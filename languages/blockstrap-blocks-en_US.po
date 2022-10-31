@@ -1,0 +1,1748 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BlockStrap Blocks\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-27 11:41+0100\n"
+"PO-Revision-Date: 2022-10-27 11:41+0100\n"
+"Last-Translator: \n"
+"Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;__ngettext:1,2;__ngettext_noop:1,2;_c;_e;_ex:1,2c;"
+"_n:1,2;_n_noop:1,2;_nc:4c,1,2;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;gettext;"
+"gettext_noop\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+
+#: blocks/class-blockstrap-widget-archive-title.php:30
+msgid "BS > Archive Title"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:33
+msgid "Display the archive title based on the queried object."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:43
+#: blocks/class-blockstrap-widget-archive-title.php:103
+#: blocks/class-blockstrap-widget-counter.php:164
+#: blocks/class-blockstrap-widget-heading.php:55
+#: blocks/class-blockstrap-widget-heading.php:101
+#: blocks/class-blockstrap-widget-heading.php:105
+#: blocks/class-blockstrap-widget-heading.php:124
+#: blocks/class-blockstrap-widget-icon-box.php:99
+#: blocks/class-blockstrap-widget-post-title.php:43
+#: blocks/class-blockstrap-widget-post-title.php:103
+msgid "Title"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:45
+#: blocks/class-blockstrap-widget-button.php:45
+#: blocks/class-blockstrap-widget-container.php:76
+#: blocks/class-blockstrap-widget-counter.php:51
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:60
+#: blocks/class-blockstrap-widget-gallery.php:45
+#: blocks/class-blockstrap-widget-heading.php:57
+#: blocks/class-blockstrap-widget-icon-box.php:45
+#: blocks/class-blockstrap-widget-image.php:48
+#: blocks/class-blockstrap-widget-map.php:39
+#: blocks/class-blockstrap-widget-nav-dropdown.php:70
+#: blocks/class-blockstrap-widget-nav-item.php:45
+#: blocks/class-blockstrap-widget-navbar-brand.php:88
+#: blocks/class-blockstrap-widget-post-title.php:45
+#: blocks/class-blockstrap-widget-skip-links.php:44
+msgid "Content"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:53
+#: blocks/class-blockstrap-widget-button.php:53
+#: blocks/class-blockstrap-widget-container.php:84
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:71
+#: blocks/class-blockstrap-widget-gallery.php:56
+#: blocks/class-blockstrap-widget-heading.php:65
+#: blocks/class-blockstrap-widget-image.php:56
+#: blocks/class-blockstrap-widget-nav-dropdown.php:78
+#: blocks/class-blockstrap-widget-nav-item.php:53
+#: blocks/class-blockstrap-widget-navbar-brand.php:96
+#: blocks/class-blockstrap-widget-post-title.php:53
+#: blocks/class-blockstrap-widget-skip-links.php:52
+msgid "Typography"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:55
+#: blocks/class-blockstrap-widget-button.php:55
+#: blocks/class-blockstrap-widget-container.php:86
+#: blocks/class-blockstrap-widget-counter.php:64
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:74
+#: blocks/class-blockstrap-widget-gallery.php:59
+#: blocks/class-blockstrap-widget-heading.php:67
+#: blocks/class-blockstrap-widget-icon-box.php:55
+#: blocks/class-blockstrap-widget-image.php:58
+#: blocks/class-blockstrap-widget-map.php:49
+#: blocks/class-blockstrap-widget-nav-dropdown.php:80
+#: blocks/class-blockstrap-widget-nav-item.php:55
+#: blocks/class-blockstrap-widget-navbar-brand.php:98
+#: blocks/class-blockstrap-widget-post-title.php:55
+#: blocks/class-blockstrap-widget-skip-links.php:54
+#: blocks/class-blockstrap-widget-tabs.php:126
+msgid "Styles"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:63
+#: blocks/class-blockstrap-widget-archive-title.php:142
+#: blocks/class-blockstrap-widget-archive-title.php:151
+#: blocks/class-blockstrap-widget-button.php:63
+#: blocks/class-blockstrap-widget-container.php:95
+#: blocks/class-blockstrap-widget-counter.php:72
+#: blocks/class-blockstrap-widget-counter.php:266
+#: blocks/class-blockstrap-widget-counter.php:275
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:82
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:265
+#: blocks/class-blockstrap-widget-gallery.php:67
+#: blocks/class-blockstrap-widget-gallery.php:300
+#: blocks/class-blockstrap-widget-heading.php:75
+#: blocks/class-blockstrap-widget-heading.php:163
+#: blocks/class-blockstrap-widget-heading.php:172
+#: blocks/class-blockstrap-widget-icon-box.php:63
+#: blocks/class-blockstrap-widget-icon-box.php:440
+#: blocks/class-blockstrap-widget-image.php:67
+#: blocks/class-blockstrap-widget-image.php:348
+#: blocks/class-blockstrap-widget-map.php:58
+#: blocks/class-blockstrap-widget-nav-dropdown.php:89
+#: blocks/class-blockstrap-widget-nav-item.php:64
+#: blocks/class-blockstrap-widget-nav.php:229
+#: blocks/class-blockstrap-widget-navbar-brand.php:107
+#: blocks/class-blockstrap-widget-navbar-brand.php:224
+#: blocks/class-blockstrap-widget-navbar-brand.php:233
+#: blocks/class-blockstrap-widget-post-title.php:63
+#: blocks/class-blockstrap-widget-post-title.php:142
+#: blocks/class-blockstrap-widget-post-title.php:151
+#: blocks/class-blockstrap-widget-skip-links.php:63
+#: blocks/class-blockstrap-widget-tabs.php:136
+msgid "Wrapper Styles"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:63
+#: blocks/class-blockstrap-widget-archive-title.php:65
+#: blocks/class-blockstrap-widget-archive-title.php:219
+#: blocks/class-blockstrap-widget-button.php:63
+#: blocks/class-blockstrap-widget-button.php:65
+#: blocks/class-blockstrap-widget-container.php:96
+#: blocks/class-blockstrap-widget-container.php:99
+#: blocks/class-blockstrap-widget-counter.php:72
+#: blocks/class-blockstrap-widget-counter.php:74
+#: blocks/class-blockstrap-widget-counter.php:344
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:82
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:84
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:340
+#: blocks/class-blockstrap-widget-gallery.php:67
+#: blocks/class-blockstrap-widget-gallery.php:69
+#: blocks/class-blockstrap-widget-gallery.php:375
+#: blocks/class-blockstrap-widget-heading.php:75
+#: blocks/class-blockstrap-widget-heading.php:77
+#: blocks/class-blockstrap-widget-heading.php:241
+#: blocks/class-blockstrap-widget-icon-box.php:63
+#: blocks/class-blockstrap-widget-icon-box.php:65
+#: blocks/class-blockstrap-widget-image.php:69
+#: blocks/class-blockstrap-widget-image.php:72
+#: blocks/class-blockstrap-widget-image.php:458
+#: blocks/class-blockstrap-widget-map.php:60
+#: blocks/class-blockstrap-widget-map.php:63
+#: blocks/class-blockstrap-widget-map.php:327
+#: blocks/class-blockstrap-widget-nav-dropdown.php:90
+#: blocks/class-blockstrap-widget-nav-dropdown.php:93
+#: blocks/class-blockstrap-widget-nav-item.php:65
+#: blocks/class-blockstrap-widget-nav-item.php:68
+#: blocks/class-blockstrap-widget-navbar-brand.php:108
+#: blocks/class-blockstrap-widget-navbar-brand.php:111
+#: blocks/class-blockstrap-widget-post-title.php:63
+#: blocks/class-blockstrap-widget-post-title.php:65
+#: blocks/class-blockstrap-widget-post-title.php:220
+#: blocks/class-blockstrap-widget-skip-links.php:64
+#: blocks/class-blockstrap-widget-skip-links.php:67
+#: blocks/class-blockstrap-widget-tabs.php:137
+#: blocks/class-blockstrap-widget-tabs.php:140
+msgid "Advanced"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:89
+#: blocks/class-blockstrap-widget-heading.php:110
+#: blocks/class-blockstrap-widget-post-title.php:89
+msgid "HTML tag"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:146
+#: blocks/class-blockstrap-widget-container.php:138
+#: blocks/class-blockstrap-widget-counter.php:270
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:260
+#: blocks/class-blockstrap-widget-gallery.php:295
+#: blocks/class-blockstrap-widget-heading.php:167
+#: blocks/class-blockstrap-widget-image.php:343
+#: blocks/class-blockstrap-widget-navbar-brand.php:228
+#: blocks/class-blockstrap-widget-post-title.php:146
+#: blocks/class-blockstrap-widget-tab.php:80
+msgid "Background on text"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:150
+#: blocks/class-blockstrap-widget-container.php:142
+#: blocks/class-blockstrap-widget-counter.php:274
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:264
+#: blocks/class-blockstrap-widget-gallery.php:299
+#: blocks/class-blockstrap-widget-heading.php:171
+#: blocks/class-blockstrap-widget-image.php:347
+#: blocks/class-blockstrap-widget-navbar-brand.php:232
+#: blocks/class-blockstrap-widget-post-title.php:150
+#: blocks/class-blockstrap-widget-tab.php:84
+msgid "This will show the background on the text."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:216
+#: blocks/class-blockstrap-widget-counter.php:341
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:337
+#: blocks/class-blockstrap-widget-gallery.php:372
+#: blocks/class-blockstrap-widget-heading.php:238
+#: blocks/class-blockstrap-widget-image.php:455
+#: blocks/class-blockstrap-widget-map.php:324
+#: blocks/class-blockstrap-widget-post-title.php:217
+msgid "Additional CSS class(es)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-archive-title.php:217
+#: blocks/class-blockstrap-widget-counter.php:342
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:338
+#: blocks/class-blockstrap-widget-gallery.php:373
+#: blocks/class-blockstrap-widget-heading.php:239
+#: blocks/class-blockstrap-widget-image.php:456
+#: blocks/class-blockstrap-widget-map.php:325
+#: blocks/class-blockstrap-widget-post-title.php:218
+msgid "Separate multiple classes with spaces."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:30
+msgid "BS > Button"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:33
+msgid "A bootstrap button, badge or iconbox."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:43
+#: blocks/class-blockstrap-widget-button.php:93
+#: blocks/class-blockstrap-widget-button.php:103
+#: blocks/class-blockstrap-widget-button.php:113
+#: blocks/class-blockstrap-widget-button.php:124
+#: blocks/class-blockstrap-widget-button.php:135
+#: blocks/class-blockstrap-widget-button.php:145
+#: blocks/class-blockstrap-widget-button.php:157
+#: blocks/class-blockstrap-widget-icon-box.php:43
+#: blocks/class-blockstrap-widget-icon-box.php:136
+#: blocks/class-blockstrap-widget-icon-box.php:146
+#: blocks/class-blockstrap-widget-icon-box.php:156
+#: blocks/class-blockstrap-widget-icon-box.php:167
+#: blocks/class-blockstrap-widget-image.php:44
+#: blocks/class-blockstrap-widget-image.php:193
+#: blocks/class-blockstrap-widget-image.php:198
+#: blocks/class-blockstrap-widget-image.php:200
+#: blocks/class-blockstrap-widget-image.php:213
+#: blocks/class-blockstrap-widget-image.php:223
+#: blocks/class-blockstrap-widget-nav-dropdown.php:68
+#: blocks/class-blockstrap-widget-nav-dropdown.php:120
+#: blocks/class-blockstrap-widget-nav-dropdown.php:130
+#: blocks/class-blockstrap-widget-nav-item.php:43
+#: blocks/class-blockstrap-widget-nav-item.php:148
+#: blocks/class-blockstrap-widget-nav-item.php:158
+#: blocks/class-blockstrap-widget-nav-item.php:168
+#: blocks/class-blockstrap-widget-nav-item.php:179
+#: blocks/class-blockstrap-widget-nav-item.php:190
+#: blocks/class-blockstrap-widget-nav-item.php:200
+#: blocks/class-blockstrap-widget-navbar-brand.php:85
+#: blocks/class-blockstrap-widget-navbar-brand.php:172
+#: blocks/class-blockstrap-widget-navbar-brand.php:182
+msgid "Link"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:53
+#: blocks/class-blockstrap-widget-button.php:167
+#: blocks/class-blockstrap-widget-button.php:176
+#: blocks/class-blockstrap-widget-button.php:190
+#: blocks/class-blockstrap-widget-button.php:198
+#: blocks/class-blockstrap-widget-button.php:211
+#: blocks/class-blockstrap-widget-button.php:225
+#: blocks/class-blockstrap-widget-button.php:241
+#: blocks/class-blockstrap-widget-button.php:255
+#: blocks/class-blockstrap-widget-nav-dropdown.php:139
+#: blocks/class-blockstrap-widget-nav-item.php:209
+msgid "Button"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:89
+#: blocks/class-blockstrap-widget-icon-box.php:132
+#: blocks/class-blockstrap-widget-nav-item.php:144
+#: blocks/class-blockstrap-widget-navbar-brand.php:164
+msgid "Link Type"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:98
+#: blocks/class-blockstrap-widget-button.php:326
+#: blocks/class-blockstrap-widget-icon-box.php:141
+#: blocks/class-blockstrap-widget-icon-box.php:498
+#: blocks/class-blockstrap-widget-nav-item.php:84
+#: blocks/class-blockstrap-widget-nav-item.php:153
+msgid "Page"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:100
+#: blocks/class-blockstrap-widget-button.php:347
+#: blocks/class-blockstrap-widget-icon-box.php:143
+#: blocks/class-blockstrap-widget-icon-box.php:519
+#: blocks/class-blockstrap-widget-nav-item.php:118
+#: blocks/class-blockstrap-widget-nav-item.php:155
+msgid "Select Page"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:109
+#: blocks/class-blockstrap-widget-button.php:327
+#: blocks/class-blockstrap-widget-icon-box.php:152
+#: blocks/class-blockstrap-widget-icon-box.php:499
+#: blocks/class-blockstrap-widget-nav-item.php:85
+#: blocks/class-blockstrap-widget-nav-item.php:164
+msgid "Post ID"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:119
+#: blocks/class-blockstrap-widget-button.php:328
+#: blocks/class-blockstrap-widget-icon-box.php:162
+#: blocks/class-blockstrap-widget-icon-box.php:500
+#: blocks/class-blockstrap-widget-nav-item.php:86
+#: blocks/class-blockstrap-widget-nav-item.php:174
+#: blocks/class-blockstrap-widget-navbar-brand.php:177
+msgid "Custom URL"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:120
+#: blocks/class-blockstrap-widget-icon-box.php:163
+#: blocks/class-blockstrap-widget-nav-item.php:175
+#: blocks/class-blockstrap-widget-navbar-brand.php:178
+msgid "Add custom link URL"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:121
+#: blocks/class-blockstrap-widget-icon-box.php:164
+#: blocks/class-blockstrap-widget-image.php:199
+#: blocks/class-blockstrap-widget-nav-item.php:176
+#: blocks/class-blockstrap-widget-navbar-brand.php:179
+msgid "https://example.com"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:130
+#: blocks/class-blockstrap-widget-nav-dropdown.php:115
+#: blocks/class-blockstrap-widget-nav-item.php:185
+msgid "Link Text"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:131
+#: blocks/class-blockstrap-widget-nav-dropdown.php:116
+#: blocks/class-blockstrap-widget-nav-item.php:186
+msgid "Add custom link text or leave blank for dynamic"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:132
+#: blocks/class-blockstrap-widget-button.php:324
+#: blocks/class-blockstrap-widget-button.php:381
+#: blocks/class-blockstrap-widget-icon-box.php:496
+#: blocks/class-blockstrap-widget-nav-dropdown.php:117
+#: blocks/class-blockstrap-widget-nav-item.php:83
+#: blocks/class-blockstrap-widget-nav-item.php:187
+#: blocks/class-blockstrap-widget-nav-item.php:344
+#: blocks/class-blockstrap-widget-navbar-brand.php:166
+msgid "Home"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:140
+#: blocks/class-blockstrap-widget-icon-box.php:89
+#: blocks/class-blockstrap-widget-nav-dropdown.php:125
+#: blocks/class-blockstrap-widget-nav-item.php:195
+msgid "Icon class"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:141
+#: blocks/class-blockstrap-widget-icon-box.php:90
+#: blocks/class-blockstrap-widget-nav-dropdown.php:126
+#: blocks/class-blockstrap-widget-nav-item.php:196
+msgid "Enter a font awesome icon class."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:142
+#: blocks/class-blockstrap-widget-icon-box.php:91
+#: blocks/class-blockstrap-widget-icon-box.php:100
+#: blocks/class-blockstrap-widget-nav-dropdown.php:127
+#: blocks/class-blockstrap-widget-nav-item.php:197
+msgid "fas fa-ship"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:150
+msgid "Icon position"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:152
+msgid "Left"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:153
+msgid "right"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:164
+#: blocks/class-blockstrap-widget-nav-dropdown.php:136
+#: blocks/class-blockstrap-widget-nav-item.php:206
+msgid "Link style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:166
+#: blocks/class-blockstrap-widget-image.php:152
+#: blocks/class-blockstrap-widget-image.php:186
+#: blocks/class-blockstrap-widget-image.php:416
+#: blocks/class-blockstrap-widget-map.php:285
+#: blocks/class-blockstrap-widget-nav-dropdown.php:138
+#: blocks/class-blockstrap-widget-nav-item.php:208
+#: blocks/class-blockstrap-widget-navbar-brand.php:168
+#: blocks/class-blockstrap-widget-navbar.php:85
+msgid "None"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:168
+#: blocks/class-blockstrap-widget-nav-dropdown.php:140
+#: blocks/class-blockstrap-widget-nav-item.php:210
+msgid "Button rounded"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:169
+#: blocks/class-blockstrap-widget-icon-box.php:177
+#: blocks/class-blockstrap-widget-nav-dropdown.php:141
+#: blocks/class-blockstrap-widget-nav-item.php:211
+msgid "Iconbox bordered"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:170
+#: blocks/class-blockstrap-widget-icon-box.php:178
+#: blocks/class-blockstrap-widget-nav-dropdown.php:142
+#: blocks/class-blockstrap-widget-nav-item.php:212
+msgid "Iconbox filled"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:171
+msgid "Badge"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:172
+msgid "Pill Badge"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:181
+#: blocks/class-blockstrap-widget-icon-box.php:187
+#: blocks/class-blockstrap-widget-nav-dropdown.php:151
+#: blocks/class-blockstrap-widget-nav-item.php:221
+msgid "Size"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:183
+#: blocks/class-blockstrap-widget-counter.php:150
+#: blocks/class-blockstrap-widget-gallery.php:220
+#: blocks/class-blockstrap-widget-gallery.php:236
+#: blocks/class-blockstrap-widget-icon-box.php:189
+#: blocks/class-blockstrap-widget-image.php:153
+#: blocks/class-blockstrap-widget-nav-dropdown.php:153
+#: blocks/class-blockstrap-widget-nav-item.php:223
+#: blocks/class-blockstrap-widget-nav.php:122
+#: blocks/class-blockstrap-widget-nav.php:220
+#: blocks/class-blockstrap-widget-navbar.php:162
+msgid "Default"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:184
+#: blocks/class-blockstrap-widget-icon-box.php:190
+#: blocks/class-blockstrap-widget-nav-dropdown.php:154
+#: blocks/class-blockstrap-widget-nav-item.php:224
+msgid "Small"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:185
+#: blocks/class-blockstrap-widget-icon-box.php:191
+#: blocks/class-blockstrap-widget-nav-dropdown.php:155
+#: blocks/class-blockstrap-widget-nav-item.php:225
+msgid "Medium"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:186
+#: blocks/class-blockstrap-widget-icon-box.php:192
+#: blocks/class-blockstrap-widget-nav-dropdown.php:156
+#: blocks/class-blockstrap-widget-nav-item.php:226
+msgid "Large"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:196
+msgid "Badge size is inherited from the parent text size"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:203
+#: blocks/class-blockstrap-widget-button.php:233
+#: blocks/class-blockstrap-widget-nav-dropdown.php:164
+#: blocks/class-blockstrap-widget-nav-item.php:234
+msgid "Color"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:206
+#: blocks/class-blockstrap-widget-button.php:236
+#: blocks/class-blockstrap-widget-icon-box.php:227
+msgid "Default (primary)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:214
+msgid "Normal"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:244
+msgid "Hover"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:325
+#: blocks/class-blockstrap-widget-icon-box.php:497
+msgid "None (non link)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:333
+#: blocks/class-blockstrap-widget-icon-box.php:505
+#: blocks/class-blockstrap-widget-nav-item.php:91
+msgid "GD Search"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:334
+#: blocks/class-blockstrap-widget-icon-box.php:506
+#: blocks/class-blockstrap-widget-nav-item.php:92
+msgid "GD Location"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:337
+#: blocks/class-blockstrap-widget-icon-box.php:509
+#: blocks/class-blockstrap-widget-nav-item.php:95
+#, php-format
+msgid "%s (archive)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:339
+#: blocks/class-blockstrap-widget-icon-box.php:511
+#: blocks/class-blockstrap-widget-nav-item.php:97
+#, php-format
+msgid "%s (add listing)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:395
+#: blocks/class-blockstrap-widget-image.php:189
+#: blocks/class-blockstrap-widget-nav-item.php:358
+#: blocks/class-blockstrap-widget-navbar-brand.php:167
+msgid "Custom"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:398
+#: blocks/class-blockstrap-widget-nav-item.php:361
+msgid "Search"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:401
+#: blocks/class-blockstrap-widget-nav-item.php:364
+msgid "Location"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:419
+#: blocks/class-blockstrap-widget-nav-item.php:382
+#, php-format
+msgid "Add %s"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:20
+msgid "BS > "
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:20
+#: blocks/class-blockstrap-widget-container.php:61
+msgid "BS > Container"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:64
+msgid "A container for content"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:74
+msgid "Container"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:84
+#: blocks/class-blockstrap-widget-container.php:143
+#: blocks/class-blockstrap-widget-navbar.php:76
+#: blocks/class-blockstrap-widget-tab.php:85
+#: blocks/class-blockstrap-widget-tabs.php:135
+msgid "Background"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:36
+msgid "BS > Counter"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:39
+msgid "Animate a number up/down."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:49
+#: blocks/class-blockstrap-widget-counter.php:101
+#: blocks/class-blockstrap-widget-counter.php:109
+#: blocks/class-blockstrap-widget-counter.php:117
+#: blocks/class-blockstrap-widget-counter.php:125
+#: blocks/class-blockstrap-widget-counter.php:133
+#: blocks/class-blockstrap-widget-counter.php:142
+#: blocks/class-blockstrap-widget-counter.php:158
+#: blocks/class-blockstrap-widget-counter.php:168
+#: blocks/class-blockstrap-widget-navbar-brand.php:83
+#: blocks/class-blockstrap-widget-navbar-brand.php:135
+#: blocks/class-blockstrap-widget-navbar-brand.php:140
+#: blocks/class-blockstrap-widget-skip-links.php:91
+#: blocks/class-blockstrap-widget-skip-links.php:110
+#: blocks/class-blockstrap-widget-skip-links.php:129
+msgid "Text"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:60
+#: blocks/class-blockstrap-widget-counter.php:175
+#: blocks/class-blockstrap-widget-counter.php:184
+#: blocks/class-blockstrap-widget-counter.php:187
+#: blocks/class-blockstrap-widget-counter.php:191
+#: blocks/class-blockstrap-widget-counter.php:194
+#: blocks/class-blockstrap-widget-counter.php:200
+#: blocks/class-blockstrap-widget-counter.php:209
+#: blocks/class-blockstrap-widget-counter.php:217
+msgid "Number Typography"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:61
+#: blocks/class-blockstrap-widget-counter.php:225
+#: blocks/class-blockstrap-widget-counter.php:228
+#: blocks/class-blockstrap-widget-counter.php:231
+#: blocks/class-blockstrap-widget-counter.php:234
+#: blocks/class-blockstrap-widget-counter.php:240
+#: blocks/class-blockstrap-widget-counter.php:249
+#: blocks/class-blockstrap-widget-counter.php:257
+msgid "Title Typography"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:98
+msgid "Start number"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:106
+msgid "End number"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:114
+msgid "Prefix"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:122
+msgid "Suffix"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:130
+msgid "Animation duration"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:138
+msgid "Thousand Separator"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:148
+msgid "Separator"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:151
+msgid "Dot"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:152
+msgid "Space"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:153
+msgid "Underline"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:154
+msgid "Apostrophe"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-counter.php:166
+#: blocks/class-blockstrap-widget-heading.php:102
+msgid "Enter you title!"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:45
+#: blocks/class-blockstrap-widget-gallery.php:30
+msgid "BS > Gallery"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:48
+#: blocks/class-blockstrap-widget-gallery.php:33
+msgid "An image gallery."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:58
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:112
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:124
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:133
+#: blocks/class-blockstrap-widget-gallery.php:43
+#: blocks/class-blockstrap-widget-gallery.php:97
+#: blocks/class-blockstrap-widget-gallery.php:109
+#: blocks/class-blockstrap-widget-gallery.php:118
+#: blocks/class-blockstrap-widget-image.php:43
+#: blocks/class-blockstrap-widget-image.php:104
+#: blocks/class-blockstrap-widget-image.php:115
+#: blocks/class-blockstrap-widget-image.php:125
+#: blocks/class-blockstrap-widget-image.php:136
+#: blocks/class-blockstrap-widget-image.php:144
+#: blocks/class-blockstrap-widget-image.php:158
+#: blocks/class-blockstrap-widget-image.php:169
+#: blocks/class-blockstrap-widget-image.php:179
+#: blocks/class-blockstrap-widget-navbar-brand.php:144
+msgid "Image"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:58
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:146
+#: blocks/class-blockstrap-widget-gallery.php:43
+#: blocks/class-blockstrap-widget-gallery.php:131
+msgid "Captions"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:69
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:156
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:165
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:174
+#: blocks/class-blockstrap-widget-gallery.php:54
+#: blocks/class-blockstrap-widget-gallery.php:149
+#: blocks/class-blockstrap-widget-gallery.php:157
+#: blocks/class-blockstrap-widget-gallery.php:166
+#: blocks/class-blockstrap-widget-gallery.php:175
+#: blocks/class-blockstrap-widget-gallery.php:196
+#: blocks/class-blockstrap-widget-gallery.php:213
+#: blocks/class-blockstrap-widget-gallery.php:230
+#: blocks/class-blockstrap-widget-gallery.php:246
+msgid "Gallery Styles"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:70
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:215
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:216
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:217
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:220
+#: blocks/class-blockstrap-widget-gallery.php:55
+#: blocks/class-blockstrap-widget-gallery.php:250
+#: blocks/class-blockstrap-widget-gallery.php:251
+#: blocks/class-blockstrap-widget-gallery.php:252
+#: blocks/class-blockstrap-widget-gallery.php:255
+#: blocks/class-blockstrap-widget-image.php:56
+#: blocks/class-blockstrap-widget-image.php:241
+#: blocks/class-blockstrap-widget-image.php:250
+#: blocks/class-blockstrap-widget-image.php:259
+#: blocks/class-blockstrap-widget-image.php:279
+#: blocks/class-blockstrap-widget-image.php:295
+#: blocks/class-blockstrap-widget-image.php:299
+#: blocks/class-blockstrap-widget-image.php:300
+#: blocks/class-blockstrap-widget-image.php:301
+#: blocks/class-blockstrap-widget-image.php:304
+msgid "Image Styles"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:108
+#: blocks/class-blockstrap-widget-gallery.php:93
+#: blocks/class-blockstrap-widget-image.php:110
+msgid "Custom image"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:120
+#: blocks/class-blockstrap-widget-gallery.php:105
+#: blocks/class-blockstrap-widget-image.php:132
+msgid "Image size"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:129
+#: blocks/class-blockstrap-widget-gallery.php:114
+#: blocks/class-blockstrap-widget-image.php:206
+msgid "Lightbox"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:138
+#: blocks/class-blockstrap-widget-gallery.php:123
+#: blocks/class-blockstrap-widget-image.php:45
+#: blocks/class-blockstrap-widget-image.php:230
+#: blocks/class-blockstrap-widget-image.php:233
+msgid "Caption"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:140
+#: blocks/class-blockstrap-widget-gallery.php:125
+msgid "Hide"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:141
+#: blocks/class-blockstrap-widget-gallery.php:126
+msgid "Show always"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:142
+#: blocks/class-blockstrap-widget-gallery.php:127
+msgid "Show on hover"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:158
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:167
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:176
+#: blocks/class-blockstrap-widget-gallery.php:159
+#: blocks/class-blockstrap-widget-gallery.php:168
+#: blocks/class-blockstrap-widget-gallery.php:177
+msgid "Images per row"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:181
+#: blocks/class-blockstrap-widget-gallery.php:182
+#: blocks/class-blockstrap-widget-image.php:266
+msgid "Aspect ratio"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:181
+msgid "(bootstrap only)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:182
+#: blocks/class-blockstrap-widget-gallery.php:183
+#: blocks/class-blockstrap-widget-image.php:267
+msgid ""
+"For a more consistent image view you can set the aspect ratio of the image "
+"view port."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:185
+#: blocks/class-blockstrap-widget-gallery.php:186
+#: blocks/class-blockstrap-widget-image.php:270
+msgid "Default (16by9)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:186
+#: blocks/class-blockstrap-widget-gallery.php:187
+#: blocks/class-blockstrap-widget-image.php:271
+msgid "21by9"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:187
+#: blocks/class-blockstrap-widget-gallery.php:188
+#: blocks/class-blockstrap-widget-image.php:272
+msgid "4by3"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:188
+#: blocks/class-blockstrap-widget-gallery.php:189
+#: blocks/class-blockstrap-widget-image.php:273
+msgid "1by1 (square)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:189
+#: blocks/class-blockstrap-widget-gallery.php:190
+#: blocks/class-blockstrap-widget-image.php:274
+msgid "No ratio (natural)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:195
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:211
+msgid "Design"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:198
+msgid "Image cover type:"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:199
+#: blocks/class-blockstrap-widget-gallery.php:201
+#: blocks/class-blockstrap-widget-image.php:284
+msgid "This is how the image should cover the image viewport."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:202
+#: blocks/class-blockstrap-widget-gallery.php:204
+#: blocks/class-blockstrap-widget-image.php:287
+msgid "Default (cover both)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:203
+#: blocks/class-blockstrap-widget-gallery.php:205
+#: blocks/class-blockstrap-widget-image.php:288
+msgid "Width cover"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:204
+#: blocks/class-blockstrap-widget-gallery.php:206
+#: blocks/class-blockstrap-widget-image.php:289
+msgid "height cover"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery-inner-test.php:205
+#: blocks/class-blockstrap-widget-gallery.php:207
+#: blocks/class-blockstrap-widget-image.php:290
+msgid "No cover (contain)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:137
+msgid "Gallery style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:141
+msgid "Grid (defaut)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:142
+msgid "1-2-5 Grid"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:143
+msgid "1-2-2 Grid"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:200
+#: blocks/class-blockstrap-widget-image.php:283
+msgid "Image cover type"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:217
+msgid "Row gap X"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:233
+msgid "Row gap Y"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-gallery.php:507
+#: blocks/class-blockstrap-widget-gallery.php:533
+#, php-format
+msgid "+%s photo"
+msgid_plural "+%s photos"
+msgstr[0] ""
+msgstr[1] ""
+
+#: blocks/class-blockstrap-widget-heading.php:42
+msgid "BS > Heading"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-heading.php:45
+msgid "A heading element"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-heading.php:103
+msgid "Add Your Heading Text"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:30
+msgid "BS > Icon Box"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:33
+msgid "A bootstrap iconbox."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:43
+#: blocks/class-blockstrap-widget-icon-box.php:94
+#: blocks/class-blockstrap-widget-icon-box.php:103
+#: blocks/class-blockstrap-widget-icon-box.php:119
+#: blocks/class-blockstrap-widget-icon-box.php:127
+msgid "Icon Box"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:53
+#: blocks/class-blockstrap-widget-icon-box.php:182
+#: blocks/class-blockstrap-widget-icon-box.php:196
+#: blocks/class-blockstrap-widget-icon-box.php:203
+#: blocks/class-blockstrap-widget-icon-box.php:208
+#: blocks/class-blockstrap-widget-icon-box.php:216
+#: blocks/class-blockstrap-widget-icon-box.php:219
+#: blocks/class-blockstrap-widget-icon-box.php:232
+#: blocks/class-blockstrap-widget-icon-box.php:241
+#: blocks/class-blockstrap-widget-icon-box.php:248
+#: blocks/class-blockstrap-widget-icon-box.php:256
+#: blocks/class-blockstrap-widget-icon-box.php:264
+msgid "Icon Style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:53
+#: blocks/class-blockstrap-widget-icon-box.php:272
+#: blocks/class-blockstrap-widget-icon-box.php:276
+#: blocks/class-blockstrap-widget-icon-box.php:281
+#: blocks/class-blockstrap-widget-icon-box.php:287
+#: blocks/class-blockstrap-widget-icon-box.php:290
+#: blocks/class-blockstrap-widget-icon-box.php:298
+#: blocks/class-blockstrap-widget-icon-box.php:306
+#: blocks/class-blockstrap-widget-icon-box.php:314
+#: blocks/class-blockstrap-widget-icon-box.php:324
+#: blocks/class-blockstrap-widget-icon-box.php:332
+#: blocks/class-blockstrap-widget-icon-box.php:341
+#: blocks/class-blockstrap-widget-icon-box.php:349
+msgid "Title Style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:53
+#: blocks/class-blockstrap-widget-icon-box.php:359
+#: blocks/class-blockstrap-widget-icon-box.php:362
+#: blocks/class-blockstrap-widget-icon-box.php:367
+#: blocks/class-blockstrap-widget-icon-box.php:373
+#: blocks/class-blockstrap-widget-icon-box.php:376
+#: blocks/class-blockstrap-widget-icon-box.php:384
+#: blocks/class-blockstrap-widget-icon-box.php:392
+#: blocks/class-blockstrap-widget-icon-box.php:400
+#: blocks/class-blockstrap-widget-icon-box.php:410
+#: blocks/class-blockstrap-widget-icon-box.php:418
+#: blocks/class-blockstrap-widget-icon-box.php:427
+#: blocks/class-blockstrap-widget-icon-box.php:435
+msgid "Description Style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:101
+msgid "Title of the iconbox"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:108
+msgid "Title Tag"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:124
+msgid "Description"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:174
+msgid "Icon style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:176
+#: blocks/class-blockstrap-widget-navbar-brand.php:84
+#: blocks/class-blockstrap-widget-navbar-brand.php:149
+#: blocks/class-blockstrap-widget-navbar-brand.php:159
+msgid "Icon"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-icon-box.php:224
+msgid "Background Color"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:29
+msgid "BS > Image"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:32
+msgid "A image element"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:68
+#: blocks/class-blockstrap-widget-image.php:430
+#: blocks/class-blockstrap-widget-image.php:449
+#: blocks/class-blockstrap-widget-map.php:59
+#: blocks/class-blockstrap-widget-map.php:299
+#: blocks/class-blockstrap-widget-map.php:318
+msgid "Image Mask"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:96
+msgid "Image source"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:98
+#: blocks/class-blockstrap-widget-image.php:154
+msgid "Upload"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:99
+msgid "URL"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:100
+msgid "Featured image"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:142
+msgid "Image URL"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:143
+msgid "https://example.com/uploads/my-iamge.jpg"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:150
+msgid "Fallback image source"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:164
+msgid "Fallback image"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:184
+msgid "Link to"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:187
+msgid "Post"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:188
+msgid "Media"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:208
+#: blocks/class-blockstrap-widget-nav.php:136
+msgid "No"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:209
+msgid "Yes"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:219
+msgid "Lightbox size"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:231
+msgid "Enter a caption!"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:243
+#: blocks/class-blockstrap-widget-image.php:252
+#: blocks/class-blockstrap-widget-image.php:261
+#: blocks/class-blockstrap-widget-map.php:199
+#: blocks/class-blockstrap-widget-map.php:208
+#: blocks/class-blockstrap-widget-map.php:217
+msgid "Responsive width"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:414
+#: blocks/class-blockstrap-widget-map.php:283
+msgid "Mask"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:420
+#: blocks/class-blockstrap-widget-map.php:289
+msgid "circle"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:421
+#: blocks/class-blockstrap-widget-map.php:290
+msgid "Diamond"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:422
+#: blocks/class-blockstrap-widget-map.php:291
+msgid "Flower"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:423
+#: blocks/class-blockstrap-widget-map.php:292
+msgid "Hexagon"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:424
+#: blocks/class-blockstrap-widget-map.php:293
+msgid "Rounded"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:425
+#: blocks/class-blockstrap-widget-map.php:294
+msgid "sketch"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:426
+#: blocks/class-blockstrap-widget-map.php:295
+msgid "triangle"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:435
+#: blocks/class-blockstrap-widget-map.php:304
+msgid "Position"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:437
+#: blocks/class-blockstrap-widget-map.php:306
+msgid "Center Center"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:438
+#: blocks/class-blockstrap-widget-map.php:307
+msgid "Center Left"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:439
+#: blocks/class-blockstrap-widget-map.php:308
+msgid "Center Right"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:440
+#: blocks/class-blockstrap-widget-map.php:309
+msgid "Top Center"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:441
+#: blocks/class-blockstrap-widget-map.php:310
+msgid "Top Left"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:442
+#: blocks/class-blockstrap-widget-map.php:311
+msgid "Top Right"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:443
+#: blocks/class-blockstrap-widget-map.php:312
+msgid "Bottom Center"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:444
+#: blocks/class-blockstrap-widget-map.php:313
+msgid "bottom left"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-image.php:445
+#: blocks/class-blockstrap-widget-map.php:314
+msgid "bottom right"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:29
+msgid "BS > Map"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:32
+msgid "A simple lazy load iframe Google or OSM map."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:37
+#: blocks/class-blockstrap-widget-map.php:94
+#: blocks/class-blockstrap-widget-map.php:102
+#: blocks/class-blockstrap-widget-map.php:113
+#: blocks/class-blockstrap-widget-map.php:143
+#: blocks/class-blockstrap-widget-map.php:150
+#: blocks/class-blockstrap-widget-map.php:157
+#: blocks/class-blockstrap-widget-map.php:174
+#: blocks/class-blockstrap-widget-map.php:189
+msgid "Map"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:47
+#: blocks/class-blockstrap-widget-map.php:197
+#: blocks/class-blockstrap-widget-map.php:206
+#: blocks/class-blockstrap-widget-map.php:215
+msgid "Map Styles"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:87
+msgid "Map source"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:89
+msgid "Google"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:90
+msgid "Open Street Maps"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:99
+msgid "Address"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:100
+msgid "Golden Gate Bridge"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:108
+msgid "GPS"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:112
+#, php-format
+msgid ""
+"Right click anywhere on a %1$sGoogle map%2$s and then click the GPS and past "
+"here."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:119
+msgid "Map zoom"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:148
+#: blocks/class-blockstrap-widget-map.php:163
+msgid "Map view"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:151
+msgid "Satellite"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:152
+msgid "Hybrid"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:153
+msgid "Terrain"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:165
+msgid "Standard"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:166
+msgid "CyclOSM"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:167
+msgid "Cycle OSM"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:168
+msgid "Transport Map"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:169
+msgid "ÖPNVKarte"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:170
+msgid "Humanitarian"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-map.php:180
+msgid "Responsive ratios"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-dropdown.php:20
+msgid "BS > Dropdown"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-dropdown.php:55
+msgid "BS > Nav Dropdown"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-dropdown.php:58
+msgid "A container for navbar dropdown items."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-dropdown.php:78
+#: blocks/class-blockstrap-widget-nav-dropdown.php:146
+#: blocks/class-blockstrap-widget-nav-dropdown.php:160
+#: blocks/class-blockstrap-widget-nav-dropdown.php:173
+#: blocks/class-blockstrap-widget-nav-item.php:53
+#: blocks/class-blockstrap-widget-nav-item.php:216
+#: blocks/class-blockstrap-widget-nav-item.php:230
+#: blocks/class-blockstrap-widget-nav-item.php:243
+msgid "Link styles"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-dropdown.php:165
+#: blocks/class-blockstrap-widget-nav-item.php:235
+msgid "Select the color."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-dropdown.php:168
+#: blocks/class-blockstrap-widget-nav-item.php:238
+msgid "Custom colors"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:19
+#: blocks/class-blockstrap-widget-nav.php:66
+msgid "BS > Nav"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:30
+msgid "BS > Nav Item"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:33
+msgid "A navigation item for the navbar."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:103
+msgid "UWP Login (logged out)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:104
+msgid "UWP Register (logged out)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:105
+msgid "UWP Forgot Password? (logged out)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:108
+msgid "Account (logged in)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:109
+msgid "Change Password (logged in)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:110
+msgid "Profile (logged in)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:111
+msgid "Log out (logged in)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:388
+msgid "Login"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:392
+msgid "Register"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:396
+msgid "Forgot Password"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:400
+msgid "Account"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:403
+msgid "Change password"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:406
+msgid "Profile"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav-item.php:409
+msgid "Log out"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:69
+msgid "Navigation items container."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:94
+msgid "Usage"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:96
+msgid "Inside Navbar (collapse on mobile)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:97
+msgid "Standalone (never collapse)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:101
+#: blocks/class-blockstrap-widget-nav.php:114
+#: blocks/class-blockstrap-widget-nav.php:128
+#: blocks/class-blockstrap-widget-nav.php:142
+msgid "Nav Styles"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:107
+msgid "Horizontal / Vertical"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:109
+msgid "Horizontal"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:110
+msgid "Vertical"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:120
+msgid "Nav style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:123
+#: blocks/class-blockstrap-widget-tabs.php:166
+msgid "Tabs"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:124
+#: blocks/class-blockstrap-widget-tabs.php:167
+msgid "Pills"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:134
+msgid "Fill / Justify"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:137
+msgid "Justify"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:138
+msgid "Justify equal width"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:218
+msgid "Width"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-nav.php:221
+#: blocks/class-blockstrap-widget-tabs.php:178
+msgid "Auto"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar-brand.php:69
+msgid "BS > Navbar Brand"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar-brand.php:72
+msgid "Your navbar site name or logo."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar-brand.php:136
+msgid "Brand text"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar-brand.php:137
+msgid "My Awesome Site!"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar-brand.php:154
+msgid "Max width"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar-brand.php:155
+msgid "Set the image max width."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar-brand.php:156
+msgid "150"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:41
+msgid "BS > Navbar"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:44
+msgid "Navbar container, this holds the nav and navbar brand."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:71
+msgid "Transparent until scroll"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:75
+msgid "This may not show in block preview."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:83
+#: blocks/class-blockstrap-widget-navbar.php:91
+msgid "Color scheme"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:86
+msgid "Dark"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:87
+msgid "Light"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:97
+#: blocks/class-blockstrap-widget-navbar.php:104
+msgid "Content Container"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:99
+msgid "Full width"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:100
+msgid "Contain"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:163
+msgid "Fixed top"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:164
+msgid "Fixed bottom"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-navbar.php:165
+msgid "Sticky top"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-post-title.php:30
+msgid "BS > Post Title"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-post-title.php:33
+msgid "Displays the title of a post, page, or any other content-type."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-shape-divider.php:39
+msgid "BS > Shape Divider"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-shape-divider.php:42
+msgid "Add a divider between containers."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-shape-divider.php:63
+msgid "Style ID"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-shape-divider.php:65
+msgid "Shape Divider"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:29
+msgid "BS > Skip Links"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:32
+msgid ""
+"Skip links for accessibility users. This should be the first thing in your "
+"header and link to places such as your main content."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:42
+#: blocks/class-blockstrap-widget-skip-links.php:95
+#: blocks/class-blockstrap-widget-skip-links.php:105
+msgid "Link One"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:42
+#: blocks/class-blockstrap-widget-skip-links.php:114
+#: blocks/class-blockstrap-widget-skip-links.php:124
+msgid "Link Two"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:42
+#: blocks/class-blockstrap-widget-skip-links.php:133
+#: blocks/class-blockstrap-widget-skip-links.php:143
+msgid "Link Three"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:92
+#: blocks/class-blockstrap-widget-skip-links.php:93
+msgid "Skip to main content"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:100
+#: blocks/class-blockstrap-widget-skip-links.php:119
+#: blocks/class-blockstrap-widget-skip-links.php:138
+msgid "Content ID"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:101
+#: blocks/class-blockstrap-widget-skip-links.php:120
+#: blocks/class-blockstrap-widget-skip-links.php:139
+msgid "Enter the ID of the content."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:102
+#: blocks/class-blockstrap-widget-skip-links.php:103
+msgid "main"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:111
+msgid "Skip to footer"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:121
+#: blocks/class-blockstrap-widget-skip-links.php:140
+msgid "footer"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-skip-links.php:130
+msgid "Skip to"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tab.php:40
+msgid "BS > Tab"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tab.php:43
+msgid "A tab"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tab.php:62
+msgid "Name"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tab.php:63
+msgid "Tab1"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tab.php:66
+#: blocks/class-blockstrap-widget-tab.php:73
+msgid "Tab Name"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tab.php:71
+msgid "HTML anchor (required)"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:116
+msgid "BS > Tabs"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:119
+msgid "A container for tabs"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:124
+#: blocks/class-blockstrap-widget-tabs.php:171
+#: blocks/class-blockstrap-widget-tabs.php:184
+#: blocks/class-blockstrap-widget-tabs.php:194
+#: blocks/class-blockstrap-widget-tabs.php:200
+#: blocks/class-blockstrap-widget-tabs.php:210
+msgid "Tabs Head"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:124
+#: blocks/class-blockstrap-widget-tabs.php:214
+#: blocks/class-blockstrap-widget-tabs.php:217
+#: blocks/class-blockstrap-widget-tabs.php:225
+#: blocks/class-blockstrap-widget-tabs.php:233
+#: blocks/class-blockstrap-widget-tabs.php:241
+msgid "Tab Body Typography"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:164
+msgid "Style"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:176
+msgid "Tab button size"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:179
+msgid "Fill"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:180
+msgid "Justified"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:189
+msgid "Greedy tabs"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:193
+msgid "This will add overflowing tabs to a dropdown instead of a new line."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-tabs.php:207
+msgid "Tabs head array"
+msgstr ""

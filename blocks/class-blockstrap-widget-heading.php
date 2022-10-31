@@ -130,6 +130,9 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 		// font size
 		$arguments = $arguments + sd_get_font_size_input_group();
 
+		// line height
+		$arguments['font_line_height'] = sd_get_font_line_height_input();
+
 		// font size
 		$arguments['font_weight'] = sd_get_font_weight_input();
 

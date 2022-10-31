@@ -42,7 +42,7 @@ function bsb_pattern_part_comments_default( $content ) {
 	<!-- wp:post-comments-form /--></div>
 <!-- /wp:comments -->';
 }
-add_filter( 'bs_pattern_part_comments_default', 'bsb_pattern_part_comments_default', 10, 1 );
+add_filter( 'blockstrap_pattern_part_comments_default', 'bsb_pattern_part_comments_default', 10, 1 );
 
 /**
  * Replaces the default page content in the BlockStrap theme.
@@ -101,4 +101,4 @@ function bsb_pattern_part_main_default( $content ) {
 <!-- /wp:query -->
 ';
 }
-add_filter( 'bs_pattern_part_main_default', 'bsb_pattern_part_main_default', 10, 1 );
+add_filter( 'blockstrap_pattern_part_main_default', 'bsb_pattern_part_main_default', 10, 1 );

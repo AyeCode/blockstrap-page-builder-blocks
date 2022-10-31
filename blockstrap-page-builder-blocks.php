@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the main GeoDirectory plugin file, here we declare and call the important stuff
+ * This is the main plugin file, here we declare and call the important stuff
  *
  * @package     BlockStrap
  * @copyright   2022 AyeCode Ltd
@@ -8,7 +8,7 @@
  * @since       1.0.0
  *
  * @wordpress-plugin
- * Plugin Name: BlockStrap
+ * Plugin Name: BlockStrap - Page Builder Blocks
  * Plugin URI: https://wpgeodirectory.com/
  * Description: BlockStrap - A FSE page builder for WordPress
  * Version: 0.0.1-dev
@@ -23,17 +23,20 @@
 
 define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.0.1-dev' );
 
+/**
+ * The BlockStrap Class
+ */
 final class BlockStrap {
 
+	// The one true instance.
 	private static $instance = null;
-
 
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof BlockStrap ) ) {
 			self::$instance = new BlockStrap();
 			self::$instance->setup_constants();
 
-			//          add_action( 'plugins_loaded', array( self::$instance, 'load_textdomain' ) );
+			add_action( 'plugins_loaded', array( self::$instance, 'load_textdomain' ) );
 
 			self::$instance->includes();
 			self::$instance->init_hooks();
@@ -45,7 +48,54 @@ final class BlockStrap {
 	}
 
 	private function init_hooks() {
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts'), 1000 );
+	}
 
+	public function enqueue_editor_scripts(){
+		wp_enqueue_script(
+			'blockstrap-blocks-filters',
+			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/js/blockstrap-block-filters.js',
+			array( 'wp-block-library', 'wp-element', 'wp-i18n' ), // required dependencies for blocks
+			BLOCKSTRAP_BLOCKS_VERSION
+		);
+
+		wp_enqueue_style(
+			'blockstrap-blocks-style',
+			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/css/style.css',
+			'',
+			BLOCKSTRAP_BLOCKS_VERSION
+		);
+
+		wp_enqueue_style(
+			'blockstrap-blocks-style-admin',
+			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/css/block-editor.css',
+			array( 'blockstrap-blocks-style' ),
+			BLOCKSTRAP_BLOCKS_VERSION
+		);
+	}
+
+	/**
+	 * Loads the plugin language files
+	 *
+	 * @access public
+	 * @since 2.0.0
+	 * @return void
+	 */
+	public function load_textdomain() {
+
+		$locale = get_user_locale();
+
+		/**
+		 * Filter the plugin locale.
+		 *
+		 * @since   1.4.2
+		 * @package BlockStrap
+		 */
+		$locale = apply_filters( 'plugin_locale', $locale, 'blockstrap-blocks' );
+
+		unload_textdomain( 'blockstrap-blocks' );
+		load_textdomain( 'blockstrap-blocks', WP_LANG_DIR . '/' . 'geodirectory' . '/' . 'geodirectory' . '-' . $locale . '.mo' );
+		load_plugin_textdomain( 'blockstrap-blocks', false, basename( dirname( BLOCKSTRAP_BLOCKS_PLUGIN_FILE ) ) . '/languages/' );
 	}
 
 	/**
@@ -73,6 +123,11 @@ final class BlockStrap {
 		}
 	}
 
+	/**
+	 * File includes.
+	 *
+	 * @return void
+	 */
 	private function includes() {
 		// composer autoloader
 		require_once 'vendor/autoload.php';
@@ -105,7 +160,5 @@ final class BlockStrap {
 	}
 }
 
-
 //run
 BlockStrap::instance();
-

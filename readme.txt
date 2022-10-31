@@ -1,4 +1,4 @@
-=== BlockStrap ===
+=== BlockStrap - Page Builder Blocks ===
 Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://wpgeodirectory.com
 Tags: business directory, listings, directory plugin, classifieds, member directory

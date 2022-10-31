@@ -112,6 +112,9 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 		// font size
 		$arguments['font_weight'] = sd_get_font_weight_input();
 
+		// line height
+		$arguments['font_line_height'] = sd_get_font_line_height_input();
+
 		// Text justify
 		$arguments['text_justify'] = sd_get_text_justify_input();
 

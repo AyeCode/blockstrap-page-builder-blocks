@@ -8,8 +8,17 @@
 	.wp-block-blockstrap-blockstrap-widget-navbar {
 		&.is-selected, &.has-child-selected {
 			.wp-block-blockstrap-blockstrap-widget-nav {
-				display: block;
+				display: block !important;
 			}
 		}
 	}
+
+	// fix for fully transparent nav menu open on mobile
+	.navbar.bg-transparent.navbar-dark{
+		background: #343a40 !important;
+	}
+	.navbar.bg-transparent.navbar-light{
+		background: #f8f9fa !important;
+	}
 }
+

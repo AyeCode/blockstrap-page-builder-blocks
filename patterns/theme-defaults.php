@@ -49,11 +49,11 @@ function bsb_pattern_header_default( $content ) {
 
 <!-- wp:blockstrap/blockstrap-widget-nav-item {"type":"custom","custom_url":"https://wpblockstrap.com/","text":"Buy now","icon_class":"fas fa-shopping-bag","link_type":"btn-round","link_bg":"danger","text_align_lg":"text-lg-right","ml":"0","ml_md":"0","mt_lg":"0","mb_lg":"0","ml_lg":"3","pt_lg":"0","pr_lg":"0","pb_lg":"0","pl_lg":"0","content":"\u003ca href=\u0022#https://wpblockstrap.com/\u0022 class=\u0022btn btn-round btn-danger\u0022\u003e\u003ci class=\u0022fas fa-shopping-bag mr-2\u0022\u003e\u003c/i\u003eBuy now\u003c/a\u003e"} -->
 [bs_nav_item type=\'custom\'  page_id=\'\'  post_id=\'\'  custom_url=\'https://wpblockstrap.com/\'  text=\'Buy now\'  icon_class=\'fas fa-shopping-bag\'  link_type=\'btn-round\'  link_size=\'\'  link_bg=\'danger\'  text_color=\'\'  text_justify=\'false\'  text_align=\'\'  text_align_md=\'\'  text_align_lg=\'text-lg-right\'  mt=\'\'  mr=\'\'  mb=\'\'  ml=\'0\'  mt_md=\'\'  mr_md=\'\'  mb_md=\'\'  ml_md=\'0\'  mt_lg=\'0\'  mr_lg=\'\'  mb_lg=\'0\'  ml_lg=\'3\'  pt=\'\'  pr=\'\'  pb=\'\'  pl=\'\'  pt_md=\'\'  pr_md=\'\'  pb_md=\'\'  pl_md=\'\'  pt_lg=\'0\'  pr_lg=\'0\'  pb_lg=\'0\'  pl_lg=\'0\'  border=\'\'  rounded=\'\'  rounded_size=\'\'  shadow=\'\'  css_class=\'\' ]
-<!-- /wp:blockstrap/blockstrap-widget-nav-item --></ul></div><script>jQuery("#navbarNav_1").on("show.bs.collapse", function () {jQuery("#navbarNav_1").closest(".bg-transparent-until-scroll").addClass("nav-menu-open");});jQuery("#navbarNav_1").on("hidden.bs.collapse", function () {jQuery("#navbarNav_1").closest(".bg-transparent-until-scroll").removeClass("nav-menu-open");});</script>[/bs_nav]
+<!-- /wp:blockstrap/blockstrap-widget-nav-item --></ul></div><script>jQuery("#navbarNav_1").on("show.bs.collapse", function () {jQuery("#navbarNav_1").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_1").on("hidden.bs.collapse", function () {jQuery("#navbarNav_1").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});</script>[/bs_nav]
 <!-- /wp:blockstrap/blockstrap-widget-nav --></div></nav>[/bs_navbar]
 <!-- /wp:blockstrap/blockstrap-widget-navbar -->';
 }
-add_filter( 'bs_pattern_header_default', 'bsb_pattern_header_default', 10, 1 );
+add_filter( 'blockstrap_pattern_header_default', 'bsb_pattern_header_default', 10, 1 );
 
 /**
  * Replaces the default footer content in the BlockStrap theme.
@@ -176,7 +176,7 @@ function bsb_pattern_footer_default( $content ) {
 <!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_footer_default', 'bsb_pattern_footer_default', 10, 1 );
+add_filter( 'blockstrap_pattern_footer_default', 'bsb_pattern_footer_default', 10, 1 );
 
 /**
  * Replaces the default hero section content in the BlockStrap theme.
@@ -220,7 +220,7 @@ function bsb_pattern_hero_home_default( $content ) {
 <!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_hero_home_default', 'bsb_pattern_hero_home_default', 10, 1 );
+add_filter( 'blockstrap_pattern_hero_home_default', 'bsb_pattern_hero_home_default', 10, 1 );
 
 /**
  * Replaces the default feature section content in the BlockStrap theme.
@@ -258,7 +258,7 @@ function bsb_pattern_feature_home_default( $content ) {
 	<!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_feature_home_default', 'bsb_pattern_feature_home_default', 10, 1 );
+add_filter( 'blockstrap_pattern_feature_home_default', 'bsb_pattern_feature_home_default', 10, 1 );
 
 
 /**
@@ -285,7 +285,7 @@ function bsb_pattern_hero_404_default( $content ) {
 	<!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_hero_404_default', 'bsb_pattern_hero_404_default', 10, 1 );
+add_filter( 'blockstrap_pattern_hero_404_default', 'bsb_pattern_hero_404_default', 10, 1 );
 
 /**
  * Replaces the default 404 page content in the BlockStrap theme.
@@ -313,7 +313,7 @@ function bsb_pattern_page_content_404_default( $content ) {
 	<!-- wp:search {"label":"Search","showLabel":false,"buttonText":"Search"} /--></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_page_content_404_default', 'bsb_pattern_page_content_404_default', 10, 1 );
+add_filter( 'blockstrap_pattern_page_content_404_default', 'bsb_pattern_page_content_404_default', 10, 1 );
 
 /**
  * Replaces the default archive page hero section content in the BlockStrap theme.
@@ -341,7 +341,7 @@ function bsb_pattern_hero_archive_default( $content ) {
 	<!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_hero_archive_default', 'bsb_pattern_hero_archive_default', 10, 1 );
+add_filter( 'blockstrap_pattern_hero_archive_default', 'bsb_pattern_hero_archive_default', 10, 1 );
 
 
 /**
@@ -356,7 +356,7 @@ function bsb_pattern_page_content_archive_default( $content ) {
 [bs_container container=\'container\'  row_cols=\'\'  row_cols_md=\'\'  row_cols_lg=\'\'  col=\'\'  col_md=\'\'  col_lg=\'\'  bg=\'\'  bg_color=\'#0073aa\'  bg_gradient=\'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)\'  bg_image_fixed=\'false\'  bg_image_use_featured=\'false\'  bg_image=\'\'  bg_image_id=\'\'  bg_image_xy=\'{x:undefined,y:undefined}\'  bg_on_text=\'false\'  text_color=\'\'  text_justify=\'false\'  text_align=\'\'  text_align_md=\'\'  text_align_lg=\'\'  mt=\'\'  mr=\'\'  mb=\'3\'  ml=\'\'  mt_md=\'\'  mr_md=\'\'  mb_md=\'\'  ml_md=\'\'  mt_lg=\'5\'  mr_lg=\'\'  mb_lg=\'3\'  ml_lg=\'\'  pt=\'\'  pr=\'\'  pb=\'\'  pl=\'\'  pt_md=\'\'  pr_md=\'\'  pb_md=\'\'  pl_md=\'\'  pt_lg=\'\'  pr_lg=\'\'  pb_lg=\'\'  pl_lg=\'\'  border=\'\'  rounded=\'\'  rounded_size=\'\'  shadow=\'\'  position=\'\'  sticky_offset_top=\'\'  sticky_offset_bottom=\'\'  display=\'\'  display_md=\'\'  display_lg=\'\'  flex_align_items=\'\'  flex_align_items_md=\'\'  flex_align_items_lg=\'\'  flex_justify_content=\'\'  flex_justify_content_md=\'\'  flex_justify_content_lg=\'\'  flex_align_self=\'\'  flex_align_self_md=\'\'  flex_align_self_lg=\'\'  flex_order=\'\'  flex_order_md=\'\'  flex_order_lg=\'\'  anchor=\'\'  css_class=\'\' ]<div class="wp-block-blockstrap-blockstrap-widget-container undefined mb-3 mt-5 mb-lg-3 container"><!-- wp:template-part {"slug":"main","theme":"blockstrap","tagName":"main","className":"site-main"} /--></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_page_content_archive_default', 'bsb_pattern_page_content_archive_default', 10, 1 );
+add_filter( 'blockstrap_pattern_page_content_archive_default', 'bsb_pattern_page_content_archive_default', 10, 1 );
 
 
 /**
@@ -383,7 +383,7 @@ function bsb_pattern_hero_page_default( $content ) {
 	<!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_hero_page_default', 'bsb_pattern_hero_page_default', 10, 1 );
+add_filter( 'blockstrap_pattern_hero_page_default', 'bsb_pattern_hero_page_default', 10, 1 );
 
 /**
  * Replaces the default page content in the BlockStrap theme.
@@ -407,7 +407,7 @@ function bsb_pattern_page_content_page_default( $content ) {
 	<!-- wp:template-part {"slug":"comments","theme":"blockstrap"} /--></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_page_content_page_default', 'bsb_pattern_page_content_page_default', 10, 1 );
+add_filter( 'blockstrap_pattern_page_content_page_default', 'bsb_pattern_page_content_page_default', 10, 1 );
 
 
 /**
@@ -437,7 +437,7 @@ function bsb_pattern_hero_post_default( $content ) {
 <!-- /wp:blockstrap/blockstrap-widget-container -->
 ';
 }
-add_filter( 'bs_pattern_hero_post_default', 'bsb_pattern_hero_post_default', 10, 1 );
+add_filter( 'blockstrap_pattern_hero_post_default', 'bsb_pattern_hero_post_default', 10, 1 );
 
 /**
  * Replaces the default post page content in the BlockStrap theme.
@@ -464,7 +464,7 @@ function bsb_pattern_page_content_post_default( $content ) {
 <!-- /wp:blockstrap/blockstrap-widget-container -->
 
 <!-- wp:blockstrap/blockstrap-widget-container {"anchor":"main"} -->
-[bs_container container=\'container\'  row_cols=\'\'  row_cols_md=\'\'  row_cols_lg=\'\'  col=\'\'  col_md=\'\'  col_lg=\'\'  bg=\'\'  bg_color=\'#0073aa\'  bg_gradient=\'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)\'  bg_image_fixed=\'false\'  bg_image_use_featured=\'false\'  bg_image=\'\'  bg_image_id=\'\'  bg_image_xy=\'{x:undefined,y:undefined}\'  bg_on_text=\'false\'  text_color=\'\'  text_justify=\'false\'  text_align=\'\'  text_align_md=\'\'  text_align_lg=\'\'  mt=\'\'  mr=\'\'  mb=\'3\'  ml=\'\'  mt_md=\'\'  mr_md=\'\'  mb_md=\'\'  ml_md=\'\'  mt_lg=\'\'  mr_lg=\'\'  mb_lg=\'3\'  ml_lg=\'\'  pt=\'\'  pr=\'\'  pb=\'\'  pl=\'\'  pt_md=\'\'  pr_md=\'\'  pb_md=\'\'  pl_md=\'\'  pt_lg=\'\'  pr_lg=\'\'  pb_lg=\'\'  pl_lg=\'\'  border=\'\'  rounded=\'\'  rounded_size=\'\'  shadow=\'\'  position=\'\'  sticky_offset_top=\'\'  sticky_offset_bottom=\'\'  display=\'\'  display_md=\'\'  display_lg=\'\'  flex_align_items=\'\'  flex_align_items_md=\'\'  flex_align_items_lg=\'\'  flex_justify_content=\'\'  flex_justify_content_md=\'\'  flex_justify_content_lg=\'\'  flex_align_self=\'\'  flex_align_self_md=\'\'  flex_align_self_lg=\'\'  flex_order=\'\'  flex_order_md=\'\'  flex_order_lg=\'\'  anchor=\'main\'  css_class=\'\' ]<div class="wp-block-blockstrap-blockstrap-widget-container undefined mb-3 mb-lg-3 container" is="main"><!-- wp:blockstrap/blockstrap-widget-container {"container":"col","col":"12","col_md":"12","col_lg":"8","text_color":"dark","mr_lg":"auto","ml_lg":"auto"} -->
+[bs_container container=\'container\'  row_cols=\'\'  row_cols_md=\'\'  row_cols_lg=\'\'  col=\'\'  col_md=\'\'  col_lg=\'\'  bg=\'\'  bg_color=\'#0073aa\'  bg_gradient=\'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)\'  bg_image_fixed=\'false\'  bg_image_use_featured=\'false\'  bg_image=\'\'  bg_image_id=\'\'  bg_image_xy=\'{x:undefined,y:undefined}\'  bg_on_text=\'false\'  text_color=\'\'  text_justify=\'false\'  text_align=\'\'  text_align_md=\'\'  text_align_lg=\'\'  mt=\'\'  mr=\'\'  mb=\'3\'  ml=\'\'  mt_md=\'\'  mr_md=\'\'  mb_md=\'\'  ml_md=\'\'  mt_lg=\'\'  mr_lg=\'\'  mb_lg=\'3\'  ml_lg=\'\'  pt=\'\'  pr=\'\'  pb=\'\'  pl=\'\'  pt_md=\'\'  pr_md=\'\'  pb_md=\'\'  pl_md=\'\'  pt_lg=\'\'  pr_lg=\'\'  pb_lg=\'\'  pl_lg=\'\'  border=\'\'  rounded=\'\'  rounded_size=\'\'  shadow=\'\'  position=\'\'  sticky_offset_top=\'\'  sticky_offset_bottom=\'\'  display=\'\'  display_md=\'\'  display_lg=\'\'  flex_align_items=\'\'  flex_align_items_md=\'\'  flex_align_items_lg=\'\'  flex_justify_content=\'\'  flex_justify_content_md=\'\'  flex_justify_content_lg=\'\'  flex_align_self=\'\'  flex_align_self_md=\'\'  flex_align_self_lg=\'\'  flex_order=\'\'  flex_order_md=\'\'  flex_order_lg=\'\'  anchor=\'main\'  css_class=\'\' ]<div class="wp-block-blockstrap-blockstrap-widget-container undefined mb-3 mb-lg-3 container" id="main"><!-- wp:blockstrap/blockstrap-widget-container {"container":"col","col":"12","col_md":"12","col_lg":"8","text_color":"dark","mr_lg":"auto","ml_lg":"auto"} -->
 	[bs_container container=\'col\'  row_cols=\'\'  row_cols_md=\'\'  row_cols_lg=\'\'  col=\'12\'  col_md=\'12\'  col_lg=\'8\'  bg=\'\'  bg_color=\'#0073aa\'  bg_gradient=\'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)\'  bg_image_fixed=\'false\'  bg_image_use_featured=\'false\'  bg_image=\'\'  bg_image_id=\'\'  bg_image_xy=\'{x:undefined,y:undefined}\'  bg_on_text=\'false\'  text_color=\'dark\'  text_justify=\'false\'  text_align=\'\'  text_align_md=\'\'  text_align_lg=\'\'  mt=\'\'  mr=\'\'  mb=\'3\'  ml=\'\'  mt_md=\'\'  mr_md=\'\'  mb_md=\'\'  ml_md=\'\'  mt_lg=\'\'  mr_lg=\'auto\'  mb_lg=\'3\'  ml_lg=\'auto\'  pt=\'\'  pr=\'\'  pb=\'\'  pl=\'\'  pt_md=\'\'  pr_md=\'\'  pb_md=\'\'  pl_md=\'\'  pt_lg=\'\'  pr_lg=\'\'  pb_lg=\'\'  pl_lg=\'\'  border=\'\'  rounded=\'\'  rounded_size=\'\'  shadow=\'\'  position=\'\'  sticky_offset_top=\'\'  sticky_offset_bottom=\'\'  display=\'\'  display_md=\'\'  display_lg=\'\'  flex_align_items=\'\'  flex_align_items_md=\'\'  flex_align_items_lg=\'\'  flex_justify_content=\'\'  flex_justify_content_md=\'\'  flex_justify_content_lg=\'\'  flex_align_self=\'\'  flex_align_self_md=\'\'  flex_align_self_lg=\'\'  flex_order=\'\'  flex_order_md=\'\'  flex_order_lg=\'\'  anchor=\'\'  css_class=\'\' ]<div class="wp-block-blockstrap-blockstrap-widget-container undefined mb-3 mr-auto mb-lg-3 ml-auto col-12 col-md-12 col-lg-8 text-dark col"><!-- wp:spacer {"height":"50px"} -->
 		<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>
 		<!-- /wp:spacer -->
@@ -491,7 +491,7 @@ function bsb_pattern_page_content_post_default( $content ) {
 	<!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_page_content_post_default', 'bsb_pattern_page_content_post_default', 10, 1 );
+add_filter( 'blockstrap_pattern_page_content_post_default', 'bsb_pattern_page_content_post_default', 10, 1 );
 
 /**
  * Replaces the default search page content in the BlockStrap theme.
@@ -513,7 +513,7 @@ function bsb_pattern_page_content_search_default( $content ) {
 [bs_container container=\'container\'  row_cols=\'\'  row_cols_md=\'\'  row_cols_lg=\'\'  col=\'\'  col_md=\'\'  col_lg=\'\'  bg=\'\'  bg_color=\'#0073aa\'  bg_gradient=\'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)\'  bg_image_fixed=\'false\'  bg_image_use_featured=\'false\'  bg_image=\'\'  bg_image_id=\'\'  bg_image_xy=\'{x:undefined,y:undefined}\'  bg_on_text=\'false\'  text_color=\'\'  text_justify=\'false\'  text_align=\'\'  text_align_md=\'\'  text_align_lg=\'\'  mt=\'\'  mr=\'\'  mb=\'3\'  ml=\'\'  mt_md=\'\'  mr_md=\'\'  mb_md=\'\'  ml_md=\'\'  mt_lg=\'5\'  mr_lg=\'\'  mb_lg=\'3\'  ml_lg=\'\'  pt=\'\'  pr=\'\'  pb=\'\'  pl=\'\'  pt_md=\'\'  pr_md=\'\'  pb_md=\'\'  pl_md=\'\'  pt_lg=\'\'  pr_lg=\'\'  pb_lg=\'\'  pl_lg=\'\'  border=\'\'  rounded=\'\'  rounded_size=\'\'  shadow=\'\'  position=\'\'  sticky_offset_top=\'\'  sticky_offset_bottom=\'\'  display=\'\'  display_md=\'\'  display_lg=\'\'  flex_align_items=\'\'  flex_align_items_md=\'\'  flex_align_items_lg=\'\'  flex_justify_content=\'\'  flex_justify_content_md=\'\'  flex_justify_content_lg=\'\'  flex_align_self=\'\'  flex_align_self_md=\'\'  flex_align_self_lg=\'\'  flex_order=\'\'  flex_order_md=\'\'  flex_order_lg=\'\'  anchor=\'\'  css_class=\'\' ]<div class="wp-block-blockstrap-blockstrap-widget-container undefined mb-3 mt-5 mb-lg-3 container"><!-- wp:template-part {"slug":"main","theme":"blockstrap","tagName":"main","className":"site-main"} /--></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_page_content_search_default', 'bsb_pattern_page_content_search_default', 10, 1 );
+add_filter( 'blockstrap_pattern_page_content_search_default', 'bsb_pattern_page_content_search_default', 10, 1 );
 
 /**
  * Replaces the default page sidebar left content in the BlockStrap theme.
@@ -537,7 +537,7 @@ function bsb_pattern_page_content_page_sidebar_left_default( $content ) {
 	<!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_page_content_page_sidebar_left_default', 'bsb_pattern_page_content_page_sidebar_left_default', 10, 1 );
+add_filter( 'blockstrap_pattern_page_content_page_sidebar_left_default', 'bsb_pattern_page_content_page_sidebar_left_default', 10, 1 );
 
 /**
  * Replaces the default page sidebar right content in the BlockStrap theme.
@@ -561,4 +561,4 @@ function bsb_pattern_page_content_page_sidebar_right_default( $content ) {
 	<!-- /wp:blockstrap/blockstrap-widget-container --></div>[/bs_container]
 <!-- /wp:blockstrap/blockstrap-widget-container -->';
 }
-add_filter( 'bs_pattern_page_content_page_sidebar_right_default', 'bsb_pattern_page_content_page_sidebar_right_default', 10, 1 );
+add_filter( 'blockstrap_pattern_page_content_page_sidebar_right_default', 'bsb_pattern_page_content_page_sidebar_right_default', 10, 1 );
