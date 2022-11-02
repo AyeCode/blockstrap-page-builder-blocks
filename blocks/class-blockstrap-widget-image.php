@@ -26,10 +26,10 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_image',
-			'name'              => __( 'BS > Image', 'blockstrap' ),
+			'name'              => __( 'BS > Image', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bs-image',
-				'description' => esc_html__( 'A image element', 'blockstrap' ),
+				'description' => esc_html__( 'A image element', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -40,12 +40,12 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'block_group_tabs'  => array(
 				'content'  => array(
 					'groups' => array(
-						__( 'Image', 'blockstrap' ),
-						__( 'Link', 'blockstrap' ),
-						__( 'Caption', 'blockstrap' ),
+						__( 'Image', 'blockstrap-page-builder-blocks' ),
+						__( 'Link', 'blockstrap-page-builder-blocks' ),
+						__( 'Caption', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -53,9 +53,9 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Image Styles', 'blockstrap' ), __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Image Styles', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -64,12 +64,12 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Image Mask', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Image Mask', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -93,26 +93,26 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 		$arguments['img_src'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Image source', 'blockstrap' ),
+			'title'    => __( 'Image source', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				'upload'   => __( 'Upload', 'blockstrap' ),
-				'url'      => __( 'URL', 'blockstrap' ),
-				'featured' => __( 'Featured image', 'blockstrap' ),
+				'upload'   => __( 'Upload', 'blockstrap-page-builder-blocks' ),
+				'url'      => __( 'URL', 'blockstrap-page-builder-blocks' ),
+				'featured' => __( 'Featured image', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => 'upload',
 			'desc_tip' => true,
-			'group'    => __( 'Image', 'blockstrap' ),
+			'group'    => __( 'Image', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$type                          = 'img';
 		$arguments[ $type . '_image' ] = array(
 			'type'            => 'image',
-			'title'           => __( 'Custom image', 'blockstrap' ),
+			'title'           => __( 'Custom image', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => '',
 			'default'         => '',
 			'desc_tip'        => true,
 			'focalpoint'      => false,
-			'group'           => __( 'Image', 'blockstrap' ),
+			'group'           => __( 'Image', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_src%]=="upload"',
 		);
 
@@ -122,51 +122,51 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'title'       => '',
 			'placeholder' => '',
 			'default'     => '',
-			'group'       => __( 'Image', 'blockstrap' ),
+			'group'       => __( 'Image', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$image_sizes = get_intermediate_image_sizes();
 
 		$arguments['img_size'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Image size', 'blockstrap' ),
+			'title'           => __( 'Image size', 'blockstrap-page-builder-blocks' ),
 			'options'         => array( '' => 'Select image size' ) + array_combine( $image_sizes, $image_sizes ) + array( 'full' => 'full' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Image', 'blockstrap' ),
+			'group'           => __( 'Image', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_src%]!="url"',
 		);
 
 		$arguments['img_url'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Image URL', 'blockstrap' ),
-			'placeholder'     => __( 'https://example.com/uploads/my-iamge.jpg', 'blockstrap' ),
-			'group'           => __( 'Image', 'blockstrap' ),
+			'title'           => __( 'Image URL', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com/uploads/my-iamge.jpg', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Image', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_src%]=="url"',
 		);
 
 		$arguments['fallback_img_src'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Fallback image source', 'blockstrap' ),
+			'title'    => __( 'Fallback image source', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''        => __( 'None', 'blockstrap' ),
-				'default' => __( 'Default', 'blockstrap' ),
-				'upload'  => __( 'Upload', 'blockstrap' ),
+				''        => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'default' => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'upload'  => __( 'Upload', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Image', 'blockstrap' ),
+			'group'    => __( 'Image', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$type                          = 'fallback_img';
 		$arguments[ $type . '_image' ] = array(
 			'type'            => 'image',
-			'title'           => __( 'Fallback image', 'blockstrap' ),
+			'title'           => __( 'Fallback image', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => '',
 			'default'         => '',
 			'desc_tip'        => true,
 			'focalpoint'      => false,
-			'group'           => __( 'Image', 'blockstrap' ),
+			'group'           => __( 'Image', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_src%]=="featured" && [%fallback_img_src%]=="upload" ',
 		);
 
@@ -176,17 +176,17 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'title'       => '',
 			'placeholder' => '',
 			'default'     => '',
-			'group'       => __( 'Image', 'blockstrap' ),
+			'group'       => __( 'Image', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['img_link_to'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link to', 'blockstrap' ),
+			'title'    => __( 'Link to', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''       => __( 'None', 'blockstrap' ),
-				'post'   => __( 'Post', 'blockstrap' ),
-				'media'  => __( 'Media', 'blockstrap' ),
-				'custom' => __( 'Custom', 'blockstrap' ),
+				''       => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'post'   => __( 'Post', 'blockstrap-page-builder-blocks' ),
+				'media'  => __( 'Media', 'blockstrap-page-builder-blocks' ),
+				'custom' => __( 'Custom', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,

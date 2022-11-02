@@ -26,17 +26,17 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_map',
-			'name'              => __( 'BS > Map', 'blockstrap' ),
+			'name'              => __( 'BS > Map', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bs-map',
-				'description' => esc_html__( 'A simple lazy load iframe Google or OSM map.', 'blockstrap' ),
+				'description' => esc_html__( 'A simple lazy load iframe Google or OSM map.', 'blockstrap-page-builder-blocks' ),
 			),
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Map', 'blockstrap' ) ),
+					'groups' => array( __( 'Map', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -44,9 +44,9 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Map Styles', 'blockstrap' ) ),
+					'groups' => array( __( 'Map Styles', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -55,12 +55,12 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Image Mask', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Image Mask', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -84,39 +84,39 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 
 		$arguments['map_type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Map source', 'blockstrap' ),
+			'title'    => __( 'Map source', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				'google' => __( 'Google', 'blockstrap' ),
-				'osm'    => __( 'Open Street Maps', 'blockstrap' ),
+				'google' => __( 'Google', 'blockstrap-page-builder-blocks' ),
+				'osm'    => __( 'Open Street Maps', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => 'upload',
 			'desc_tip' => true,
-			'group'    => __( 'Map', 'blockstrap' ),
+			'group'    => __( 'Map', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['address'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Address', 'blockstrap' ),
-			'placeholder'     => __( 'Golden Gate Bridge', 'blockstrap' ),
+			'title'           => __( 'Address', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'Golden Gate Bridge', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
-			'group'           => __( 'Map', 'blockstrap' ),
+			'group'           => __( 'Map', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%map_type%]=="google"',
 		);
 
 		$arguments['gps'] = array(
 			'type'            => 'text',
-			'title'           => __( 'GPS', 'blockstrap' ),
+			'title'           => __( 'GPS', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => '56.9808, -7.4628',
 			'default'         => '',
 			/* translators: 1: Link open, 2: Link close. */
-			'desc'            => sprintf( __( 'Right click anywhere on a %1$sGoogle map%2$s and then click the GPS and past here.', 'blockstrap' ), '<a href="https://www.google.com/maps" target="_blank">', '</a>' ),
-			'group'           => __( 'Map', 'blockstrap' ),
+			'desc'            => sprintf( __( 'Right click anywhere on a %1$sGoogle map%2$s and then click the GPS and past here.', 'blockstrap-page-builder-blocks' ), '<a href="https://www.google.com/maps" target="_blank">', '</a>' ),
+			'group'           => __( 'Map', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%map_type%]=="osm"',
 		);
 
 		$arguments['map_zoom'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Map zoom', 'blockstrap' ),
+			'title'    => __( 'Map zoom', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
 				'1'  => '1',
 				'2'  => '2',
@@ -140,29 +140,29 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 			),
 			'default'  => '10',
 			'desc_tip' => true,
-			'group'    => __( 'Map', 'blockstrap' ),
+			'group'    => __( 'Map', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['map_view_google'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Map view', 'blockstrap' ),
+			'title'           => __( 'Map view', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				''  => __( 'Map', 'blockstrap' ),
-				'k' => __( 'Satellite', 'blockstrap' ),
-				'h' => __( 'Hybrid', 'blockstrap' ),
-				'p' => __( 'Terrain', 'blockstrap' ),
+				''  => __( 'Map', 'blockstrap-page-builder-blocks' ),
+				'k' => __( 'Satellite', 'blockstrap-page-builder-blocks' ),
+				'h' => __( 'Hybrid', 'blockstrap-page-builder-blocks' ),
+				'p' => __( 'Terrain', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Map', 'blockstrap' ),
+			'group'           => __( 'Map', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%map_type%]=="google"',
 		);
 
 		$arguments['map_view_osm'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Map view', 'blockstrap' ),
+			'title'           => __( 'Map view', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				'mapnik'       => __( 'Standard', 'blockstrap' ),
+				'mapnik'       => __( 'Standard', 'blockstrap-page-builder-blocks' ),
 				'cyclosm'      => __( 'CyclOSM', 'blockstrap' ),
 				'cyclemap'     => __( 'Cycle OSM', 'blockstrap' ),
 				'transportmap' => __( 'Transport Map', 'blockstrap' ),

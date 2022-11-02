@@ -8,20 +8,20 @@
  * @since       1.0.0
  *
  * @wordpress-plugin
- * Plugin Name: BlockStrap - Page Builder Blocks
- * Plugin URI: https://wpgeodirectory.com/
+ * Plugin Name: BlockStrap Page Builder Blocks
+ * Plugin URI: https://ayecode.io/
  * Description: BlockStrap - A FSE page builder for WordPress
- * Version: 0.0.1-dev
+ * Version: 0.0.1
  * Author: AyeCode
- * Author URI: https://wpgeodirectory.com
- * Text Domain: blockstrap-blocks
+ * Author URI: https://ayecode.io
+ * Text Domain: blockstrap-page-builder-blocks
  * Domain Path: /languages
  * Requires at least: 6.0
  * Tested up to: 6.1
  */
 
 
-define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.0.1-dev' );
+define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.0.1' );
 
 /**
  * The BlockStrap Class
@@ -47,11 +47,74 @@ final class BlockStrap {
 		return self::$instance;
 	}
 
+	/**
+	 * Filters and actions.
+	 *
+	 * @return void
+	 */
 	private function init_hooks() {
-		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts'), 1000 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ), 1000 );
+		add_filter( 'render_block', array( $this, 'force_render_blocks_on_templates' ), 10, 2 );
+		add_filter( 'ayecode-ui-settings', array( $this, 'aui_settings_overwrite' ), 10, 3 );
+		add_filter( 'ayecode-ui-default-settings', array( $this, 'aui_default_settings_overwrite' ), 10, 2 );
 	}
 
-	public function enqueue_editor_scripts(){
+	/**
+	 * Overwrite AUI default settings to full mode.
+	 *
+	 * @param $settings
+	 * @param $db_settings
+	 * @param $defaults
+	 *
+	 * @return mixed
+	 */
+	public function aui_default_settings_overwrite( $settings, $db_settings ) {
+
+		// set default value to full mode
+		$settings['css']         = 'core';
+		return $settings;
+	}
+
+	/**
+	 * Overwrite AUI settings to force it to full mode if BlockStrap theme is being used.
+	 *
+	 * @param $settings
+	 * @param $db_settings
+	 * @param $defaults
+	 *
+	 * @return mixed
+	 */
+	public function aui_settings_overwrite( $settings, $db_settings, $defaults ) {
+
+		// force full mode if theme is blockstrap
+		if ( wp_get_theme()->get_stylesheet() === 'blockstrap' ) {
+			$settings['css']         = 'core';
+		}
+		return $settings;
+	}
+
+	/**
+	 * Force blocks to render shortcodes.
+	 *
+	 * There is a bug where shortcodes are not renders in template files.
+	 *
+	 * @todo remove this or make it more specific once this bug is resolved https://github.com/WordPress/gutenberg/issues/35258
+	 *
+	 * @param string $block_content The HTML content of the block.
+	 * @param array  $block The full block, including name and attributes.
+	 *
+	 * @return mixed
+	 */
+	public function force_render_blocks_on_templates( $block_content, $block ) {
+		return strip_shortcodes( do_shortcode( $block_content ) );
+	}
+
+	/**
+	 * Enqueue scripts
+	 *
+	 * @return void
+	 */
+	public function enqueue_editor_scripts() {
 		wp_enqueue_script(
 			'blockstrap-blocks-filters',
 			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/js/blockstrap-block-filters.js',
@@ -82,20 +145,7 @@ final class BlockStrap {
 	 * @return void
 	 */
 	public function load_textdomain() {
-
-		$locale = get_user_locale();
-
-		/**
-		 * Filter the plugin locale.
-		 *
-		 * @since   1.4.2
-		 * @package BlockStrap
-		 */
-		$locale = apply_filters( 'plugin_locale', $locale, 'blockstrap-blocks' );
-
-		unload_textdomain( 'blockstrap-blocks' );
-		load_textdomain( 'blockstrap-blocks', WP_LANG_DIR . '/' . 'geodirectory' . '/' . 'geodirectory' . '-' . $locale . '.mo' );
-		load_plugin_textdomain( 'blockstrap-blocks', false, basename( dirname( BLOCKSTRAP_BLOCKS_PLUGIN_FILE ) ) . '/languages/' );
+		load_plugin_textdomain( 'blockstrap-page-builder-blocks', false, basename( dirname( BLOCKSTRAP_BLOCKS_PLUGIN_FILE ) ) . '/languages/' );
 	}
 
 	/**
@@ -132,6 +182,11 @@ final class BlockStrap {
 		// composer autoloader
 		require_once 'vendor/autoload.php';
 
+		// admin
+		if ( is_admin() ) {
+			require_once 'classes/class-blockstrap-blocks-admin.php';
+		}
+
 		// Patterns
 		require_once 'patterns/theme-defaults.php';
 		require_once 'patterns/theme-parts-defaults.php';
@@ -157,6 +212,10 @@ final class BlockStrap {
 		require_once 'blocks/class-blockstrap-widget-tab.php';
 		require_once 'blocks/class-blockstrap-widget-icon-box.php';
 		require_once 'blocks/class-blockstrap-widget-skip-links.php';
+
+		// Frontend comments
+		require_once 'classes/class-blockstrap-blocks-comments.php';
+
 	}
 }
 

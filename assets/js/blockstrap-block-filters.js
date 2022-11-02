@@ -5,7 +5,8 @@ const { addFilter } = wp.hooks;
  * hook below, the filter passes it the block settings
  * or config file.
  */
-const filterBlocks = (settings) => {
+const blockstrapBlocksFilterBlocks = (settings) => {
+	blockstrap_blocks_add_editor_compat_class();
 	if (settings.name !== 'core/post-template') {
 		return settings
 	}
@@ -261,31 +262,11 @@ const filterBlocks = (settings) => {
 
 addFilter(
 	'blocks.registerBlockType', // hook name, very important!
-	'example/filter-blocks', // your name, very arbitrary!
-	filterBlocks // function to run
+	'blockstrap-blocks/blockstrap-blocks-filter-blocks', // your name, very arbitrary!
+	blockstrapBlocksFilterBlocks // function to run
 )
 
-// var el = wp.element.createElement;
-//
-// var withClientIdClassName = wp.compose.createHigherOrderComponent( function (
-// 		BlockListBlock
-// 	) {
-//
-// 		return function ( props ) {
-// 			if(props.block.name=='core/post-template'){
-// 				console.log(props);
-// 			}
-// 			var newProps = lodash.assign( {}, props, {
-// 				className: 'xxxblock-' + props.clientId,
-// 			} );
-//
-// 			return el( BlockListBlock, newProps );
-// 		};
-// 	},
-// 	'withClientIdClassName' );
-//
-// wp.hooks.addFilter(
-// 	'editor.BlockListBlock',
-// 	'my-plugin/with-client-id-class-name',
-// 	withClientIdClassName
-// );
+
+function blockstrap_blocks_add_editor_compat_class(){
+	jQuery('.edit-post-visual-editor').addClass('bsui');
+}

@@ -63,10 +63,10 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'block-wrap'     => '',
 			'class_name'     => __CLASS__,
 			'base_id'        => 'bs_nav',
-			'name'           => __( 'BS > Nav', 'blockstrap' ),
+			'name'           => __( 'BS > Nav', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'     => array(
 				'classname'   => 'bd-nav',
-				'description' => esc_html__( 'Navigation items container.', 'blockstrap' ),
+				'description' => esc_html__( 'Navigation items container.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'        => array(
 				'attributes' => array(
@@ -91,55 +91,55 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 		//
 		$arguments['inside_navbar'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Usage', 'blockstrap' ),
+			'title'    => __( 'Usage', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				'1' => __( 'Inside Navbar (collapse on mobile)', 'blockstrap' ),
-				'0' => __( 'Standalone (never collapse)', 'blockstrap' ),
+				'1' => __( 'Inside Navbar (collapse on mobile)', 'blockstrap-page-builder-blocks' ),
+				'0' => __( 'Standalone (never collapse)', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Nav Styles', 'blockstrap' ),
+			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// flex direction
 		$arguments['flex_direction'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Horizontal / Vertical', 'blockstrap' ),
+			'title'    => __( 'Horizontal / Vertical', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''            => __( 'Horizontal', 'blockstrap' ),
-				'flex-column' => __( 'Vertical', 'blockstrap' ),
+				''            => __( 'Horizontal', 'blockstrap-page-builder-blocks' ),
+				'flex-column' => __( 'Vertical', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Nav Styles', 'blockstrap' ),
+			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// Nav style
 		$arguments['nav_style'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Nav style', 'blockstrap' ),
+			'title'    => __( 'Nav style', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''          => __( 'Default', 'blockstrap' ),
-				'nav-tabs'  => __( 'Tabs', 'blockstrap' ),
-				'nav-pills' => __( 'Pills', 'blockstrap' ),
+				''          => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'nav-tabs'  => __( 'Tabs', 'blockstrap-page-builder-blocks' ),
+				'nav-pills' => __( 'Pills', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Nav Styles', 'blockstrap' ),
+			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// fill / justify
 		$arguments['nav_fill'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Fill / Justify', 'blockstrap' ),
+			'title'    => __( 'Fill / Justify', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''              => __( 'No', 'blockstrap' ),
-				'nav-fill'      => __( 'Justify', 'blockstrap' ),
-				'nav-justified' => __( 'Justify equal width', 'blockstrap' ),
+				''              => __( 'No', 'blockstrap-page-builder-blocks' ),
+				'nav-fill'      => __( 'Justify', 'blockstrap-page-builder-blocks' ),
+				'nav-justified' => __( 'Justify equal width', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Nav Styles', 'blockstrap' ),
+			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// background
@@ -215,10 +215,10 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 
 		$arguments['width'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Width', 'blockstrap' ),
+			'title'    => __( 'Width', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''       => __( 'Default', 'blockstrap' ),
-				'w-auto' => __( 'Auto', 'blockstrap' ),
+				''       => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'w-auto' => __( 'Auto', 'blockstrap-page-builder-blocks' ),
 				'w-25'   => '25%',
 				'w-50'   => '50%',
 				'w-75'   => '75%',
@@ -226,7 +226,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Wrapper Styles', 'blockstrap' ),
+			'group'    => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// Text justify

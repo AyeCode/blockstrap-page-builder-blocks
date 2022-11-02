@@ -27,10 +27,10 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 								}))",
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_button',
-			'name'              => __( 'BS > Button', 'blockstrap' ),
+			'name'              => __( 'BS > Button', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bs-button',
-				'description' => esc_html__( 'A bootstrap button, badge or iconbox.', 'blockstrap' ),
+				'description' => esc_html__( 'A bootstrap button, badge or iconbox.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -40,9 +40,9 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Link', 'blockstrap' ) ),
+					'groups' => array( __( 'Link', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -50,9 +50,9 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Button', 'blockstrap' ), __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Button', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -60,9 +60,9 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 					),
 				),
 				'advanced' => array(
-					'groups' => array( __( 'Wrapper Styles', 'blockstrap' ), __( 'Advanced', 'blockstrap' ) ),
+					'groups' => array( __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ), __( 'Advanced', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -86,114 +86,114 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 		$arguments['type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link Type', 'blockstrap' ),
+			'title'    => __( 'Link Type', 'blockstrap-page-builder-blocks' ),
 			'options'  => $this->link_types(),
 			'default'  => 'home',
 			'desc_tip' => true,
-			'group'    => __( 'Link', 'blockstrap' ),
+			'group'    => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['page_id'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Page', 'blockstrap' ),
+			'title'           => __( 'Page', 'blockstrap-page-builder-blocks' ),
 			'options'         => $this->get_pages_array(),
-			'placeholder'     => __( 'Select Page', 'blockstrap' ),
+			'placeholder'     => __( 'Select Page', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="page"',
 		);
 
 		$arguments['post_id'] = array(
 			'type'            => 'number',
-			'title'           => __( 'Post ID', 'blockstrap' ),
+			'title'           => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => 123,
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="post-id"',
 		);
 
 		$arguments['custom_url'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Custom URL', 'blockstrap' ),
-			'desc'            => __( 'Add custom link URL', 'blockstrap' ),
-			'placeholder'     => __( 'https://example.com', 'blockstrap' ),
+			'title'           => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Add custom link URL', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="custom"',
 		);
 
 		$arguments['text'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Link Text', 'blockstrap' ),
-			'desc'        => __( 'Add custom link text or leave blank for dynamic', 'blockstrap' ),
-			'placeholder' => __( 'Home', 'blockstrap' ),
+			'title'       => __( 'Link Text', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Add custom link text or leave blank for dynamic', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Home', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+			'group'       => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['icon_class'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Icon class', 'blockstrap' ),
-			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap' ),
-			'placeholder' => __( 'fas fa-ship', 'blockstrap' ),
+			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'fas fa-ship', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+			'group'       => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['icon_position'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Icon position', 'blockstrap' ),
+			'title'           => __( 'Icon position', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				'left'  => __( 'Left', 'blockstrap' ),
-				'right' => __( 'right', 'blockstrap' ),
+				'left'  => __( 'Left', 'blockstrap-page-builder-blocks' ),
+				'right' => __( 'right', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%icon_class%]!=""',
 		);
 
 		// button styles
 		$arguments['link_type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link style', 'blockstrap' ),
+			'title'    => __( 'Link style', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''             => __( 'None', 'blockstrap' ),
-				'btn'          => __( 'Button', 'blockstrap' ),
-				'btn-round'    => __( 'Button rounded', 'blockstrap' ),
-				'iconbox'      => __( 'Iconbox bordered', 'blockstrap' ),
-				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap' ),
-				'badge'        => __( 'Badge', 'blockstrap' ),
-				'badge-pill'   => __( 'Pill Badge', 'blockstrap' ),
+				''             => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'btn'          => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'btn-round'    => __( 'Button rounded', 'blockstrap-page-builder-blocks' ),
+				'iconbox'      => __( 'Iconbox bordered', 'blockstrap-page-builder-blocks' ),
+				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap-page-builder-blocks' ),
+				'badge'        => __( 'Badge', 'blockstrap-page-builder-blocks' ),
+				'badge-pill'   => __( 'Pill Badge', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => 'btn',
 			'desc_tip' => true,
-			'group'    => __( 'Button', 'blockstrap' ),
+			'group'    => __( 'Button', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['link_size'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Size', 'blockstrap' ),
+			'title'           => __( 'Size', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				''       => __( 'Default', 'blockstrap' ),
-				'small'  => __( 'Small', 'blockstrap' ),
-				'medium' => __( 'Medium', 'blockstrap' ),
-				'large'  => __( 'Large', 'blockstrap' ),
+				''       => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'small'  => __( 'Small', 'blockstrap-page-builder-blocks' ),
+				'medium' => __( 'Medium', 'blockstrap-page-builder-blocks' ),
+				'large'  => __( 'Large', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Button', 'blockstrap' ),
+			'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%link_type%]!="badge" && [%link_type%]!="badge-pill"',
 		);
 
 		$arguments['badge_size_notice'] = array(
 			'type'            => 'notice',
-			'desc'            => __( 'Badge size is inherited from the parent text size', 'blockstrap' ),
+			'desc'            => __( 'Badge size is inherited from the parent text size', 'blockstrap-page-builder-blocks' ),
 			'status'          => 'info',
 			'group'           => __( 'Button', 'blockstrap' ),
 			'element_require' => '([%link_type%]=="badge" || [%link_type%]=="badge-pill")',
@@ -315,6 +315,13 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
 
 		$arguments['css_class'] = sd_get_class_input();
+
+		//      $arguments['styleid'] = array(
+		//          'type'     => 'hidden',
+		//          'title'    => __( 'Style ID', 'blockstrap' ),
+		//          'desc_tip' => true,
+		//          'group'    => __( 'Advanced', 'blockstrap' ),
+		//      );
 
 		return $arguments;
 	}

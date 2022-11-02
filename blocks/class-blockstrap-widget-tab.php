@@ -37,10 +37,10 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 			'block-wrap'         => '',
 			'class_name'         => __CLASS__,
 			'base_id'            => 'bs_tab',
-			'name'               => __( 'BS > Tab', 'blockstrap' ),
+			'name'               => __( 'BS > Tab', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'         => array(
 				'classname'   => 'bs-tab',
-				'description' => esc_html__( 'A tab', 'blockstrap' ),
+				'description' => esc_html__( 'A tab', 'blockstrap-page-builder-blocks' ),
 			),
 			'no_wrap'            => true,
 		);
@@ -59,18 +59,18 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 
 		$arguments['text'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Name', 'blockstrap' ),
-			'placeholder' => __( 'Tab1', 'blockstrap' ),
+			'title'       => __( 'Name', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Tab1', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Tab Name', 'blockstrap' ),
+			'group'       => __( 'Tab Name', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['anchor'] = array(
 			'type'    => 'text',
-			'title'   => __( 'HTML anchor (required)', 'blockstrap' ),
+			'title'   => __( 'HTML anchor (required)', 'blockstrap-page-builder-blocks' ),
 			'default' => '',
-			'group'   => __( 'Tab Name', 'blockstrap' ),
+			'group'   => __( 'Tab Name', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments = $arguments + sd_get_background_inputs( 'bg' );

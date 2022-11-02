@@ -38,10 +38,10 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 			'block-wrap'     => '',
 			'class_name'     => __CLASS__,
 			'base_id'        => 'bs_navbar',
-			'name'           => __( 'BS > Navbar', 'blockstrap' ),
+			'name'           => __( 'BS > Navbar', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'     => array(
 				'classname'   => 'bd-navbar',
-				'description' => esc_html__( 'Navbar container, this holds the nav and navbar brand.', 'blockstrap' ),
+				'description' => esc_html__( 'Navbar container, this holds the nav and navbar brand.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'        => array(
 				'attributes' => array(
@@ -68,40 +68,40 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 		// transparent until scroll
 		$arguments['bgtus'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Transparent until scroll', 'blockstrap' ),
+			'title'    => __( 'Transparent until scroll', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'desc'     => __( 'This may not show in block preview.', 'blockstrap' ),
-			'group'    => __( 'Background', 'blockstrap' ),
+			'desc'     => __( 'This may not show in block preview.', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Background', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '([%bg%]!="" || [%bg_image%]!="")',
 		);
 
 		// container class
 		$arguments['container'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Color scheme', 'blockstrap' ),
+			'title'    => __( 'Color scheme', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''             => __( 'None', 'blockstrap' ),
-				'navbar-dark'  => __( 'Dark', 'blockstrap' ),
-				'navbar-light' => __( 'Light', 'blockstrap' ),
+				''             => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'navbar-dark'  => __( 'Dark', 'blockstrap-page-builder-blocks' ),
+				'navbar-light' => __( 'Light', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Color scheme', 'blockstrap' ),
+			'group'    => __( 'Color scheme', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// container class
 		$arguments['inner_container'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Content Container', 'blockstrap' ),
+			'title'    => __( 'Content Container', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				'd-flex w-100' => __( 'Full width', 'blockstrap' ),
-				'container'    => __( 'Contain', 'blockstrap' ),
+				'd-flex w-100' => __( 'Full width', 'blockstrap-page-builder-blocks' ),
+				'container'    => __( 'Contain', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Content Container', 'blockstrap' ),
+			'group'    => __( 'Content Container', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// margins mobile

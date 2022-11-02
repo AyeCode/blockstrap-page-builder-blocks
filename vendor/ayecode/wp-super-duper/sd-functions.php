@@ -1413,6 +1413,7 @@ function sd_get_class_input( $type = 'css_class', $overwrite = array() ) {
 function sd_get_hover_animations_input( $type = 'hover_animations', $overwrite = array() ) {
 
 	$options = array(
+		''       => __( 'none', 'super-duper' ),
 		'hover-zoom'       => __( 'Zoom', 'super-duper' ),
 		'hover-shadow'     => __( 'Shadow', 'super-duper' ),
 		'hover-move-up'    => __( 'Move up', 'super-duper' ),
@@ -2142,6 +2143,7 @@ function sd_get_class_build_keys() {
 		'flex_justify_content-MTD',
 		'flex_align_self-MTD',
 		'flex_order-MTD',
+		'styleid',
 	);
 
 	return apply_filters( 'sd_class_build_keys', $keys );

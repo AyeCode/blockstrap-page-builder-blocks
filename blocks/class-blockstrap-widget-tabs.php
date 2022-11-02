@@ -113,17 +113,17 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 			'block-wrap'         => '',
 			'class_name'         => __CLASS__,
 			'base_id'            => 'bs_tabs',
-			'name'               => __( 'BS > Tabs', 'blockstrap' ),
+			'name'               => __( 'BS > Tabs', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'         => array(
 				'classname'   => 'bs-tabs',
-				'description' => esc_html__( 'A container for tabs', 'blockstrap' ),
+				'description' => esc_html__( 'A container for tabs', 'blockstrap-page-builder-blocks' ),
 			),
 			'no_wrap'            => true,
 			'block_group_tabs'   => array(
 				'styles'   => array(
-					'groups' => array( __( 'Tabs Head', 'blockstrap' ), __( 'Tab Body Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Tabs Head', 'blockstrap-page-builder-blocks' ), __( 'Tab Body Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -132,12 +132,12 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Background', 'blockstrap' ),
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Background', 'blockstrap-page-builder-blocks' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -161,60 +161,60 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 
 		$arguments['tabs_style'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Style', 'blockstrap' ),
+			'title'    => __( 'Style', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				'nav-tabs'  => __( 'Tabs', 'blockstrap' ),
-				'nav-pills' => __( 'Pills', 'blockstrap' ),
+				'nav-tabs'  => __( 'Tabs', 'blockstrap-page-builder-blocks' ),
+				'nav-pills' => __( 'Pills', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => 'nav-tabs',
 			'desc_tip' => true,
-			'group'    => __( 'Tabs Head', 'blockstrap' ),
+			'group'    => __( 'Tabs Head', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['tab_size'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Tab button size', 'blockstrap' ),
+			'title'    => __( 'Tab button size', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''              => __( 'Auto', 'blockstrap' ),
-				'nav-fill'      => __( 'Fill', 'blockstrap' ),
-				'nav-justified' => __( 'Justified', 'blockstrap' ),
+				''              => __( 'Auto', 'blockstrap-page-builder-blocks' ),
+				'nav-fill'      => __( 'Fill', 'blockstrap-page-builder-blocks' ),
+				'nav-justified' => __( 'Justified', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => 'nav-tabs',
 			'desc_tip' => true,
-			'group'    => __( 'Tabs Head', 'blockstrap' ),
+			'group'    => __( 'Tabs Head', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['tabs_greedy'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Greedy tabs', 'blockstrap' ),
+			'title'    => __( 'Greedy tabs', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'desc'     => __( 'This will add overflowing tabs to a dropdown instead of a new line.', 'blockstrap' ),
-			'group'    => __( 'Tabs Head', 'blockstrap' ),
+			'desc'     => __( 'This will add overflowing tabs to a dropdown instead of a new line.', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Tabs Head', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['tabs_head_mb'] = sd_get_margin_input(
 			'mb',
 			array(
-				'group'   => __( 'Tabs Head', 'blockstrap' ),
+				'group'   => __( 'Tabs Head', 'blockstrap-page-builder-blocks' ),
 				'default' => 3,
 			)
 		);
 
 		$arguments['tabs_head_array'] = array(
 			'type'     => 'hidden',
-			'title'    => __( 'Tabs head array', 'blockstrap' ),
+			'title'    => __( 'Tabs head array', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Tabs Head', 'blockstrap' ),
+			'group'    => __( 'Tabs Head', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
-		$arguments['text_color'] = sd_get_text_color_input( 'text_color', array( 'group' => __( 'Tab Body Typography', 'blockstrap' ) ) );
+		$arguments['text_color'] = sd_get_text_color_input( 'text_color', array( 'group' => __( 'Tab Body Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// Text justify
-		$arguments['text_justify'] = sd_get_text_justify_input( 'text_justify', array( 'group' => __( 'Tab Body Typography', 'blockstrap' ) ) );
+		$arguments['text_justify'] = sd_get_text_justify_input( 'text_justify', array( 'group' => __( 'Tab Body Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// text align
 		$arguments['text_align']    = sd_get_text_align_input(
@@ -222,7 +222,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 			array(
 				'device_type'     => 'Mobile',
 				'element_require' => '[%text_justify%]==""',
-				'group'           => __( 'Tab Body Typography', 'blockstrap' ),
+				'group'           => __( 'Tab Body Typography', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['text_align_md'] = sd_get_text_align_input(
@@ -230,7 +230,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 			array(
 				'device_type'     => 'Tablet',
 				'element_require' => '[%text_justify%]==""',
-				'group'           => __( 'Tab Body Typography', 'blockstrap' ),
+				'group'           => __( 'Tab Body Typography', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['text_align_lg'] = sd_get_text_align_input(
@@ -238,7 +238,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 			array(
 				'device_type'     => 'Desktop',
 				'element_require' => '[%text_justify%]==""',
-				'group'           => __( 'Tab Body Typography', 'blockstrap' ),
+				'group'           => __( 'Tab Body Typography', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 
