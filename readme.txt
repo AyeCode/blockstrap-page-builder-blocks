@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.1
-Stable tag: 0.0.1
+Stable tag: 0.0.2
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -38,6 +38,10 @@ The manual installation method involves downloading our Directory plugin and upl
 Automatic updates should work seamlessly. We always suggest you backup your website before any automated update to avoid unforeseen problems.
 
 == Changelog ==
+
+= 0.0.2 =
+* Added index.php files to main directories for better security - ADDED
+* Updated Bootstrap to latest v4 (4.6.2) - UPDATED
 
 = 0.0.1 =
 * First public release - RELEASE
