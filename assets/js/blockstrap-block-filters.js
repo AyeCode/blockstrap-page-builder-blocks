@@ -219,8 +219,13 @@ const blockstrapBlocksFilterBlocks = (settings) => {
 				postId: post.id
 			})), [posts]);
 			const hasLayoutFlex = layoutType === 'flex' && columns > 1;
+			let colCount = layoutType === 'flex' ? columns : 1;
+			// console.log(layoutType);
+			let colMd = ' row-cols-md-' + colCount;
+			let colSm = ' row-cols-sm-' + colCount > 1 ? ( colCount - 1 ) : colCount;
+			let rowClass = 'row list-unstyled row-cols-1'+colSm +colMd;
 			const blockProps = (0,external_wp_blockEditor_namespaceObject.useBlockProps)({
-				className: 'row list-unstyled row-cols-1 row-cols-sm-2  row-cols-md-3'
+				className: rowClass
 			});
 
 			if (!posts) {

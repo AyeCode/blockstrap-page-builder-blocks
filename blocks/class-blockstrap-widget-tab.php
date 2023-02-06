@@ -18,10 +18,11 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 			'block-category'     => 'layout',
 			'block-keywords'     => "['tabs','tab','content']",
 			'block-supports'     => array(
-				'anchor' => 'true',
+				'anchor'          => false,
+				'customClassName' => false,
 			),
 			'block-edit-return'  => "el( 'div', wp.blockEditor.useBlockProps( {
-										className: parentBlocks[parentBlocks.length - 1].innerBlocks[0].clientId === props.clientId ?  'tab-pane fade show active' : 'tab-pane fade'
+										className: ( parentBlocks[parentBlocks.length - 1].innerBlocks[0].clientId === props.clientId ?  'tab-pane fade show active ' : 'tab-pane fade ' ) +  sd_build_aui_class(props.attributes)
 										} ),
 
 										 el( 'div', wp.blockEditor.useInnerBlocksProps( {className: 'tab-content'},  {orientation: 'horizontal',inner_element: 'div' }))
@@ -43,6 +44,41 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 				'description' => esc_html__( 'A tab', 'blockstrap-page-builder-blocks' ),
 			),
 			'no_wrap'            => true,
+			'block_group_tabs'   => array(
+				'content'  => array(
+					'groups' => array( __( 'Tab Name', 'blockstrap-page-builder-blocks' ) ),
+					'tab'    => array(
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
+						'key'       => 'bs_tab_content',
+						'tabs_open' => true,
+						'open'      => true,
+						'class'     => 'text-center flex-fill d-flex justify-content-center',
+					),
+				),
+				'styles'   => array(
+					'groups' => array( __( 'Background', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
+					'tab'    => array(
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
+						'key'       => 'bs_tab_styles',
+						'tabs_open' => true,
+						'open'      => true,
+						'class'     => 'text-center flex-fill d-flex justify-content-center',
+					),
+				),
+				'advanced' => array(
+					'groups' => array(
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
+					),
+					'tab'    => array(
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
+						'key'       => 'bs_tab_advanced',
+						'tabs_open' => true,
+						'open'      => true,
+						'class'     => 'text-center flex-fill d-flex justify-content-center',
+					),
+				),
+			),
 		);
 
 		parent::__construct( $options );
@@ -73,17 +109,43 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 			'group'   => __( 'Tab Name', 'blockstrap-page-builder-blocks' ),
 		);
 
-		$arguments = $arguments + sd_get_background_inputs( 'bg' );
+		$arguments['anchor_notice'] = array(
+			'type'            => 'notice',
+			'desc'            => __( 'A unique HTML anchor is required for each tab for tabs to function.', 'blockstrap-page-builder-blocks' ),
+			'status'          => 'error', // 'warning' | 'success' | 'error' | 'info'
+			'group'           => __( 'Tab Name', 'blockstrap' ),
+			'element_require' => '[%anchor%]==""',
+		);
 
-		$arguments['bg_on_text'] = array(
-			'type'            => 'checkbox',
-			'title'           => __( 'Background on text', 'blockstrap' ),
-			'default'         => '',
-			'value'           => '1',
-			'desc_tip'        => false,
-			'desc'            => __( 'This will show the background on the text.', 'blockstrap' ),
-			'group'           => __( 'Background', 'blockstrap' ),
-			'element_require' => '[%bg%]=="custom-gradient"',
+		$arguments = $arguments + sd_get_background_inputs( 'bg', array(), false, false, false );
+
+		// text color
+		$arguments['text_color'] = sd_get_text_color_input();
+
+		// Text justify
+		$arguments['text_justify'] = sd_get_text_justify_input();
+
+		// text align
+		$arguments['text_align']    = sd_get_text_align_input(
+			'text_align',
+			array(
+				'device_type'     => 'Mobile',
+				'element_require' => '[%text_justify%]==""',
+			)
+		);
+		$arguments['text_align_md'] = sd_get_text_align_input(
+			'text_align',
+			array(
+				'device_type'     => 'Tablet',
+				'element_require' => '[%text_justify%]==""',
+			)
+		);
+		$arguments['text_align_lg'] = sd_get_text_align_input(
+			'text_align',
+			array(
+				'device_type'     => 'Desktop',
+				'element_require' => '[%text_justify%]==""',
+			)
 		);
 
 		// margins mobile
@@ -146,34 +208,7 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
 		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
 
-		// text color
-		$arguments['text_color'] = sd_get_text_color_input();
-
-		// Text justify
-		$arguments['text_justify'] = sd_get_text_justify_input();
-
-		// text align
-		$arguments['text_align']    = sd_get_text_align_input(
-			'text_align',
-			array(
-				'device_type'     => 'Mobile',
-				'element_require' => '[%text_justify%]==""',
-			)
-		);
-		$arguments['text_align_md'] = sd_get_text_align_input(
-			'text_align',
-			array(
-				'device_type'     => 'Tablet',
-				'element_require' => '[%text_justify%]==""',
-			)
-		);
-		$arguments['text_align_lg'] = sd_get_text_align_input(
-			'text_align',
-			array(
-				'device_type'     => 'Desktop',
-				'element_require' => '[%text_justify%]==""',
-			)
-		);
+		$arguments['css_class'] = sd_get_class_input();
 
 		return $arguments;
 	}

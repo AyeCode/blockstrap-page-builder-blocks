@@ -15,13 +15,16 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 		$bs_navbar_count ++;
 
 		$options = array(
-			'textdomain'     => 'blockstrap',
-			'output_types'   => array( 'block', 'shortcode' ),
-			'nested-block'   => true,
-			'block-icon'     => 'fas fa-ellipsis-h',
-			'block-category' => 'layout',
-			'block-keywords' => "['menu','navigation','nav']",
-			'block-output'   => array(
+			'textdomain'       => 'blockstrap',
+			'output_types'     => array( 'block', 'shortcode' ),
+			'nested-block'     => true,
+			'block-icon'       => 'fas fa-ellipsis-h',
+			'block-category'   => 'layout',
+			'block-keywords'   => "['menu','navigation','nav']",
+			'block-supports'   => array(
+				'customClassName' => false,
+			),
+			'block-output'     => array(
 				array(
 					'element'         => 'button',
 					'className'       => 'navbar-toggler',
@@ -54,26 +57,61 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 					),
 				),
 				array(
-					'element' => 'script',
-					'content' => 'jQuery("#navbarNav_' . $bs_navbar_count . '").on("show.bs.collapse", function () {jQuery("#navbarNav_' . $bs_navbar_count . '").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_' . $bs_navbar_count . '").on("hidden.bs.collapse", function () {jQuery("#navbarNav_' . $bs_navbar_count . '").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});',
+					'element'         => 'script',
+					'content'         => 'jQuery("#navbarNav_' . $bs_navbar_count . '").on("show.bs.collapse", function () {jQuery("#navbarNav_' . $bs_navbar_count . '").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_' . $bs_navbar_count . '").on("hidden.bs.collapse", function () {jQuery("#navbarNav_' . $bs_navbar_count . '").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});',
 					'element_require' => '[%inside_navbar%]=="1"',
 				),
 
 			),
-			'block-wrap'     => '',
-			'class_name'     => __CLASS__,
-			'base_id'        => 'bs_nav',
-			'name'           => __( 'BS > Nav', 'blockstrap-page-builder-blocks' ),
-			'widget_ops'     => array(
+			'block-wrap'       => '',
+			'class_name'       => __CLASS__,
+			'base_id'          => 'bs_nav',
+			'name'             => __( 'BS > Nav', 'blockstrap-page-builder-blocks' ),
+			'widget_ops'       => array(
 				'classname'   => 'bd-nav',
 				'description' => esc_html__( 'Navigation items container.', 'blockstrap-page-builder-blocks' ),
 			),
-			'example'        => array(
+			'example'          => array(
 				'attributes' => array(
 					'after_text' => 'Earth',
 				),
 			),
-			'no_wrap'        => true,
+			'no_wrap'          => true,
+			'block_group_tabs' => array(
+//				'content'  => array(
+//					'groups' => array( __( 'Nav', 'blockstrap' ) ),
+//					'tab'    => array(
+//						'title'     => __( 'Content', 'blockstrap' ),
+//						'key'       => 'bs_tab_content',
+//						'tabs_open' => true,
+//						'open'      => true,
+//						'class'     => 'text-center flex-fill d-flex justify-content-center',
+//					),
+//				),
+				'styles'   => array(
+					'groups' => array( __( 'Nav Styles', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
+					'tab'    => array(
+						'title'     => __( 'Styles', 'blockstrap' ),
+						'key'       => 'bs_tab_styles',
+						'tabs_open' => true,
+						'open'      => true,
+						'class'     => 'text-center flex-fill d-flex justify-content-center',
+					),
+				),
+				'advanced' => array(
+					'groups' => array(
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
+					),
+					'tab'    => array(
+						'title'     => __( 'Advanced', 'blockstrap' ),
+						'key'       => 'bs_tab_advanced',
+						'tabs_open' => true,
+						'open'      => true,
+						'class'     => 'text-center flex-fill d-flex justify-content-center',
+					),
+				),
+			),
 		);
 
 		parent::__construct( $options );
@@ -99,6 +137,22 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'default'  => '',
 			'desc_tip' => true,
 			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
+		);
+
+		// container class
+		$arguments['container'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Color scheme', 'blockstrap-page-builder-blocks' ),
+			'options'  => array(
+				''             => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'nav-dark'  => __( 'Dark', 'blockstrap-page-builder-blocks' ),
+				'nav-light' => __( 'Light', 'blockstrap-page-builder-blocks' ),
+				'nav-muted' => __( 'Muted', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%inside_navbar%]=="0"',
 		);
 
 		// flex direction
@@ -128,6 +182,9 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
+		$arguments = $arguments + sd_get_flex_justify_content_input_group( 'flex_justify_content', array('element_require' => '','group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ) ) );
+
+
 		// fill / justify
 		$arguments['nav_fill'] = array(
 			'type'     => 'select',
@@ -141,6 +198,10 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'desc_tip' => true,
 			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
+
+
+		// font size
+		$arguments = $arguments + sd_get_font_size_input_group();
 
 		// background
 		$arguments['bg'] = sd_get_background_input( 'bg' );
@@ -229,31 +290,8 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'group'    => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
-		// Text justify
-		$arguments['text_justify'] = sd_get_text_justify_input();
+		$arguments['css_class'] = sd_get_class_input();
 
-		// text align
-		$arguments['text_align']    = sd_get_text_align_input(
-			'text_align',
-			array(
-				'device_type'     => 'Mobile',
-				'element_require' => '[%text_justify%]==""',
-			)
-		);
-		$arguments['text_align_md'] = sd_get_text_align_input(
-			'text_align',
-			array(
-				'device_type'     => 'Tablet',
-				'element_require' => '[%text_justify%]==""',
-			)
-		);
-		$arguments['text_align_lg'] = sd_get_text_align_input(
-			'text_align',
-			array(
-				'device_type'     => 'Desktop',
-				'element_require' => '[%text_justify%]==""',
-			)
-		);
 
 		return $arguments;
 	}

@@ -122,7 +122,7 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 		$arguments['description'] = array(
 			'type'     => 'textarea',
 			'title'    => __( 'Description', 'blockstrap' ),
-			'default'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus magna, dignissim sit amet aliquam consequat, dignissim non ex.',
+			//'default'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus magna, dignissim sit amet aliquam consequat, dignissim non ex.',
 			'desc_tip' => true,
 			'group'    => __( 'Icon Box', 'blockstrap' ),
 		);
@@ -168,14 +168,30 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			'element_require' => '[%type%]=="custom"',
 		);
 
+		$arguments['icon_position'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Icon position', 'blockstrap' ),
+			'options'  => array(
+				''                    => __( 'Top', 'blockstrap' ),
+				'left'             => __( 'Left', 'blockstrap' ),
+				'right'        => __( 'Right', 'blockstrap' ),
+				'bottom' => __( 'Bottom', 'blockstrap' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Icon Style', 'blockstrap' ),
+		);
+
 		// icon styles
 		$arguments['icon_type'] = array(
 			'type'     => 'select',
 			'title'    => __( 'Icon style', 'blockstrap' ),
 			'options'  => array(
-				''             => __( 'Icon', 'blockstrap' ),
-				'iconbox'      => __( 'Iconbox bordered', 'blockstrap' ),
-				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap' ),
+				''                    => __( 'Icon', 'blockstrap' ),
+				'iconbox'             => __( 'Iconbox bordered', 'blockstrap' ),
+				'iconbox-fill'        => __( 'Iconbox filled', 'blockstrap' ),
+				'iconbox-translucent' => __( 'Iconbox translucent', 'blockstrap' ),
+				'iconbox-invert'      => __( 'Iconbox hover invert', 'blockstrap' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
@@ -186,10 +202,12 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			'type'            => 'select',
 			'title'           => __( 'Size', 'blockstrap' ),
 			'options'         => array(
-				''       => __( 'Default', 'blockstrap' ),
-				'small'  => __( 'Small', 'blockstrap' ),
-				'medium' => __( 'Medium', 'blockstrap' ),
-				'large'  => __( 'Large', 'blockstrap' ),
+				''            => __( 'Default', 'blockstrap' ),
+				'extrasmall'  => __( 'Extra Small', 'blockstrap' ),
+				'small'       => __( 'Small', 'blockstrap' ),
+				'smallmedium' => __( 'Small-Medium', 'blockstrap' ),
+				'medium'      => __( 'Medium', 'blockstrap' ),
+				'large'       => __( 'Large', 'blockstrap' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
@@ -551,12 +569,26 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 		$styles = sd_build_aui_styles( $args );
 		$style  = $styles ? ' style="' . $styles . '"' : '';
 
+		$text_wrap_class = '';
+		// icon position
+		if ( ! empty( $args['icon_position'] ) ) {
+			if ( 'left' === $args['icon_position'] ) {
+				$wrap_class .= ' d-flex align-items-center';
+			} elseif ( 'right' === $args['icon_position'] ) {
+				$wrap_class .= ' d-flex align-items-center';
+				$text_wrap_class .= ' order-0';
+			} elseif ( 'bottom' === $args['icon_position'] ) {
+				$wrap_class .= ' d-flex flex-column-reverse';
+			}
+		}
+
 		return $icon_html || $title_html || $description_html ? sprintf(
-			'<%1$s class="blockstrap-iconbox position-relative h-100 %2$s" %3$s >%4$s%5$s%6$s</%1$s>',
+			'<%1$s class="blockstrap-iconbox position-relative h-100 %2$s" %3$s >%4$s<div class="iconbox-text-wrap %5$s">%6$s%7$s</div></%1$s>',
 			$tag,
 			sd_sanitize_html_classes( $wrap_class ),
 			$style,
 			$icon_html,
+			sd_sanitize_html_classes( $text_wrap_class ),
 			$title_html,
 			$description_html
 		) : '';
@@ -566,7 +598,7 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 	public function build_icon( $args ) {
 		$html = '';
-
+		$wrap_class = '';
 		if ( ! empty( $args['icon_class'] ) ) {
 			$tag        = 'div';
 			$icon_class = '';
@@ -574,19 +606,46 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 				if ( 'iconbox' === $args['icon_type'] ) {
 					$icon_class .= ' iconbox rounded-circle';
 				} elseif ( 'iconbox-fill' === $args['icon_type'] ) {
-					$icon_class .= ' iconbox fill rounded-circle';
+					$icon_class .= ' iconbox border-0 fill rounded-circle';
 
 					if ( ! empty( $args['icon_bg'] ) ) {
 						$icon_class .= ' ' . sd_build_aui_class(
-							array(
-								'bg' => $args['icon_bg'],
-							)
-						);
+								array(
+									'bg' => $args['icon_bg'],
+								)
+							);
+					}
+				}  elseif ( 'iconbox-invert' === $args['icon_type'] ) {
+					$icon_class .= ' iconbox border-0 fill rounded-circle icon-box-media transition-all';
+					$wrap_class .= 'icon-box ';
+					if ( ! empty( $args['icon_bg'] ) ) {
+						$args['icon_bg'] = '';
+					}
+
+					if ( ! empty( $args['icon_color'] ) ) {
+						$icon_class        .= ' text-' . esc_attr( $args['icon_color'] );
+						$args['icon_color'] = '';
+					}
+
+				} elseif ( 'iconbox-translucent' === $args['icon_type'] ) {
+					$icon_class .= ' iconbox border-0 fill rounded-circle transition-all';
+
+					if ( ! empty( $args['icon_bg'] ) ) {
+						$args['icon_bg'] = '';
+					}
+
+					if ( ! empty( $args['icon_color'] ) ) {
+						$icon_class        .= ' btn-translucent-' . esc_attr( $args['icon_color'] );
+						$args['icon_color'] = '';
 					}
 				}
 
 				if ( empty( $args['iconbox_size'] ) || 'small' === $args['iconbox_size'] ) {
 					$icon_class .= ' iconsmall';
+				} elseif ( 'extrasmall' === $args['iconbox_size'] ) {
+					$icon_class .= ' iconextrasmall';
+				} elseif ( 'smallmedium' === $args['iconbox_size'] ) {
+					$icon_class .= ' iconsmallmedium';
 				} elseif ( 'medium' === $args['iconbox_size'] ) {
 					$icon_class .= ' iconmedium';
 				} elseif ( 'large' === $args['iconbox_size'] ) {
@@ -594,9 +653,16 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 				}
 			}
 
+			// margins left/right
+			if ( 'right' === $args['icon_position'] ) {
+				$wrap_class .= ' ms-3 ml-3 order-1 ';
+			} elseif ( 'left' === $args['icon_position'] ) {
+				$wrap_class .= ' me-3 mr-3 ';
+			}
+
 			$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . ' ' . sd_sanitize_html_classes( $icon_class ) . '"></i>';
 
-			$wrap_class = sd_build_aui_class(
+			$wrap_class .= sd_build_aui_class(
 				array(
 					'font_size'     => empty( $args['icon_type'] ) ? $args['icon_size'] : '',
 					'text_color'    => $args['icon_color'],
@@ -665,7 +731,7 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			$style  = $styles ? ' style="' . $styles . '"' : '';
 
 			$html = sprintf(
-				'<%1$s class="blockstrap-iconbox-title %2$s" %3$s >%4$s</%1$s>',
+				'<%1$s class="blockstrap-iconbox-title %2$s mb-0" %3$s >%4$s</%1$s>',
 				$tag,
 				sd_sanitize_html_classes( $wrap_class ),
 				$style,

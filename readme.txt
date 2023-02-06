@@ -39,6 +39,14 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
+= 0.0.4 =
+* Button block hover styling not working - FIXED
+* Breadcrumb block - ADDED
+* Share block - ADDED
+* Post excerpt block - ADDED
+* Post info block (for meta details) - ADDED
+* Several changes and improvements to other blocks for BS5 option - CHANGED
+
 = 0.0.3 =
 * First WP.org release - RELEASE
 
@@ -49,7 +57,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 = 0.0.1 =
 * First public release - RELEASE
 
-== Resources used to build this plugin ==
+= Resources used to build this plugin =
 
 * Image for image block placeholder ( block-image-placeholder.jpg ), Copyright PxHere
   License: CC0 Public Domain

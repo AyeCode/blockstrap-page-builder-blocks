@@ -77,7 +77,18 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 			'element_require' => '([%bg%]!="" || [%bg_image%]!="")',
 		);
 
-		// container class
+		$arguments['cscos'] = array(
+			'type'     => 'checkbox',
+			'title'    => __( 'Flip color scheme on scroll', 'blockstrap-page-builder-blocks' ),
+			'default'  => '',
+			'value'    => '1',
+			'desc_tip' => false,
+			'desc'     => __( 'This may not show in block preview.', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Background', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '([%bg%]!="" || [%bg_image%]!="") && [%bgtus%]',
+		);
+
+		// Color scheme
 		$arguments['container'] = array(
 			'type'     => 'select',
 			'title'    => __( 'Color scheme', 'blockstrap-page-builder-blocks' ),

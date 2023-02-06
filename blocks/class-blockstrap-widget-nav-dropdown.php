@@ -158,6 +158,7 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'default'  => '',
 			'desc_tip' => true,
 			'group'    => __( 'Link styles', 'blockstrap' ),
+			'element_require' => '[%link_type%]!=""',
 		);
 
 		$arguments['link_bg'] = array(
@@ -172,6 +173,19 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'advanced'        => false,
 			'group'           => __( 'Link styles', 'blockstrap' ),
 			'element_require' => '[%link_type%]!="iconbox" && [%link_type%]!=""',
+		);
+
+		$arguments['link_divider'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Link Divider', 'blockstrap' ),
+			'options'  => array(
+				''      => __( 'None', 'blockstrap' ),
+				'left'  => __( 'Left', 'blockstrap' ),
+				'right' => __( 'Right', 'blockstrap' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Link styles', 'blockstrap' ),
 		);
 
 		// text color
@@ -285,10 +299,14 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 
 				let $icon = '';
 				if ( $args.icon_class !== undefined && $args.icon_class ) {
-					$icon = $args['text'] !== undefined && $args['text'] ? '<i class="' + $args.icon_class + ' mr-2"></i>' : '<i class="' + $args.icon_class + '"></i>';
+					$icon = $args['text'] !== undefined && $args['text'] ? '<i class="' + $args.icon_class + ' mr-2 me-2"></i>' : '<i class="' + $args.icon_class + '"></i>';
 				}
 
-				$html = $icon + $args['text'];
+				let $link_divider_pos   = $args.icon_class !== undefined && $args.icon_class ? $args.link_divider : '';
+				let $link_divider_left  = 'left' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 start-0 translate-middle-y"></span>' : '';
+				let $link_divider_right = 'right' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 end-0 translate-middle-y"></span>' : '';
+
+				$html = $link_divider_left + $icon + $args['text'] + $link_divider_right ;
 
 				return $html;
 			}

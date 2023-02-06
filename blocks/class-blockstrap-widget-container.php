@@ -16,7 +16,7 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			'nested-block'     => true,
 			'block-icon'       => 'far fa-square',
 			'block-category'   => 'layout',
-			'block-keywords'   => "['container','content']",
+			'block-keywords'   => "['container','content','col','row']",
 			'block-label'      => "attributes.container ? '" . __( 'BS > ', 'blockstrap' ) . " ('+ attributes.container +')' : '" . __( 'BS > Container', 'blockstrap' ) . "'",
 			'block-supports'   => array(
 				//'anchor' => 'true',
@@ -30,12 +30,12 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 						'if_className' => 'props.attributes.styleid + " " [%WrapClass%]',
 						'style'        => '{[%WrapStyle%]}',
 						'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : props.clientId',
-//						'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : "bbb"',
+		//                      'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : "bbb"',
 						//                      '\'data-styleid\'' => "block-" . wp_rand(15),
 						//                      'if_\'data-styleid\'' => 'props.attributes.anchor ? props.attributes.anchor : props.attributes.styleid',
 						//                      'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : "vvvv"',
 						//                      'if_id'        => 'props.attributes.bg',
-//						                      'if_id'        => '"zzzzz"',
+		//                                            'if_id'        => '"zzzzz"',
 					),
 					'innerBlocksProps' => array(
 						'orientation' => 'vertical',
@@ -180,7 +180,7 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			'mb',
 			array(
 				'device_type' => 'Mobile',
-				'default'     => 3,
+			//              'default'     => 3,
 			)
 		);
 		$arguments['ml'] = sd_get_margin_input( 'ml', array( 'device_type' => 'Mobile' ) );
@@ -222,9 +222,12 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 		$arguments['pl_lg'] = sd_get_padding_input( 'pl', array( 'device_type' => 'Desktop' ) );
 
 		// border
-		$arguments['border']       = sd_get_border_input( 'border' );
-		$arguments['rounded']      = sd_get_border_input( 'rounded' );
-		$arguments['rounded_size'] = sd_get_border_input( 'rounded_size' );
+		$arguments['border']         = sd_get_border_input( 'border' );
+		$arguments['border_type']    = sd_get_border_input( 'type' );
+		$arguments['border_width']   = sd_get_border_input( 'width' ); // BS5 only
+		$arguments['border_opacity'] = sd_get_border_input( 'opacity' ); // BS5 only
+		$arguments['rounded']        = sd_get_border_input( 'rounded' );
+		$arguments['rounded_size']   = sd_get_border_input( 'rounded_size' );
 
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );

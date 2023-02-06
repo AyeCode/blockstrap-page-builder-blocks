@@ -18,7 +18,7 @@ class BlockStrap_Blocks_Admin {
 	public static function init() {
 
 		// load only if theme is not blockstrap
-		if ( 'blockstrap' !== wp_get_theme()->get_stylesheet() ) {
+		if ( 'blockstrap' !== wp_get_theme()->get_stylesheet() && 'blockstrap' !== get_template() ) {
 			add_action( 'admin_notices', array( __CLASS__, 'theme_notice' ) );
 		}
 

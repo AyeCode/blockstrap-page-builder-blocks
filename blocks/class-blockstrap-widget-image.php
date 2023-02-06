@@ -275,7 +275,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			),
 			'desc_tip' => true,
 			'value'    => '',
-			'default'  => '16by9',
+			'default'  => '',
 			'group'    => __( 'Image Styles', 'blockstrap' ),
 		);
 
@@ -297,11 +297,35 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 		// border
 		$arguments['img_border']       = sd_get_border_input( 'border', array( 'group' => __( 'Image Styles', 'blockstrap' ) ) );
-		$arguments['img_rounded']      = sd_get_border_input( 'rounded', array( 'group' => __( 'Image Styles', 'blockstrap' ) ) );
-		$arguments['img_rounded_size'] = sd_get_border_input( 'rounded_size', array( 'group' => __( 'Image Styles', 'blockstrap' ) ) );
+		$arguments['img_rounded']      = sd_get_border_input(
+			'rounded',
+			array(
+				'group'           => __( 'Image Styles', 'blockstrap' ),
+				'element_require' => '',
+			)
+		);
+		$arguments['img_rounded_size'] = sd_get_border_input(
+			'rounded_size',
+			array(
+				'group'           => __( 'Image Styles', 'blockstrap' ),
+				'element_require' => '',
+			)
+		);
 
 		// shadow
 		$arguments['img_shadow'] = sd_get_shadow_input( 'shadow', array( 'group' => __( 'Image Styles', 'blockstrap' ) ) );
+
+		$arguments['img_overlay'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Overlay', 'blockstrap' ),
+			'options'  => array(
+				''         => __( 'None', 'blockstrap' ),
+				'bottom'    => __( 'Bottom', 'blockstrap' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'           => __( 'Image Styles', 'blockstrap' ),
+		);
 
 		// text color
 		$arguments['text_color'] = sd_get_text_color_input();
@@ -472,7 +496,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-		global $post;
+		global $post, $aui_bs5;
 
 		$link_to      = $args['img_link_to'] ? esc_attr( $args['img_link_to'] ) : '';
 		$image_src    = '';
@@ -539,6 +563,11 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			$image = str_replace( ' src=', ' ' . $image_style . ' src=', $image );
 		}
 
+		// Image overlay
+		if ( ! empty( $args['img_overlay'] ) && 'bottom' === $args['img_overlay'] ) {
+			$image .= '<span class="img-gradient-overlay"></span>';
+		}
+
 		// class
 		$wrap_class        = sd_build_aui_class( $args );
 		$wrap_class        = $args['img_link_lightbox'] ? 'aui-gallery ' . $wrap_class : $wrap_class;
@@ -554,11 +583,13 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		// maybe link
 		$ratio_cover_class = '';
 
-		$ratio_cover_class .= ! empty( $args['img_aspect'] ) ? ' embed-responsive embed-responsive-' . esc_attr( $args['img_aspect'] ) . ' ' : '';
+		$ratio_prefix       = $aui_bs5 ? 'ratio ratio-' : 'embed-responsive embed-responsive-';
+		$ratio_val          = $aui_bs5 ? str_replace( 'by', 'x', $args['img_aspect'] ) : $args['img_aspect'];
+		$ratio_cover_class .= ! empty( $args['img_aspect'] ) ? ' ' . $ratio_prefix . esc_attr( $ratio_val ) . ' ' : '';
 
 		if ( 'media' === $link_to ) {
 			$image = sprintf(
-				'<a href="%1$s" class="%2$s aui-lightbox-image  embed-has-action position-relative">%3$s<i class="fas fa-search-plus"></i></a>',
+				'<a href="%1$s" class="%2$s aui-lightbox-image  embed-has-action position-relative">%3$s<i class="fas fa-search-plus w-auto h-auto"></i></a>',
 				$image_src,
 				$ratio_cover_class,
 				$image
@@ -572,8 +603,8 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			);
 		} elseif ( 'post' === $link_to ) {
 			$image = sprintf(
-				'<a href="%1$s" class="%2$s embed-has-action position-relative" >%3$s<i class="fas fa-link"></i></a>',
-				$this->is_block_content_call() ? '#' : esc_url_raw( get_post_permalink() ),
+				'<a href="%1$s" class="%2$s embed-has-action position-relative" >%3$s<i class="fas fa-link w-auto h-auto"></i></a>',
+				$this->is_block_content_call() ? '#' : esc_url_raw( get_permalink() ),
 				$ratio_cover_class,
 				$image
 			);

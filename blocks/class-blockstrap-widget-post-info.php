@@ -1,6 +1,6 @@
 <?php
 
-class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
+class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 
 	public $arguments;
@@ -11,36 +11,37 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 	public function __construct() {
 
 		$options = array(
-			'textdomain'        => 'blockstrap',
-			'output_types'      => array( 'block', 'shortcode' ),
-			'block-icon'        => 'fas fa-link',
-			'block-category'    => 'layout',
-			'block-keywords'    => "['menu','nav','item']",
-			'block-label'       => "attributes.text ? '" . __( 'BS > Nav', 'blockstrap' ) . " ('+ attributes.text+')' : ''",
-			'block-supports'    => array(
+			'textdomain'          => 'blockstrap',
+			'output_types'        => array( 'block', 'shortcode' ),
+			'block-icon'          => 'fas fa-info-circle',
+			'block-category'      => 'layout',
+			'block-keywords'      => "['post','meta','info']",
+			'block-label'         => "attributes.text ? '" . __( 'BS > Post info', 'blockstrap' ) . " ('+ attributes.text+')' : ''",
+			'block-supports'      => array(
 				'customClassName' => false,
 			),
-			'block-edit-return' => "el('li', wp.blockEditor.useBlockProps({
+			'block-edit-returnx'  => "el('li', wp.blockEditor.useBlockProps({
 									dangerouslySetInnerHTML: {__html: onChangeContent()},
 									className: props.attributes.link_type ? 'nav-item form-inline align-self-center ' + sd_build_aui_class(props.attributes) : 'nav-item ' + sd_build_aui_class(props.attributes) ,
 								}))",
-			'block-wrap'        => '',
-			'class_name'        => __CLASS__,
-			'base_id'           => 'bs_nav_item',
-			'name'              => __( 'BS > Nav Item', 'blockstrap' ),
-			'widget_ops'        => array(
-				'classname'   => 'bd-nav-item',
-				'description' => esc_html__( 'A navigation item for the navbar.', 'blockstrap' ),
+			'block-wrap'          => '',
+			'class_name'          => __CLASS__,
+			'base_id'             => 'bs_post_info',
+			'name'                => __( 'BS > Post info', 'blockstrap' ),
+			'widget_ops'          => array(
+				'classname'   => 'bs-post-info',
+				'description' => esc_html__( 'Show basic post information.', 'blockstrap' ),
 			),
-			'example'           => array(
+			'example'             => array(
 				'attributes' => array(
 					'after_text' => 'Earth',
 				),
 			),
-			'no_wrap'           => true,
-			'block_group_tabs'  => array(
+			'no_wrap'             => true,
+			'block_edit_wrap_tag' => 'span',
+			'block_group_tabs'    => array(
 				'content'  => array(
-					'groups' => array( __( 'Link', 'blockstrap' ) ),
+					'groups' => array( __( 'Meta', 'blockstrap' ) ),
 					'tab'    => array(
 						'title'     => __( 'Content', 'blockstrap' ),
 						'key'       => 'bs_tab_content',
@@ -78,60 +79,18 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		parent::__construct( $options );
 	}
 
-	public function link_types() {
-		$links = array(
-			'home'    => __( 'Home', 'blockstrap' ),
-			'page'    => __( 'Page', 'blockstrap' ),
-			'post-id' => __( 'Post ID', 'blockstrap' ),
-			'custom'  => __( 'Custom URL', 'blockstrap' ),
+	public function meta_types() {
+		$types = array(
+			'author'         => __( 'Author', 'blockstrap' ),
+			'date_published' => __( 'Date Published', 'blockstrap' ),
+			'date_updated'   => __( 'Date Updated', 'blockstrap' ),
+			'comments'       => __( 'Comments', 'blockstrap' ),
+			'taxonomy'       => __( 'Taxonomy', 'blockstrap' ),
+			'read_time'      => __( 'Read Time', 'blockstrap' ),
+			'custom'         => __( 'Custom', 'blockstrap' ),
 		);
 
-		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
-			$post_types           = function_exists( 'geodir_get_posttypes' ) ? geodir_get_posttypes( 'options-plural' ) : array();
-			$links['gd_search']   = __( 'GD Search', 'blockstrap' );
-			$links['gd_location'] = __( 'GD Location', 'blockstrap' );
-			foreach ( $post_types as $cpt => $cpt_name ) {
-				/* translators: Custom Post Type name. */
-				$links[ $cpt ] = sprintf( __( '%s (archive)', 'blockstrap' ), $cpt_name );
-				/* translators: Custom Post Type name. */
-				$links[ 'add_' . $cpt ] = sprintf( __( '%s (add listing)', 'blockstrap' ), $cpt_name );
-			}
-		}
-
-		if ( defined( 'GEODIRLOCATION_VERSION' ) ) {
-			$links['gd_location_switcher'] = __( 'GD Location Switcher', 'blockstrap' );
-		}
-
-		if ( defined( 'USERSWP_VERSION' ) ) {
-			// logged out
-			$links['uwp_login']    = __( 'UWP Login (logged out)', 'blockstrap' );
-			$links['uwp_register'] = __( 'UWP Register (logged out)', 'blockstrap' );
-			$links['uwp_forgot']   = __( 'UWP Forgot Password? (logged out)', 'blockstrap' );
-
-			// logged in
-			$links['uwp_account']         = __( 'Account (logged in)', 'blockstrap' );
-			$links['uwp_change_password'] = __( 'Change Password (logged in)', 'blockstrap' );
-			$links['uwp_profile']         = __( 'Profile (logged in)', 'blockstrap' );
-			$links['uwp_logout']          = __( 'Log out (logged in)', 'blockstrap' );
-		}
-
-		return $links;
-	}
-
-	public function get_pages_array() {
-		$options = array( '' => __( 'Select Page', 'blockstrap' ) );
-
-		$pages = get_pages();
-
-		if ( ! empty( $pages ) ) {
-			foreach ( $pages as $page ) {
-				if ( $page->post_title ) {
-					$options[ $page->ID ] = esc_attr( $page->post_title );
-				}
-			}
-		}
-
-		return $options;
+		return $types;
 	}
 
 	/**
@@ -146,31 +105,72 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		$arguments['type'] = array(
 			'type'     => 'select',
 			'title'    => __( 'Link Type', 'blockstrap' ),
-			'options'  => $this->link_types(),
-			'default'  => 'home',
+			'options'  => $this->meta_types(),
+			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link', 'blockstrap' ),
+			'group'    => __( 'Meta', 'blockstrap' ),
 		);
 
-		$arguments['page_id'] = array(
+		$arguments['taxonomy'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Page', 'blockstrap' ),
-			'options'         => $this->get_pages_array(),
-			'placeholder'     => __( 'Select Page', 'blockstrap' ),
-			'default'         => '',
+			'title'           => __( 'Taxonomy', 'blockstrap' ),
+			'options'         => get_taxonomies(
+				array(
+					'show_ui' => 1,
+					'public'  => 1,
+				)
+			),
+			'default'         => 'category',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
-			'element_require' => '[%type%]=="page"',
+			'group'           => __( 'Meta', 'blockstrap' ),
+			'element_require' => '[%type%]=="taxonomy"',
 		);
 
-		$arguments['post_id'] = array(
+		$arguments['taxonomy_limit'] = array(
 			'type'            => 'number',
-			'title'           => __( 'Post ID', 'blockstrap' ),
-			'placeholder'     => 123,
+			'title'           => __( 'Taxonomy limit', 'blockstrap' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
-			'element_require' => '[%type%]=="post-id"',
+			'placeholder'     => __( '0', 'blockstrap' ),
+			'group'           => __( 'Meta', 'blockstrap' ),
+			'element_require' => '[%type%]=="taxonomy"',
+		);
+
+		$arguments['date_format'] = array(
+			'type'            => 'select',
+			'title'           => __( 'Date format', 'blockstrap' ),
+			'options'         => array(
+				''         => __( 'Default (WordPress)', 'blockstrap' ),
+				'time-ago' => __( 'Time ago (4mins ago)', 'blockstrap' ),
+				'F j, Y'   => gmdate( 'F j, Y' ) . ' (F j, Y)',
+				'Y-m-d'    => gmdate( 'Y-m-d' ) . ' (Y-m-d)',
+				'm/d/Y'    => gmdate( 'm/d/Y' ) . ' (m/d/Y)',
+				'd/m/Y'    => gmdate( 'd/m/Y' ) . ' (d/m/Y)',
+				'custom'   => __( 'Custom', 'blockstrap' ),
+			),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Meta', 'blockstrap' ),
+			'element_require' => '( [%type%]=="date_published" || [%type%]=="date_updated" )',
+		);
+
+		$arguments['date_custom'] = array(
+			'type'            => 'text',
+			'title'           => __( 'Date custom', 'blockstrap' ),
+			'default'         => '',
+			'desc_tip'        => true,
+			'placeholder'     => __( 'F j, Y', 'blockstrap' ),
+			'group'           => __( 'Meta', 'blockstrap' ),
+			'element_require' => '[%date_format%]=="custom"',
+		);
+
+		$arguments['is_link'] = array(
+			'type'     => 'checkbox',
+			'title'    => __( 'Is link', 'blockstrap' ),
+			'default'  => '',
+			'value'    => '1',
+			'desc_tip' => false,
+			'group'    => __( 'Meta', 'blockstrap' ),
 		);
 
 		$arguments['custom_url'] = array(
@@ -180,28 +180,47 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			'placeholder'     => __( 'https://example.com', 'blockstrap' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Meta', 'blockstrap' ),
 			'element_require' => '[%type%]=="custom"',
 		);
 
-		$arguments['text'] = array(
-			'type'        => 'text',
-			'title'       => __( 'Link Text', 'blockstrap' ),
-			'desc'        => __( 'Add custom link text or leave blank for dynamic', 'blockstrap' ),
-			'placeholder' => __( 'Home', 'blockstrap' ),
-			'default'     => '',
-			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+		$arguments['icon_type'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Icon', 'blockstrap' ),
+			'options'  => array(
+				''       => __( 'Default', 'blockstrap' ),
+				'custom' => __( 'Custom', 'blockstrap' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Meta', 'blockstrap' ),
 		);
 
 		$arguments['icon_class'] = array(
-			'type'        => 'text',
-			'title'       => __( 'Icon class', 'blockstrap' ),
-			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap' ),
-			'placeholder' => __( 'fas fa-ship', 'blockstrap' ),
-			'default'     => '',
-			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+			'type'            => 'text',
+			'title'           => __( 'Icon class', 'blockstrap' ),
+			'desc'            => __( 'Enter a font awesome icon class.', 'blockstrap' ),
+			'placeholder'     => __( 'fas fa-ship', 'blockstrap' ),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Meta', 'blockstrap' ),
+			'element_require' => '[%icon_type%]=="custom"',
+		);
+
+		$arguments['before'] = array(
+			'type'     => 'text',
+			'title'    => __( 'Before', 'blockstrap' ),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Meta', 'blockstrap' ),
+		);
+
+		$arguments['after'] = array(
+			'type'     => 'text',
+			'title'    => __( 'After', 'blockstrap' ),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Meta', 'blockstrap' ),
 		);
 
 		// link styles
@@ -215,6 +234,8 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'btn-icon'     => __( 'Button Icon Circle', 'blockstrap' ),
 				'iconbox'      => __( 'Iconbox bordered', 'blockstrap' ),
 				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap' ),
+				'badge'        => __( 'Badge', 'blockstrap' ),
+				'badge-round'  => __( 'Badge rounded', 'blockstrap' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
@@ -393,6 +414,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		// text color
 		$arguments['text_color'] = sd_get_text_color_input();
 
+		// font size
+		$arguments = $arguments + sd_get_font_size_input_group();
+
 		// Text justify
 		$arguments['text_justify'] = sd_get_text_justify_input();
 
@@ -481,127 +505,111 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-		global $aui_bs5;
+		global $aui_bs5, $post;
 
 		$content = '';
 
-		$link               = '#';
-		$link_text          = '';
-		$link_class         = 'nav-link';
-		$icon               = '';
+		$icon        = '';
+		$link        = '#';
+		$link_text   = '';
+		$link_class  = '';
+		$is_preview  = $this->is_block_content_call();
+		$post_author = ! empty( $post->post_author ) ? absint( $post->post_author ) : 0;
+
 		$link_divider_pos   = ! empty( $args['link_divider'] ) ? esc_attr( $args['link_divider'] ) : '';
 		$link_divider_left  = 'left' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 start-0 translate-middle-y"></span>' : '';
 		$link_divider_right = 'right' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 end-0 translate-middle-y"></span>' : '';
 
 		$font_weight = ! empty( $args['font_weight'] ) ? esc_attr( $args['font_weight'] ) : '';
-		unset( $args['font_weight'] ); // we don't want it on the parent.
+		//unset( $args['font_weight'] ); // we don't want it on the parent.
 
+//		print_r( $args );
 		$wrap_class = sd_build_aui_class( $args );
-		if ( 'home' === $args['type'] ) {
-			$link      = get_home_url();
-			$link_text = __( 'Home', 'blockstrap' );
-		} elseif ( 'page' === $args['type'] || 'post-id' === $args['type'] ) {
-			$page_id = ! empty( $args['page_id'] ) ? absint( $args['page_id'] ) : 0;
-			$post_id = ! empty( $args['post_id'] ) ? absint( $args['post_id'] ) : 0;
-			$id      = 'page' === $args['type'] ? $page_id : $post_id;
-			if ( $id ) {
-				$page = get_post( $id );
-				if ( ! empty( $page->post_title ) ) {
-					$link      = get_permalink( $id );
-					$link_text = esc_attr( $page->post_title );
+
+//		echo '###'.$wrap_class .'###';
+		if ( 'author' === $args['type'] ) {
+			$link = $is_preview ? '#author' : get_author_posts_url( $post_author );
+			$text = $is_preview ? 'John Doe' : get_the_author_meta( 'display_name' );
+			$icon = 'fas fa-user-circle';
+		} elseif ( 'date_published' === $args['type'] || 'date_updated' === $args['type'] ) {
+			$link     = $is_preview ? '#post-link' : get_the_permalink();
+			$time_ago = 'time-ago' === $args['date_format'];
+			if ( empty( $args['date_format'] ) || $time_ago ) {
+				$date_format = get_option( 'date_format' );
+			} else {
+				$date_format = 'custom' === $args['date_format'] ? $args['date_custom'] : $args['date_format'];
+			}
+			$date = 'date_published' === $args['type'] ? $post->post_date : $post->post_modified;
+			$text = $is_preview ? gmdate( $date_format, strtotime( '-2 hours' ) ) : gmdate( $date_format, strtotime( $date ) );
+			$icon = 'far fa-calendar';
+
+			if ( $time_ago ) {
+				$icon     = $is_preview ? 'far fa-clock' : '';
+				$date_raw = $is_preview ? strtotime( '-2 hours' ) : $date;
+				$text     = $is_preview ? '2 days ago' : sprintf(
+					'<span class="timeago" datetime="%1$s" >%2$s</span>',
+					$date_raw,
+					$text
+				);
+			}
+		} elseif ( 'comments' === $args['type'] ) {
+			$comments = $is_preview ? 3 : absint( $post->comment_count );
+			$link     = $is_preview ? '#post-comments' : get_comments_link();
+			$text     = $comments ?
+				/* translators: the number of comments */
+				sprintf( _n( '%s comment', '%s comments', $comments, 'blockstrap-page-builder-blocks' ), number_format_i18n( $comments ) )
+				: __( 'No comments', 'blockstrap-page-builder-blocks' );
+			$icon = 'far fa-comment';
+		} elseif ( 'read_time' === $args['type'] ) {
+			$words = $is_preview ? 1000 : str_word_count( wp_strip_all_tags( $post->post_content ) );
+			$m     = floor( $words / 200 );
+			$link  = '';
+			/* translators: the number of minutes to read */
+			$text = sprintf( __( '%d min read', 'blockstrap-page-builder-blocks' ), absint( $m ) );
+			$icon = 'far fa-clock';
+		} elseif ( 'taxonomy' === $args['type'] ) {
+			$taxonomy = esc_attr( $args['taxonomy'] );
+			$terms    = get_the_terms( $post, $taxonomy );
+			$term     = '';
+			$limit    = absint( $args['taxonomy_limit'] );
+			$icon = 'far fa-folder-open';
+			$text = $is_preview ? 'Taxonomy' : '';
+
+			if ( ! empty( $terms ) ) {
+
+				if ( $limit && count( $terms ) > $limit ) {
+					$terms = array_slice( $terms, 0, $limit );
+				}
+
+				if ( 1 === count( $terms ) ) {
+					$term = end( $terms );
+					$text = esc_attr( $term->name );
+					$link = $is_preview ? '#post-tax' : get_term_link( $term );
+				} else {
+
+					$text = array();
+					foreach ( $terms as $term ) {
+						$text[] = array(
+							'text' => esc_attr( $term->name ),
+							'link' => $is_preview ? '#post-tax' : get_term_link( $term ),
+						);
+					}
 				}
 			}
-		} elseif ( 'custom' === $args['type'] ) {
-			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
-			$link_text = __( 'Custom', 'blockstrap' );
-		} elseif ( 'gd_search' === $args['type'] ) {
-			$link      = function_exists( 'geodir_search_page_base_url' ) ? geodir_search_page_base_url() : '';
-			$link_text = __( 'Search', 'blockstrap' );
-		} elseif ( 'gd_location' === $args['type'] ) {
-			$link      = function_exists( 'geodir_location_page_id' ) ? get_permalink( geodir_location_page_id() ) : '';
-			$link_text = __( 'Location', 'blockstrap' );
-		} elseif ( 'gd_location_switcher' === $args['type'] ) {
-			global $geodirectory;
-			$location_name = __( 'Set Locationx', 'blockstrap' );
-			$location_set  = true;
 
-			//          print_r($geodirectory->location);
-			if ( ! empty( $geodirectory->location->neighbourhood ) ) {
-				$location_name = $geodirectory->location->neighbourhood;} elseif ( ! empty( $geodirectory->location->city ) ) {
-				$location_name = $geodirectory->location->city;} elseif ( ! empty( $geodirectory->location->region ) ) {
-					$location_name = $geodirectory->location->region;} elseif ( ! empty( $geodirectory->location->country ) ) {
-					$location_name = __( $geodirectory->location->country, 'geodirectory' );} else {
-							$location_set = false;
-					}
-					if ( $location_set ) {
-						$icon_class         = ! empty( $args['icon_class'] ) ? esc_attr( $args['icon_class'] ) : 'fas fa-map-marker-alt fa-lg text-primary';
-						$icon               = '<span class="hover-swap gdlmls-menu-icon"><i class="' . $icon_class . ' hover-content-original"></i><i class="fas fa-times hover-content c-pointer" title="' . __( 'Clear Location', 'geodirlocation' ) . '" data-toggle="tooltip"></i></span> ';
-						$args['icon_class'] = '';
-						$args['text']       = esc_attr( $location_name );
-					}
+			if ( $is_preview && empty( $text ) ) {
+				$text = 'Taxonomy';
+				$link = '#';
+			}
 
-					$link      = '#location-switcher';
-					$link_text = esc_attr( $location_name );
-		} elseif ( substr( $args['type'], 0, 3 ) === 'gd_' ) {
-			$post_types = function_exists( 'geodir_get_posttypes' ) ? geodir_get_posttypes( 'options-plural' ) : '';
-			if ( ! empty( $post_types ) ) {
-				foreach ( $post_types as $cpt => $cpt_name ) {
-					if ( $cpt === $args['type'] ) {
-						$link      = get_post_type_archive_link( $cpt );
-						$link_text = $cpt_name;
-					}
-				}
-			}
-		} elseif ( substr( $args['type'], 0, 7 ) === 'add_gd_' ) {
-			$post_types = function_exists( 'geodir_get_posttypes' ) ? geodir_get_posttypes( 'options' ) : '';
-			if ( ! empty( $post_types ) ) {
-				foreach ( $post_types as $cpt => $cpt_name ) {
-					if ( 'add_' . $cpt === $args['type'] ) {
-						$link = function_exists( 'geodir_add_listing_page_url' ) ? geodir_add_listing_page_url( $cpt ) : '';
-						/* translators: Custom Post Type name. */
-						$link_text = sprintf( __( 'Add %s', 'blockstrap' ), $cpt_name );
-					}
-				}
-			}
-		} elseif ( 'uwp_login' === $args['type'] ) {
-			$link        = function_exists( 'uwp_get_login_page_url' ) ? uwp_get_login_page_url() : '';
-			$link_text   = __( 'Login', 'blockstrap' );
-			$wrap_class .= ' uwp-login-link';
-		} elseif ( 'uwp_register' === $args['type'] ) {
-			$link        = function_exists( 'uwp_get_register_page_url' ) ? uwp_get_register_page_url() : '';
-			$link_text   = __( 'Register', 'blockstrap' );
-			$wrap_class .= ' uwp-register-link';
-		} elseif ( 'uwp_forgot' === $args['type'] ) {
-			$link        = function_exists( 'uwp_get_forgot_page_url' ) ? uwp_get_forgot_page_url() : '';
-			$link_text   = __( 'Forgot Password', 'blockstrap' );
-			$wrap_class .= ' uwp-forgot-password-link';
-		} elseif ( 'uwp_account' === $args['type'] ) {
-			$link      = function_exists( 'uwp_get_account_page_url' ) ? uwp_get_account_page_url() : '';
-			$link_text = __( 'Account', 'blockstrap' );
-		} elseif ( 'uwp_change_password' === $args['type'] ) {
-			$link      = function_exists( 'uwp_get_change_page_url' ) ? uwp_get_change_page_url() : '';
-			$link_text = __( 'Change password', 'blockstrap' );
-		} elseif ( 'uwp_profile' === $args['type'] ) {
-			$link      = function_exists( 'uwp_get_profile_page_url' ) ? uwp_get_profile_page_url() : '';
-			$link_text = __( 'Profile', 'blockstrap' );
-		} elseif ( 'uwp_logout' === $args['type'] ) {
-			$link      = wp_logout_url( get_permalink() );
-			$link_text = __( 'Log out', 'blockstrap' );
-		}
+			//          print_r( $term );
+			//          echo '###' . $taxonomy;//exit;
+//			$link = $is_preview ? '#post-tax' : get_term_link( $term );
 
-		// UWP maybe bail if logged in.
-		if ( in_array( $args['type'], array( 'uwp_login', 'uwp_register', 'uwp_forgot' ), true ) ) {
-			if ( ! $this->is_block_content_call() && get_current_user_id() ) {
-				return '';
-			}
-		} elseif ( in_array( $args['type'], array( 'uwp_account', 'uwp_change_password', 'uwp_profile', 'uwp_logout' ), true ) ) {
-			if ( ! $this->is_block_content_call() && ! get_current_user_id() ) {
-				return '';
-			}
 		}
 
 		// maybe set custom link text
-		$link_text = ! empty( $args['text'] ) ? esc_attr( $args['text'] ) : $link_text;
+		$text = ! empty( $args['text'] ) ? esc_attr( $args['text'] ) : $text;
 
 		// link type
 		if ( ! empty( $args['link_type'] ) ) {
@@ -616,6 +624,10 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				$link_class = 'iconbox rounded-circle';
 			} elseif ( 'iconbox-fill' === $args['link_type'] ) {
 				$link_class = 'iconbox fill rounded-circle';
+			} elseif ( 'badge' === $args['link_type'] ) {
+				$link_class = 'badge';
+			} elseif ( 'badge-round' === $args['link_type'] ) {
+				$link_class = 'badge rounded-pill';
 			}
 
 			if ( 'btn' === $args['link_type'] || 'btn-round' === $args['link_type'] || 'btn-icon' === $args['link_type'] ) {
@@ -627,6 +639,8 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				} elseif ( 'large' === $args['link_size'] ) {
 					$link_class .= ' btn-lg';
 				}
+			} elseif ( 'badge' === $args['link_type'] || 'badge-round' === $args['link_type'] ) {
+				$link_class .= ' text-bg-' . sanitize_html_class( $args['link_bg'] );
 			} else {
 				$link_class .= 'iconbox-fill' === $args['link_type'] ? ' bg-' . sanitize_html_class( $args['link_bg'] ) : '';
 				if ( empty( $args['link_size'] ) || 'small' === $args['link_size'] ) {
@@ -644,35 +658,44 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		}
 
 		// link padding / font weight
-		$link_class .= ' ' . sd_build_aui_class(
-			array(
-				'pt'          => $args['link_pt'],
-				'pt_md'       => $args['link_pt_md'],
-				'pt_lg'       => $args['link_pt_lg'],
+		//      $link_class .= ' ' . sd_build_aui_class(
+		//          array(
+		//              'pt'          => $args['link_pt'],
+		//              'pt_md'       => $args['link_pt_md'],
+		//              'pt_lg'       => $args['link_pt_lg'],
+		//
+		//              'pr'          => $args['link_pr'],
+		//              'pr_md'       => $args['link_pr_md'],
+		//              'pr_lg'       => $args['link_pr_lg'],
+		//
+		//              'pb'          => $args['link_pb'],
+		//              'pb_md'       => $args['link_pb_md'],
+		//              'pb_lg'       => $args['link_pb_lg'],
+		//
+		//              'pl'          => $args['link_pl'],
+		//              'pl_md'       => $args['link_pl_md'],
+		//              'pl_lg'       => $args['link_pl_lg'],
+		//
+		//              'font_weight' => $font_weight,
+		//          )
+		//      );
 
-				'pr'          => $args['link_pr'],
-				'pr_md'       => $args['link_pr_md'],
-				'pr_lg'       => $args['link_pr_lg'],
+		//      echo '####'.$link_class.'###';
 
-				'pb'          => $args['link_pb'],
-				'pb_md'       => $args['link_pb_md'],
-				'pb_lg'       => $args['link_pb_lg'],
+		$wrap_class .= ' ' . $link_class;
 
-				'pl'          => $args['link_pl'],
-				'pl_md'       => $args['link_pl_md'],
-				'pl_lg'       => $args['link_pl_lg'],
+		if ( 'custom' !== $args['icon_type'] ) {
+			$args['icon_class'] = $icon;
+		}
 
-				'font_weight' => $font_weight,
-			)
-		);
-
+		$icon = '';
 		if ( ! empty( $args['icon_class'] ) ) {
 			// remove default text if icon exists.
 			if ( empty( $args['text'] ) ) {
 				$link_text = '';
 			}
 			$mr   = $aui_bs5 ? ' me-2' : ' mr-2';
-			$icon = ! empty( $link_text ) ? '<i class="' . esc_attr( $args['icon_class'] ) . $mr . '"></i>' : '<i class="' . esc_attr( $args['icon_class'] ) . '"></i>';
+			$icon = '<i class="' . esc_attr( $args['icon_class'] ) . $mr . '"></i>';
 
 		}
 
@@ -681,18 +704,44 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			$wrap_class .= $aui_bs5 ? ' align-self-center' : ' form-inline';
 		}
 
-		if ( $this->is_block_content_call() ) {
-			$is_sub = ! empty( $_REQUEST['block_parent_name'] ) && 'blockstrap/blockstrap-widget-nav-dropdown' === $_REQUEST['block_parent_name']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			if ( $is_sub ) {
-				$link_class = str_replace( 'nav-link', 'dropdown-item', $link_class );
+		$wrapper_attributes = '';
+
+		$output = '';
+
+		if ( is_array( $text ) ) {
+			foreach ( $text as $t ) {
+				$text    = ! empty( $t['text'] ) ? $t['text'] : $text;
+				$link    = ! empty( $t['link'] ) ? $t['link'] : $link;
+				$output .= $this->output_html( $text, $link, $wrap_class, $wrapper_attributes, $icon, $args['is_link'] );
 			}
-			return $link_text || $icon ? '<a href="#' . esc_url_raw( $link ) . '" class="' . esc_attr( $link_class ) . '">' . $link_divider_left . $icon . esc_attr( $link_text ) . $link_divider_right . '</a>' : ''; // shortcode
-
 		} else {
-			return $link_text || $icon ? '<li class="nav-item ' . $wrap_class . '"><a href="' . esc_url_raw( $link ) . '" class="' . esc_attr( $link_class ) . '">' . $link_divider_left . $icon . esc_attr( $link_text ) . $link_divider_right . '</a></li>' : ''; // shortcode
-
+			$output .= $this->output_html( $text, $link, $wrap_class, $wrapper_attributes, $icon, $args['is_link'] );
 		}
 
+		return $output;
+
+	}
+
+	public function output_html( $text = '', $link, $wrap_class, $wrapper_attributes, $icon, $is_link ) {
+
+		if ( $is_link ) {
+			return $text ? sprintf(
+				'<a href="%1$s" class="%2$s" %3$s>%4$s%5$s</a>',
+				$link,
+				$wrap_class,
+				$wrapper_attributes,
+				$icon,
+				$text
+			) : '';
+		} else {
+			return $text ? sprintf(
+				'<span class="%1$s" %2$s>%3$s%4$s</span>',
+				$wrap_class,
+				$wrapper_attributes,
+				$icon,
+				$text
+			) : '';
+		}
 	}
 
 }
@@ -701,7 +750,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 add_action(
 	'widgets_init',
 	function () {
-		register_widget( 'BlockStrap_Widget_Nav_Item' );
+		register_widget( 'BlockStrap_Widget_Post_Info' );
 	}
 );
 

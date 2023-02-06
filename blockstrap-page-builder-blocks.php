@@ -54,7 +54,7 @@ final class BlockStrap {
 	 */
 	private function init_hooks() {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ), 1000 );
-		add_filter( 'render_block', array( $this, 'force_render_blocks_on_templates' ), 10, 2 );
+		add_filter( 'render_block', array( $this, 'force_render_blocks_on_templates' ), 100000, 2 );
 		add_filter( 'ayecode-ui-settings', array( $this, 'aui_settings_overwrite' ), 10, 3 );
 		add_filter( 'ayecode-ui-default-settings', array( $this, 'aui_default_settings_overwrite' ), 10, 2 );
 	}
@@ -106,6 +106,7 @@ final class BlockStrap {
 	 * @return mixed
 	 */
 	public function force_render_blocks_on_templates( $block_content, $block ) {
+
 		return strip_shortcodes( do_shortcode( $block_content ) );
 	}
 
@@ -168,7 +169,7 @@ final class BlockStrap {
 	 * @param string|bool $value
 	 */
 	private function define( $name, $value ) {
-		if ( ! defined( $name ) ) {
+		if (!defined( $name ) ) {
 			define( $name, $value );
 		}
 	}
@@ -212,6 +213,10 @@ final class BlockStrap {
 		require_once 'blocks/class-blockstrap-widget-tab.php';
 		require_once 'blocks/class-blockstrap-widget-icon-box.php';
 		require_once 'blocks/class-blockstrap-widget-skip-links.php';
+		require_once 'blocks/class-blockstrap-widget-post-info.php';
+		require_once 'blocks/class-blockstrap-widget-post-excerpt.php';
+		require_once 'blocks/class-blockstrap-widget-breadcrumb.php';
+		require_once 'blocks/class-blockstrap-widget-share.php';
 
 		// Frontend comments
 		require_once 'classes/class-blockstrap-blocks-comments.php';

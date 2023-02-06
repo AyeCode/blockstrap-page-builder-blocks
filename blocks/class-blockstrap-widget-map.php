@@ -341,12 +341,13 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-
+		global $aui_bs5;
 		// class
-		$wrap_class  = sd_build_aui_class( $args );
-		$wrap_class .= ' embed-responsive';
-		$wrap_class .= $args['map_aspect'] ? ' embed-responsive-' . esc_attr( $args['map_aspect'] ) : '';
-		$class       = $wrap_class ? 'class="overflow-hidden ' . $wrap_class . '"' : '';
+		$wrap_class   = sd_build_aui_class( $args );
+		$ratio_prefix = $aui_bs5 ? 'ratio ratio-' : 'embed-responsive embed-responsive-';
+		$ratio_val    = $aui_bs5 ? str_replace( 'by', 'x', $args['map_aspect'] ) : $args['map_aspect'];
+		$wrap_class  .= $args['map_aspect'] ? ' ' . $ratio_prefix . esc_attr( $ratio_val ) : '';
+		$class        = $wrap_class ? 'class="overflow-hidden ' . $wrap_class . '"' : '';
 
 		// styles
 		$wrap_styles = sd_build_aui_styles( $args );

@@ -19,11 +19,16 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			'block-supports'    => array(
 				'customClassName' => false,
 			),
-			'block-edit-return' => "el(props.attributes.html_tag ? props.attributes.html_tag : 'h1', wp.blockEditor.useBlockProps({
+			'block-edit-return' => "!props.attributes.is_link ? el(props.attributes.html_tag ? props.attributes.html_tag : 'h1', wp.blockEditor.useBlockProps({
 									dangerouslySetInnerHTML: {__html: 'Post Title' },
 									style: sd_build_aui_styles(props.attributes),
 									className: sd_build_aui_class(props.attributes),
-								}))",
+								})) :
+								el(props.attributes.html_tag ? props.attributes.html_tag : 'h1', wp.blockEditor.useBlockProps({
+									//dangerouslySetInnerHTML: {__html: 'Post Title' },
+									style: sd_build_aui_styles(props.attributes),
+									className: sd_build_aui_class(props.attributes),
+								}), el('a',{dangerouslySetInnerHTML: {__html: 'Post Title' },href: '#post-link', className: 'nav-link-' + props.attributes.text_color, style: sd_build_aui_styles(props.attributes)  }) )",
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_post_title',
@@ -103,6 +108,15 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			'group'    => __( 'Title', 'blockstrap' ),
 		);
 
+		$arguments['is_link'] = array(
+			'type'     => 'checkbox',
+			'title'    => __( 'Link to post', 'blockstrap' ),
+			'default'  => '',
+			'value'    => '1',
+			'desc_tip' => false,
+			'group'    => __( 'Title', 'blockstrap' ),
+		);
+
 		// text color
 		$arguments = $arguments + sd_get_text_color_input_group();
 
@@ -112,7 +126,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 		// line height
 		$arguments['font_line_height'] = sd_get_font_line_height_input();
 
-		// font size
+		// font weight
 		$arguments['font_weight'] = sd_get_font_weight_input();
 
 		// Text justify
@@ -249,6 +263,17 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 
 			$wrapper_attributes = $class . $style;
 
+			if ( $args['is_link'] ) {
+				$class = $args['text_color'] ? 'nav-link-' . esc_attr( $args['text_color'] ) : '';
+				$link  = get_permalink();
+				$title = sprintf(
+					'<a href="%1$s" class=" %2$s" %3$s>%4$s</a>',
+					$link,
+					$class,
+					$styles,
+					$title
+				);
+			}
 		}
 
 		return $title ? sprintf(

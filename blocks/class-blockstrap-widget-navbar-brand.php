@@ -57,7 +57,9 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					array(
 						'element' => 'span',
 						'class'   => 'mb-0 [%brand_font_size%] [%brand_font_weight%] [%brand_font_italic%]',
-						'content' => '[%text%]',
+						'if_dangerouslySetInnerHTML' => '{__html: props.attributes.text }',
+
+//						'if_content' => 'dangerouslySetInnerHTML: {__html: props.attributes.text}',
 					),
 
 				),
@@ -131,7 +133,7 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 		$arguments = array();
 
 		$arguments['text']       = array(
-			'type'        => 'text',
+			'type'        => 'textarea',
 			'title'       => __( 'Text', 'blockstrap' ),
 			'desc'        => __( 'Brand text', 'blockstrap' ),
 			'placeholder' => __( 'My Awesome Site!', 'blockstrap' ),
