@@ -245,7 +245,7 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 			'<div class="bs-skip-links position-absolute shadow" style="z-index: 10000">%1$s%2$s%3$s</div>',
 			$link_one,
 			$link_two,
-			$link_three,
+			$link_three
 		) : '';
 
 	}

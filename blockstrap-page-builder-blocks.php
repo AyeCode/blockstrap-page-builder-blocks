@@ -216,6 +216,7 @@ final class BlockStrap {
 		require_once 'blocks/class-blockstrap-widget-post-info.php';
 		require_once 'blocks/class-blockstrap-widget-post-excerpt.php';
 		require_once 'blocks/class-blockstrap-widget-breadcrumb.php';
+		require_once 'blocks/class-blockstrap-widget-search.php';
 		require_once 'blocks/class-blockstrap-widget-share.php';
 
 		// Frontend comments
