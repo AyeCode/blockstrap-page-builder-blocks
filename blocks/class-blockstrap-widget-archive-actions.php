@@ -98,6 +98,17 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 			'element_require' => '![%hide_category_filter%]',
 		);
 
+		$arguments['filter_cats'] = array(
+			'type'            => 'text',
+			'title'           => __( 'Include/Exclude Categories', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Enter a comma separated list of category ids (21,8,43) to show these categories, or a negative list (-21,-8,-43) to exclude these categories.', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => '21,8,43 (default: empty)',
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Actions', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '![%hide_category_filter%]',
+		);
+
 		$arguments['hide_sortby_filter'] = array(
 			'type'     => 'checkbox',
 			'title'    => __( 'Hide Sort By Filter', 'blockstrap-page-builder-blocks' ),
@@ -221,10 +232,16 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
 		global $wp, $aui_bs5;
 
+		// Don't output block.
+		if ( ! ( $this->is_preview() || blockstrap_blocks_archive_actions_show() ) ) {
+			return;
+		}
+
 		$args = wp_parse_args(
 			$args,
 			array(
 				'hide_category_filter' => '',
+				'filter_cats' => '',
 				'category_placeholder' => '',
 				'hide_sortby_filter' => '',
 				'sortby_placeholder' => '',
@@ -237,13 +254,13 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 			)
 		);
 
-		// Blog posts page.
-		if ( ! ( ! is_front_page() && is_home() && ! $this->is_preview() ) ) {
-			return;
-		}
-
 		$category_filter = empty( $args['hide_category_filter'] ) ? true : false;
 		$sortby_filter = empty( $args['hide_sortby_filter'] ) ? true : false;
+
+		// Hide category filter on tag archive page.
+		if ( $category_filter && is_tag() ) {
+			$category_filter = false;
+		}
 
 		if ( ! $category_filter && ! $sortby_filter ) {
 			return;
@@ -298,37 +315,49 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 
 		$parse_url = parse_url( home_url() );
 		$current_url = set_url_scheme( 'http://' . $parse_url['host'] . wp_unslash( $_SERVER['REQUEST_URI'] ) );
-		$current_url = remove_query_arg( array( '_bs_category', '_bs_sortby' ), $current_url );
+		$current_url = remove_query_arg( array( '_bs_sortby' ), $current_url );
+
 		$content .= '<div class="row g-3 ' . $justify_class . '">';
-		if ( $category_filter && ( $category_options = self::get_category_options() ) ) {
+		if ( $category_filter && ( $category_options = $this->get_category_options( $args ) ) ) {
 			$category_placeholder = trim( stripslashes( esc_html( $args['category_placeholder'] ) ) );
 			if ( ! $category_placeholder ) {
 				$category_placeholder = __( 'Category', 'blockstrap-page-builder-blocks' );
 			}
 
-			$category_options = array( '' => $category_placeholder ) + $category_options;
+			$category_value = '';
+			if ( is_category() && ( $term = get_queried_object() ) ) {
+				if ( ! empty( $term->term_id ) ) {
+					$category_value = esc_url( get_category_link( $term->term_id ) );
+				}
+			}
+
+			if ( ! $category_value ) {
+				$category_options = array( '' => $category_placeholder ) + $category_options;
+			} else if ( 'page' === get_option( 'show_on_front' ) && ( $page_for_posts = (int) get_option( 'page_for_posts' ) ) ) {
+				$category_options = array( esc_url( get_permalink( $page_for_posts ) ) => $category_placeholder ) + $category_options;
+			}
 
 			$content .= '<div class="col-6 col-sm-3 d-flex flex-sm-row flex-column align-items-sm-center"><div class="position-relative w-100">';
 			if ( empty( $args['hide_icon'] ) ) {
 				$content .= '<i class="fas fa-filter position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>';
 			}
+
 			$content .= aui()->select( 
 				array(
-					'name'             => '_bs_category',
+					'id'               => '_bs_category',
 					'class'            => $select_class,
-					'value'            => ( ! empty( $_REQUEST['_bs_category'] ) ? sanitize_text_field( $_REQUEST['_bs_category'] ) : '' ),
+					'value'            => $category_value,
 					'options'          => $category_options,
 					'no_wrap'          => true,
 					'extra_attributes' => array(
-						'aria-label' => $category_placeholder,
-						'data-current-url' => esc_url( $current_url ),
+						'aria-label' => $category_placeholder
 					)
 				)
 			);
 			$content .= '</div></div>';
 		}
 
-		if ( $sortby_filter && ( $sortby_options = self::get_sortby_options() ) ) {
+		if ( $sortby_filter && ( $sortby_options = $this->get_sortby_options( $args ) ) ) {
 			$sortby_placeholder = trim( stripslashes( esc_html( $args['sortby_placeholder'] ) ) );
 			if ( ! $sortby_placeholder ) {
 				$sortby_placeholder = __( 'Sort By', 'blockstrap-page-builder-blocks' );
@@ -348,7 +377,7 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 					'options'          => $sortby_options,
 					'no_wrap'          => true,
 					'extra_attributes' => array(
-						'aria-label' => $category_placeholder,
+						'aria-label' => $sortby_placeholder,
 						'data-current-url' => esc_url( $current_url ),
 					)
 				)
@@ -366,13 +395,74 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 		return $output;
 	}
 
-	public static function get_category_options() {
-		$categories = get_categories();
+	/**
+	 * Get the category options for archive actions.
+	 *
+	 * @since 1.0
+	 *
+	 * @param array $args Widget args.
+	 * @return array Post category options.
+	 */
+	public function get_category_options( $args = array() ) {
+		// Include/exclude terms
+		if ( ! empty( $args['filter_cats'] ) ) {
+			$filter_cats = is_array( $args['filter_cats'] ) ? implode( ',', $args['filter_cats'] ) : $args['filter_cats'];
+		} else {
+			$filter_cats = '';
+		}
+
+		$filter_terms = array(
+			'include' => array(),
+			'exclude' => array(),
+		);
+
+		if ( ! empty( $filter_cats ) ) {
+			$_filter_cats = explode( ",", $filter_cats );
+
+			foreach( $_filter_cats as $filter_cat ) {
+				$filter_cat = trim( $filter_cat );
+
+				if ( absint( $filter_cat ) > 0 ) {
+					if ( abs( $filter_cat ) != $filter_cat ) {
+						$filter_terms['exclude'][] = absint( $filter_cat );
+					} else {
+						$filter_terms['include'][] = absint( $filter_cat );
+					}
+				}
+			}
+		}
+
+		$category_args = array();
+
+		// Include terms
+		if ( ! empty( $filter_terms['include'] ) ) {
+			$category_args['include'] = $filter_terms['include'];
+		}
+
+		// Exclude terms
+		if ( ! empty( $filter_terms['exclude'] ) ) {
+			$category_args['exclude'] = $filter_terms['exclude'];
+		}
+
+		/**
+		 * Filters the category args to retrieve a list of category objects.
+		 *
+		 * @since 1.0
+		 *
+		 * @param array  $category_args Category args.
+		 * @param array  $args Widget args.
+		 * @param object $this Widget object.
+		 */
+		$category_args = apply_filters( 'blockstrap_blocks_archive_actions_category_args', $category_args, $args, $this );
+
+		$categories = get_categories( $category_args );
 		$options = array();
 
 		if ( ! empty( $categories ) ) {
 			foreach ( $categories as $k => $category ) {
-				$options[ $category->slug ] = $category->name;
+				$term_url = get_category_link( $category->term_id );
+
+				$options[ esc_url( $term_url ) ] = $category->name;
 			}
 		}
 
@@ -383,16 +473,26 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 		 *
 		 * @param array  $options Post category options.
 		 * @param object $categories Categories object.
+		 * @param array  $args Widget args.
+		 * @param object $this Widget object.
 		 */
-		return apply_filters( 'blockstrap_blocks_archive_actions_category_opitons', $options, $categories );
+		return apply_filters( 'blockstrap_blocks_archive_actions_category_opitons', $options, $categories, $args, $this );
 	}
 
-	public static function get_sortby_options() {
+	/**
+	 * Get the sort by options for archive actions.
+	 *
+	 * @since 1.0
+	 *
+	 * @param array  $args Widget args.
+	 * @return array Sort by options.
+	 */
+	public function get_sortby_options( $args = array() ) {
 		$options = array(
 			'title' => __( 'Title', 'blockstrap-page-builder-blocks' ),
 			'newest' => __( 'Newest', 'blockstrap-page-builder-blocks' ),
 			'oldest' => __( 'Oldest', 'blockstrap-page-builder-blocks' ),
-			//'popular' => __( 'Popular', 'blockstrap-page-builder-blocks' ),
+			'popular' => __( 'Popular', 'blockstrap-page-builder-blocks' ),
 			//'sponsored' => __( 'Sponsored', 'blockstrap-page-builder-blocks' ),
 		);
 
@@ -401,30 +501,39 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 		 *
 		 * @since 1.0
 		 *
-		 * @param array $options Sort by options.
+		 * @param array  $options Sort by options.
+		 * @param array  $args Widget args.
+		 * @param object $this Widget object.
 		 */
-		return apply_filters( 'blockstrap_blocks_archive_actions_sortby_opitons', $options );
+		return apply_filters( 'blockstrap_blocks_archive_actions_sortby_opitons', $options, $args, $this );
 	}
 
+	/*
+	 * Add script to footer.
+	 *
+	 * @since 1.0
+	 */
 	public static function add_script() {
 		remove_action( 'wp_footer', array( __CLASS__, 'add_script' ), 99 );
 ?>
 <script type="text/javascript">
 jQuery(function($) {
-	$('[name="_bs_category"], [name="_bs_sortby"]').on('change', function(e){
-		blockstrap_archive_action(this);
-	});
-
-	function blockstrap_archive_action(el) {
-		var $row = $(el).closest('.row'), bsUrl = $(el).data('current-url') ? $(el).data('current-url') : window.location;
-		if ($('[name="_bs_category"]', $row).length && $('[name="_bs_category"]', $row).val()) {
-			bsUrl = bsUrl + (bsUrl.indexOf('?') === -1 ? '?' : '&') + '_bs_category=' + $('[name="_bs_category"]', $row).val();
-		}
-		if ($('[name="_bs_sortby"]', $row).length && $('[name="_bs_sortby"]', $row).val()) {
-			bsUrl = bsUrl + (bsUrl.indexOf('?') === -1 ? '?' : '&') + '_bs_sortby=' + $('[name="_bs_sortby"]', $row).val();
+	$('#_bs_category').on('change', function(e){
+		var bsUrl = $(this).val(), bsSort;
+		if (!bsUrl) { return; }
+		if ($(this).closest('.row').find('[name="_bs_sortby"]').length && (bsSort = $(this).closest('.row').find('[name="_bs_sortby"]').val())) {
+			bsUrl = bsUrl + (bsUrl.indexOf('?') === -1 ? '?' : '&') + '_bs_sortby=' + bsSort;
 		}
 		window.location = bsUrl;
-	}
+	});
+	$('[name="_bs_sortby"]').on('change', function(e){
+		var bsUrl = $(this).data('current-url') ? $(this).data('current-url') : window.location;
+		if (!bsUrl) { return; }
+		if ($(this).val()) {
+			bsUrl = bsUrl + (bsUrl.indexOf('?') === -1 ? '?' : '&') + '_bs_sortby=' + $(this).val();
+		}
+		window.location = bsUrl;
+	});
 });
 </script>
 <?php
@@ -441,24 +550,48 @@ add_action(
 );
 
 /**
+ * Archive actions show/hide block.
+ *
+ * @since 1.0
+ */
+function blockstrap_blocks_archive_actions_show() {
+	$show = false;
+
+	if ( is_archive() && is_category() ) {
+		$show = true; // Post tag page.
+	} else if ( is_archive() && is_tag() ) {
+		$show = true; // Post category page.
+	} else if ( ! is_front_page() && is_home() ) {
+		$show = true; // Main blog page.
+	} else {
+		$show = false;
+	}
+
+	/**
+	 * Filters the archive actions block show/hide.
+	 *
+	 * @since 1.0
+	 *
+	 * @param bool   $show If true then show block.
+	 * @param object $this Block object.
+	 */
+	return apply_filters( 'blockstrap_blocks_archive_actions_show', $show );
+}
+
+/**
  * Apply blog archive actions filters.
  *
  * @since 1.0
  */
-function blockstrap_archive_actions_filter( $query ) {
-	if ( ( isset( $_REQUEST['_bs_category'] ) || isset( $_REQUEST['_bs_sortby'] ) ) && $query->is_main_query() && ! is_admin() && $query->is_home() ) {
-		// Category
-		if ( ! empty( $_REQUEST['_bs_category'] ) && ( $term = get_term_by( 'slug', sanitize_text_field( $_REQUEST['_bs_category'] ), 'category' ) ) ) {
-			$term = get_term_by( 'slug', sanitize_text_field( $_REQUEST['_bs_category'] ), 'category' );
-
-			if ( ! empty( $term->term_id ) ) {
-				$query->set( 'category_name', sanitize_text_field( $_REQUEST['_bs_category'] ) );
-			}
-		}
-
+function blockstrap_blocks_archive_actions_filter( $query ) {
+	if ( isset( $_REQUEST['_bs_sortby'] ) && $query->is_main_query() && ! is_admin() && blockstrap_blocks_archive_actions_show() ) {
 		// Sort by
 		if ( ! empty( $_REQUEST['_bs_sortby'] ) ) {
 			switch ( $_REQUEST['_bs_sortby'] ) {
+				case 'popular':
+					$query->set( 'orderby', 'comment_count' );
+					$query->set( 'order', 'DESC' );
+					break;
 				case 'title':
 					$query->set( 'orderby', 'title' );
 					$query->set( 'order', 'ASC' );
@@ -475,4 +608,4 @@ function blockstrap_archive_actions_filter( $query ) {
 		}
 	}
 }
-add_action( 'pre_get_posts', 'blockstrap_archive_actions_filter', 10, 1 );
+add_action( 'pre_get_posts', 'blockstrap_blocks_archive_actions_filter', 10, 1 );
