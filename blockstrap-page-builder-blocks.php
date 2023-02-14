@@ -194,6 +194,7 @@ final class BlockStrap {
 		require_once 'patterns/header.php';
 
 		// Blocks
+		require_once 'blocks/class-blockstrap-widget-archive-actions.php';
 		require_once 'blocks/class-blockstrap-widget-container.php';
 		require_once 'blocks/class-blockstrap-widget-navbar.php';
 		require_once 'blocks/class-blockstrap-widget-navbar-brand.php';
