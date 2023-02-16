@@ -214,6 +214,7 @@ final class BlockStrap {
 		require_once 'blocks/class-blockstrap-widget-tab.php';
 		require_once 'blocks/class-blockstrap-widget-icon-box.php';
 		require_once 'blocks/class-blockstrap-widget-skip-links.php';
+		require_once 'blocks/class-blockstrap-widget-pagination.php';
 		require_once 'blocks/class-blockstrap-widget-post-info.php';
 		require_once 'blocks/class-blockstrap-widget-post-excerpt.php';
 		require_once 'blocks/class-blockstrap-widget-breadcrumb.php';

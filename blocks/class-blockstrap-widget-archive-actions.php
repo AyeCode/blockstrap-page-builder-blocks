@@ -476,7 +476,7 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 		 * @param array  $args Widget args.
 		 * @param object $this Widget object.
 		 */
-		return apply_filters( 'blockstrap_blocks_archive_actions_category_opitons', $options, $categories, $args, $this );
+		return apply_filters( 'blockstrap_blocks_archive_actions_category_options', $options, $categories, $args, $this );
 	}
 
 	/**
@@ -505,7 +505,7 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 		 * @param array  $args Widget args.
 		 * @param object $this Widget object.
 		 */
-		return apply_filters( 'blockstrap_blocks_archive_actions_sortby_opitons', $options, $args, $this );
+		return apply_filters( 'blockstrap_blocks_archive_actions_sortby_options', $options, $args, $this );
 	}
 
 	/*
