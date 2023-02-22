@@ -13,12 +13,13 @@ class AUI_Component_Alert {
 
 	/**
 	 * Build the component.
-	 * 
+	 *
 	 * @param array $args
 	 *
 	 * @return string The rendered component.
 	 */
 	public static function get($args = array()){
+		global $aui_bs5;
 		$defaults = array(
 			'type'       => 'info',
 			'class'      => '',
@@ -70,9 +71,14 @@ class AUI_Component_Alert {
 
 			// dismissible
 			if($args['dismissible']){
-				$output .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
-				$output .= '<span aria-hidden="true">&times;</span>';
-				$output .= '</button>';
+
+				if ( $aui_bs5 ) {
+					$output .= '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+				}else{
+					$output .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+					$output .= '<span aria-hidden="true">&times;</span>';
+					$output .= '</button>';
+				}
 			}
 
 			// footer

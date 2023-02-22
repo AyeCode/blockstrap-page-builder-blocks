@@ -83,6 +83,8 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			'home'    => __( 'Home', 'blockstrap' ),
 			'page'    => __( 'Page', 'blockstrap' ),
 			'post-id' => __( 'Post ID', 'blockstrap' ),
+			'wp-login' => __( 'WP Login (logged out)', 'blockstrap' ),
+			'wp-logout' => __( 'WP Logout (logged in)', 'blockstrap' ),
 			'custom'  => __( 'Custom URL', 'blockstrap' ),
 		);
 
@@ -114,6 +116,8 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			$links['uwp_profile']         = __( 'Profile (logged in)', 'blockstrap' );
 			$links['uwp_logout']          = __( 'Log out (logged in)', 'blockstrap' );
 		}
+
+		$links['spacer'] = __( 'spacer (non link)', 'blockstrap' );
 
 		return $links;
 	}
@@ -497,7 +501,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		unset( $args['font_weight'] ); // we don't want it on the parent.
 
 		$wrap_class = sd_build_aui_class( $args );
-		if ( 'home' === $args['type'] ) {
+		if ( 'spacer' === $args['type'] ) {
+			return '<li class="nav-item ' . $wrap_class . '"></li>';
+		} elseif ( 'home' === $args['type'] ) {
 			$link      = get_home_url();
 			$link_text = __( 'Home', 'blockstrap' );
 		} elseif ( 'page' === $args['type'] || 'post-id' === $args['type'] ) {
@@ -511,6 +517,14 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 					$link_text = esc_attr( $page->post_title );
 				}
 			}
+		} elseif ( 'wp-login' === $args['type'] ) {
+			$icon      = 'far fa-user';
+			$link      = esc_url( wp_login_url( get_permalink() ) );
+			$link_text = __( 'Sign in', 'blockstrap' );
+		} elseif ( 'wp-logout' === $args['type'] ) {
+			$icon      = 'fas fa-sign-out-alt';
+			$link      = esc_url( wp_logout_url( get_permalink() ) );
+			$link_text = __( 'Sign out', 'blockstrap' );
 		} elseif ( 'custom' === $args['type'] ) {
 			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
 			$link_text = __( 'Custom', 'blockstrap' );
@@ -590,11 +604,11 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		}
 
 		// UWP maybe bail if logged in.
-		if ( in_array( $args['type'], array( 'uwp_login', 'uwp_register', 'uwp_forgot' ), true ) ) {
+		if ( in_array( $args['type'], array( 'wp-login', 'uwp_login', 'uwp_register', 'uwp_forgot' ), true ) ) {
 			if ( ! $this->is_block_content_call() && get_current_user_id() ) {
 				return '';
 			}
-		} elseif ( in_array( $args['type'], array( 'uwp_account', 'uwp_change_password', 'uwp_profile', 'uwp_logout' ), true ) ) {
+		} elseif ( in_array( $args['type'], array( 'wp-logout', 'uwp_account', 'uwp_change_password', 'uwp_profile', 'uwp_logout' ), true ) ) {
 			if ( ! $this->is_block_content_call() && ! get_current_user_id() ) {
 				return '';
 			}

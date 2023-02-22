@@ -103,6 +103,17 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 			'group'    => __( 'Title', 'blockstrap' ),
 		);
 
+		$arguments['prefix_hide'] = array(
+			'type'     => 'checkbox',
+			'title'    => __( 'Remove archive prefix', 'blockstrap' ),
+			'default'  => '',
+			'value'    => '1',
+			'desc_tip' => false,
+			'desc'     => __( 'Category: or Tag: etc..', 'blockstrap' ),
+			'group'    => __( 'Title', 'blockstrap' ),
+		//          'element_require' => '[%bg%]=="custom-gradient"',
+		);
+
 		// text color
 		$arguments = $arguments + sd_get_text_color_input_group();
 
@@ -237,7 +248,22 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
 
-		$title = get_the_archive_title();
+		if ( function_exists( 'geodir_is_geodir_page' ) && geodir_is_geodir_page() ) {
+			$title = GeoDir_SEO::set_meta();
+		} else {
+
+			// hide prefix
+			if ( ! empty( $args['prefix_hide'] ) ) {
+				add_filter( 'get_the_archive_title_prefix', '__return_false' );
+			}
+
+			$title = is_home() ? single_post_title( '', false ) : get_the_archive_title();
+
+			// maybe check if search
+			if ( isset( $_REQUEST['s'] ) ) {
+				$title = __( 'Search', 'blockstrap-page-builder-blocks' );
+			}
+		}
 
 		if ( $title ) {
 			$tag     = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'h1';

@@ -277,9 +277,9 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 			$size = '';
 		}
 
-		$select_class = '';
+		$select_class = 'c-pointer ';
 		if ( empty( $args['hide_icon'] ) ) {
-			$select_class .= 'ps-5';
+			$select_class .= ' ps-5';
 		}
 
 		if ( $size ) {
@@ -337,12 +337,12 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 				$category_options = array( esc_url( get_permalink( $page_for_posts ) ) => $category_placeholder ) + $category_options;
 			}
 
-			$content .= '<div class="col-6 col-sm-3 d-flex flex-sm-row flex-column align-items-sm-center"><div class="position-relative w-100">';
+			$content .= '<div class="col-6  d-flex flex-sm-row flex-column align-items-sm-center"><div class="position-relative w-100">';
 			if ( empty( $args['hide_icon'] ) ) {
 				$content .= '<i class="fas fa-filter position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>';
 			}
 
-			$content .= aui()->select( 
+			$content .= aui()->select(
 				array(
 					'id'               => '_bs_category',
 					'class'            => $select_class,
@@ -365,11 +365,11 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 
 			$sortby_options = array( '' => $sortby_placeholder ) + $sortby_options;
 
-			$content .= '<div class="col-6 col-sm-3 d-flex flex-sm-row flex-column align-items-sm-center"><div class="position-relative w-100">';
+			$content .= '<div class="col-6 d-flex flex-sm-row flex-column align-items-sm-center"><div class="position-relative w-100">';
 			if ( empty( $args['hide_icon'] ) ) {
 				$content .= '<i class="fas fa-arrow-up-a-z position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>';
 			}
-			$content .= aui()->select( 
+			$content .= aui()->select(
 				array(
 					'name'             => '_bs_sortby',
 					'class'            => $select_class,

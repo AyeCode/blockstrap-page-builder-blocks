@@ -264,7 +264,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			$wrapper_attributes = $class . $style;
 
 			if ( $args['is_link'] ) {
-				$class = $args['text_color'] ? 'nav-link-' . esc_attr( $args['text_color'] ) : '';
+				$class = $args['text_color'] ? 'nav-link-' . esc_attr( $args['text_color'] ) : 'nav-link';
 				$link  = get_permalink();
 				$title = sprintf(
 					'<a href="%1$s" class=" %2$s" %3$s>%4$s</a>',

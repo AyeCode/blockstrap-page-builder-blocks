@@ -93,6 +93,7 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 				'advanced' => array(
 					'groups' => array(
 						__( 'Wrapper Styles', 'blockstrap' ),
+						__( 'Hover Animations', 'blockstrap' ),
 						__( 'Advanced', 'blockstrap' ),
 					),
 					'tab'    => array(
@@ -120,6 +121,19 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 
 		// container class
 		$arguments['container'] = sd_get_container_class_input( 'container', array( 'default' => 'container' ) );
+
+		$arguments['h100'] = array(
+			'type'            => 'select',
+			'title'           => __( 'Card equal heights', 'blockstrap' ),
+			'default'         => '',
+			'options'         => array(
+				''      => __( 'No', 'blockstrap' ),
+				'h-100' => __( 'Yes', 'blockstrap' ),
+			),
+			'desc_tip'        => false,
+			'group'           => __( 'Container', 'blockstrap' ),
+			'element_require' => '[%container%]=="card"',
+		);
 
 		// row-cols
 		$arguments['row_cols']    = sd_get_row_cols_input( 'row_cols', array( 'device_type' => 'Mobile' ) );
@@ -248,11 +262,20 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_flex_align_self_input_group( 'flex_align_self' );
 		$arguments = $arguments + sd_get_flex_order_input_group( 'flex_order' );
 
-		// advanced
-		$arguments['anchor'] = sd_get_anchor_input();
+		// overflow
+		$arguments['overflow'] = sd_get_overflow_input();
+
+		// Max height
+		$arguments['max_height'] = sd_get_max_height_input();
+
+		// scrollbars
+		$arguments['scrollbars'] = sd_get_scrollbars_input();
 
 		// Hover animations
-		//$arguments['hover_animations'] = sd_get_hover_animations_input( 'hover_animations' );
+		$arguments['hover_animations'] = sd_get_hover_animations_input();
+
+		// advanced
+		$arguments['anchor'] = sd_get_anchor_input();
 
 		$arguments['css_class'] = sd_get_class_input();
 
@@ -291,7 +314,10 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 		} else {
 			$wrap_class = sd_build_aui_class( $args );
 
-			return '<section class="' . $wrap_class . '">' . $content . '</section>'; // shortcode
+			$styles = sd_build_aui_styles( $args );
+			$style  = $styles ? ' style="' . $styles . '"' : '';
+
+			return '<section class="' . $wrap_class . '"' . $style . '>' . $content . '</section>'; // shortcode
 		}
 
 	}

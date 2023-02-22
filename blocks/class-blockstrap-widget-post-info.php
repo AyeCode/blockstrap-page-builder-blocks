@@ -490,6 +490,22 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
 
+		// position
+		$arguments['position'] = sd_get_position_class_input( 'position' );
+
+		// absolute_position
+		$arguments['absolute_position'] = sd_get_absolute_position_input();
+
+		$arguments['sticky_offset_top']    = sd_get_sticky_offset_input( 'top' );
+		$arguments['sticky_offset_bottom'] = sd_get_sticky_offset_input( 'bottom' );
+
+		$arguments['display']    = sd_get_display_input( 'd', array( 'device_type' => 'Mobile' ) );
+		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
+		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
+
+		// zindex
+		$arguments['zindex'] = sd_get_zindex_input();
+
 		$arguments['css_class'] = sd_get_class_input();
 
 		return $arguments;
@@ -524,10 +540,10 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 		$font_weight = ! empty( $args['font_weight'] ) ? esc_attr( $args['font_weight'] ) : '';
 		//unset( $args['font_weight'] ); // we don't want it on the parent.
 
-//		print_r( $args );
+		//      print_r( $args );
 		$wrap_class = sd_build_aui_class( $args );
 
-//		echo '###'.$wrap_class .'###';
+		//      echo '###'.$wrap_class .'###';
 		if ( 'author' === $args['type'] ) {
 			$link = $is_preview ? '#author' : get_author_posts_url( $post_author );
 			$text = $is_preview ? 'John Doe' : get_the_author_meta( 'display_name' );
@@ -573,8 +589,8 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			$terms    = get_the_terms( $post, $taxonomy );
 			$term     = '';
 			$limit    = absint( $args['taxonomy_limit'] );
-			$icon = 'far fa-folder-open';
-			$text = $is_preview ? 'Taxonomy' : '';
+			$icon     = 'far fa-folder-open';
+			$text     = $is_preview ? 'Taxonomy' : '';
 
 			if ( ! empty( $terms ) ) {
 
@@ -605,7 +621,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 			//          print_r( $term );
 			//          echo '###' . $taxonomy;//exit;
-//			$link = $is_preview ? '#post-tax' : get_term_link( $term );
+			//          $link = $is_preview ? '#post-tax' : get_term_link( $term );
 
 		}
 

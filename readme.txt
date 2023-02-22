@@ -46,6 +46,8 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 * Post excerpt block - ADDED
 * Post info block (for meta details) - ADDED
 * Several changes and improvements to other blocks for BS5 option - CHANGED
+* Added option to remove archive title prefix in BS > Archive title block - ADDED
+* Added spacer and log in/out options to BS > Nav item block - ADDED
 
 = 0.0.3 =
 * First WP.org release - RELEASE

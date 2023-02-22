@@ -302,6 +302,12 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'link' => '',
 			);
 
+		} elseif ( is_home() ) {
+
+			$breadcrumbs[] = array(
+				'name' => 'Blog',
+				'link' => '#',
+			);
 		} elseif ( is_single() ) {
 
 			// Single post
@@ -312,7 +318,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				// Custom post type single
 				$post_type_object = get_post_type_object( $post_type );
 				$breadcrumbs[]    = array(
-					'name' => $post_type_object->label,
+					'name' => esc_attr( $post_type_object->label ),
 					'link' => get_post_type_archive_link( $post_type ),
 				);
 

@@ -229,3 +229,10 @@ final class BlockStrap {
 
 //run
 BlockStrap::instance();
+
+
+
+//add_action('wp','xserasa');
+function xserasa(){
+	print_r(get_block_templates(array(),'wp_template_part'));exit;
+}
