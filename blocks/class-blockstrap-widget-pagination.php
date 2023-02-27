@@ -12,7 +12,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 		$options = array(
 			'textdomain'        => 'blockstrap',
 			'output_types'      => array( 'block', 'shortcode' ),
-			'block-icon'        => 'fas fa-arrow-up-1-9',
+			'block-icon'        => 'fas fa-angle-double-right',
 			'block-category'    => 'layout',
 			'block-keywords'    => "['loop','paging','pagination']",
 			'block-wrap'        => '',
@@ -226,7 +226,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 		$arguments['ap_pr'] = sd_get_padding_input( 'pr', array( 'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%show_advanced%]' ) );
 		$arguments['ap_pb'] = sd_get_padding_input( 'pb', array( 'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%show_advanced%]' ) );
 		$arguments['ap_pl'] = sd_get_padding_input( 'pl', array( 'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%show_advanced%]' ) );
-		
+
 		// text align
 		$arguments['ap_text_align']    = sd_get_text_align_input(
 			'text_align',

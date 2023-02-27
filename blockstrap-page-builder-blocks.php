@@ -189,9 +189,11 @@ final class BlockStrap {
 		}
 
 		// Patterns
-		require_once 'patterns/theme-defaults.php';
-		require_once 'patterns/theme-parts-defaults.php';
+		require_once 'patterns/comments.php';
+		require_once 'patterns/content.php';
+		require_once 'patterns/footer.php';
 		require_once 'patterns/header.php';
+		require_once 'patterns/hero.php';
 
 		// Blocks
 		require_once 'blocks/class-blockstrap-widget-archive-actions.php';

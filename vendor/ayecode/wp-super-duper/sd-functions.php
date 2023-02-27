@@ -293,9 +293,9 @@ function sd_get_border_input( $type = 'border', $overwrite = array() ) {
 	} else {
 		$defaults['title']   = __( 'Border color' );
 		$defaults['options'] = array(
-			''  => __( 'Default', 'super-duper' ),
-			'0' => __( 'None', 'super-duper' ),
-		) + sd_aui_colors();
+			                       ''  => __( 'Default', 'super-duper' ),
+			                       '0' => __( 'None', 'super-duper' ),
+		                       ) + sd_aui_colors();
 	}
 
 	$input = wp_parse_args( $overwrite, $defaults );
@@ -343,9 +343,9 @@ function sd_get_shadow_input( $type = 'shadow', $overwrite = array() ) {
  */
 function sd_get_background_input( $type = 'bg', $overwrite = array() ) {
 	$options = array(
-		''            => __( 'None', 'super-duper' ),
-		'transparent' => __( 'Transparent', 'super-duper' ),
-	) + sd_aui_colors();
+		           ''            => __( 'None', 'super-duper' ),
+		           'transparent' => __( 'Transparent', 'super-duper' ),
+	           ) + sd_aui_colors();
 
 	$defaults = array(
 		'type'     => 'select',
@@ -414,9 +414,9 @@ function sd_get_background_inputs( $type = 'bg', $overwrite = array(), $overwrit
 	$color_options = $include_button_colors ? sd_aui_colors( false, true, true, true ) : sd_aui_colors();
 
 	$options = array(
-		''            => __( 'None', 'super-duper' ),
-		'transparent' => __( 'Transparent', 'super-duper' ),
-	) + $color_options;
+		           ''            => __( 'None', 'super-duper' ),
+		           'transparent' => __( 'Transparent', 'super-duper' ),
+	           ) + $color_options;
 
 	if ( false !== $overwrite_color ) {
 		$options['custom-color'] = __( 'Custom Color', 'super-duper' );
@@ -598,12 +598,12 @@ function sd_get_shape_divider_inputs( $type = 'sd', $overwrite = array(), $overw
 	);
 
 	$options = array(
-		''            => __( 'None', 'super-duper' ),
-		'transparent' => __( 'Transparent', 'super-duper' ),
-	) + sd_aui_colors()
-			   + array(
-				   'custom-color' => __( 'Custom Color', 'super-duper' ),
-			   );
+		           ''            => __( 'None', 'super-duper' ),
+		           'transparent' => __( 'Transparent', 'super-duper' ),
+	           ) + sd_aui_colors()
+	           + array(
+		           'custom-color' => __( 'Custom Color', 'super-duper' ),
+	           );
 
 	$input[ $type . '_color' ] = wp_parse_args(
 		$overwrite_color,
@@ -750,8 +750,8 @@ function sd_get_element_require_string( $args, $key, $type ) {
  */
 function sd_get_text_color_input( $type = 'text_color', $overwrite = array(), $has_custom = false ) {
 	$options = array(
-		'' => __( 'None', 'super-duper' ),
-	) + sd_aui_colors();
+		           '' => __( 'None', 'super-duper' ),
+	           ) + sd_aui_colors();
 
 	if ( $has_custom ) {
 		$options['custom'] = __( 'Custom color', 'super-duper' );
@@ -1304,17 +1304,17 @@ function sd_get_font_size_input( $type = 'font_size', $overwrite = array(), $has
 	}
 
 	$options = $options + array(
-		'h6'        => 'h6',
-		'h5'        => 'h5',
-		'h4'        => 'h4',
-		'h3'        => 'h3',
-		'h2'        => 'h2',
-		'h1'        => 'h1',
-		'display-1' => 'display-1',
-		'display-2' => 'display-2',
-		'display-3' => 'display-3',
-		'display-4' => 'display-4',
-	);
+			'h6'        => 'h6',
+			'h5'        => 'h5',
+			'h4'        => 'h4',
+			'h3'        => 'h3',
+			'h2'        => 'h2',
+			'h1'        => 'h1',
+			'display-1' => 'display-1',
+			'display-2' => 'display-2',
+			'display-3' => 'display-3',
+			'display-4' => 'display-4',
+		);
 
 	if ( $aui_bs5 ) {
 		$options['display-5'] = 'display-5';

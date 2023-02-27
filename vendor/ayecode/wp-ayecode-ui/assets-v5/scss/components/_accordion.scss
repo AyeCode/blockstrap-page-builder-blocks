@@ -24,7 +24,7 @@
     background-color: $accordion-light-bg;
     border-color: $accordion-light-border-color;
   }
-
+  
   .accordion-button {
     background-color: $accordion-light-bg !important;
 
@@ -61,7 +61,7 @@
   }
   &.collapsed {
     > [class^='fi-'],
-    > [class*=' fi-'] { transform: none; }
+    > [class*=' fi-'] { transform: none; }  
     &::after {
       content: attr(data-bs-label-collapsed);
     }

@@ -45,7 +45,7 @@
   position: relative;
   overflow: hidden;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
-
+  
   .img-overlay { opacity: 0 !important; }
 
   .content-overlay {
@@ -83,7 +83,7 @@
       size: cover;
     }
   }
-
+  
   @include media-breakpoint-up(sm) {
     flex-direction: row;
 
@@ -96,7 +96,7 @@
       max-width: $card-horizontal-image-width;
       min-width: $card-horizontal-image-width;
     }
-
+    
     .card-img-top {
       border-radius: 0;
       @include border-start-radius($card-inner-border-radius);

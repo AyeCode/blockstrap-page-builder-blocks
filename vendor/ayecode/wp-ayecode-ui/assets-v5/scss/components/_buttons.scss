@@ -4,7 +4,7 @@
 
 
 // Overriding button variant colors
-//
+// 
 // Solid variant
 
 @each $color, $value in map-remove($theme-colors, 'secondary', 'light') {

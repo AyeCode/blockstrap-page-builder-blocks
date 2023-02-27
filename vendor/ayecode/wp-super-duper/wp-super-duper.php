@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WP_Super_Duper' ) ) {
 
-	define( 'SUPER_DUPER_VER', '1.1.14' );
+	define( 'SUPER_DUPER_VER', '1.1.15' );
 
 	/**
 	 * A Class to be able to create a Widget, Shortcode or Block to be able to output content for WordPress.
@@ -2461,7 +2461,7 @@ const parentBlocksIDs = wp.data.select( 'core/block-editor' ).getBlockParents(pr
 const parentBlocks = wp.data.select('core/block-editor').getBlocksByClientId(parentBlocksIDs);
 // const isParentOfSelectedBlock = useSelect( ( select ) => wp.data.select( 'core/block-editor' ).hasSelectedInnerBlock( props.clientId, true ) ):
     const block = wp.data.select('core/block-editor').getBlocksByClientId(props.clientId);//.[0].innerBlocks;
-    const childBlocks = block[0].innerBlocks;
+    const childBlocks = block[0] == null ? '' : block[0].innerBlocks;
 
 	var $value = '';
 	<?php

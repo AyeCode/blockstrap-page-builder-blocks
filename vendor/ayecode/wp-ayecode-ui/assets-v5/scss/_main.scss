@@ -39,7 +39,7 @@
     padding-top: 15px;
     padding-bottom: 15px;
 }
-.mt-neg5 {
+.mt-neg5 { 
     margin-top: -5rem;
 }
 .ml-neg5 {
@@ -57,8 +57,8 @@
 }
 
 @include media-breakpoint-only(xl) {
-    .h-xl-300 {
-      height: 300px;
+    .h-xl-300 { 
+      height: 300px; 
     }
     .h-max-380 {
       max-height:380px;
@@ -75,7 +75,7 @@
     border-radius: $round-radius !important;
 }
 /*
-.btn {
+.btn { 
  @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-line-height, $btn-border-radius);
     &:hover,
     &:focus {
@@ -100,7 +100,7 @@
 */
 .btn-link {
     &:hover,
-    &:focus {
+    &:focus { 
         box-shadow:none;
     }
 }
@@ -109,12 +109,12 @@
 .btn-link.btn-#{$color} {
     @include button-variant-link($value);
     border-color: transparent;
-  }
+  } 
 }
 .btn-white {background-color:#fff;}
 // Inputs
 .input-round {
-    border-radius: $round-radius !important;
+    border-radius: $round-radius !important;    
 }
 .input-group.input-round {
     input:first-child {border-radius:30px 0 0 30px}
@@ -138,7 +138,7 @@
     text-transform:none;
     box-shadow: $box-shadow-lg;
     &:before {
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(md) { 
             content: '';
             top: -8px;
             position: absolute;
@@ -273,26 +273,26 @@
 }
 
 // Icons
-.iconbox {
-    border:1px solid;
+.iconbox {       
+    border:1px solid;        
     text-align:center;
     display:inline-block;
 }
 .iconbox.iconsmall {
         width:40px;
-        height:40px;
+        height:40px;       
         line-height:40px;
         font-size:1rem;
     }
 .iconbox.iconmedium {
         width:60px;
-        height:60px;
+        height:60px;       
         line-height:60px;
         font-size:1.8rem;
     }
  .iconbox.iconlarge {
         width:80px;
-        height:80px;
+        height:80px;       
         line-height:80px;
         font-size:2.2rem;
     }

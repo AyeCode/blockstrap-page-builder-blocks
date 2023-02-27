@@ -13,7 +13,7 @@ class AUI_Component_Alert {
 
 	/**
 	 * Build the component.
-	 *
+	 * 
 	 * @param array $args
 	 *
 	 * @return string The rendered component.

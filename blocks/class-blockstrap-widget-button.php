@@ -392,6 +392,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'page'    => __( 'Page', 'blockstrap' ),
 			'post-id' => __( 'Post ID', 'blockstrap' ),
 			'custom'  => __( 'Custom URL', 'blockstrap' ),
+			'lightbox'  => __( 'Custom URL', 'blockstrap' ),
 		);
 
 		if ( defined( 'GEODIRECTORY_VERSION' ) ) {

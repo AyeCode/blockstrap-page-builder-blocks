@@ -42,6 +42,8 @@ function aui_bs_convert_sd_output( $output, $instance = '', $args = '', $sd = ''
 			'border-left'    => 'border-start',
 			'font-weight-'  => 'fw-',
 			'btn-block'     => 'w-100',
+			'rounded-left'  => 'rounded-start',
+			'rounded-right'  => 'rounded-left',
 
 //			'custom-control custom-checkbox'    => 'form-check',
 			// data

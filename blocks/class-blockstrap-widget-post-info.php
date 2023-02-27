@@ -263,7 +263,8 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			'desc'            => __( 'Select the color.', 'blockstrap' ),
 			'type'            => 'select',
 			'options'         => array(
-				'' => __( 'Custom colors', 'blockstrap' ),
+				''         => __( 'Custom colors', 'blockstrap' ),
+				'category' => __( 'Category Color (taxonomy only)', 'blockstrap' ),
 			) + sd_aui_colors( true, true, true, true ),
 			'default'         => '',
 			'desc_tip'        => true,
@@ -556,7 +557,12 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			} else {
 				$date_format = 'custom' === $args['date_format'] ? $args['date_custom'] : $args['date_format'];
 			}
-			$date = 'date_published' === $args['type'] ? $post->post_date : $post->post_modified;
+
+			if ( isset( $post->post_date ) ) {
+				$date = 'date_published' === $args['type'] ? $post->post_date : $post->post_modified;
+			}else{
+				$date = '';
+			}
 			$text = $is_preview ? gmdate( $date_format, strtotime( '-2 hours' ) ) : gmdate( $date_format, strtotime( $date ) );
 			$icon = 'far fa-calendar';
 
