@@ -16,7 +16,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			'block-icon'          => 'fas fa-info-circle',
 			'block-category'      => 'layout',
 			'block-keywords'      => "['post','meta','info']",
-			'block-label'         => "attributes.text ? '" . __( 'BS > Post info', 'blockstrap' ) . " ('+ attributes.text+')' : ''",
+			'block-label'         => "attributes.text ? '" . __( 'BS > Post info', 'blockstrap-page-builder-blocks' ) . " ('+ attributes.text+')' : ''",
 			'block-supports'      => array(
 				'customClassName' => false,
 			),
@@ -27,10 +27,10 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			'block-wrap'          => '',
 			'class_name'          => __CLASS__,
 			'base_id'             => 'bs_post_info',
-			'name'                => __( 'BS > Post info', 'blockstrap' ),
+			'name'                => __( 'BS > Post info', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'          => array(
 				'classname'   => 'bs-post-info',
-				'description' => esc_html__( 'Show basic post information.', 'blockstrap' ),
+				'description' => esc_html__( 'Show basic post information.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'             => array(
 				'attributes' => array(
@@ -41,9 +41,9 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			'block_edit_wrap_tag' => 'span',
 			'block_group_tabs'    => array(
 				'content'  => array(
-					'groups' => array( __( 'Meta', 'blockstrap' ) ),
+					'groups' => array( __( 'Meta', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -51,9 +51,9 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Link styles', 'blockstrap' ), __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Link styles', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -62,11 +62,11 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -81,13 +81,13 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 	public function meta_types() {
 		$types = array(
-			'author'         => __( 'Author', 'blockstrap' ),
-			'date_published' => __( 'Date Published', 'blockstrap' ),
-			'date_updated'   => __( 'Date Updated', 'blockstrap' ),
-			'comments'       => __( 'Comments', 'blockstrap' ),
-			'taxonomy'       => __( 'Taxonomy', 'blockstrap' ),
-			'read_time'      => __( 'Read Time', 'blockstrap' ),
-			'custom'         => __( 'Custom', 'blockstrap' ),
+			'author'         => __( 'Author', 'blockstrap-page-builder-blocks' ),
+			'date_published' => __( 'Date Published', 'blockstrap-page-builder-blocks' ),
+			'date_updated'   => __( 'Date Updated', 'blockstrap-page-builder-blocks' ),
+			'comments'       => __( 'Comments', 'blockstrap-page-builder-blocks' ),
+			'taxonomy'       => __( 'Taxonomy', 'blockstrap-page-builder-blocks' ),
+			'read_time'      => __( 'Read Time', 'blockstrap-page-builder-blocks' ),
+			'custom'         => __( 'Custom', 'blockstrap-page-builder-blocks' ),
 		);
 
 		return $types;
@@ -104,16 +104,16 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 		$arguments['type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link Type', 'blockstrap' ),
+			'title'    => __( 'Link Type', 'blockstrap-page-builder-blocks' ),
 			'options'  => $this->meta_types(),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Meta', 'blockstrap' ),
+			'group'    => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['taxonomy'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Taxonomy', 'blockstrap' ),
+			'title'           => __( 'Taxonomy', 'blockstrap-page-builder-blocks' ),
 			'options'         => get_taxonomies(
 				array(
 					'show_ui' => 1,
@@ -122,154 +122,154 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			),
 			'default'         => 'category',
 			'desc_tip'        => true,
-			'group'           => __( 'Meta', 'blockstrap' ),
+			'group'           => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="taxonomy"',
 		);
 
 		$arguments['taxonomy_limit'] = array(
 			'type'            => 'number',
-			'title'           => __( 'Taxonomy limit', 'blockstrap' ),
+			'title'           => __( 'Taxonomy limit', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'placeholder'     => __( '0', 'blockstrap' ),
-			'group'           => __( 'Meta', 'blockstrap' ),
+			'placeholder'     => __( '0', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="taxonomy"',
 		);
 
 		$arguments['date_format'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Date format', 'blockstrap' ),
+			'title'           => __( 'Date format', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				''         => __( 'Default (WordPress)', 'blockstrap' ),
-				'time-ago' => __( 'Time ago (4mins ago)', 'blockstrap' ),
+				''         => __( 'Default (WordPress)', 'blockstrap-page-builder-blocks' ),
+				'time-ago' => __( 'Time ago (4mins ago)', 'blockstrap-page-builder-blocks' ),
 				'F j, Y'   => gmdate( 'F j, Y' ) . ' (F j, Y)',
 				'Y-m-d'    => gmdate( 'Y-m-d' ) . ' (Y-m-d)',
 				'm/d/Y'    => gmdate( 'm/d/Y' ) . ' (m/d/Y)',
 				'd/m/Y'    => gmdate( 'd/m/Y' ) . ' (d/m/Y)',
-				'custom'   => __( 'Custom', 'blockstrap' ),
+				'custom'   => __( 'Custom', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Meta', 'blockstrap' ),
+			'group'           => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '( [%type%]=="date_published" || [%type%]=="date_updated" )',
 		);
 
 		$arguments['date_custom'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Date custom', 'blockstrap' ),
+			'title'           => __( 'Date custom', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'placeholder'     => __( 'F j, Y', 'blockstrap' ),
-			'group'           => __( 'Meta', 'blockstrap' ),
+			'placeholder'     => __( 'F j, Y', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%date_format%]=="custom"',
 		);
 
 		$arguments['is_link'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Is link', 'blockstrap' ),
+			'title'    => __( 'Is link', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'group'    => __( 'Meta', 'blockstrap' ),
+			'group'    => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['custom_url'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Custom URL', 'blockstrap' ),
-			'desc'            => __( 'Add custom link URL', 'blockstrap' ),
-			'placeholder'     => __( 'https://example.com', 'blockstrap' ),
+			'title'           => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Add custom link URL', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Meta', 'blockstrap' ),
+			'group'           => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="custom"',
 		);
 
 		$arguments['icon_type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Icon', 'blockstrap' ),
+			'title'    => __( 'Icon', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''       => __( 'Default', 'blockstrap' ),
-				'custom' => __( 'Custom', 'blockstrap' ),
+				''       => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'custom' => __( 'Custom', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Meta', 'blockstrap' ),
+			'group'    => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['icon_class'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Icon class', 'blockstrap' ),
-			'desc'            => __( 'Enter a font awesome icon class.', 'blockstrap' ),
-			'placeholder'     => __( 'fas fa-ship', 'blockstrap' ),
+			'title'           => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'fas fa-ship', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Meta', 'blockstrap' ),
+			'group'           => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%icon_type%]=="custom"',
 		);
 
 		$arguments['before'] = array(
 			'type'     => 'text',
-			'title'    => __( 'Before', 'blockstrap' ),
+			'title'    => __( 'Before', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Meta', 'blockstrap' ),
+			'group'    => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['after'] = array(
 			'type'     => 'text',
-			'title'    => __( 'After', 'blockstrap' ),
+			'title'    => __( 'After', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Meta', 'blockstrap' ),
+			'group'    => __( 'Meta', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// link styles
 		$arguments['link_type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link style', 'blockstrap' ),
+			'title'    => __( 'Link style', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''             => __( 'None', 'blockstrap' ),
-				'btn'          => __( 'Button', 'blockstrap' ),
-				'btn-round'    => __( 'Button rounded', 'blockstrap' ),
-				'btn-icon'     => __( 'Button Icon Circle', 'blockstrap' ),
-				'iconbox'      => __( 'Iconbox bordered', 'blockstrap' ),
-				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap' ),
-				'badge'        => __( 'Badge', 'blockstrap' ),
-				'badge-round'  => __( 'Badge rounded', 'blockstrap' ),
+				''             => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'btn'          => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'btn-round'    => __( 'Button rounded', 'blockstrap-page-builder-blocks' ),
+				'btn-icon'     => __( 'Button Icon Circle', 'blockstrap-page-builder-blocks' ),
+				'iconbox'      => __( 'Iconbox bordered', 'blockstrap-page-builder-blocks' ),
+				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap-page-builder-blocks' ),
+				'badge'        => __( 'Badge', 'blockstrap-page-builder-blocks' ),
+				'badge-round'  => __( 'Badge rounded', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link styles', 'blockstrap' ),
+			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['link_size'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Size', 'blockstrap' ),
+			'title'           => __( 'Size', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				''            => __( 'Default', 'blockstrap' ),
-				'extra-small' => __( 'Extra Small (BS5)', 'blockstrap' ),
-				'small'       => __( 'Small', 'blockstrap' ),
-				'medium'      => __( 'Medium', 'blockstrap' ),
-				'large'       => __( 'Large', 'blockstrap' ),
+				''            => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'extra-small' => __( 'Extra Small (BS5)', 'blockstrap-page-builder-blocks' ),
+				'small'       => __( 'Small', 'blockstrap-page-builder-blocks' ),
+				'medium'      => __( 'Medium', 'blockstrap-page-builder-blocks' ),
+				'large'       => __( 'Large', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link styles', 'blockstrap' ),
+			'group'           => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%link_type%]!=""',
 		);
 
 		$arguments['link_bg'] = array(
-			'title'           => __( 'Color', 'blockstrap' ),
-			'desc'            => __( 'Select the color.', 'blockstrap' ),
+			'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Select the color.', 'blockstrap-page-builder-blocks' ),
 			'type'            => 'select',
 			'options'         => array(
-				''         => __( 'Custom colors', 'blockstrap' ),
-				'category' => __( 'Category Color (taxonomy only)', 'blockstrap' ),
+				''         => __( 'Custom colors', 'blockstrap-page-builder-blocks' ),
+				'category' => __( 'Category Color (taxonomy only)', 'blockstrap-page-builder-blocks' ),
 			) + sd_aui_colors( true, true, true, true ),
 			'default'         => '',
 			'desc_tip'        => true,
 			'advanced'        => false,
-			'group'           => __( 'Link styles', 'blockstrap' ),
+			'group'           => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%link_type%]!="iconbox" && [%link_type%]!=""',
 		);
 
@@ -280,7 +280,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -290,7 +290,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -300,7 +300,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -310,7 +310,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -322,7 +322,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -332,7 +332,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -342,7 +342,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -352,7 +352,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -364,7 +364,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -374,7 +374,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -384,7 +384,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -394,22 +394,22 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
 
 		$arguments['link_divider'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link Divider', 'blockstrap' ),
+			'title'    => __( 'Link Divider', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''      => __( 'None', 'blockstrap' ),
-				'left'  => __( 'Left', 'blockstrap' ),
-				'right' => __( 'Right', 'blockstrap' ),
+				''      => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'left'  => __( 'Left', 'blockstrap-page-builder-blocks' ),
+				'right' => __( 'Right', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link styles', 'blockstrap' ),
+			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
@@ -506,6 +506,9 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 		// zindex
 		$arguments['zindex'] = sd_get_zindex_input();
+
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
 
 		$arguments['css_class'] = sd_get_class_input();
 

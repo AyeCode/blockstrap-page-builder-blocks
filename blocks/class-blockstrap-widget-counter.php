@@ -33,10 +33,10 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_counter',
-			'name'              => __( 'BS > Counter', 'blockstrap' ),
+			'name'              => __( 'BS > Counter', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bs-counter',
-				'description' => esc_html__( 'Animate a number up/down.', 'blockstrap' ),
+				'description' => esc_html__( 'Animate a number up/down.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -46,9 +46,9 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Text', 'blockstrap' ) ),
+					'groups' => array( __( 'Text', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -57,11 +57,11 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 				),
 				'styles'   => array(
 					'groups' => array(
-						__( 'Number Typography', 'blockstrap' ),
-						__( 'Title Typography', 'blockstrap' ),
+						__( 'Number Typography', 'blockstrap-page-builder-blocks' ),
+						__( 'Title Typography', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -69,9 +69,9 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 					),
 				),
 				'advanced' => array(
-					'groups' => array( __( 'Wrapper Styles', 'blockstrap' ), __( 'Advanced', 'blockstrap' ) ),
+					'groups' => array( __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ), __( 'Advanced', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -95,84 +95,84 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 
 		$arguments['num_start'] = array(
 			'type'     => 'number',
-			'title'    => __( 'Start number', 'blockstrap' ),
+			'title'    => __( 'Start number', 'blockstrap-page-builder-blocks' ),
 			'default'  => '0',
 			'desc_tip' => true,
-			'group'    => __( 'Text', 'blockstrap' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['num_end'] = array(
 			'type'     => 'number',
-			'title'    => __( 'End number', 'blockstrap' ),
+			'title'    => __( 'End number', 'blockstrap-page-builder-blocks' ),
 			'default'  => '123',
 			'desc_tip' => true,
-			'group'    => __( 'Text', 'blockstrap' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['num_prefix'] = array(
 			'type'     => 'text',
-			'title'    => __( 'Prefix', 'blockstrap' ),
+			'title'    => __( 'Prefix', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Text', 'blockstrap' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['num_suffix'] = array(
 			'type'     => 'text',
-			'title'    => __( 'Suffix', 'blockstrap' ),
+			'title'    => __( 'Suffix', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Text', 'blockstrap' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['duration'] = array(
 			'type'     => 'number',
-			'title'    => __( 'Animation duration', 'blockstrap' ),
+			'title'    => __( 'Animation duration', 'blockstrap-page-builder-blocks' ),
 			'default'  => '2000',
 			'desc_tip' => true,
-			'group'    => __( 'Text', 'blockstrap' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['num_sep'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Thousand Separator', 'blockstrap' ),
+			'title'    => __( 'Thousand Separator', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'group'    => __( 'Text', 'blockstrap' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
 			//          'element_require' => '[%bg%]=="custom-gradient"',
 		);
 
 		$arguments['num_sep_type'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Separator', 'blockstrap' ),
+			'title'           => __( 'Separator', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				',' => __( 'Default', 'blockstrap' ),
-				'.' => __( 'Dot', 'blockstrap' ),
-				' ' => __( 'Space', 'blockstrap' ),
-				'_' => __( 'Underline', 'blockstrap' ),
-				"'" => __( 'Apostrophe', 'blockstrap' ),
+				',' => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'.' => __( 'Dot', 'blockstrap-page-builder-blocks' ),
+				' ' => __( 'Space', 'blockstrap-page-builder-blocks' ),
+				'_' => __( 'Underline', 'blockstrap-page-builder-blocks' ),
+				"'" => __( 'Apostrophe', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => ',',
 			'desc_tip'        => true,
-			'group'           => __( 'Text', 'blockstrap' ),
+			'group'           => __( 'Text', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%num_sep%]',
 		);
 
 		$arguments['text'] = array(
 			'type'        => 'textarea',
-			'title'       => __( 'Title', 'blockstrap' ),
-			//          'desc' => __('Brand text', 'blockstrap'),
-			'placeholder' => __( 'Enter you title!', 'blockstrap' ),
+			'title'       => __( 'Title', 'blockstrap-page-builder-blocks' ),
+			//          'desc' => __('Brand text', 'blockstrap-page-builder-blocks'),
+			'placeholder' => __( 'Enter you title!', 'blockstrap-page-builder-blocks' ),
 			'desc_tip'    => true,
-			'group'       => __( 'Text', 'blockstrap' ),
+			'group'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
 		$arguments['num_text_color'] = sd_get_text_color_input(
 			'',
 			array(
-				'group'   => __( 'Number Typography', 'blockstrap' ),
+				'group'   => __( 'Number Typography', 'blockstrap-page-builder-blocks' ),
 				'default' => 'primary',
 			)
 		);
@@ -181,23 +181,23 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_font_size_input_group(
 			'num_font_size',
 			array(
-				'group'   => __( 'Number Typography', 'blockstrap' ),
+				'group'   => __( 'Number Typography', 'blockstrap-page-builder-blocks' ),
 				'default' => 'h2',
 			),
-			array( 'group' => __( 'Number Typography', 'blockstrap' ) )
+			array( 'group' => __( 'Number Typography', 'blockstrap-page-builder-blocks' ) )
 		);
 
 		// font weight
-		$arguments['num_font_weight'] = sd_get_font_weight_input( '', array( 'group' => __( 'Number Typography', 'blockstrap' ) ) );
+		$arguments['num_font_weight'] = sd_get_font_weight_input( '', array( 'group' => __( 'Number Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// Text justify
-		$arguments['num_text_justify'] = sd_get_text_justify_input( '', array( 'group' => __( 'Number Typography', 'blockstrap' ) ) );
+		$arguments['num_text_justify'] = sd_get_text_justify_input( '', array( 'group' => __( 'Number Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// text align
 		$arguments['num_text_align']    = sd_get_text_align_input(
 			'text_align',
 			array(
-				'group'           => __( 'Number Typography', 'blockstrap' ),
+				'group'           => __( 'Number Typography', 'blockstrap-page-builder-blocks' ),
 				'device_type'     => 'Mobile',
 				'element_require' => '[%num_text_justify%]==""',
 				'default'         => 'text-center',
@@ -206,7 +206,7 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 		$arguments['num_text_align_md'] = sd_get_text_align_input(
 			'text_align',
 			array(
-				'group'           => __( 'Number Typography', 'blockstrap' ),
+				'group'           => __( 'Number Typography', 'blockstrap-page-builder-blocks' ),
 				'device_type'     => 'Tablet',
 				'element_require' => '[%num_text_justify%]==""',
 			)
@@ -214,7 +214,7 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 		$arguments['num_text_align_lg'] = sd_get_text_align_input(
 			'text_align',
 			array(
-				'group'           => __( 'Number Typography', 'blockstrap' ),
+				'group'           => __( 'Number Typography', 'blockstrap-page-builder-blocks' ),
 				'device_type'     => 'Desktop',
 				'element_require' => '[%num_text_justify%]==""',
 			)
@@ -222,22 +222,22 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 
 		// Title typography
 		// text color
-		$arguments['title_text_color'] = sd_get_text_color_input( '', array( 'group' => __( 'Title Typography', 'blockstrap' ) ) );
+		$arguments['title_text_color'] = sd_get_text_color_input( '', array( 'group' => __( 'Title Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// font size
-		$arguments = $arguments + sd_get_font_size_input_group( 'title_font_size', array( 'group' => __( 'Title Typography', 'blockstrap' ) ), array( 'group' => __( 'Title Typography', 'blockstrap' ) ) );
+		$arguments = $arguments + sd_get_font_size_input_group( 'title_font_size', array( 'group' => __( 'Title Typography', 'blockstrap-page-builder-blocks' ) ), array( 'group' => __( 'Title Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// font weight
-		$arguments['title_font_weight'] = sd_get_font_weight_input( '', array( 'group' => __( 'Title Typography', 'blockstrap' ) ) );
+		$arguments['title_font_weight'] = sd_get_font_weight_input( '', array( 'group' => __( 'Title Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// Text justify
-		$arguments['title_text_justify'] = sd_get_text_justify_input( '', array( 'group' => __( 'Title Typography', 'blockstrap' ) ) );
+		$arguments['title_text_justify'] = sd_get_text_justify_input( '', array( 'group' => __( 'Title Typography', 'blockstrap-page-builder-blocks' ) ) );
 
 		// text align
 		$arguments['title_text_align']    = sd_get_text_align_input(
 			'text_align',
 			array(
-				'group'           => __( 'Title Typography', 'blockstrap' ),
+				'group'           => __( 'Title Typography', 'blockstrap-page-builder-blocks' ),
 				'device_type'     => 'Mobile',
 				'element_require' => '[%title_text_justify%]==""',
 				'default'         => 'text-center',
@@ -246,7 +246,7 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 		$arguments['title_text_align_md'] = sd_get_text_align_input(
 			'text_align',
 			array(
-				'group'           => __( 'Title Typography', 'blockstrap' ),
+				'group'           => __( 'Title Typography', 'blockstrap-page-builder-blocks' ),
 				'device_type'     => 'Tablet',
 				'element_require' => '[%title_text_justify%]==""',
 			)
@@ -254,7 +254,7 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 		$arguments['title_text_align_lg'] = sd_get_text_align_input(
 			'text_align',
 			array(
-				'group'           => __( 'Title Typography', 'blockstrap' ),
+				'group'           => __( 'Title Typography', 'blockstrap-page-builder-blocks' ),
 				'device_type'     => 'Desktop',
 				'element_require' => '[%title_text_justify%]==""',
 			)
@@ -263,16 +263,16 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 		//      print_r($arguments);exit;
 
 		// background
-		$arguments = $arguments + sd_get_background_inputs( 'bg', array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), false );
+		$arguments = $arguments + sd_get_background_inputs( 'bg', array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), false );
 
 		$arguments['bg_on_text'] = array(
 			'type'            => 'checkbox',
-			'title'           => __( 'Background on text', 'blockstrap' ),
+			'title'           => __( 'Background on text', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'value'           => '1',
 			'desc_tip'        => false,
-			'desc'            => __( 'This will show the background on the text.', 'blockstrap' ),
-			'group'           => __( 'Wrapper Styles', 'blockstrap' ),
+			'desc'            => __( 'This will show the background on the text.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%bg%]=="custom-gradient"',
 		);
 
@@ -336,13 +336,10 @@ class BlockStrap_Widget_Counter extends WP_Super_Duper {
 		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
 		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
 
-		$arguments['css_class'] = array(
-			'type'    => 'text',
-			'title'   => __( 'Additional CSS class(es)', 'blockstrap' ),
-			'desc'    => __( 'Separate multiple classes with spaces.', 'blockstrap' ),
-			'default' => '',
-			'group'   => __( 'Advanced', 'blockstrap' ),
-		);
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
+
+		$arguments['css_class'] = sd_get_class_input();
 
 		return $arguments;
 	}

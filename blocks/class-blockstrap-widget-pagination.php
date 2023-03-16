@@ -173,35 +173,35 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_flex_justify_content_input_group( 'flex_justify_content', array( 'group' => __( 'Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '![%show_custom_next_prev%]' ) );
 
 		$arguments['paging_style'] = array(
-			'title'    => __( 'Style', 'blockstrap' ),
+			'title'    => __( 'Style', 'blockstrap-page-builder-blocks' ),
 			'type'     => 'select',
 			'options'  => array(
-				''      => __( 'Default', 'blockstrap' ),
-				'rounded' => __( 'Rounded', 'blockstrap' ),
-				'rounded-pill' => __( 'Rounded Pill', 'blockstrap' ),
+				''      => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'rounded' => __( 'Rounded', 'blockstrap-page-builder-blocks' ),
+				'rounded-pill' => __( 'Rounded Pill', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
 			'advanced' => false,
-			'group'    => __( 'Paging', 'blockstrap' ),
+			'group'    => __( 'Paging', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['paging_rounded_size'] = sd_get_border_input( 'rounded_size', array( 'title'    => __( 'Page Link Border Radius Size', 'blockstrap-page-builder-blocks' ), 'group' => __( 'Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%paging_style%]=="rounded"' ) );
 
 		//
 		$arguments['size'] = array(
-			'title'    => __( 'Size', 'blockstrap' ),
+			'title'    => __( 'Size', 'blockstrap-page-builder-blocks' ),
 			'type'     => 'select',
 			'options'  => array(
-				''      => __( 'Default', 'blockstrap' ),
-				'small' => __( 'Small', 'blockstrap' ),
-				'medium' => __( 'Medium', 'blockstrap' ),
-				'large' => __( 'Large', 'blockstrap' ),
+				''      => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'small' => __( 'Small', 'blockstrap-page-builder-blocks' ),
+				'medium' => __( 'Medium', 'blockstrap-page-builder-blocks' ),
+				'large' => __( 'Large', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
 			'advanced' => false,
-			'group'    => __( 'Paging', 'blockstrap' ),
+			'group'    => __( 'Paging', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%paging_style%]==""'
 		);
 

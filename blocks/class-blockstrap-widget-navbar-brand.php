@@ -68,10 +68,10 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 			'block-wrap'       => '',
 			'class_name'       => __CLASS__,
 			'base_id'          => 'bs_navbar_brand',
-			'name'             => __( 'BS > Navbar Brand', 'blockstrap' ),
+			'name'             => __( 'BS > Navbar Brand', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'       => array(
 				'classname'   => 'bd-navbar-brand',
-				'description' => esc_html__( 'Your navbar site name or logo.', 'blockstrap' ),
+				'description' => esc_html__( 'Your navbar site name or logo.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'          => array(
 				'attributes' => array(
@@ -82,12 +82,12 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 			'block_group_tabs' => array(
 				'content'  => array(
 					'groups' => array(
-						__( 'Text', 'blockstrap' ),
-						__( 'Icon', 'blockstrap' ),
-						__( 'Link', 'blockstrap' ),
+						__( 'Text', 'blockstrap-page-builder-blocks' ),
+						__( 'Icon', 'blockstrap-page-builder-blocks' ),
+						__( 'Link', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -95,9 +95,9 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -106,11 +106,11 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -134,54 +134,54 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 
 		$arguments['text']       = array(
 			'type'        => 'textarea',
-			'title'       => __( 'Text', 'blockstrap' ),
-			'desc'        => __( 'Brand text', 'blockstrap' ),
-			'placeholder' => __( 'My Awesome Site!', 'blockstrap' ),
+			'title'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Brand text', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'My Awesome Site!', 'blockstrap-page-builder-blocks' ),
 			'default'     => get_bloginfo( 'name' ),
 			'desc_tip'    => true,
-			'group'       => __( 'Text', 'blockstrap' ),
+			'group'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 		$arguments['icon_image'] = array(
 			'type'        => 'image',
-			'title'       => __( 'Image', 'blockstrap' ),
+			'title'       => __( 'Image', 'blockstrap-page-builder-blocks' ),
 			'placeholder' => '',
 			'focalpoint'  => 0,
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Icon', 'blockstrap' ),
+			'group'       => __( 'Icon', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['img_max_width'] = array(
 			'type'        => 'number',
-			'title'       => __( 'Max width', 'blockstrap' ),
-			'desc'        => __( 'Set the image max width.', 'blockstrap' ),
-			'placeholder' => __( '150', 'blockstrap' ),
+			'title'       => __( 'Max width', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Set the image max width.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( '150', 'blockstrap-page-builder-blocks' ),
 			'default'     => '150',
 			'desc_tip'    => true,
-			'group'       => __( 'Icon', 'blockstrap' ),
+			'group'       => __( 'Icon', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link Type', 'blockstrap' ),
+			'title'    => __( 'Link Type', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				'home'   => __( 'Home', 'blockstrap' ),
-				'custom' => __( 'Custom', 'blockstrap' ),
-				'none'   => __( 'None', 'blockstrap' ),
+				'home'   => __( 'Home', 'blockstrap-page-builder-blocks' ),
+				'custom' => __( 'Custom', 'blockstrap-page-builder-blocks' ),
+				'none'   => __( 'None', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => 'home',
 			'desc_tip' => true,
-			'group'    => __( 'Link', 'blockstrap' ),
+			'group'    => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['custom_url'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Custom URL', 'blockstrap' ),
-			'desc'            => __( 'Add custom link URL', 'blockstrap' ),
-			'placeholder'     => __( 'https://example.com', 'blockstrap' ),
+			'title'           => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Add custom link URL', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="custom"',
 		);
 
@@ -223,16 +223,16 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 		);
 
 		// background
-		$arguments = $arguments + sd_get_background_inputs( 'bg', array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), false );
+		$arguments = $arguments + sd_get_background_inputs( 'bg', array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), false );
 
 		$arguments['bg_on_text'] = array(
 			'type'            => 'checkbox',
-			'title'           => __( 'Background on text', 'blockstrap' ),
+			'title'           => __( 'Background on text', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'value'           => '1',
 			'desc_tip'        => false,
-			'desc'            => __( 'This will show the background on the text.', 'blockstrap' ),
-			'group'           => __( 'Wrapper Styles', 'blockstrap' ),
+			'desc'            => __( 'This will show the background on the text.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%bg%]=="custom-gradient"',
 		);
 

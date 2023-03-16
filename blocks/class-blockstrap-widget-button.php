@@ -195,23 +195,23 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'type'            => 'notice',
 			'desc'            => __( 'Badge size is inherited from the parent text size', 'blockstrap-page-builder-blocks' ),
 			'status'          => 'info',
-			'group'           => __( 'Button', 'blockstrap' ),
+			'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '([%link_type%]=="badge" || [%link_type%]=="badge-pill")',
 		);
 
 		//      $arguments['link_bg'] = array(
-		//          'title'           => __( 'Color', 'blockstrap' ),
+		//          'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
 		//          'type'            => 'select',
 		//          'options'         => array(
-		//              '' => __( 'Default (primary)', 'blockstrap' ),
+		//              '' => __( 'Default (primary)', 'blockstrap-page-builder-blocks' ),
 		//          ) + sd_aui_colors( true, true, true ),
 		//          'default'         => 'primary',
 		//          'desc_tip'        => true,
 		//          'advanced'        => false,
-		//          'group'           => __( 'Button', 'blockstrap' ),
+		//          'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 		//          'element_require' => '[%link_type%]!="iconbox"',
 		//          'tab'             => array(
-		//              'title'     => __( 'Normal', 'blockstrap' ),
+		//              'title'     => __( 'Normal', 'blockstrap-page-builder-blocks' ),
 		//              'key'       => 'button_normal',
 		//              'tabs_open' => true,
 		//              'open'      => true,
@@ -222,12 +222,12 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_background_inputs(
 			'link_bg',
 			array(
-				'title'           => __( 'Color', 'blockstrap' ),
-				'group'           => __( 'Button', 'blockstrap' ),
+				'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox"',
 				'default'         => 'primary',
 				'tab'             => array(
-					'title'     => __( 'Normal', 'blockstrap' ),
+					'title'     => __( 'Normal', 'blockstrap-page-builder-blocks' ),
 					'key'       => 'button_normal',
 					'tabs_open' => true,
 					'open'      => true,
@@ -235,11 +235,11 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 				),
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%link_bg%]=="custom-color"',
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%link_bg%]=="custom-gradient"',
 			),
 			false,
@@ -249,10 +249,10 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_text_color_input_group(
 			'text_color',
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 			),
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'tab'   => array(
 					'close' => true,
 				),
@@ -260,18 +260,18 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		);
 
 		//      $arguments['bg_hover'] = array(
-		//          'title'           => __( 'Color', 'blockstrap' ),
+		//          'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
 		//          'type'            => 'select',
 		//          'options'         => array(
-		//              '' => __( 'Default (primary)', 'blockstrap' ),
+		//              '' => __( 'Default (primary)', 'blockstrap-page-builder-blocks' ),
 		//          ) + sd_aui_colors( true, false, false ),
 		//          'default'         => '',
 		//          'desc_tip'        => true,
 		//          'advanced'        => false,
-		//          'group'           => __( 'Button', 'blockstrap' ),
+		//          'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 		//          'element_require' => '[%link_type%]!="iconbox"',
 		//          'tab'             => array(
-		//              'title' => __( 'Hover', 'blockstrap' ),
+		//              'title' => __( 'Hover', 'blockstrap-page-builder-blocks' ),
 		//              'key'   => 'button_hover',
 		//              'open'  => true,
 		//              'class' => 'text-center w-50 d-flex justify-content-center',
@@ -281,23 +281,23 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_background_inputs(
 			'bg_hover',
 			array(
-				'title'           => __( 'Color', 'blockstrap' ),
-				'group'           => __( 'Button', 'blockstrap' ),
+				'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox"',
 				'default'         => '',
 				'tab'             => array(
-					'title' => __( 'Hover', 'blockstrap' ),
+					'title' => __( 'Hover', 'blockstrap-page-builder-blocks' ),
 					'key'   => 'button_hover',
 					'open'  => true,
 					'class' => 'text-center w-50 d-flex justify-content-center',
 				),
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%bg_hover%]=="custom-color"',
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%bg_hover%]=="custom-gradient"',
 			),
 			false,
@@ -308,10 +308,10 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_text_color_input_group(
 			'text_color_hover',
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 			),
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'tab'   => array(
 					'close'      => true,
 					'tabs_close' => true,
@@ -373,13 +373,16 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
 
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
+
 		$arguments['css_class'] = sd_get_class_input();
 
 		$arguments['styleid'] = array(
 			'type'     => 'hidden',
-			'title'    => __( 'Style ID', 'blockstrap' ),
+			'title'    => __( 'Style ID', 'blockstrap-page-builder-blocks' ),
 			'desc_tip' => true,
-			'group'    => __( 'Advanced', 'blockstrap' ),
+			'group'    => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 		);
 
 		return $arguments;
@@ -387,23 +390,23 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 	public function link_types() {
 		$links = array(
-			'home'    => __( 'Home', 'blockstrap' ),
-			'none'    => __( 'None (non link)', 'blockstrap' ),
-			'page'    => __( 'Page', 'blockstrap' ),
-			'post-id' => __( 'Post ID', 'blockstrap' ),
-			'custom'  => __( 'Custom URL', 'blockstrap' ),
-			'lightbox'  => __( 'Custom URL', 'blockstrap' ),
+			'home'    => __( 'Home', 'blockstrap-page-builder-blocks' ),
+			'none'    => __( 'None (non link)', 'blockstrap-page-builder-blocks' ),
+			'page'    => __( 'Page', 'blockstrap-page-builder-blocks' ),
+			'post-id' => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
+			'custom'  => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+			'lightbox'  => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
 		);
 
 		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
 			$post_types           = geodir_get_posttypes( 'options-plural' );
-			$links['gd_search']   = __( 'GD Search', 'blockstrap' );
-			$links['gd_location'] = __( 'GD Location', 'blockstrap' );
+			$links['gd_search']   = __( 'GD Search', 'blockstrap-page-builder-blocks' );
+			$links['gd_location'] = __( 'GD Location', 'blockstrap-page-builder-blocks' );
 			foreach ( $post_types as $cpt => $cpt_name ) {
 				/* translators: Custom Post Type name. */
-				$links[ $cpt ] = sprintf( __( '%s (archive)', 'blockstrap' ), $cpt_name );
+				$links[ $cpt ] = sprintf( __( '%s (archive)', 'blockstrap-page-builder-blocks' ), $cpt_name );
 				/* translators: Custom Post Type name. */
-				$links[ 'add_' . $cpt ] = sprintf( __( '%s (add listing)', 'blockstrap' ), $cpt_name );
+				$links[ 'add_' . $cpt ] = sprintf( __( '%s (add listing)', 'blockstrap-page-builder-blocks' ), $cpt_name );
 			}
 		}
 
@@ -411,7 +414,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 	}
 
 	public function get_pages_array() {
-		$options = array( '' => __( 'Select Page', 'blockstrap' ) );
+		$options = array( '' => __( 'Select Page', 'blockstrap-page-builder-blocks' ) );
 
 		$pages = get_pages();
 
@@ -448,7 +451,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 		} elseif ( 'home' === $args['type'] ) {
 			$link      = get_home_url();
-			$link_text = __( 'Home', 'blockstrap' );
+			$link_text = __( 'Home', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'page' === $args['type'] || 'post-id' === $args['type'] ) {
 			$page_id = ! empty( $args['page_id'] ) ? absint( $args['page_id'] ) : 0;
 			$post_id = ! empty( $args['post_id'] ) ? absint( $args['post_id'] ) : 0;
@@ -462,13 +465,13 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			}
 		} elseif ( 'custom' === $args['type'] ) {
 			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
-			$link_text = __( 'Custom', 'blockstrap' );
+			$link_text = __( 'Custom', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'gd_search' === $args['type'] ) {
 			$link      = function_exists( 'geodir_search_page_base_url' ) ? geodir_search_page_base_url() : '#';
-			$link_text = __( 'Search', 'blockstrap' );
+			$link_text = __( 'Search', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'gd_location' === $args['type'] ) {
 			$link      = function_exists( 'geodir_location_page_id' ) ? get_permalink( geodir_location_page_id() ) : '#';
-			$link_text = __( 'Location', 'blockstrap' );
+			$link_text = __( 'Location', 'blockstrap-page-builder-blocks' );
 		} elseif ( substr( $args['type'], 0, 3 ) === 'gd_' ) {
 			$post_types = function_exists( 'geodir_get_posttypes' ) ? geodir_get_posttypes( 'options-plural' ) : '';
 			if ( ! empty( $post_types ) ) {
@@ -486,7 +489,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 					if ( 'add_' . $cpt === $args['type'] ) {
 						$link = function_exists( 'geodir_add_listing_page_url' ) ? geodir_add_listing_page_url( $cpt ) : '';
 						/* translators: Custom Post Type name. */
-						$link_text = sprintf( __( 'Add %s', 'blockstrap' ), $cpt_name );
+						$link_text = sprintf( __( 'Add %s', 'blockstrap-page-builder-blocks' ), $cpt_name );
 					}
 				}
 			}

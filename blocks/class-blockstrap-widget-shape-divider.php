@@ -36,10 +36,10 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 			'block-wrap'     => '',
 			'class_name'     => __CLASS__,
 			'base_id'        => 'bs_shape_divider',
-			'name'           => __( 'BS > Shape Divider', 'blockstrap' ),
+			'name'           => __( 'BS > Shape Divider', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'     => array(
 				'classname'   => 'bd-shape-divider',
-				'description' => esc_html__( 'Add a divider between containers.', 'blockstrap' ),
+				'description' => esc_html__( 'Add a divider between containers.', 'blockstrap-page-builder-blocks' ),
 			),
 			'no_wrap'        => true,
 		);
@@ -60,9 +60,9 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 
 		$arguments['styleid'] = array(
 			'type'     => 'hidden',
-			'title'    => __( 'Style ID', 'blockstrap' ),
+			'title'    => __( 'Style ID', 'blockstrap-page-builder-blocks' ),
 			'desc_tip' => true,
-			'group'    => __( 'Shape Divider', 'blockstrap' ),
+			'group'    => __( 'Shape Divider', 'blockstrap-page-builder-blocks' ),
 		);
 
 		return $arguments;

@@ -79,9 +79,9 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'no_wrap'          => true,
 			'block_group_tabs' => array(
 //				'content'  => array(
-//					'groups' => array( __( 'Nav', 'blockstrap' ) ),
+//					'groups' => array( __( 'Nav', 'blockstrap-page-builder-blocks' ) ),
 //					'tab'    => array(
-//						'title'     => __( 'Content', 'blockstrap' ),
+//						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 //						'key'       => 'bs_tab_content',
 //						'tabs_open' => true,
 //						'open'      => true,
@@ -91,7 +91,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 				'styles'   => array(
 					'groups' => array( __( 'Nav Styles', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -104,7 +104,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,

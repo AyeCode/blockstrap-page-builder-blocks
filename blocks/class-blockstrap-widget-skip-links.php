@@ -26,10 +26,10 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_skip_links',
-			'name'              => __( 'BS > Skip Links', 'blockstrap' ),
+			'name'              => __( 'BS > Skip Links', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bd-skip-links',
-				'description' => esc_html__( 'Skip links for accessibility users. This should be the first thing in your header and link to places such as your main content.', 'blockstrap' ),
+				'description' => esc_html__( 'Skip links for accessibility users. This should be the first thing in your header and link to places such as your main content.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -39,9 +39,9 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Link One', 'blockstrap' ), __( 'Link Two', 'blockstrap' ), __( 'Link Three', 'blockstrap' ) ),
+					'groups' => array( __( 'Link One', 'blockstrap-page-builder-blocks' ), __( 'Link Two', 'blockstrap-page-builder-blocks' ), __( 'Link Three', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -49,9 +49,9 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -60,11 +60,11 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -88,59 +88,59 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 
 		$arguments['text1'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Text', 'blockstrap' ),
-			'placeholder' => __( 'Skip to main content', 'blockstrap' ),
-			'default'     => __( 'Skip to main content', 'blockstrap' ),
+			'title'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Skip to main content', 'blockstrap-page-builder-blocks' ),
+			'default'     => __( 'Skip to main content', 'blockstrap-page-builder-blocks' ),
 			'desc_tip'    => true,
-			'group'       => __( 'Link One', 'blockstrap' ),
+			'group'       => __( 'Link One', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['hash1'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Content ID', 'blockstrap' ),
-			'desc'        => __( 'Enter the ID of the content.', 'blockstrap' ),
-			'placeholder' => __( 'main', 'blockstrap' ),
-			'default'     => __( 'main', 'blockstrap' ),
+			'title'       => __( 'Content ID', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter the ID of the content.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'main', 'blockstrap-page-builder-blocks' ),
+			'default'     => __( 'main', 'blockstrap-page-builder-blocks' ),
 			'desc_tip'    => true,
-			'group'       => __( 'Link One', 'blockstrap' ),
+			'group'       => __( 'Link One', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['text2'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Text', 'blockstrap' ),
-			'placeholder' => __( 'Skip to footer', 'blockstrap' ),
+			'title'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Skip to footer', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link Two', 'blockstrap' ),
+			'group'       => __( 'Link Two', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['hash2'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Content ID', 'blockstrap' ),
-			'desc'        => __( 'Enter the ID of the content.', 'blockstrap' ),
-			'placeholder' => __( 'footer', 'blockstrap' ),
+			'title'       => __( 'Content ID', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter the ID of the content.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'footer', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link Two', 'blockstrap' ),
+			'group'       => __( 'Link Two', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['text3'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Text', 'blockstrap' ),
-			'placeholder' => __( 'Skip to', 'blockstrap' ),
+			'title'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Skip to', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link Three', 'blockstrap' ),
+			'group'       => __( 'Link Three', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['hash3'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Content ID', 'blockstrap' ),
-			'desc'        => __( 'Enter the ID of the content.', 'blockstrap' ),
-			'placeholder' => __( 'footer', 'blockstrap' ),
+			'title'       => __( 'Content ID', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter the ID of the content.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'footer', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link Three', 'blockstrap' ),
+			'group'       => __( 'Link Three', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color

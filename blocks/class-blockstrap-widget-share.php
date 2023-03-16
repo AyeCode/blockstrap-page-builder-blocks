@@ -269,23 +269,23 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			'type'            => 'notice',
 			'desc'            => __( 'Badge size is inherited from the parent text size', 'blockstrap-page-builder-blocks' ),
 			'status'          => 'info',
-			'group'           => __( 'Button', 'blockstrap' ),
+			'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '([%link_type%]=="badge" || [%link_type%]=="badge-pill")',
 		);
 
 		//      $arguments['link_bg'] = array(
-		//          'title'           => __( 'Color', 'blockstrap' ),
+		//          'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
 		//          'type'            => 'select',
 		//          'options'         => array(
-		//              '' => __( 'Default (primary)', 'blockstrap' ),
+		//              '' => __( 'Default (primary)', 'blockstrap-page-builder-blocks' ),
 		//          ) + sd_aui_colors( true, true, true ),
 		//          'default'         => 'primary',
 		//          'desc_tip'        => true,
 		//          'advanced'        => false,
-		//          'group'           => __( 'Button', 'blockstrap' ),
+		//          'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 		//          'element_require' => '[%link_type%]!="iconbox"',
 		//          'tab'             => array(
-		//              'title'     => __( 'Normal', 'blockstrap' ),
+		//              'title'     => __( 'Normal', 'blockstrap-page-builder-blocks' ),
 		//              'key'       => 'button_normal',
 		//              'tabs_open' => true,
 		//              'open'      => true,
@@ -296,12 +296,12 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_background_inputs(
 			'link_bg',
 			array(
-				'title'           => __( 'Color', 'blockstrap' ),
-				'group'           => __( 'Button', 'blockstrap' ),
+				'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox"',
 				'default'         => 'primary',
 				'tab'             => array(
-					'title'     => __( 'Normal', 'blockstrap' ),
+					'title'     => __( 'Normal', 'blockstrap-page-builder-blocks' ),
 					'key'       => 'button_normal',
 					'tabs_open' => true,
 					'open'      => true,
@@ -309,11 +309,11 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 				),
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%link_bg%]=="custom-color"',
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%link_bg%]=="custom-gradient"',
 			),
 			false
@@ -322,10 +322,10 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_text_color_input_group(
 			'text_color',
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 			),
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'tab'   => array(
 					'close' => true,
 				),
@@ -333,18 +333,18 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		);
 
 		//      $arguments['bg_hover'] = array(
-		//          'title'           => __( 'Color', 'blockstrap' ),
+		//          'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
 		//          'type'            => 'select',
 		//          'options'         => array(
-		//              '' => __( 'Default (primary)', 'blockstrap' ),
+		//              '' => __( 'Default (primary)', 'blockstrap-page-builder-blocks' ),
 		//          ) + sd_aui_colors( true, false, false ),
 		//          'default'         => '',
 		//          'desc_tip'        => true,
 		//          'advanced'        => false,
-		//          'group'           => __( 'Button', 'blockstrap' ),
+		//          'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 		//          'element_require' => '[%link_type%]!="iconbox"',
 		//          'tab'             => array(
-		//              'title' => __( 'Hover', 'blockstrap' ),
+		//              'title' => __( 'Hover', 'blockstrap-page-builder-blocks' ),
 		//              'key'   => 'button_hover',
 		//              'open'  => true,
 		//              'class' => 'text-center w-50 d-flex justify-content-center',
@@ -354,23 +354,23 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_background_inputs(
 			'bg_hover',
 			array(
-				'title'           => __( 'Color', 'blockstrap' ),
-				'group'           => __( 'Button', 'blockstrap' ),
+				'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox"',
 				'default'         => '',
 				'tab'             => array(
-					'title' => __( 'Hover', 'blockstrap' ),
+					'title' => __( 'Hover', 'blockstrap-page-builder-blocks' ),
 					'key'   => 'button_hover',
 					'open'  => true,
 					'class' => 'text-center w-50 d-flex justify-content-center',
 				),
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%bg_hover%]=="custom-color"',
 			),
 			array(
-				'group'           => __( 'Button', 'blockstrap' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '[%link_type%]!="iconbox" && [%bg_hover%]=="custom-gradient"',
 			),
 			false
@@ -380,10 +380,10 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_text_color_input_group(
 			'text_color_hover',
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 			),
 			array(
-				'group' => __( 'Button', 'blockstrap' ),
+				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'tab'   => array(
 					'close'      => true,
 					'tabs_close' => true,
@@ -449,9 +449,9 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 		$arguments['styleid'] = array(
 			'type'     => 'hidden',
-			'title'    => __( 'Style ID', 'blockstrap' ),
+			'title'    => __( 'Style ID', 'blockstrap-page-builder-blocks' ),
 			'desc_tip' => true,
-			'group'    => __( 'Advanced', 'blockstrap' ),
+			'group'    => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 		);
 
 		return $arguments;

@@ -113,7 +113,7 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 			'type'            => 'notice',
 			'desc'            => __( 'A unique HTML anchor is required for each tab for tabs to function.', 'blockstrap-page-builder-blocks' ),
 			'status'          => 'error', // 'warning' | 'success' | 'error' | 'info'
-			'group'           => __( 'Tab Name', 'blockstrap' ),
+			'group'           => __( 'Tab Name', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%anchor%]==""',
 		);
 
@@ -207,6 +207,9 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 		$arguments['display']    = sd_get_display_input( 'd', array( 'device_type' => 'Mobile' ) );
 		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
 		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
+
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
 
 		$arguments['css_class'] = sd_get_class_input();
 

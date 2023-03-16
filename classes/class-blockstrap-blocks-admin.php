@@ -59,10 +59,8 @@ class BlockStrap_Blocks_Admin {
 		}
 
 		$show     = ! get_option( 'blockstrap_blocks_compatibility_notice' );
-		$aui      = AyeCode_UI_Settings::instance();
-		$settings = $aui->get_settings();
 
-		if ( $show && 'core' === $settings['css'] ) {
+		if ( $show ) {
 			$install_url     = wp_nonce_url(
 				add_query_arg(
 					array(

@@ -86,12 +86,12 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 		$arguments['hide_home'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Hide the home link', 'blockstrap' ),
+			'title'    => __( 'Hide the home link', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'desc'     => __( 'This will hide the home link.', 'blockstrap' ),
-			'group'    => __( 'Home Link', 'blockstrap' ),
+			'desc'     => __( 'This will hide the home link.', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Home Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['home_text'] = array(

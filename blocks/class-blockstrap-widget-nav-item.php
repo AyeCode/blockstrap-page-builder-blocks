@@ -16,7 +16,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			'block-icon'        => 'fas fa-link',
 			'block-category'    => 'layout',
 			'block-keywords'    => "['menu','nav','item']",
-			'block-label'       => "attributes.text ? '" . __( 'BS > Nav', 'blockstrap' ) . " ('+ attributes.text+')' : ''",
+			'block-label'       => "attributes.text ? '" . __( 'BS > Nav', 'blockstrap-page-builder-blocks' ) . " ('+ attributes.text+')' : ''",
 			'block-supports'    => array(
 				'customClassName' => false,
 			),
@@ -27,10 +27,10 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_nav_item',
-			'name'              => __( 'BS > Nav Item', 'blockstrap' ),
+			'name'              => __( 'BS > Nav Item', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bd-nav-item',
-				'description' => esc_html__( 'A navigation item for the navbar.', 'blockstrap' ),
+				'description' => esc_html__( 'A navigation item for the navbar.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -40,9 +40,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Link', 'blockstrap' ) ),
+					'groups' => array( __( 'Link', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -50,9 +50,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Link styles', 'blockstrap' ), __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Link styles', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -61,11 +61,11 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -80,50 +80,50 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 
 	public function link_types() {
 		$links = array(
-			'home'    => __( 'Home', 'blockstrap' ),
-			'page'    => __( 'Page', 'blockstrap' ),
-			'post-id' => __( 'Post ID', 'blockstrap' ),
-			'wp-login' => __( 'WP Login (logged out)', 'blockstrap' ),
-			'wp-logout' => __( 'WP Logout (logged in)', 'blockstrap' ),
-			'custom'  => __( 'Custom URL', 'blockstrap' ),
+			'home'    => __( 'Home', 'blockstrap-page-builder-blocks' ),
+			'page'    => __( 'Page', 'blockstrap-page-builder-blocks' ),
+			'post-id' => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
+			'wp-login' => __( 'WP Login (logged out)', 'blockstrap-page-builder-blocks' ),
+			'wp-logout' => __( 'WP Logout (logged in)', 'blockstrap-page-builder-blocks' ),
+			'custom'  => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
 		);
 
 		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
 			$post_types           = function_exists( 'geodir_get_posttypes' ) ? geodir_get_posttypes( 'options-plural' ) : array();
-			$links['gd_search']   = __( 'GD Search', 'blockstrap' );
-			$links['gd_location'] = __( 'GD Location', 'blockstrap' );
+			$links['gd_search']   = __( 'GD Search', 'blockstrap-page-builder-blocks' );
+			$links['gd_location'] = __( 'GD Location', 'blockstrap-page-builder-blocks' );
 			foreach ( $post_types as $cpt => $cpt_name ) {
 				/* translators: Custom Post Type name. */
-				$links[ $cpt ] = sprintf( __( '%s (archive)', 'blockstrap' ), $cpt_name );
+				$links[ $cpt ] = sprintf( __( '%s (archive)', 'blockstrap-page-builder-blocks' ), $cpt_name );
 				/* translators: Custom Post Type name. */
-				$links[ 'add_' . $cpt ] = sprintf( __( '%s (add listing)', 'blockstrap' ), $cpt_name );
+				$links[ 'add_' . $cpt ] = sprintf( __( '%s (add listing)', 'blockstrap-page-builder-blocks' ), $cpt_name );
 			}
 		}
 
 		if ( defined( 'GEODIRLOCATION_VERSION' ) ) {
-			$links['gd_location_switcher'] = __( 'GD Location Switcher', 'blockstrap' );
+			$links['gd_location_switcher'] = __( 'GD Location Switcher', 'blockstrap-page-builder-blocks' );
 		}
 
 		if ( defined( 'USERSWP_VERSION' ) ) {
 			// logged out
-			$links['uwp_login']    = __( 'UWP Login (logged out)', 'blockstrap' );
-			$links['uwp_register'] = __( 'UWP Register (logged out)', 'blockstrap' );
-			$links['uwp_forgot']   = __( 'UWP Forgot Password? (logged out)', 'blockstrap' );
+			$links['uwp_login']    = __( 'UWP Login (logged out)', 'blockstrap-page-builder-blocks' );
+			$links['uwp_register'] = __( 'UWP Register (logged out)', 'blockstrap-page-builder-blocks' );
+			$links['uwp_forgot']   = __( 'UWP Forgot Password? (logged out)', 'blockstrap-page-builder-blocks' );
 
 			// logged in
-			$links['uwp_account']         = __( 'Account (logged in)', 'blockstrap' );
-			$links['uwp_change_password'] = __( 'Change Password (logged in)', 'blockstrap' );
-			$links['uwp_profile']         = __( 'Profile (logged in)', 'blockstrap' );
-			$links['uwp_logout']          = __( 'Log out (logged in)', 'blockstrap' );
+			$links['uwp_account']         = __( 'Account (logged in)', 'blockstrap-page-builder-blocks' );
+			$links['uwp_change_password'] = __( 'Change Password (logged in)', 'blockstrap-page-builder-blocks' );
+			$links['uwp_profile']         = __( 'Profile (logged in)', 'blockstrap-page-builder-blocks' );
+			$links['uwp_logout']          = __( 'Log out (logged in)', 'blockstrap-page-builder-blocks' );
 		}
 
-		$links['spacer'] = __( 'spacer (non link)', 'blockstrap' );
+		$links['spacer'] = __( 'spacer (non link)', 'blockstrap-page-builder-blocks' );
 
 		return $links;
 	}
 
 	public function get_pages_array() {
-		$options = array( '' => __( 'Select Page', 'blockstrap' ) );
+		$options = array( '' => __( 'Select Page', 'blockstrap-page-builder-blocks' ) );
 
 		$pages = get_pages();
 
@@ -149,109 +149,109 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 
 		$arguments['type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link Type', 'blockstrap' ),
+			'title'    => __( 'Link Type', 'blockstrap-page-builder-blocks' ),
 			'options'  => $this->link_types(),
 			'default'  => 'home',
 			'desc_tip' => true,
-			'group'    => __( 'Link', 'blockstrap' ),
+			'group'    => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['page_id'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Page', 'blockstrap' ),
+			'title'           => __( 'Page', 'blockstrap-page-builder-blocks' ),
 			'options'         => $this->get_pages_array(),
-			'placeholder'     => __( 'Select Page', 'blockstrap' ),
+			'placeholder'     => __( 'Select Page', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="page"',
 		);
 
 		$arguments['post_id'] = array(
 			'type'            => 'number',
-			'title'           => __( 'Post ID', 'blockstrap' ),
+			'title'           => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => 123,
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="post-id"',
 		);
 
 		$arguments['custom_url'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Custom URL', 'blockstrap' ),
-			'desc'            => __( 'Add custom link URL', 'blockstrap' ),
-			'placeholder'     => __( 'https://example.com', 'blockstrap' ),
+			'title'           => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Add custom link URL', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="custom"',
 		);
 
 		$arguments['text'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Link Text', 'blockstrap' ),
-			'desc'        => __( 'Add custom link text or leave blank for dynamic', 'blockstrap' ),
-			'placeholder' => __( 'Home', 'blockstrap' ),
+			'title'       => __( 'Link Text', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Add custom link text or leave blank for dynamic', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Home', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+			'group'       => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['icon_class'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Icon class', 'blockstrap' ),
-			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap' ),
-			'placeholder' => __( 'fas fa-ship', 'blockstrap' ),
+			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'fas fa-ship', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+			'group'       => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// link styles
 		$arguments['link_type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link style', 'blockstrap' ),
+			'title'    => __( 'Link style', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''             => __( 'None', 'blockstrap' ),
-				'btn'          => __( 'Button', 'blockstrap' ),
-				'btn-round'    => __( 'Button rounded', 'blockstrap' ),
-				'btn-icon'     => __( 'Button Icon Circle', 'blockstrap' ),
-				'iconbox'      => __( 'Iconbox bordered', 'blockstrap' ),
-				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap' ),
+				''             => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'btn'          => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'btn-round'    => __( 'Button rounded', 'blockstrap-page-builder-blocks' ),
+				'btn-icon'     => __( 'Button Icon Circle', 'blockstrap-page-builder-blocks' ),
+				'iconbox'      => __( 'Iconbox bordered', 'blockstrap-page-builder-blocks' ),
+				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link styles', 'blockstrap' ),
+			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['link_size'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Size', 'blockstrap' ),
+			'title'           => __( 'Size', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				''            => __( 'Default', 'blockstrap' ),
-				'extra-small' => __( 'Extra Small (BS5)', 'blockstrap' ),
-				'small'       => __( 'Small', 'blockstrap' ),
-				'medium'      => __( 'Medium', 'blockstrap' ),
-				'large'       => __( 'Large', 'blockstrap' ),
+				''            => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'extra-small' => __( 'Extra Small (BS5)', 'blockstrap-page-builder-blocks' ),
+				'small'       => __( 'Small', 'blockstrap-page-builder-blocks' ),
+				'medium'      => __( 'Medium', 'blockstrap-page-builder-blocks' ),
+				'large'       => __( 'Large', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link styles', 'blockstrap' ),
+			'group'           => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%link_type%]!=""',
 		);
 
 		$arguments['link_bg'] = array(
-			'title'           => __( 'Color', 'blockstrap' ),
-			'desc'            => __( 'Select the color.', 'blockstrap' ),
+			'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Select the color.', 'blockstrap-page-builder-blocks' ),
 			'type'            => 'select',
 			'options'         => array(
-				'' => __( 'Custom colors', 'blockstrap' ),
+				'' => __( 'Custom colors', 'blockstrap-page-builder-blocks' ),
 			) + sd_aui_colors( true, true, true, true ),
 			'default'         => '',
 			'desc_tip'        => true,
 			'advanced'        => false,
-			'group'           => __( 'Link styles', 'blockstrap' ),
+			'group'           => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%link_type%]!="iconbox" && [%link_type%]!=""',
 		);
 
@@ -262,7 +262,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -272,7 +272,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -282,7 +282,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -292,7 +292,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Mobile',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -304,7 +304,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -314,7 +314,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -324,7 +324,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -334,7 +334,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Tablet',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -346,7 +346,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -356,7 +356,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -366,7 +366,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
@@ -376,22 +376,22 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 				'device_type' => 'Desktop',
 				'group'       => __(
 					'Link styles',
-					'blockstrap'
+					'blockstrap-page-builder-blocks'
 				),
 			)
 		);
 
 		$arguments['link_divider'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link Divider', 'blockstrap' ),
+			'title'    => __( 'Link Divider', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''      => __( 'None', 'blockstrap' ),
-				'left'  => __( 'Left', 'blockstrap' ),
-				'right' => __( 'Right', 'blockstrap' ),
+				''      => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'left'  => __( 'Left', 'blockstrap-page-builder-blocks' ),
+				'right' => __( 'Right', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link styles', 'blockstrap' ),
+			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
@@ -470,6 +470,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
 
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
+
 		$arguments['css_class'] = sd_get_class_input();
 
 		return $arguments;
@@ -505,7 +508,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			return '<li class="nav-item ' . $wrap_class . '"></li>';
 		} elseif ( 'home' === $args['type'] ) {
 			$link      = get_home_url();
-			$link_text = __( 'Home', 'blockstrap' );
+			$link_text = __( 'Home', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'page' === $args['type'] || 'post-id' === $args['type'] ) {
 			$page_id = ! empty( $args['page_id'] ) ? absint( $args['page_id'] ) : 0;
 			$post_id = ! empty( $args['post_id'] ) ? absint( $args['post_id'] ) : 0;
@@ -520,23 +523,23 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		} elseif ( 'wp-login' === $args['type'] ) {
 			$icon      = 'far fa-user';
 			$link      = esc_url( wp_login_url( get_permalink() ) );
-			$link_text = __( 'Sign in', 'blockstrap' );
+			$link_text = __( 'Sign in', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'wp-logout' === $args['type'] ) {
 			$icon      = 'fas fa-sign-out-alt';
 			$link      = esc_url( wp_logout_url( get_permalink() ) );
-			$link_text = __( 'Sign out', 'blockstrap' );
+			$link_text = __( 'Sign out', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'custom' === $args['type'] ) {
 			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
-			$link_text = __( 'Custom', 'blockstrap' );
+			$link_text = __( 'Custom', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'gd_search' === $args['type'] ) {
 			$link      = function_exists( 'geodir_search_page_base_url' ) ? geodir_search_page_base_url() : '';
-			$link_text = __( 'Search', 'blockstrap' );
+			$link_text = __( 'Search', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'gd_location' === $args['type'] ) {
 			$link      = function_exists( 'geodir_location_page_id' ) ? get_permalink( geodir_location_page_id() ) : '';
-			$link_text = __( 'Location', 'blockstrap' );
+			$link_text = __( 'Location', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'gd_location_switcher' === $args['type'] ) {
 			global $geodirectory;
-			$location_name = __( 'Set Locationx', 'blockstrap' );
+			$location_name = __( 'Set Locationx', 'blockstrap-page-builder-blocks' );
 			$location_set  = true;
 
 			//          print_r($geodirectory->location);
@@ -573,34 +576,34 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 					if ( 'add_' . $cpt === $args['type'] ) {
 						$link = function_exists( 'geodir_add_listing_page_url' ) ? geodir_add_listing_page_url( $cpt ) : '';
 						/* translators: Custom Post Type name. */
-						$link_text = sprintf( __( 'Add %s', 'blockstrap' ), $cpt_name );
+						$link_text = sprintf( __( 'Add %s', 'blockstrap-page-builder-blocks' ), $cpt_name );
 					}
 				}
 			}
 		} elseif ( 'uwp_login' === $args['type'] ) {
 			$link        = function_exists( 'uwp_get_login_page_url' ) ? uwp_get_login_page_url() : '';
-			$link_text   = __( 'Login', 'blockstrap' );
+			$link_text   = __( 'Login', 'blockstrap-page-builder-blocks' );
 			$wrap_class .= ' uwp-login-link';
 		} elseif ( 'uwp_register' === $args['type'] ) {
 			$link        = function_exists( 'uwp_get_register_page_url' ) ? uwp_get_register_page_url() : '';
-			$link_text   = __( 'Register', 'blockstrap' );
+			$link_text   = __( 'Register', 'blockstrap-page-builder-blocks' );
 			$wrap_class .= ' uwp-register-link';
 		} elseif ( 'uwp_forgot' === $args['type'] ) {
 			$link        = function_exists( 'uwp_get_forgot_page_url' ) ? uwp_get_forgot_page_url() : '';
-			$link_text   = __( 'Forgot Password', 'blockstrap' );
+			$link_text   = __( 'Forgot Password', 'blockstrap-page-builder-blocks' );
 			$wrap_class .= ' uwp-forgot-password-link';
 		} elseif ( 'uwp_account' === $args['type'] ) {
 			$link      = function_exists( 'uwp_get_account_page_url' ) ? uwp_get_account_page_url() : '';
-			$link_text = __( 'Account', 'blockstrap' );
+			$link_text = __( 'Account', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'uwp_change_password' === $args['type'] ) {
 			$link      = function_exists( 'uwp_get_change_page_url' ) ? uwp_get_change_page_url() : '';
-			$link_text = __( 'Change password', 'blockstrap' );
+			$link_text = __( 'Change password', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'uwp_profile' === $args['type'] ) {
 			$link      = function_exists( 'uwp_get_profile_page_url' ) ? uwp_get_profile_page_url() : '';
-			$link_text = __( 'Profile', 'blockstrap' );
+			$link_text = __( 'Profile', 'blockstrap-page-builder-blocks' );
 		} elseif ( 'uwp_logout' === $args['type'] ) {
 			$link      = wp_logout_url( get_permalink() );
-			$link_text = __( 'Log out', 'blockstrap' );
+			$link_text = __( 'Log out', 'blockstrap-page-builder-blocks' );
 		}
 
 		// UWP maybe bail if logged in.

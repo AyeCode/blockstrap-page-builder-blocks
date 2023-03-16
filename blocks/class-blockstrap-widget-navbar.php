@@ -170,10 +170,10 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 			'position',
 			array(
 				'options' => array(
-					''             => __( 'Default', 'blockstrap' ),
-					'fixed-top'    => __( 'Fixed top', 'blockstrap' ),
-					'fixed-bottom' => __( 'Fixed bottom', 'blockstrap' ),
-					'sticky-top'   => __( 'Sticky top', 'blockstrap' ),
+					''             => __( 'Default', 'blockstrap-page-builder-blocks' ),
+					'fixed-top'    => __( 'Fixed top', 'blockstrap-page-builder-blocks' ),
+					'fixed-bottom' => __( 'Fixed bottom', 'blockstrap-page-builder-blocks' ),
+					'sticky-top'   => __( 'Sticky top', 'blockstrap-page-builder-blocks' ),
 				),
 			)
 		);

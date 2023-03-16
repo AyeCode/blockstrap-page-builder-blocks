@@ -11,17 +11,17 @@
  * Plugin Name: BlockStrap Page Builder Blocks
  * Plugin URI: https://ayecode.io/
  * Description: BlockStrap - A FSE page builder for WordPress
- * Version: 0.0.3
+ * Version: 0.1.0
  * Author: AyeCode
  * Author URI: https://ayecode.io
  * Text Domain: blockstrap-page-builder-blocks
  * Domain Path: /languages
  * Requires at least: 6.0
- * Tested up to: 6.1
+ * Tested up to: 6.2
  */
 
 
-define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.0.3' );
+define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.0' );
 
 /**
  * The BlockStrap Class
@@ -32,6 +32,7 @@ final class BlockStrap {
 	private static $instance = null;
 
 	public static function instance() {
+
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof BlockStrap ) ) {
 			self::$instance = new BlockStrap();
 			self::$instance->setup_constants();
@@ -194,6 +195,7 @@ final class BlockStrap {
 		require_once 'patterns/footer.php';
 		require_once 'patterns/header.php';
 		require_once 'patterns/hero.php';
+		require_once 'patterns/menu.php';
 
 		// Blocks
 		require_once 'blocks/class-blockstrap-widget-archive-actions.php';
@@ -222,6 +224,9 @@ final class BlockStrap {
 		require_once 'blocks/class-blockstrap-widget-breadcrumb.php';
 		require_once 'blocks/class-blockstrap-widget-search.php';
 		require_once 'blocks/class-blockstrap-widget-share.php';
+
+
+//		require_once 'blocks/class-blockstrap-widget-popup-test.php'; //@todo remove before release
 
 		// Frontend comments
 		require_once 'classes/class-blockstrap-blocks-comments.php';

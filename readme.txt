@@ -3,8 +3,8 @@ Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
-Tested up to: 6.1
-Stable tag: 0.0.3
+Tested up to: 6.2
+Stable tag: 0.1.0
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -39,7 +39,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
-= 0.0.4 =
+= 0.1.0 =
 * Button block hover styling not working - FIXED
 * Breadcrumb block - ADDED
 * Share block - ADDED
@@ -48,6 +48,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 * Several changes and improvements to other blocks for BS5 option - CHANGED
 * Added option to remove archive title prefix in BS > Archive title block - ADDED
 * Added spacer and log in/out options to BS > Nav item block - ADDED
+* Default to Bootstrap v5 - ADDED
 
 = 0.0.3 =
 * First WP.org release - RELEASE

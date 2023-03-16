@@ -27,10 +27,10 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_archive_title',
-			'name'              => __( 'BS > Archive Title', 'blockstrap' ),
+			'name'              => __( 'BS > Archive Title', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bs-archive-title',
-				'description' => esc_html__( 'Display the archive title based on the queried object.', 'blockstrap' ),
+				'description' => esc_html__( 'Display the archive title based on the queried object.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -40,9 +40,9 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Title', 'blockstrap' ) ),
+					'groups' => array( __( 'Title', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -50,9 +50,9 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -60,9 +60,9 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 					),
 				),
 				'advanced' => array(
-					'groups' => array( __( 'Wrapper Styles', 'blockstrap' ), __( 'Advanced', 'blockstrap' ) ),
+					'groups' => array( __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ), __( 'Advanced', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -86,7 +86,7 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 
 		$arguments['html_tag'] = array(
 			'type'     => 'select',
-			'title'    => __( 'HTML tag', 'blockstrap' ),
+			'title'    => __( 'HTML tag', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
 				'h1'   => 'h1',
 				'h2'   => 'h2',
@@ -100,17 +100,17 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 			),
 			'default'  => 'h1',
 			'desc_tip' => true,
-			'group'    => __( 'Title', 'blockstrap' ),
+			'group'    => __( 'Title', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['prefix_hide'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Remove archive prefix', 'blockstrap' ),
+			'title'    => __( 'Remove archive prefix', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'desc'     => __( 'Category: or Tag: etc..', 'blockstrap' ),
-			'group'    => __( 'Title', 'blockstrap' ),
+			'desc'     => __( 'Category: or Tag: etc..', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Title', 'blockstrap-page-builder-blocks' ),
 		//          'element_require' => '[%bg%]=="custom-gradient"',
 		);
 
@@ -153,16 +153,16 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 		);
 
 		// background
-		$arguments = $arguments + sd_get_background_inputs( 'bg', array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap' ) ), false );
+		$arguments = $arguments + sd_get_background_inputs( 'bg', array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), array( 'group' => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ) ), false );
 
 		$arguments['bg_on_text'] = array(
 			'type'            => 'checkbox',
-			'title'           => __( 'Background on text', 'blockstrap' ),
+			'title'           => __( 'Background on text', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'value'           => '1',
 			'desc_tip'        => false,
-			'desc'            => __( 'This will show the background on the text.', 'blockstrap' ),
-			'group'           => __( 'Wrapper Styles', 'blockstrap' ),
+			'desc'            => __( 'This will show the background on the text.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%bg%]=="custom-gradient"',
 		);
 
@@ -225,13 +225,7 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
 		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
 
-		$arguments['css_class'] = array(
-			'type'    => 'text',
-			'title'   => __( 'Additional CSS class(es)', 'blockstrap' ),
-			'desc'    => __( 'Separate multiple classes with spaces.', 'blockstrap' ),
-			'default' => '',
-			'group'   => __( 'Advanced', 'blockstrap' ),
-		);
+		$arguments['css_class'] = sd_get_class_input();
 
 		return $arguments;
 	}

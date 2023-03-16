@@ -190,47 +190,47 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link', 'blockstrap' ),
+			'group'    => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['img_link'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Link', 'blockstrap' ),
-			'placeholder'     => __( 'https://example.com', 'blockstrap' ),
-			'group'           => __( 'Link', 'blockstrap' ),
+			'title'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_link_to%]=="custom"',
 		);
 
 		$arguments['img_link_lightbox'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Lightbox', 'blockstrap' ),
+			'title'           => __( 'Lightbox', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				''  => __( 'No', 'blockstrap' ),
-				'1' => __( 'Yes', 'blockstrap' ),
+				''  => __( 'No', 'blockstrap-page-builder-blocks' ),
+				'1' => __( 'Yes', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => '',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_link_to%]=="media"',
 		);
 
 		$arguments['lightbox_size'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Lightbox size', 'blockstrap' ),
+			'title'           => __( 'Lightbox size', 'blockstrap-page-builder-blocks' ),
 			'options'         => array( '' => 'No' ) + array_combine( $image_sizes, $image_sizes ) + array( 'full' => 'full' ),
 			'default'         => 'full',
 			'desc_tip'        => true,
-			'group'           => __( 'Link', 'blockstrap' ),
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_link_to%]=="media" && [%img_link_lightbox%]!="" && [%img_src%]!="url"',
 		);
 
 		// caption
 		$arguments['text'] = array(
 			'type'        => 'textarea',
-			'title'       => __( 'Caption', 'blockstrap' ),
-			'placeholder' => __( 'Enter a caption!', 'blockstrap' ),
+			'title'       => __( 'Caption', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Enter a caption!', 'blockstrap-page-builder-blocks' ),
 			'desc_tip'    => true,
-			'group'       => __( 'Caption', 'blockstrap' ),
+			'group'       => __( 'Caption', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// columns
@@ -238,93 +238,93 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'col',
 			array(
 				'device_type'     => 'Mobile',
-				'group'           => __( 'Image Styles', 'blockstrap' ),
+				'group'           => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
-				'title'           => __( 'Responsive width', 'blockstrap' ),
+				'title'           => __( 'Responsive width', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['col_md'] = sd_get_col_input(
 			'col',
 			array(
 				'device_type'     => 'Tablet',
-				'group'           => __( 'Image Styles', 'blockstrap' ),
+				'group'           => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
-				'title'           => __( 'Responsive width', 'blockstrap' ),
+				'title'           => __( 'Responsive width', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['col_lg'] = sd_get_col_input(
 			'col',
 			array(
 				'device_type'     => 'Desktop',
-				'group'           => __( 'Image Styles', 'blockstrap' ),
+				'group'           => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
-				'title'           => __( 'Responsive width', 'blockstrap' ),
+				'title'           => __( 'Responsive width', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 
 		$arguments['img_aspect'] = array(
-			'title'    => __( 'Aspect ratio', 'blockstrap' ),
-			'desc'     => __( 'For a more consistent image view you can set the aspect ratio of the image view port.', 'blockstrap' ),
+			'title'    => __( 'Aspect ratio', 'blockstrap-page-builder-blocks' ),
+			'desc'     => __( 'For a more consistent image view you can set the aspect ratio of the image view port.', 'blockstrap-page-builder-blocks' ),
 			'type'     => 'select',
 			'options'  => array(
-				'16by9' => __( 'Default (16by9)', 'blockstrap' ),
-				'21by9' => __( '21by9', 'blockstrap' ),
-				'4by3'  => __( '4by3', 'blockstrap' ),
-				'1by1'  => __( '1by1 (square)', 'blockstrap' ),
-				''      => __( 'No ratio (natural)', 'blockstrap' ),
+				'16by9' => __( 'Default (16by9)', 'blockstrap-page-builder-blocks' ),
+				'21by9' => __( '21by9', 'blockstrap-page-builder-blocks' ),
+				'4by3'  => __( '4by3', 'blockstrap-page-builder-blocks' ),
+				'1by1'  => __( '1by1 (square)', 'blockstrap-page-builder-blocks' ),
+				''      => __( 'No ratio (natural)', 'blockstrap-page-builder-blocks' ),
 			),
 			'desc_tip' => true,
 			'value'    => '',
 			'default'  => '',
-			'group'    => __( 'Image Styles', 'blockstrap' ),
+			'group'    => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['img_cover'] = array(
-			'title'    => __( 'Image cover type', 'blockstrap' ),
-			'desc'     => __( 'This is how the image should cover the image viewport.', 'blockstrap' ),
+			'title'    => __( 'Image cover type', 'blockstrap-page-builder-blocks' ),
+			'desc'     => __( 'This is how the image should cover the image viewport.', 'blockstrap-page-builder-blocks' ),
 			'type'     => 'select',
 			'options'  => array(
-				''  => __( 'Default (cover both)', 'blockstrap' ),
-				'x' => __( 'Width cover', 'blockstrap' ),
-				'y' => __( 'height cover', 'blockstrap' ),
-				'n' => __( 'No cover (contain)', 'blockstrap' ),
+				''  => __( 'Default (cover both)', 'blockstrap-page-builder-blocks' ),
+				'x' => __( 'Width cover', 'blockstrap-page-builder-blocks' ),
+				'y' => __( 'height cover', 'blockstrap-page-builder-blocks' ),
+				'n' => __( 'No cover (contain)', 'blockstrap-page-builder-blocks' ),
 			),
 			'desc_tip' => true,
 			'value'    => '',
 			'default'  => '',
-			'group'    => __( 'Image Styles', 'blockstrap' ),
+			'group'    => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// border
-		$arguments['img_border']       = sd_get_border_input( 'border', array( 'group' => __( 'Image Styles', 'blockstrap' ) ) );
+		$arguments['img_border']       = sd_get_border_input( 'border', array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ) ) );
 		$arguments['img_rounded']      = sd_get_border_input(
 			'rounded',
 			array(
-				'group'           => __( 'Image Styles', 'blockstrap' ),
+				'group'           => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
 			)
 		);
 		$arguments['img_rounded_size'] = sd_get_border_input(
 			'rounded_size',
 			array(
-				'group'           => __( 'Image Styles', 'blockstrap' ),
+				'group'           => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
 			)
 		);
 
 		// shadow
-		$arguments['img_shadow'] = sd_get_shadow_input( 'shadow', array( 'group' => __( 'Image Styles', 'blockstrap' ) ) );
+		$arguments['img_shadow'] = sd_get_shadow_input( 'shadow', array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ) ) );
 
 		$arguments['img_overlay'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Overlay', 'blockstrap' ),
+			'title'    => __( 'Overlay', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''         => __( 'None', 'blockstrap' ),
-				'bottom'    => __( 'Bottom', 'blockstrap' ),
+				''         => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'bottom'    => __( 'Bottom', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'           => __( 'Image Styles', 'blockstrap' ),
+			'group'           => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
@@ -364,12 +364,12 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 		$arguments['bg_on_text'] = array(
 			'type'            => 'checkbox',
-			'title'           => __( 'Background on text', 'blockstrap' ),
+			'title'           => __( 'Background on text', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'value'           => '1',
 			'desc_tip'        => false,
-			'desc'            => __( 'This will show the background on the text.', 'blockstrap' ),
-			'group'           => __( 'Wrapper Styles', 'blockstrap' ),
+			'desc'            => __( 'This will show the background on the text.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%bg%]=="custom-gradient"',
 		);
 
@@ -435,52 +435,49 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 		$arguments['img_mask'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Mask', 'blockstrap' ),
+			'title'    => __( 'Mask', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''         => __( 'None', 'blockstrap' ),
+				''         => __( 'None', 'blockstrap-page-builder-blocks' ),
 				'blob1'    => 'blob1',
 				'blob2'    => 'blob2',
 				'blob3'    => 'blob3',
-				'circle'   => __( 'circle', 'blockstrap' ),
-				'diamond'  => __( 'Diamond', 'blockstrap' ),
-				'flower'   => __( 'Flower', 'blockstrap' ),
-				'hexagon'  => __( 'Hexagon', 'blockstrap' ),
-				'rounded'  => __( 'Rounded', 'blockstrap' ),
-				'sketch'   => __( 'sketch', 'blockstrap' ),
-				'triangle' => __( 'triangle', 'blockstrap' ),
+				'circle'   => __( 'circle', 'blockstrap-page-builder-blocks' ),
+				'diamond'  => __( 'Diamond', 'blockstrap-page-builder-blocks' ),
+				'flower'   => __( 'Flower', 'blockstrap-page-builder-blocks' ),
+				'hexagon'  => __( 'Hexagon', 'blockstrap-page-builder-blocks' ),
+				'rounded'  => __( 'Rounded', 'blockstrap-page-builder-blocks' ),
+				'sketch'   => __( 'sketch', 'blockstrap-page-builder-blocks' ),
+				'triangle' => __( 'triangle', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Image Mask', 'blockstrap' ),
+			'group'    => __( 'Image Mask', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['img_mask_position'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Position', 'blockstrap' ),
+			'title'           => __( 'Position', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				'center center' => __( 'Center Center', 'blockstrap' ),
-				'center left'   => __( 'Center Left', 'blockstrap' ),
-				'center right'  => __( 'Center Right', 'blockstrap' ),
-				'top center'    => __( 'Top Center', 'blockstrap' ),
-				'top left'      => __( 'Top Left', 'blockstrap' ),
-				'top right'     => __( 'Top Right', 'blockstrap' ),
-				'bottom center' => __( 'Bottom Center', 'blockstrap' ),
-				'bottom left'   => __( 'bottom left', 'blockstrap' ),
-				'bottom right'  => __( 'bottom right', 'blockstrap' ),
+				'center center' => __( 'Center Center', 'blockstrap-page-builder-blocks' ),
+				'center left'   => __( 'Center Left', 'blockstrap-page-builder-blocks' ),
+				'center right'  => __( 'Center Right', 'blockstrap-page-builder-blocks' ),
+				'top center'    => __( 'Top Center', 'blockstrap-page-builder-blocks' ),
+				'top left'      => __( 'Top Left', 'blockstrap-page-builder-blocks' ),
+				'top right'     => __( 'Top Right', 'blockstrap-page-builder-blocks' ),
+				'bottom center' => __( 'Bottom Center', 'blockstrap-page-builder-blocks' ),
+				'bottom left'   => __( 'bottom left', 'blockstrap-page-builder-blocks' ),
+				'bottom right'  => __( 'bottom right', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => 'center center',
 			'desc_tip'        => true,
-			'group'           => __( 'Image Mask', 'blockstrap' ),
+			'group'           => __( 'Image Mask', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_mask%]!=""',
 		);
 
-		$arguments['css_class'] = array(
-			'type'    => 'text',
-			'title'   => __( 'Additional CSS class(es)', 'blockstrap' ),
-			'desc'    => __( 'Separate multiple classes with spaces.', 'blockstrap' ),
-			'default' => '',
-			'group'   => __( 'Advanced', 'blockstrap' ),
-		);
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
+
+		$arguments['css_class'] = sd_get_class_input();
 
 		return $arguments;
 	}

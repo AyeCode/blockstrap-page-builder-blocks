@@ -17,7 +17,7 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'block-icon'       => 'fas fa-caret-down',
 			'block-category'   => 'layout',
 			'block-keywords'   => "['menu','nav','item']",
-			'block-label'      => "attributes.text ? '" . __( 'BS > Dropdown', 'blockstrap' ) . " ('+ attributes.text+')' : ''",
+			'block-label'      => "attributes.text ? '" . __( 'BS > Dropdown', 'blockstrap-page-builder-blocks' ) . " ('+ attributes.text+')' : ''",
 			'block-supports'   => array(
 				'customClassName' => false,
 			),
@@ -52,10 +52,10 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'block-wrap'       => '',
 			'class_name'       => __CLASS__,
 			'base_id'          => 'bs_nav_dropdown',
-			'name'             => __( 'BS > Nav Dropdown', 'blockstrap' ),
+			'name'             => __( 'BS > Nav Dropdown', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'       => array(
 				'classname'   => 'bd-nav-dropdown',
-				'description' => esc_html__( 'A container for navbar dropdown items.', 'blockstrap' ),
+				'description' => esc_html__( 'A container for navbar dropdown items.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'          => array(
 				'attributes' => array(
@@ -65,9 +65,9 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'no_wrap'          => true,
 			'block_group_tabs' => array(
 				'content'  => array(
-					'groups' => array( __( 'Link', 'blockstrap' ) ),
+					'groups' => array( __( 'Link', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -75,9 +75,9 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Link styles', 'blockstrap' ), __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Link styles', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -86,11 +86,11 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -112,80 +112,80 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 
 		$arguments['text'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Link Text', 'blockstrap' ),
-			'desc'        => __( 'Add custom link text or leave blank for dynamic', 'blockstrap' ),
-			'placeholder' => __( 'Home', 'blockstrap' ),
+			'title'       => __( 'Link Text', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Add custom link text or leave blank for dynamic', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Home', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+			'group'       => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['icon_class'] = array(
 			'type'        => 'text',
-			'title'       => __( 'Icon class', 'blockstrap' ),
-			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap' ),
-			'placeholder' => __( 'fas fa-ship', 'blockstrap' ),
+			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'fas fa-ship', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
-			'group'       => __( 'Link', 'blockstrap' ),
+			'group'       => __( 'Link', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// link styles
 		$arguments['link_type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link style', 'blockstrap' ),
+			'title'    => __( 'Link style', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''             => __( 'None', 'blockstrap' ),
-				'btn'          => __( 'Button', 'blockstrap' ),
-				'btn-round'    => __( 'Button rounded', 'blockstrap' ),
-				'iconbox'      => __( 'Iconbox bordered', 'blockstrap' ),
-				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap' ),
+				''             => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'btn'          => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'btn-round'    => __( 'Button rounded', 'blockstrap-page-builder-blocks' ),
+				'iconbox'      => __( 'Iconbox bordered', 'blockstrap-page-builder-blocks' ),
+				'iconbox-fill' => __( 'Iconbox filled', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link styles', 'blockstrap' ),
+			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['link_size'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Size', 'blockstrap' ),
+			'title'    => __( 'Size', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''       => __( 'Default', 'blockstrap' ),
-				'small'  => __( 'Small', 'blockstrap' ),
-				'medium' => __( 'Medium', 'blockstrap' ),
-				'large'  => __( 'Large', 'blockstrap' ),
+				''       => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'small'  => __( 'Small', 'blockstrap-page-builder-blocks' ),
+				'medium' => __( 'Medium', 'blockstrap-page-builder-blocks' ),
+				'large'  => __( 'Large', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link styles', 'blockstrap' ),
+			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%link_type%]!=""',
 		);
 
 		$arguments['link_bg'] = array(
-			'title'           => __( 'Color', 'blockstrap' ),
-			'desc'            => __( 'Select the color.', 'blockstrap' ),
+			'title'           => __( 'Color', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Select the color.', 'blockstrap-page-builder-blocks' ),
 			'type'            => 'select',
 			'options'         => array(
-				'' => __( 'Custom colors', 'blockstrap' ),
+				'' => __( 'Custom colors', 'blockstrap-page-builder-blocks' ),
 			) + sd_aui_colors( true, true, true ),
 			'default'         => '',
 			'desc_tip'        => true,
 			'advanced'        => false,
-			'group'           => __( 'Link styles', 'blockstrap' ),
+			'group'           => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%link_type%]!="iconbox" && [%link_type%]!=""',
 		);
 
 		$arguments['link_divider'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Link Divider', 'blockstrap' ),
+			'title'    => __( 'Link Divider', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''      => __( 'None', 'blockstrap' ),
-				'left'  => __( 'Left', 'blockstrap' ),
-				'right' => __( 'Right', 'blockstrap' ),
+				''      => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'left'  => __( 'Left', 'blockstrap-page-builder-blocks' ),
+				'right' => __( 'Right', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Link styles', 'blockstrap' ),
+			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
@@ -260,6 +260,9 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
+
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
 
 		$arguments['css_class'] = sd_get_class_input();
 

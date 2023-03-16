@@ -17,7 +17,7 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			'block-icon'       => 'far fa-square',
 			'block-category'   => 'layout',
 			'block-keywords'   => "['container','content','col','row']",
-			'block-label'      => "attributes.container ? '" . __( 'BS > ', 'blockstrap' ) . " ('+ attributes.container +')' : '" . __( 'BS > Container', 'blockstrap' ) . "'",
+			'block-label'      => "attributes.container ? '" . __( 'BS > ', 'blockstrap-page-builder-blocks' ) . " ('+ attributes.container +')' : '" . __( 'BS > Container', 'blockstrap-page-builder-blocks' ) . "'",
 			'block-supports'   => array(
 				//'anchor' => 'true',
 				'customClassName' => false,
@@ -58,10 +58,10 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			'block-wrap'       => '',
 			'class_name'       => __CLASS__,
 			'base_id'          => 'bs_container',
-			'name'             => __( 'BS > Container', 'blockstrap' ),
+			'name'             => __( 'BS > Container', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'       => array(
 				'classname'   => 'bd-container',
-				'description' => esc_html__( 'A container for content', 'blockstrap' ),
+				'description' => esc_html__( 'A container for content', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'          => array(
 				'attributes' => array(
@@ -71,9 +71,9 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			'no_wrap'          => true,
 			'block_group_tabs' => array(
 				'content'  => array(
-					'groups' => array( __( 'Container', 'blockstrap' ) ),
+					'groups' => array( __( 'Container', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Content', 'blockstrap' ),
+						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
@@ -81,9 +81,9 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Background', 'blockstrap' ), __( 'Typography', 'blockstrap' ) ),
+					'groups' => array( __( 'Background', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
-						'title'     => __( 'Styles', 'blockstrap' ),
+						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
 						'tabs_open' => true,
 						'open'      => true,
@@ -92,12 +92,12 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 				),
 				'advanced' => array(
 					'groups' => array(
-						__( 'Wrapper Styles', 'blockstrap' ),
-						__( 'Hover Animations', 'blockstrap' ),
-						__( 'Advanced', 'blockstrap' ),
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Hover Animations', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
-						'title'     => __( 'Advanced', 'blockstrap' ),
+						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
 						'tabs_open' => true,
 						'open'      => true,
@@ -124,14 +124,14 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 
 		$arguments['h100'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Card equal heights', 'blockstrap' ),
+			'title'           => __( 'Card equal heights', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'options'         => array(
-				''      => __( 'No', 'blockstrap' ),
-				'h-100' => __( 'Yes', 'blockstrap' ),
+				''      => __( 'No', 'blockstrap-page-builder-blocks' ),
+				'h-100' => __( 'Yes', 'blockstrap-page-builder-blocks' ),
 			),
 			'desc_tip'        => false,
-			'group'           => __( 'Container', 'blockstrap' ),
+			'group'           => __( 'Container', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%container%]=="card"',
 		);
 
@@ -149,12 +149,12 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 
 		$arguments['bg_on_text'] = array(
 			'type'            => 'checkbox',
-			'title'           => __( 'Background on text', 'blockstrap' ),
+			'title'           => __( 'Background on text', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'value'           => '1',
 			'desc_tip'        => false,
-			'desc'            => __( 'This will show the background on the text.', 'blockstrap' ),
-			'group'           => __( 'Background', 'blockstrap' ),
+			'desc'            => __( 'This will show the background on the text.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Background', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%bg%]=="custom-gradient"',
 		);
 
@@ -273,6 +273,9 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 
 		// Hover animations
 		$arguments['hover_animations'] = sd_get_hover_animations_input();
+
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
 
 		// advanced
 		$arguments['anchor'] = sd_get_anchor_input();

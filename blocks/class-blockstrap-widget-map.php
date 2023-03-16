@@ -11,7 +11,7 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 	public function __construct() {
 
 		$options = array(
-			'textdomain'        => 'blockstrap',
+			'textdomain'        => 'blockstrap-page-builder-blocks',
 			'output_types'      => array( 'block', 'shortcode' ),
 			'block-icon'        => 'fas fa-map-marked-alt',
 			'block-category'    => 'layout',
@@ -163,21 +163,21 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 			'title'           => __( 'Map view', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
 				'mapnik'       => __( 'Standard', 'blockstrap-page-builder-blocks' ),
-				'cyclosm'      => __( 'CyclOSM', 'blockstrap' ),
-				'cyclemap'     => __( 'Cycle OSM', 'blockstrap' ),
-				'transportmap' => __( 'Transport Map', 'blockstrap' ),
-				'opnvkarte'    => __( 'ÖPNVKarte', 'blockstrap' ),
-				'hot'          => __( 'Humanitarian', 'blockstrap' ),
+				'cyclosm'      => __( 'CyclOSM', 'blockstrap-page-builder-blocks' ),
+				'cyclemap'     => __( 'Cycle OSM', 'blockstrap-page-builder-blocks' ),
+				'transportmap' => __( 'Transport Map', 'blockstrap-page-builder-blocks' ),
+				'opnvkarte'    => __( 'ÖPNVKarte', 'blockstrap-page-builder-blocks' ),
+				'hot'          => __( 'Humanitarian', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => 'mapnik',
 			'desc_tip'        => true,
-			'group'           => __( 'Map', 'blockstrap' ),
+			'group'           => __( 'Map', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%map_type%]=="osm"',
 		);
 
 		$arguments['map_aspect'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Responsive ratios', 'blockstrap' ),
+			'title'    => __( 'Responsive ratios', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
 				'4by3'  => '4x3',
 				'16by9' => '16x9',
@@ -186,7 +186,7 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 			),
 			'default'  => '4by3',
 			'desc_tip' => true,
-			'group'    => __( 'Map', 'blockstrap' ),
+			'group'    => __( 'Map', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// columns
@@ -194,27 +194,27 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 			'col',
 			array(
 				'device_type'     => 'Mobile',
-				'group'           => __( 'Map Styles', 'blockstrap' ),
+				'group'           => __( 'Map Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
-				'title'           => __( 'Responsive width', 'blockstrap' ),
+				'title'           => __( 'Responsive width', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['col_md'] = sd_get_col_input(
 			'col',
 			array(
 				'device_type'     => 'Tablet',
-				'group'           => __( 'Map Styles', 'blockstrap' ),
+				'group'           => __( 'Map Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
-				'title'           => __( 'Responsive width', 'blockstrap' ),
+				'title'           => __( 'Responsive width', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['col_lg'] = sd_get_col_input(
 			'col',
 			array(
 				'device_type'     => 'Desktop',
-				'group'           => __( 'Map Styles', 'blockstrap' ),
+				'group'           => __( 'Map Styles', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '',
-				'title'           => __( 'Responsive width', 'blockstrap' ),
+				'title'           => __( 'Responsive width', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 
@@ -280,52 +280,49 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 
 		$arguments['mask'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Mask', 'blockstrap' ),
+			'title'    => __( 'Mask', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''         => __( 'None', 'blockstrap' ),
+				''         => __( 'None', 'blockstrap-page-builder-blocks' ),
 				'blob1'    => 'blob1',
 				'blob2'    => 'blob2',
 				'blob3'    => 'blob3',
-				'circle'   => __( 'circle', 'blockstrap' ),
-				'diamond'  => __( 'Diamond', 'blockstrap' ),
-				'flower'   => __( 'Flower', 'blockstrap' ),
-				'hexagon'  => __( 'Hexagon', 'blockstrap' ),
-				'rounded'  => __( 'Rounded', 'blockstrap' ),
-				'sketch'   => __( 'sketch', 'blockstrap' ),
-				'triangle' => __( 'triangle', 'blockstrap' ),
+				'circle'   => __( 'circle', 'blockstrap-page-builder-blocks' ),
+				'diamond'  => __( 'Diamond', 'blockstrap-page-builder-blocks' ),
+				'flower'   => __( 'Flower', 'blockstrap-page-builder-blocks' ),
+				'hexagon'  => __( 'Hexagon', 'blockstrap-page-builder-blocks' ),
+				'rounded'  => __( 'Rounded', 'blockstrap-page-builder-blocks' ),
+				'sketch'   => __( 'sketch', 'blockstrap-page-builder-blocks' ),
+				'triangle' => __( 'triangle', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'    => __( 'Image Mask', 'blockstrap' ),
+			'group'    => __( 'Image Mask', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['mask_position'] = array(
 			'type'            => 'select',
-			'title'           => __( 'Position', 'blockstrap' ),
+			'title'           => __( 'Position', 'blockstrap-page-builder-blocks' ),
 			'options'         => array(
-				'center center' => __( 'Center Center', 'blockstrap' ),
-				'center left'   => __( 'Center Left', 'blockstrap' ),
-				'center right'  => __( 'Center Right', 'blockstrap' ),
-				'top center'    => __( 'Top Center', 'blockstrap' ),
-				'top left'      => __( 'Top Left', 'blockstrap' ),
-				'top right'     => __( 'Top Right', 'blockstrap' ),
-				'bottom center' => __( 'Bottom Center', 'blockstrap' ),
-				'bottom left'   => __( 'bottom left', 'blockstrap' ),
-				'bottom right'  => __( 'bottom right', 'blockstrap' ),
+				'center center' => __( 'Center Center', 'blockstrap-page-builder-blocks' ),
+				'center left'   => __( 'Center Left', 'blockstrap-page-builder-blocks' ),
+				'center right'  => __( 'Center Right', 'blockstrap-page-builder-blocks' ),
+				'top center'    => __( 'Top Center', 'blockstrap-page-builder-blocks' ),
+				'top left'      => __( 'Top Left', 'blockstrap-page-builder-blocks' ),
+				'top right'     => __( 'Top Right', 'blockstrap-page-builder-blocks' ),
+				'bottom center' => __( 'Bottom Center', 'blockstrap-page-builder-blocks' ),
+				'bottom left'   => __( 'bottom left', 'blockstrap-page-builder-blocks' ),
+				'bottom right'  => __( 'bottom right', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'         => 'center center',
 			'desc_tip'        => true,
-			'group'           => __( 'Image Mask', 'blockstrap' ),
+			'group'           => __( 'Image Mask', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_mask%]!=""',
 		);
 
-		$arguments['css_class'] = array(
-			'type'    => 'text',
-			'title'   => __( 'Additional CSS class(es)', 'blockstrap' ),
-			'desc'    => __( 'Separate multiple classes with spaces.', 'blockstrap' ),
-			'default' => '',
-			'group'   => __( 'Advanced', 'blockstrap' ),
-		);
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
+
+		$arguments['css_class'] = sd_get_class_input();
 
 		return $arguments;
 	}
