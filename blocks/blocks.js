@@ -34,3 +34,87 @@ registerBlockType( 'blockstrap/blockstrap-widget-skip-links', { title: 'BS > Ski
 registerBlockType( 'blockstrap/blockstrap-widget-tab', { title: 'BS > Tab' } );
 registerBlockType( 'blockstrap/blockstrap-widget-tabs', { title: 'BS > Tabs' } );
 */
+
+
+el(
+	'div',
+	wp.blockEditor.useBlockProps(
+		{
+			//dangerouslySetInnerHTML: {__html: onChangeContent()},
+			style: sd_build_aui_styles( props.attributes ),
+			className: sd_build_aui_class( props.attributes ),
+
+		}
+	),
+	el(
+		'nav',
+		{className: props.attributes.tabs_greedy ? 'greedy' : ''},
+		el(
+			'ul',
+			{className: (props.attributes.tabs_style == 'nav-pills' ? 'border-0 ' : '') + 'nav nav-tabs ' + props.attributes.tabs_style + ' ' + props.attributes.tab_size + ' mb-' + props.attributes.tabs_head_mb + ' ' + sd_build_aui_class( {flex_justify_content : props.attributes.tabs_flex_justify_content,flex_justify_content_md : props.attributes.tabs_flex_justify_content_md,flex_justify_content_lg : props.attributes.tabs_flex_justify_content_lg} ) ,role : 'tablist'},
+			(function() {
+				let tabs       = [];
+				let tabs_array = [];
+
+				if (childBlocks.length) {
+					let active_index = 0
+
+					childBlocks.map(
+						(tab, index) => (
+						tabs_array.push( {name:tab.attributes.text,id:tab.attributes.anchor} ),
+						active_index = tab.clientId === wp.data.select( 'core/editor' ).getBlockSelectionStart() || hasSelectedInnerBlock( tab ) ? index : active_index
+						)
+					);
+
+					props.setAttributes(
+						{
+							tabs_head_array: JSON.stringify( tabs_array ).replace( '[','' ).replace( ']','' )
+						}
+					);
+
+					childBlocks.map(
+						(tab, index) => (
+						//console.log( 'tab:' + index )
+						tabs.push(
+							el(
+								'li',
+								{className:'nav-item'},
+								el(
+									'button',
+									{
+										className: active_index === index ? 'nav-link active ' + sd_build_aui_class( {rounded_size : props.attributes.tabs_rounded_size} ) : 'nav-link ' + sd_build_aui_class( {rounded_size : props.attributes.tabs_rounded_size} ),
+										'data-{$bs5}toggle': 'tab',
+										type: 'button',
+										role: 'tab',
+										'aria-selected': false,
+										'aria-controls': 'nav-profile',
+										'data-{$bs5}target':  '#block-' + tab.clientId
+									},
+									tab.attributes.text ? tab.attributes.text : 'Tab ' + (index + 1)
+								)
+							)
+						)
+						)
+					);
+				}
+
+				return tabs;
+			})(),
+		),
+	),
+	el(
+		'div',
+		wp.blockEditor.useInnerBlocksProps(
+			{className: 'tab-content'},
+			{orientation: 'horizontal',inner_element: 'div',
+				template:
+				[
+				[ 'blockstrap/blockstrap-widget-tab', {text:'Tab1',anchor:'tab-1'}, [[ 'core/paragraph', { placeholder: 'Add your blocks here' } ],] ],
+				[ 'blockstrap/blockstrap-widget-tab', {text:'Tab2',anchor:'tab-2'}, [[ 'core/paragraph', { placeholder: 'Add your blocks here' } ],] ],
+
+				]
+				,
+			},
+		)
+	)
+)

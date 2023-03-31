@@ -39,6 +39,13 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
+= 0.1.1 =
+* New Accordion block added - ADDED
+* WP 6.2 apply globally feature disabled until they add a way for devs to remove per block - CHANGED
+* Image block, new alt setting - ADDED
+* Image block, new lazy load setting - ADDED
+* Image block, new setting to remove icon on link hover - ADDED
+
 = 0.1.0 =
 * Button block hover styling not working - FIXED
 * Breadcrumb block - ADDED

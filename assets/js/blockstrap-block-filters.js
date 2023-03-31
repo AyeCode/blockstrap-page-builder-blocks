@@ -275,3 +275,56 @@ addFilter(
 function blockstrap_blocks_add_editor_compat_class(){
 	jQuery('.edit-post-visual-editor').addClass('bsui');
 }
+
+/*
+Remove the "Apply Globally" button as it adds a new advanced tab in block settings and is not used by any of our blocks.
+@todo remove this once they add an option to remove per block https://github.com/WordPress/gutenberg/issues/47256
+ */
+wp.hooks.removeFilter(
+	'editor.BlockEdit',
+	'core/edit-site/push-changes-to-global-styles'
+);
+
+//
+// function blockstrap_blocks_add_post_editor_root_class(){
+// 	jQuery('.is-root-container').addClass('container');
+// 	console.log('add root class');
+// }
+//
+// wp.domReady( function() {
+// 	blockstrap_blocks_add_post_editor_root_class();
+// 	setTimeout(function(){
+// 		blockstrap_blocks_add_post_editor_root_class();
+// 	}, 5000);
+//
+// 	window._wpLoadBlockEditor.then( function() {
+//
+// 		const getDeviceType = () => wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
+//
+// 		let deviceType = wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
+//
+// 		wp.data.subscribe(() => {
+//
+// 			// get the current postFormat
+// 			const newDeviceType = getDeviceType();
+//
+// 			// only do something if postFormat has changed.
+// 			if( deviceType !== newDeviceType) {
+//
+// 				// Do whatever you want after postFormat has changed
+// 				blockstrap_blocks_add_post_editor_root_class();
+// 				setTimeout(function(){
+// 					blockstrap_blocks_add_post_editor_root_class();
+// 				}, 500);
+//
+// 			}
+//
+// 			// update the postFormat variable.
+// 			deviceType = newDeviceType;
+//
+// 		});
+//
+// 	});
+//
+// } );
+

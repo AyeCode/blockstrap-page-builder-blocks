@@ -224,6 +224,8 @@ final class BlockStrap {
 		require_once 'blocks/class-blockstrap-widget-breadcrumb.php';
 		require_once 'blocks/class-blockstrap-widget-search.php';
 		require_once 'blocks/class-blockstrap-widget-share.php';
+		require_once 'blocks/class-blockstrap-widget-accordion.php';
+		require_once 'blocks/class-blockstrap-widget-accordion-item.php';
 
 
 //		require_once 'blocks/class-blockstrap-widget-popup-test.php'; //@todo remove before release
@@ -236,10 +238,3 @@ final class BlockStrap {
 
 //run
 BlockStrap::instance();
-
-
-
-//add_action('wp','xserasa');
-function xserasa(){
-	print_r(get_block_templates(array(),'wp_template_part'));exit;
-}

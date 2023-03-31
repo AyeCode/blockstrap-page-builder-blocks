@@ -179,6 +179,34 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'group'       => __( 'Image', 'blockstrap-page-builder-blocks' ),
 		);
 
+		$arguments['img_alt'] = array(
+			'type'  => 'text',
+			'title' => __( 'Image alt', 'blockstrap-page-builder-blocks' ),
+			'desc'  => __( '(image description, highly recommended)', 'blockstrap-page-builder-blocks' ),
+			'group' => __( 'Image', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['img_lazyload'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Lazyload', 'blockstrap-page-builder-blocks' ),
+			'options'  => array(
+				''      => __( 'Off', 'blockstrap-page-builder-blocks' ),
+				'lazy'  => __( 'On', 'blockstrap-page-builder-blocks' ),
+				'eager' => __( 'Force off', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Image', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['img_lazyload_notice'] = array(
+			'type'            => 'notice',
+			'desc'            => __( 'Only lazyload images below the fold (off-screen).', 'blockstrap-page-builder-blocks' ),
+			'status'          => 'info',
+			'group'           => __( 'Image', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%img_lazyload%]=="lazy"',
+		);
+
 		$arguments['img_link_to'] = array(
 			'type'     => 'select',
 			'title'    => __( 'Link to', 'blockstrap-page-builder-blocks' ),
@@ -222,6 +250,20 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'desc_tip'        => true,
 			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%img_link_to%]=="media" && [%img_link_lightbox%]!="" && [%img_src%]!="url"',
+		);
+
+		$arguments['img_link_hover_effect'] = array(
+			'type'            => 'select',
+			'title'           => __( 'Hover effect', 'blockstrap-page-builder-blocks' ),
+			'options'         => array(
+				''       => __( 'Darken + Icon', 'blockstrap-page-builder-blocks' ),
+				'darken' => __( 'Darken', 'blockstrap-page-builder-blocks' ),
+				'none'   => __( 'None', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%img_link_to%]!=""',
 		);
 
 		// caption
@@ -319,12 +361,12 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'type'     => 'select',
 			'title'    => __( 'Overlay', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				''         => __( 'None', 'blockstrap-page-builder-blocks' ),
-				'bottom'    => __( 'Bottom', 'blockstrap-page-builder-blocks' ),
+				''       => __( 'None', 'blockstrap-page-builder-blocks' ),
+				'bottom' => __( 'Bottom', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
-			'group'           => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
@@ -433,6 +475,9 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
 		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
 
+		// float
+		$arguments = function_exists( 'sd_get_float_group' ) ? $arguments + sd_get_float_group() : $arguments;
+
 		$arguments['img_mask'] = array(
 			'type'     => 'select',
 			'title'    => __( 'Mask', 'blockstrap-page-builder-blocks' ),
@@ -495,16 +540,19 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
 		global $post, $aui_bs5;
 
-		$link_to      = $args['img_link_to'] ? esc_attr( $args['img_link_to'] ) : '';
-		$image_src    = '';
-		$image_size   = ! empty( $args['img_size'] ) ? esc_attr( $args['img_size'] ) : 'full';
-		$image        = '';
-		$image_class  = 'mw-100 w-100';
-		$image_class .= ! empty( $args['img_border'] ) ? ' border border-' . esc_attr( $args['img_border'] ) : '';
-		$image_class .= ! empty( $args['img_rounded'] ) ? ' ' . esc_attr( $args['img_rounded'] ) : '';
-		$image_class .= ! empty( $args['img_rounded_size'] ) ? ' rounded-' . esc_attr( $args['img_rounded_size'] ) : '';
-		$image_class .= ! empty( $args['img_shadow'] ) ? ' ' . esc_attr( $args['img_shadow'] ) : '';
-		$image_class .= ! empty( $args['img_aspect'] ) ? ' embed-responsive-item' : '';
+		$link_to        = $args['img_link_to'] ? esc_attr( $args['img_link_to'] ) : '';
+		$link_hover     = ! empty( $args['img_link_hover_effect'] ) ? esc_attr( $args['img_link_hover_effect'] ) : '';
+		$link_image_src = '';
+		$image_src      = '';
+		$image_size     = ! empty( $args['img_size'] ) ? esc_attr( $args['img_size'] ) : 'full';
+		$lightbox_size  = ! empty( $args['lightbox_size'] ) ? esc_attr( $args['lightbox_size'] ) : 'full';
+		$image          = '';
+		$image_class    = 'mw-100 w-100';
+		$image_class   .= ! empty( $args['img_border'] ) ? ' border border-' . esc_attr( $args['img_border'] ) : '';
+		$image_class   .= ! empty( $args['img_rounded'] ) ? ' ' . esc_attr( $args['img_rounded'] ) : '';
+		$image_class   .= ! empty( $args['img_rounded_size'] ) ? ' rounded-' . esc_attr( $args['img_rounded_size'] ) : '';
+		$image_class   .= ! empty( $args['img_shadow'] ) ? ' ' . esc_attr( $args['img_shadow'] ) : '';
+		$image_class   .= ! empty( $args['img_aspect'] ) ? ' embed-responsive-item' : '';
 
 		// image mask
 		$image_styles  = ! empty( $args['img_mask'] ) ? '-webkit-mask-image: url("' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/masks/' . esc_attr( $args['img_mask'] ) . '.svg");' : '';
@@ -524,15 +572,31 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			$image_class .= ' embed-item-cover-xy ';
 		}
 
+		// image attributes
+		$img_alt      = ! empty( $args['img_alt'] ) ? esc_attr( $args['img_alt'] ) : '';
+		$img_alt_tag  = ! empty( $img_alt ) ? 'alt="' . $img_alt . '"' : '';
+		$img_lazy     = ! empty( $args['img_lazyload'] ) ? esc_attr( $args['img_lazyload'] ) : '';
+		$img_lazy_tag = ! empty( $img_alt ) ? 'loading="' . $img_lazy . '"' : '';
+		$img_attr     = array(
+			'alt'     => $img_alt,
+			'loading' => $img_lazy,
+			'class'   => $image_class,
+		);
+
 		if ( 'url' === $args['img_src'] ) {
 			$image_src = $args['img_url'] ? esc_url_raw( $args['img_url'] ) : '';
 		} elseif ( 'featured' === $args['img_src'] ) {
-			$image     = get_the_post_thumbnail( $post, $image_size, array( 'class' => $image_class ) );
-			$image_src = get_the_post_thumbnail_url( $post, 'large' );
+			$image          = get_the_post_thumbnail( $post, $image_size, $img_attr );
+			$image_src      = get_the_post_thumbnail_url( $post, 'large' );
+			$link_image_src = get_the_post_thumbnail_url( $post, $lightbox_size );
 		} elseif ( ! empty( $args['img_image_id'] ) ) {
-			$image         = wp_get_attachment_image( absint( $args['img_image_id'] ), $image_size, false, array( 'class' => $image_class ) );
+			$image         = wp_get_attachment_image( absint( $args['img_image_id'] ), $image_size, false, $img_attr );
 			$image_src_arr = wp_get_attachment_image_src( absint( $args['img_image_id'] ), 'large' );
 			$image_src     = ! empty( $image_src_arr[0] ) ? esc_url_raw( $image_src_arr[0] ) : '';
+
+			$link_image_src_arr = wp_get_attachment_image_src( absint( $args['img_image_id'] ),$lightbox_size );
+			$link_image_src     = ! empty( $link_image_src_arr[0] ) ? esc_url_raw( $link_image_src_arr[0] ) : '';
+
 		}
 
 		if ( ! $image_src && $this->is_block_content_call() ) {
@@ -540,19 +604,23 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		} elseif ( ! $image ) {
 
 			if ( 'featured' === $args['img_src'] && 'upload' === $args['fallback_img_src'] && ! empty( $args['fallback_img_image_id'] ) ) {
-				$image         = wp_get_attachment_image( absint( $args['fallback_img_image_id'] ), $image_size, false, array( 'class' => $image_class ) );
+				$image         = wp_get_attachment_image( absint( $args['fallback_img_image_id'] ), $image_size, false, $img_attr );
 				$image_src_arr = wp_get_attachment_image_src( absint( $args['fallback_img_image_id'] ), 'large' );
 				$image_src     = ! empty( $image_src_arr[0] ) ? esc_url_raw( $image_src_arr[0] ) : '';
 			} elseif ( 'featured' === $args['img_src'] && 'default' === $args['fallback_img_src'] ) {
 				$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg';
-				$image     = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" />';
+				$image     = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
 			} else {
-				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" />';
+				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
 			}
 		}
 
 		if ( ! $image_src && ! $this->is_preview() ) {
 			return;
+		}
+
+		if ( empty( $link_image_src ) ) {
+			$link_image_src = $image_src;
 		}
 
 		// maybe add image styles
@@ -584,12 +652,17 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$ratio_val          = $aui_bs5 ? str_replace( 'by', 'x', $args['img_aspect'] ) : $args['img_aspect'];
 		$ratio_cover_class .= ! empty( $args['img_aspect'] ) ? ' ' . $ratio_prefix . esc_attr( $ratio_val ) . ' ' : '';
 
+		// hover action
+		$ratio_cover_class .= 'none' === $link_hover ? '' : ' embed-has-action';
+
 		if ( 'media' === $link_to ) {
+			$icon  = '' === $link_hover ? '<i class="fas fa-search-plus w-auto h-auto"></i>' : '';
 			$image = sprintf(
-				'<a href="%1$s" class="%2$s aui-lightbox-image  embed-has-action position-relative">%3$s<i class="fas fa-search-plus w-auto h-auto"></i></a>',
-				$image_src,
+				'<a href="%1$s" class="%2$s aui-lightbox-image position-relative">%3$s%4$s</a>',
+				$link_image_src,
 				$ratio_cover_class,
-				$image
+				$image,
+				$icon
 			);
 		} elseif ( 'custom' === $link_to ) {
 			$image = sprintf(
@@ -599,11 +672,13 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 				$image
 			);
 		} elseif ( 'post' === $link_to ) {
+			$icon  = '' === $link_hover ? '<i class="fas fa-link w-auto h-auto"></i>' : '';
 			$image = sprintf(
-				'<a href="%1$s" class="%2$s embed-has-action position-relative" >%3$s<i class="fas fa-link w-auto h-auto"></i></a>',
+				'<a href="%1$s" class="%2$s position-relative" >%3$s%4$s</a>',
 				$this->is_block_content_call() ? '#' : esc_url_raw( get_permalink() ),
 				$ratio_cover_class,
-				$image
+				$image,
+				$icon
 			);
 		} else {
 			$figure_attributes = str_replace( 'class="', 'class=" ' . $ratio_cover_class, $figure_attributes );

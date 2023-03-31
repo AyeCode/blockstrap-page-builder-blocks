@@ -221,7 +221,6 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 			$item_class .= ' mb-0';
 
-
 			unset( $args['text_color'] );
 			unset( $args['text_color_custom'] );
 			unset( $args['font_size'] );
@@ -234,7 +233,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 			$output .= '<nav aria-label="breadcrumb" ' . $class_output . $styles_output . '><ol class="breadcrumb  m-0 p-0 pt-1">';
 
-			$i = 0;
+			$i     = 0;
 			$total = count( $crumbs );
 			foreach ( $crumbs as $crumb ) {
 				$icon = '';
@@ -288,11 +287,12 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 			// Custom post type archive
 			$post_type        = get_post_type();
 			$post_type_object = get_post_type_object( $post_type );
-			$breadcrumbs[]    = array(
-				'name' => $post_type_object->label,
-				'link' => get_post_type_archive_link( $post_type ),
-			);
-
+			if ( isset( $post_type_object->label ) ) {
+				$breadcrumbs[] = array(
+					'name' => $post_type_object->label,
+					'link' => get_post_type_archive_link( $post_type ),
+				);
+			}
 		} elseif ( is_archive() && is_tax() && ! is_category() && ! is_tag() ) {
 
 			// Custom taxonomy archive
@@ -343,27 +343,26 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				$last_category = reset( $category );
 
 				if ( ! empty( $last_category ) ) {
-//					print_r( $last_category );
+					//                  print_r( $last_category );
 					$breadcrumbs[] = array(
 						'name' => $last_category->name,
 						'link' => get_term_link( $last_category->term_id ),
 					);
 				}
 
-
 				// Get parent any categories and create array
-//				$get_cat_parents = rtrim( get_category_parents( $last_category->term_id, false, ',' ), ',' );
-//				$cat_parents     = explode( ',', $get_cat_parents );
-//
-////				print_r( $cat_parents );
-//				// Loop through parent categories and add to breadcrumbs
-//				foreach ( $cat_parents as $parent ) {
-//					print_r( $parent );
-//					$breadcrumbs[] = array(
-//						'name' => $parent,
-//						'link' => get_term_link( $parent->term_id ),
-//					);
-//				}
+				//              $get_cat_parents = rtrim( get_category_parents( $last_category->term_id, false, ',' ), ',' );
+				//              $cat_parents     = explode( ',', $get_cat_parents );
+				//
+				////                print_r( $cat_parents );
+				//              // Loop through parent categories and add to breadcrumbs
+				//              foreach ( $cat_parents as $parent ) {
+				//                  print_r( $parent );
+				//                  $breadcrumbs[] = array(
+				//                      'name' => $parent,
+				//                      'link' => get_term_link( $parent->term_id ),
+				//                  );
+				//              }
 			}
 
 			// Add current page to breadcrumbs
@@ -372,7 +371,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'link' => '',
 			);
 
-//			print_r( $breadcrumbs );
+			//          print_r( $breadcrumbs );
 
 		} elseif ( is_category() ) {
 

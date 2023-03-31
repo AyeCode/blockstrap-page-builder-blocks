@@ -35,6 +35,28 @@ class BlockStrap_Blocks_Admin {
 		// Save term fields.
 		add_action( 'create_term', array( __CLASS__, 'save_term_fields' ), 10, 3 );
 		add_action( 'edit_term', array( __CLASS__, 'save_term_fields' ), 10, 3 );
+
+
+		// Set AUI to load on all post type edit screens
+		add_filter( 'aui_screen_ids', array( __CLASS__, 'maybe_load_aui' ) );
+	}
+
+	/**
+	 * Load AUI on all post edit screens so our blocks render.
+	 *
+	 * @param $aui_screens
+	 *
+	 * @return mixed
+	 */
+	public static function maybe_load_aui( $aui_screens ){
+
+		$screen = get_current_screen();
+
+		if ( ! empty( $screen->id ) && ! empty( $screen->base ) && 'post' === $screen->base ) {
+			$aui_screens[] = esc_attr( $screen->id );
+		}
+
+		return $aui_screens;
 	}
 
 	/**

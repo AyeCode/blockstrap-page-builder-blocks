@@ -531,7 +531,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 				.bs-tooltip-top .arrow{
 					margin-left:0px;
 				}
-				
+
 				.custom-switch input[type=checkbox]{
 				    display:none;
 				}
@@ -959,10 +959,34 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 					?>
                 </form>
 
-                <div id="wpbs-version"><?php echo $this->version; ?></div>
+                <div id="wpbs-version"  data-aui-source="<?php echo esc_attr( $this->get_load_source() ); ?>"><?php echo $this->version; ?></div>
             </div>
 
 			<?php
+		}
+
+		/**
+		 * Get the source plugin or theme loading the AUI.
+		 *
+		 * @return string|null
+		 */
+		public function get_load_source(){
+			$file = str_replace( array( "/", "\\" ), "/", realpath( __FILE__ ) );
+			$plugins_dir = str_replace( array( "/", "\\" ), "/", realpath( WP_PLUGIN_DIR ) );
+
+			// Find source plugin/theme of SD
+			$source = array();
+			if ( strpos( $file, $plugins_dir ) !== false ) {
+				$source = explode( "/", plugin_basename( $file ) );
+			} else if ( function_exists( 'get_theme_root' ) ) {
+				$themes_dir = str_replace( array( "/", "\\" ), "/", realpath( get_theme_root() ) );
+
+				if ( strpos( $file, $themes_dir ) !== false ) {
+					$source = explode( "/", ltrim( str_replace( $themes_dir, "", $file ), "/" ) );
+				}
+			}
+
+			return isset($source[0]) ? esc_attr($source[0]) : '';
 		}
 
 		public function customizer_settings($wp_customize){
@@ -1294,7 +1318,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
 			//  buttons
 			$output .= $prefix . ' .btn-'.esc_attr($type).'{';
-			$output .= ' 
+			$output .= '
             --bs-btn-bg: '.esc_attr($color_code).';
             --bs-btn-border-color: '.esc_attr($color_code).';
             --bs-btn-hover-bg: rgba(var(--bs-'.esc_attr($type).'-rgb), .9);
@@ -1316,7 +1340,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
 			//  buttons outline
 			$output .= $prefix . ' .btn-outline-'.esc_attr($type).'{';
-			$output .= ' 
+			$output .= '
             --bs-btn-border-color: '.esc_attr($color_code).';
             --bs-btn-hover-bg: rgba(var(--bs-'.esc_attr($type).'-rgb), .9);
             --bs-btn-hover-border-color: rgba(var(--bs-'.esc_attr($type).'-rgb), .9);
@@ -1338,7 +1362,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
             // button hover
 			$output .= $prefix . ' .btn-'.esc_attr($type).':hover{';
-			$output .= ' 
+			$output .= '
             box-shadow: 0 0.25rem 0.25rem 0.125rem rgb(var(--bs-'.esc_attr($type).'-rgb), .1), 0 0.375rem 0.75rem -0.125rem rgb(var(--bs-'.esc_attr($type).'-rgb) , .4);
             }
             ';
