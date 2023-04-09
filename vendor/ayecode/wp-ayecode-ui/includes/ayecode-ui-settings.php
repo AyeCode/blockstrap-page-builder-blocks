@@ -1144,7 +1144,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
                         // font face
                         if( !empty( $theme_settings['typography']['fontFamily'] ) ){
                             $t_fontface = str_replace( array('var:preset|','font-family|'), array('--wp--preset--','font-family--'), $theme_settings['typography']['fontFamily']  ); //var(--wp--preset--font-family--poppins)
-                            $css .= '--bs-body-font-family: ' . esc_attr($t_fontface) . ';';
+                            $css .= '--bs-body-font-family: var(' . esc_attr($t_fontface) . ');';
                         }
 
                         // font size
