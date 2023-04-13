@@ -181,8 +181,8 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 		$arguments['img_alt'] = array(
 			'type'  => 'text',
-			'title' => __( 'Image alt', 'blockstrap-page-builder-blocks' ),
-			'desc'  => __( '(image description, highly recommended)', 'blockstrap-page-builder-blocks' ),
+			'title' => __( 'Alt text (alternative text)', 'blockstrap-page-builder-blocks' ),
+			'desc'  => sprintf( __( '%1$sDescribe the purpose of the image%2$s Leave empty if the image is purely decorative.', 'blockstrap-page-builder-blocks' ), '<a class="components-external-link" href="https://www.w3.org/WAI/tutorials/images/decision-tree" target="_blank" rel="external noreferrer noopener">', '<i class="fas fa-external-link-alt"></i></a>' ),
 			'group' => __( 'Image', 'blockstrap-page-builder-blocks' ),
 		);
 
@@ -594,7 +594,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			$image_src_arr = wp_get_attachment_image_src( absint( $args['img_image_id'] ), 'large' );
 			$image_src     = ! empty( $image_src_arr[0] ) ? esc_url_raw( $image_src_arr[0] ) : '';
 
-			$link_image_src_arr = wp_get_attachment_image_src( absint( $args['img_image_id'] ),$lightbox_size );
+			$link_image_src_arr = wp_get_attachment_image_src( absint( $args['img_image_id'] ), $lightbox_size );
 			$link_image_src     = ! empty( $link_image_src_arr[0] ) ? esc_url_raw( $link_image_src_arr[0] ) : '';
 
 		}
@@ -609,7 +609,10 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 				$image_src     = ! empty( $image_src_arr[0] ) ? esc_url_raw( $image_src_arr[0] ) : '';
 			} elseif ( 'featured' === $args['img_src'] && 'default' === $args['fallback_img_src'] ) {
 				$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg';
-				$image     = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
+				if ( ! $img_alt ) {
+					$img_alt_tag = 'alt="' . __( 'Placeholder image', 'blockstrap-page-builder-blocks' ) . '"';
+				}
+				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
 			} else {
 				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
 			}

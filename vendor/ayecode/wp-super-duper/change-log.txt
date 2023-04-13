@@ -1,3 +1,9 @@
+= 1.1.19 =
+* Block Visibility feature added - ADDED
+
+= 1.1.18 =
+* Added helper function for float inputs - ADDED
+
 = 1.1.17 =
 * Block tab groups mismatch causes JS error - FIXED
 

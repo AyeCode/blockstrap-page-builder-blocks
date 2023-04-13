@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.2
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -45,6 +45,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 * Image block, new alt setting - ADDED
 * Image block, new lazy load setting - ADDED
 * Image block, new setting to remove icon on link hover - ADDED
+* Block visibility feature added for some blocks - ADDED
 
 = 0.1.0 =
 * Button block hover styling not working - FIXED

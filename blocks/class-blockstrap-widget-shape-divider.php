@@ -119,6 +119,7 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 					//$css += 'width: 100%;';
 					$css += 'line-height: 0;';
 					$css += 'overflow: hidden;';
+					$css += 'margin: 0 1px;';
 
 
 					const can_flip = ["mountains", "drops", "clouds", "pyramids", "triangle-asymmetrical", "tilt", "opacity-tilt", "curve-asymmetrical", "waves", "wave-brush", "waves-pattern"];

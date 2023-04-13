@@ -33,6 +33,11 @@ class BlockStrap_Widget_Accordion extends WP_Super_Duper {
 					),
 					'innerBlocksProps' => array(
 						'orientation' => 'vertical',
+						'if_template'    => "[
+														[ 'blockstrap/blockstrap-widget-accordion-item', {text:'Tab1',anchor:'tab-1'}, [[ 'core/paragraph', { placeholder: 'Add your blocks here' } ],] ],
+														[ 'blockstrap/blockstrap-widget-accordion-item', {text:'Tab2',anchor:'tab-2'}, [[ 'core/paragraph', { placeholder: 'Add your blocks here' } ],] ],
+
+													]",
 					),
 
 				),

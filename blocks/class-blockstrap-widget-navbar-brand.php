@@ -28,9 +28,12 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					array(
 						'element'         => 'img',
 						'class'           => '',
+						'alt'             => __( 'Site logo', 'blockstrap-page-builder-blocks' ),
 						'element_require' => '[%icon_image%]!=""',
 						'if_src'          => '[%icon_image%]==="Blockstrap-white.png" ? "' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/Blockstrap-white.png" : [%icon_image%]',
 						'style'           => '{maxWidth:\'[%img_max_width%]px\'}',
+						'width'           => '[%img_max_width%]',
+						'height'           => '50',
 
 					),
 					array(
@@ -49,17 +52,20 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					array(
 						'element'         => 'img',
 						'class'           => '',
+						'alt'             => __( 'Site logo', 'blockstrap-page-builder-blocks' ),
 						'element_require' => '[%icon_image%]!=""',
 						'if_src'          => '[%icon_image%]==="Blockstrap-white.png" ? "' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/Blockstrap-white.png" : [%icon_image%]',
 						'style'           => '{maxWidth:\'[%img_max_width%]px\'}',
+						'width'           => '[%img_max_width%]',
+						'height'           => '50',
 
 					),
 					array(
-						'element' => 'span',
-						'class'   => 'mb-0 [%brand_font_size%] [%brand_font_weight%] [%brand_font_italic%]',
+						'element'                    => 'span',
+						'class'                      => 'mb-0 [%brand_font_size%] [%brand_font_weight%] [%brand_font_italic%]',
 						'if_dangerouslySetInnerHTML' => '{__html: props.attributes.text }',
 
-//						'if_content' => 'dangerouslySetInnerHTML: {__html: props.attributes.text}',
+				//                      'if_content' => 'dangerouslySetInnerHTML: {__html: props.attributes.text}',
 					),
 
 				),

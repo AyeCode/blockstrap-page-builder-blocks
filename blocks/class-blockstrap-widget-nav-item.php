@@ -80,12 +80,12 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 
 	public function link_types() {
 		$links = array(
-			'home'    => __( 'Home', 'blockstrap-page-builder-blocks' ),
-			'page'    => __( 'Page', 'blockstrap-page-builder-blocks' ),
-			'post-id' => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
-			'wp-login' => __( 'WP Login (logged out)', 'blockstrap-page-builder-blocks' ),
+			'home'      => __( 'Home', 'blockstrap-page-builder-blocks' ),
+			'page'      => __( 'Page', 'blockstrap-page-builder-blocks' ),
+			'post-id'   => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
+			'wp-login'  => __( 'WP Login (logged out)', 'blockstrap-page-builder-blocks' ),
 			'wp-logout' => __( 'WP Logout (logged in)', 'blockstrap-page-builder-blocks' ),
-			'custom'  => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+			'custom'    => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
 		);
 
 		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
@@ -206,6 +206,17 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			'default'     => '',
 			'desc_tip'    => true,
 			'group'       => __( 'Link', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['icon_aria_label'] = array(
+			'type'            => 'text',
+			'title'           => __( 'Aria label', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Describe the link for assistive technologies.', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'Visit our facebook page', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '( [%icon_class%]!="" && [%text%]=="" )',
 		);
 
 		// link styles
@@ -495,6 +506,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 		$link               = '#';
 		$link_text          = '';
 		$link_class         = 'nav-link';
+		$icon_aria_label    = ! empty( $args['icon_aria_label'] ) ? 'aria-label="' . esc_attr( $args['icon_aria_label'] ) . '"' : '';
 		$icon               = '';
 		$link_divider_pos   = ! empty( $args['link_divider'] ) ? esc_attr( $args['link_divider'] ) : '';
 		$link_divider_left  = 'left' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 start-0 translate-middle-y"></span>' : '';
@@ -703,10 +715,10 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper {
 			if ( $is_sub ) {
 				$link_class = str_replace( 'nav-link', 'dropdown-item', $link_class );
 			}
-			return $link_text || $icon ? '<a href="#' . esc_url_raw( $link ) . '" class="' . esc_attr( $link_class ) . '">' . $link_divider_left . $icon . esc_attr( $link_text ) . $link_divider_right . '</a>' : ''; // shortcode
+			return $link_text || $icon ? '<a href="#' . esc_url_raw( $link ) . '" class="' . esc_attr( $link_class ) . '" ' . $icon_aria_label . '>' . $link_divider_left . $icon . esc_attr( $link_text ) . $link_divider_right . '</a>' : ''; // shortcode
 
 		} else {
-			return $link_text || $icon ? '<li class="nav-item ' . $wrap_class . '"><a href="' . esc_url_raw( $link ) . '" class="' . esc_attr( $link_class ) . '">' . $link_divider_left . $icon . esc_attr( $link_text ) . $link_divider_right . '</a></li>' : ''; // shortcode
+			return $link_text || $icon ? '<li class="nav-item ' . $wrap_class . '"><a href="' . esc_url_raw( $link ) . '" class="' . esc_attr( $link_class ) . '" ' . $icon_aria_label . '>' . $link_divider_left . $icon . esc_attr( $link_text ) . $link_divider_right . '</a></li>' : ''; // shortcode
 
 		}
 

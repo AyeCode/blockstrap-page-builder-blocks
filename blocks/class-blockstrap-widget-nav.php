@@ -32,6 +32,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 					'"data-toggle"'   => 'collapse',
 					'"data-target"'   => '#navbarNav_' . $bs_navbar_count,
 					'element_require' => '[%inside_navbar%]=="1"',
+					'"aria-label"'    => __('Open menu','blockstrap-page-builder-blocks'),
 					array(
 						'element' => 'span',
 						'class'   => 'navbar-toggler-icon',

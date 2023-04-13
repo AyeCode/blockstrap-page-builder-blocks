@@ -280,10 +280,21 @@ function blockstrap_blocks_add_editor_compat_class(){
 Remove the "Apply Globally" button as it adds a new advanced tab in block settings and is not used by any of our blocks.
 @todo remove this once they add an option to remove per block https://github.com/WordPress/gutenberg/issues/47256
  */
-wp.hooks.removeFilter(
-	'editor.BlockEdit',
-	'core/edit-site/push-changes-to-global-styles'
-);
+function blockstrap_blocks_remove_gloabl_styles(){
+	wp.hooks.removeFilter(
+		'editor.BlockEdit',
+		'core/edit-site/push-changes-to-global-styles'
+	);
+}
+blockstrap_blocks_remove_gloabl_styles();
+
+
+wp.domReady( function() {
+	blockstrap_blocks_remove_gloabl_styles();
+	setTimeout(function () {
+		blockstrap_blocks_remove_gloabl_styles();
+	}, 5000);
+});
 
 //
 // function blockstrap_blocks_add_post_editor_root_class(){

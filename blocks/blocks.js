@@ -33,6 +33,8 @@ registerBlockType( 'blockstrap/blockstrap-widget-share', { title: 'BS > Share' }
 registerBlockType( 'blockstrap/blockstrap-widget-skip-links', { title: 'BS > Skip Links' } );
 registerBlockType( 'blockstrap/blockstrap-widget-tab', { title: 'BS > Tab' } );
 registerBlockType( 'blockstrap/blockstrap-widget-tabs', { title: 'BS > Tabs' } );
+registerBlockType( 'blockstrap/blockstrap-widget-accordion', { title: 'BS > Accordion' } );
+registerBlockType( 'blockstrap/blockstrap-widget-accordion-item', { title: 'BS > Accordion Item' } );
 */
 
 
