@@ -36,9 +36,9 @@ class BlockStrap_Blocks_Admin {
 		add_action( 'create_term', array( __CLASS__, 'save_term_fields' ), 10, 3 );
 		add_action( 'edit_term', array( __CLASS__, 'save_term_fields' ), 10, 3 );
 
-
 		// Set AUI to load on all post type edit screens
 		add_filter( 'aui_screen_ids', array( __CLASS__, 'maybe_load_aui' ) );
+
 	}
 
 	/**
@@ -48,7 +48,7 @@ class BlockStrap_Blocks_Admin {
 	 *
 	 * @return mixed
 	 */
-	public static function maybe_load_aui( $aui_screens ){
+	public static function maybe_load_aui( $aui_screens ) {
 
 		$screen = get_current_screen();
 
@@ -80,7 +80,7 @@ class BlockStrap_Blocks_Admin {
 			update_option( 'blockstrap_blocks_compatibility_notice', 1 );
 		}
 
-		$show     = ! get_option( 'blockstrap_blocks_compatibility_notice' );
+		$show = ! get_option( 'blockstrap_blocks_compatibility_notice' );
 
 		if ( $show ) {
 			$install_url     = wp_nonce_url(
@@ -157,7 +157,7 @@ class BlockStrap_Blocks_Admin {
 	 * @param string $taxonomy Current taxonomy slug.
 	 */
 	public static function edit_term_fields( $term, $taxonomy ) {
-		$bg_color = get_term_meta( $term->term_id, '_bs_term_bg_color', true );
+		$bg_color   = get_term_meta( $term->term_id, '_bs_term_bg_color', true );
 		$text_color = get_term_meta( $term->term_id, '_bs_term_text_color', true );
 
 		?>

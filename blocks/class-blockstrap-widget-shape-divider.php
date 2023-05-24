@@ -80,7 +80,7 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
 
-		$content = str_replace( '&lt;', '<', $content );
+		//$content = str_replace( '&lt;', '<', $content ); // this could cause XSS in search
 
 		if ( empty( $content ) ) {
 			return '';

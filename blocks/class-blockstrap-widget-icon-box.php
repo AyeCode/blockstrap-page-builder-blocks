@@ -277,8 +277,9 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 		// icon padding bottom
 		$arguments['icon_pb'] = sd_get_padding_input(
-			'pb',
+			'pb_custom',
 			array(
+				'title'    => __( 'Padding bottom', 'blockstrap-page-builder-blocks' ),
 				'group' => __( 'Icon Style', 'blockstrap-page-builder-blocks' ),
 			)
 		);
@@ -362,8 +363,9 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 		// icon padding bottom
 		$arguments['title_pb'] = sd_get_padding_input(
-			'pb',
+			'pb_custom',
 			array(
+				'title'    => __( 'Padding bottom', 'blockstrap-page-builder-blocks' ),
 				'group' => __( 'Title Style', 'blockstrap-page-builder-blocks' ),
 			)
 		);
@@ -448,8 +450,9 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 		// icon padding bottom
 		$arguments['desc_pb'] = sd_get_padding_input(
-			'pb',
+			'pb_custom',
 			array(
+				'title'    => __( 'Padding bottom', 'blockstrap-page-builder-blocks' ),
 				'group' => __( 'Description Style', 'blockstrap-page-builder-blocks' ),
 			)
 		);

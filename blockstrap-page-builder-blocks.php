@@ -11,7 +11,7 @@
  * Plugin Name: BlockStrap Page Builder Blocks
  * Plugin URI: https://ayecode.io/
  * Description: BlockStrap - A FSE page builder for WordPress
- * Version: 0.1.1
+ * Version: 0.1.2
  * Author: AyeCode
  * Author URI: https://ayecode.io
  * Text Domain: blockstrap-page-builder-blocks
@@ -21,7 +21,7 @@
  */
 
 
-define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.1' );
+define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.2' );
 
 /**
  * The BlockStrap Class
@@ -108,8 +108,14 @@ final class BlockStrap {
 	 */
 	public function force_render_blocks_on_templates( $block_content, $block ) {
 
+		$block_content = strip_shortcodes( do_shortcode( $block_content ) );
+
+		// @todo WP 6.2.1+ broke shortcodes, the order they added the code back broke other things, we need this till they revert it: https://core.trac.wordpress.org/ticket/58366#comment:37
+		$block_content = str_replace('[/bs_','[bs_',$block_content );
+
 		return strip_shortcodes( do_shortcode( $block_content ) );
 	}
+
 
 	/**
 	 * Enqueue scripts
@@ -189,6 +195,10 @@ final class BlockStrap {
 			require_once 'classes/class-blockstrap-blocks-admin.php';
 		}
 
+		require_once 'classes/class-blockstrap-blocks-templates.php';
+		require_once 'classes/class-blockstrap-blocks-ajax.php';
+
+
 		// Patterns
 		require_once 'patterns/comments.php';
 		require_once 'patterns/content.php';
@@ -226,6 +236,7 @@ final class BlockStrap {
 		require_once 'blocks/class-blockstrap-widget-share.php';
 		require_once 'blocks/class-blockstrap-widget-accordion.php';
 		require_once 'blocks/class-blockstrap-widget-accordion-item.php';
+		//require_once 'blocks/class-blockstrap-widget-contact.php'; // not ready for release yet
 
 
 //		require_once 'blocks/class-blockstrap-widget-popup-test.php'; //@todo remove before release
@@ -238,3 +249,10 @@ final class BlockStrap {
 
 //run
 BlockStrap::instance();
+
+//function eeeeeeeeeeee() {
+//	echo strip_shortcodes( "testing [/bs_container]" );exit;
+//
+//}
+//
+//add_action('init','eeeeeeeeeeee');

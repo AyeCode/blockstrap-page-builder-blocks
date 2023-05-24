@@ -308,7 +308,7 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			$content = preg_replace( '/:url\(\w+:\/\/\S*\/icons\/placeholder.png/', ':url(' . $featured_image, $content );
 		}
 
-		$content = str_replace( '&lt;', '<', $content );
+		//$content = str_replace( '&lt;', '<', $content ); // this could cause XSS in search
 
 		if ( empty( $content ) ) {
 			return '';

@@ -202,6 +202,8 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 		$output = '';
 		$crumbs = $this->get_breadcrumbs();
 
+//		/print_r($crumbs);exit();
+
 		// maybe remove home link
 		if ( ! empty( $crumbs ) && ! empty( $args['hide_home'] ) ) {
 			array_shift( $crumbs );
@@ -271,6 +273,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 	 * @return array
 	 */
 	public function get_breadcrumbs() {
+		global $post;
 
 		// Set up variables
 		$breadcrumbs        = array();
@@ -505,7 +508,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 			// Search results page
 			$breadcrumbs[] = array(
-				'name' => 'Search results for: ' . get_search_query(),
+				'name' => 'Search results for: ' . esc_attr( get_search_query() ),
 				'link' => '',
 			);
 

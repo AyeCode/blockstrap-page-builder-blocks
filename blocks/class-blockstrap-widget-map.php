@@ -89,7 +89,7 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 				'google' => __( 'Google', 'blockstrap-page-builder-blocks' ),
 				'osm'    => __( 'Open Street Maps', 'blockstrap-page-builder-blocks' ),
 			),
-			'default'  => 'upload',
+			'default'  => 'google',
 			'desc_tip' => true,
 			'group'    => __( 'Map', 'blockstrap-page-builder-blocks' ),
 		);
