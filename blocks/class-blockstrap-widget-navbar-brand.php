@@ -38,7 +38,7 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					),
 					array(
 						'element' => 'span',
-						'class'   => 'mb-0 [%brand_font_size%] [%brand_font_weight%] [%brand_font_italic%]',
+						'if_class'   => 'props.attributes.brand_font_italic ? "mb-0 [%brand_font_size%] [%brand_font_weight%] fst-italic" : "mb-0 [%brand_font_size%] [%brand_font_weight%] [%brand_font_italic%]"',
 						'content' => '[%text%]',
 					),
 
@@ -62,7 +62,7 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					),
 					array(
 						'element'                    => 'span',
-						'class'                      => 'mb-0 [%brand_font_size%] [%brand_font_weight%] [%brand_font_italic%]',
+						'if_class'   => 'props.attributes.brand_font_italic ? "mb-0 [%brand_font_size%] [%brand_font_weight%] fst-italic" : "mb-0 [%brand_font_size%] [%brand_font_weight%] [%brand_font_italic%]"',
 						'if_dangerouslySetInnerHTML' => '{__html: props.attributes.text }',
 
 				//                      'if_content' => 'dangerouslySetInnerHTML: {__html: props.attributes.text}',

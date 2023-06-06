@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.2
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -38,6 +38,13 @@ The manual installation method involves downloading our Directory plugin and upl
 Automatic updates should work seamlessly. We always suggest you backup your website before any automated update to avoid unforeseen problems.
 
 == Changelog ==
+
+= 0.1.3 =
+* post info block Deprecated: Optional parameter notice - FIXED
+* Several minor block improvements - ADDED
+* Gallery block in 1-2-5 layout could skip last image - FIXED
+* BS > Contact form, block added for simple contact forms - ADDED
+* New option added in BS > Button and BS > Nav item to be able to open BS > Contact form lightboxes - ADDED
 
 = 0.1.2 =
 * Map block Google address input not showing as default value wrong - FIXED

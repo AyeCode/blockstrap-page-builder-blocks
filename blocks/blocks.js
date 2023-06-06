@@ -35,6 +35,7 @@ registerBlockType( 'blockstrap/blockstrap-widget-tab', { title: 'BS > Tab' } );
 registerBlockType( 'blockstrap/blockstrap-widget-tabs', { title: 'BS > Tabs' } );
 registerBlockType( 'blockstrap/blockstrap-widget-accordion', { title: 'BS > Accordion' } );
 registerBlockType( 'blockstrap/blockstrap-widget-accordion-item', { title: 'BS > Accordion Item' } );
+registerBlockType( 'blockstrap/blockstrap-widget-contact', { title: 'BS > Contact Form' } );
 */
 
 

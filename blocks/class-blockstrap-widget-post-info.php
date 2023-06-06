@@ -748,7 +748,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 	}
 
-	public function output_html( $text = '', $link, $wrap_class, $wrapper_attributes, $icon, $is_link ) {
+	public function output_html( $text, $link, $wrap_class, $wrapper_attributes, $icon, $is_link ) {
 
 		if ( $is_link ) {
 			return $text ? sprintf(

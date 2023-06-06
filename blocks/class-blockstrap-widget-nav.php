@@ -10,9 +10,9 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 	 */
 	public function __construct() {
 
-		global $bs_navbar_count;
+		//global $bs_navbar_count;
 
-		$bs_navbar_count ++;
+		$bs_navbar_count = wp_unique_id();
 
 		$options = array(
 			'textdomain'       => 'blockstrap',
@@ -30,7 +30,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 					'className'       => 'navbar-toggler',
 					'type'            => 'button',
 					'"data-toggle"'   => 'collapse',
-					'"data-target"'   => '#navbarNav_' . $bs_navbar_count,
+					'"data-target"'   => '#navbarNav_[%anchor%]',
 					'element_require' => '[%inside_navbar%]=="1"',
 					'"aria-label"'    => __('Open menu','blockstrap-page-builder-blocks'),
 					array(
@@ -45,7 +45,8 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 					'inner_element' => 'div',
 					'if_className'  => '[%inside_navbar%]=="1" ? "collapse navbar-collapse" : ""',
 					'style'         => '{[%WrapStyle%]}',
-					'id'            => 'navbarNav_' . $bs_navbar_count,
+					'id'            => 'navbarNav_[%anchor%]',
+
 					array(
 						'element'          => 'innerBlocksProps',
 						'inner_element'    => 'ul',
@@ -59,7 +60,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 				),
 				array(
 					'element'         => 'script',
-					'content'         => 'jQuery("#navbarNav_' . $bs_navbar_count . '").on("show.bs.collapse", function () {jQuery("#navbarNav_' . $bs_navbar_count . '").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_' . $bs_navbar_count . '").on("hidden.bs.collapse", function () {jQuery("#navbarNav_' . $bs_navbar_count . '").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});',
+					'content'         => 'jQuery("#navbarNav_[%anchor%]").on("show.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_[%anchor%]").on("hidden.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});',
 					'element_require' => '[%inside_navbar%]=="1"',
 				),
 
@@ -126,6 +127,18 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 	public function set_arguments() {
 
 		$arguments = array();
+
+		$arguments['anchor'] = sd_get_anchor_input('anchor', array(
+			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
+		));
+
+		$arguments['anchor_notice'] = array(
+			'type'            => 'notice',
+			'desc'            => __( 'A unique HTML anchor is required to prevent issues with multiple navs.', 'blockstrap-page-builder-blocks' ),
+			'status'          => 'error', // 'warning' | 'success' | 'error' | 'info'
+			'group'           => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%anchor%]==""',
+		);
 
 		//
 		$arguments['inside_navbar'] = array(

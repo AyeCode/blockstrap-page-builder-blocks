@@ -122,7 +122,15 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'default'         => '',
 			'desc_tip'        => true,
 			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
-			'element_require' => '[%type%]=="custom"',
+			'element_require' => '( [%type%]=="custom" || [%type%]=="lightbox" )',
+		);
+
+		$arguments['lightbox_notice'] = array(
+			'type'            => 'notice',
+			'desc'            => __( 'Enter the BS > Contact form ID prefixed by a `#` eg: #contact-form', 'blockstrap-page-builder-blocks' ),
+			'status'          => 'info',
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%type%]=="lightbox"',
 		);
 
 		$arguments['text'] = array(
@@ -390,12 +398,12 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 	public function link_types() {
 		$links = array(
-			'home'    => __( 'Home', 'blockstrap-page-builder-blocks' ),
-			'none'    => __( 'None (non link)', 'blockstrap-page-builder-blocks' ),
-			'page'    => __( 'Page', 'blockstrap-page-builder-blocks' ),
-			'post-id' => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
-			'custom'  => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
-//			'lightbox'  => __( 'Custom URL', 'blockstrap-page-builder-blocks' ), // not implemented yet
+			'home'     => __( 'Home', 'blockstrap-page-builder-blocks' ),
+			'none'     => __( 'None (non link)', 'blockstrap-page-builder-blocks' ),
+			'page'     => __( 'Page', 'blockstrap-page-builder-blocks' ),
+			'post-id'  => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
+			'custom'   => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+			'lightbox' => __( 'Open Lightbox', 'blockstrap-page-builder-blocks' ), // not implemented yet
 		);
 
 		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
@@ -446,6 +454,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$tag       = 'a';
 		$link      = '#';
 		$link_text = '';
+		$link_attr = '';
 		if ( 'none' === $args['type'] ) {
 			$tag = 'span';
 
@@ -463,6 +472,10 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 					$link_text = esc_attr( $page->post_title );
 				}
 			}
+		} elseif ( 'lightbox' === $args['type'] ) {
+			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
+			$link_text = __( 'Open Lightbox', 'blockstrap-page-builder-blocks' );
+			$link_attr = ' data-bs-toggle="modal" ';
 		} elseif ( 'custom' === $args['type'] ) {
 			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
 			$link_text = __( 'Custom', 'blockstrap-page-builder-blocks' );
@@ -595,7 +608,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 		$styles = function_exists( 'sd_build_hover_styles' ) ? sd_build_hover_styles( $args, $this->is_preview() ) : '';
 
-		return $link_text || $icon_left || $icon_right ? '<' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $styles : ''; // shortcode
+		return $link_text || $icon_left || $icon_right ? '<' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '"' . $link_attr . '>' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $styles : ''; // shortcode
 
 	}
 

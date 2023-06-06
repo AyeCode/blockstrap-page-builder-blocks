@@ -379,7 +379,7 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 		}
 
 		$iframe = sprintf(
-			'<iframe src="%1$s" class="embed-responsive-item overflow-hidden" loading="lazy" width="100%%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>',
+			'<iframe src="%1$s" class="embed-responsive-item overflow-hidden" loading="lazy" width="100%%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Google map location"></iframe>',
 			$src
 		);
 
