@@ -15,6 +15,112 @@ BlockStrap Page Builder Blocks combines the power of BootStrap with the power of
 
 BlockStrap Page Builder Blocks gives you a selection of bootstrap blocks that let you craft a whole site including header, footer and even menus.
 
+# BlockStrap: The Ultimate BootStrap Page Builder for WordPress
+
+Transform your WordPress website with BlockStrap, the ultimate page builder plugin that brings the power of the Bootstrap CSS framework to your fingertips. 
+
+## Why Choose BlockStrap?
+
+BlockStrap is not just a plugin, it's a complete page builder that gives you the freedom to create any type of theme. It integrates seamlessly with the WordPress block editor, providing a wide range of blocks that are fully customizable and easy to use. 
+
+## Build Anything with BlockStrap
+
+Whether you're building a blog, a Directory, an e-commerce store, a portfolio, or a business website, BlockStrap has got you covered. With over 30+ unique blocks, you can create anything from stylish navigation bars and responsive image galleries to dynamic accordions and interactive maps. 
+
+
+## Features
+
+### BS > Archive Actions
+Perfect for blogs and news sites, this block allows you to add category selector and sort options to archive pages.
+
+### BS > Archive Title
+Display your archive titles in a stylish and professional manner.
+
+### BS > Breadcrumb
+Improve your site navigation with this breadcrumb block.
+
+### BS > Button
+Create stylish and responsive buttons that are highly customizable.
+
+### BS > Container
+This block allows you to create responsive containers for your content. It also doubles as row, column and card blocks.
+
+### BS > Counter
+Display numbers in a dynamic and engaging way with this counter block.
+
+### BS > Gallery
+Showcase your images in a beautiful and responsive gallery.
+
+### BS > Heading
+Create headings that stand out and match your theme.
+
+### BS > Icon Box
+Add icons to your site with this easy-to-use block.
+
+### BS > Image
+Display your images in a stylish and responsive manner.
+
+### BS > Map
+Add interactive maps to your site with this block.
+
+### BS > Nav
+Create a responsive navigation menu for your site.
+
+### BS > Nav Dropdown
+Add dropdown menus to your navigation with this block.
+
+### BS > Nav Item
+Add individual items to your navigation menu.
+
+### BS > Navbar
+Create a stylish and responsive navigation bar.
+
+### BS > Navbar Brand
+Display your brand / logo in your navigation bar with this block.
+
+### BS > Pagination
+Improve your site navigation with this pagination block.
+
+### BS > Post Excerpt
+Display post excerpts in a stylish and engaging manner.
+
+### BS > Post Info
+Showcase your post info with this block, including author, dates, comments, read time etc.
+
+### BS > Post Title
+Display your post titles in a stylish and professional manner.
+
+### BS > Search
+Add a search function to your site with this block.
+
+### BS > Shape Divider
+Add stylish dividers to your site with this block.
+
+### BS > Share
+Make it easy for your visitors to share your content with this social share block.
+
+### BS > Skip Links
+Improve your site accessibility with this skip links block.
+
+### BS > Tab
+Create tabs for your content with this block.
+
+### BS > Tabs
+Organize your content in a stylish and responsive tabs layout.
+
+### BS > Accordion
+Display your content in a dynamic accordion layout.
+
+### BS > Accordion Item
+Add individual items to your accordion with this block.
+
+### BS > Contact Form
+Add a simple and easy contact form to your site with this block.
+
+## Get BlockStrap Today!
+Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
+
+
 == Installation ==
 
 = Minimum Requirements =
