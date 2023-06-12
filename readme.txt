@@ -143,6 +143,16 @@ The manual installation method involves downloading our Directory plugin and upl
 
 Automatic updates should work seamlessly. We always suggest you backup your website before any automated update to avoid unforeseen problems.
 
+== Screenshots ==
+
+1. Archive Actions.
+2. Archive title.
+3. Breadcrumbs.
+4. Buttons.
+5. Contact form.
+6. Container multi-use block.
+7. Image Gallery.
+
 == Changelog ==
 
 = 0.1.5 =
