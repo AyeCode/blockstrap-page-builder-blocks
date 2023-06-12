@@ -619,14 +619,16 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 						$cols[ $key ] .= '</div></div>';
 					} elseif ( 4 === $i ) {
 						$cols[ $key ] = '<div class="col-12 p-0 m-0"><div class="row row-cols-5 p-0 m-0">' . $col;
-					} elseif ( $i === $i_count && $i_count < 8 ) {
+					}
+					elseif ( $i === $i_count && $i_count < 8 ) {
 						$cols[ $key ] = $col . '</div></div>';
-					} elseif ( 8 === $i ) {
+					}
+					elseif ( 8 === $i ) {
 						$more = absint( $i_count - 8 );
 						/* translators: number of photos */
 						$more_text    = sprintf( _n( '+%s photo', '+%s photos', $more, 'blockstrap-page-builder-blocks' ), $more );
 						$btn_color_class = $aui_bs5 ? 'text-bg-white' : 'btn-white';
-						$col          = $more ? str_replace( '</a>', '<button class="btn btn-sm ' . $btn_color_class . ' position-absolute shadow border-dark" style="bottom: 15px; right: 20px;">' . esc_attr( $more_text ) . '</button></a>', $col ) : $col . '</div></div>';
+						$col          = $more ? str_replace( '</a>', '<button class="btn btn-sm ' . $btn_color_class . ' position-absolute shadow border-dark" style="bottom: 15px; right: 20px;">' . esc_attr( $more_text ) . '</button></a>', $col ). '</div></div>'  : $col . '</div></div>';
 						$cols[ $key ] = $col;
 					} elseif ( $i > 8 ) {
 						$cols[ $key ] = str_replace( 'class="', 'class="d-none ', $col );
