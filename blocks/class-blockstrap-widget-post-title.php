@@ -117,6 +117,17 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			'group'    => __( 'Title', 'blockstrap-page-builder-blocks' ),
 		);
 
+		$arguments['stretched_link'] = array(
+			'type'            => 'checkbox',
+			'title'           => __( 'Stretched link', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'This expands the link to the first container with position relative (used to make a whole area clickable)', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'value'           => '1',
+			'desc_tip'        => false,
+			'group'           => __( 'Title', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%is_link%]',
+		);
+
 		// text color
 		$arguments = $arguments + sd_get_text_color_input_group();
 
@@ -212,9 +223,12 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 		$arguments['pl_lg'] = sd_get_padding_input( 'pl', array( 'device_type' => 'Desktop' ) );
 
 		// border
-		$arguments['border']       = sd_get_border_input( 'border' );
-		$arguments['rounded']      = sd_get_border_input( 'rounded' );
-		$arguments['rounded_size'] = sd_get_border_input( 'rounded_size' );
+		$arguments['border']         = sd_get_border_input( 'border' );
+		$arguments['border_type']    = sd_get_border_input( 'type' );
+		$arguments['border_width']   = sd_get_border_input( 'width' ); // BS5 only
+		$arguments['border_opacity'] = sd_get_border_input( 'opacity' ); // BS5 only
+		$arguments['rounded']        = sd_get_border_input( 'rounded' );
+		$arguments['rounded_size']   = sd_get_border_input( 'rounded_size' );
 
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
@@ -258,9 +272,10 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			$wrapper_attributes = $class . $style;
 
 			if ( $args['is_link'] ) {
-				$class = $args['text_color'] ? 'nav-link-' . esc_attr( $args['text_color'] ) : 'nav-link';
-				$link  = get_permalink();
-				$title = sprintf(
+				$class  = $args['text_color'] ? 'nav-link-' . esc_attr( $args['text_color'] ) : 'nav-link';
+				$class .= ! empty( $args['stretched_link'] ) ? ' stretched-link' : '';
+				$link   = get_permalink();
+				$title  = sprintf(
 					'<a href="%1$s" class=" %2$s" %3$s>%4$s</a>',
 					$link,
 					$class,

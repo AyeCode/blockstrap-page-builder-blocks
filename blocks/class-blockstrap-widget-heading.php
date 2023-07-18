@@ -222,9 +222,12 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 		$arguments['pl_lg'] = sd_get_padding_input( 'pl', array( 'device_type' => 'Desktop' ) );
 
 		// border
-		$arguments['border']       = sd_get_border_input( 'border' );
-		$arguments['rounded']      = sd_get_border_input( 'rounded' );
-		$arguments['rounded_size'] = sd_get_border_input( 'rounded_size' );
+		$arguments['border']         = sd_get_border_input( 'border' );
+		$arguments['border_type']    = sd_get_border_input( 'type' );
+		$arguments['border_width']   = sd_get_border_input( 'width' ); // BS5 only
+		$arguments['border_opacity'] = sd_get_border_input( 'opacity' ); // BS5 only
+		$arguments['rounded']        = sd_get_border_input( 'rounded' );
+		$arguments['rounded_size']   = sd_get_border_input( 'rounded_size' );
 
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );

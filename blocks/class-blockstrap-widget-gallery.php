@@ -633,6 +633,12 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 					} elseif ( $i > 8 ) {
 						$cols[ $key ] = str_replace( 'class="', 'class="d-none ', $col );
 					}
+
+					// maybe close
+					if ( $i === $i_count && $i_count < 8 && $i_count >= 2) {
+					 //echo '###';exit;
+						$cols[ $key ] = $col . '</div></div>';
+					}
 				}
 
 			}
