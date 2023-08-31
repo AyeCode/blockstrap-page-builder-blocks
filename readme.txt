@@ -155,6 +155,9 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
+= 0.1.8 =
+* BS > Gallery working when image don't have different sizes - FIXED
+
 = 0.1.7 =
 * Button block can now use GD meta as value - ADDED
 * SD and AUI updated to latest - UPDATED
