@@ -395,6 +395,10 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
 
+		$arguments['display']    = sd_get_display_input( 'd', array( 'device_type' => 'Mobile' ) );
+		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
+		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
+
 		// block visibility conditions
 		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
 
