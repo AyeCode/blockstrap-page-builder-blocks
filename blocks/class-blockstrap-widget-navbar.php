@@ -107,8 +107,8 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 			'type'     => 'select',
 			'title'    => __( 'Content Container', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
-				'd-flex w-100' => __( 'Full width', 'blockstrap-page-builder-blocks' ),
-				'container'    => __( 'Contain', 'blockstrap-page-builder-blocks' ),
+				'container-fluid px-0' => __( 'Full width', 'blockstrap-page-builder-blocks' ),
+				'container'            => __( 'Contain', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,

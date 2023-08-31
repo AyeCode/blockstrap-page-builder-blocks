@@ -50,7 +50,11 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Button', 'blockstrap-page-builder-blocks' ), __( 'Field Styles', 'blockstrap-page-builder-blocks' ) ),
+					'groups' => array(
+						__( 'Background', 'blockstrap-page-builder-blocks' ),
+						__( 'Button', 'blockstrap-page-builder-blocks' ),
+						__( 'Field Styles', 'blockstrap-page-builder-blocks' )
+					),
 					'tab'    => array(
 						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
@@ -283,7 +287,12 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			//          'element_require' => '[%icon_class%]!=""',
 			//      );
 
-			// button styles
+
+		// background
+		$arguments = $arguments + sd_get_background_inputs( 'bg' );
+
+
+		// button styles
 			$arguments['link_type'] = array(
 				'type'     => 'select',
 				'title'    => __( 'Link style', 'blockstrap-page-builder-blocks' ),
@@ -752,7 +761,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 
 		// recaptcha
 		$recaptcha_enabled = false;
-		if ( defined( 'BLOCKSTRAP_VERSION' ) && empty( $date['field_recaptcha'] ) ) {
+		if ( defined( 'BLOCKSTRAP_VERSION' ) && empty( $args['field_recaptcha'] ) ) {
 			$keys = get_option( 'blockstrap_recaptcha_keys' );
 			if ( ! empty( $keys['site_key'] ) && ! empty( $keys['site_secret'] ) ) {
 				$field_content .= '<div class="g-recaptcha mb-3" id="x" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';

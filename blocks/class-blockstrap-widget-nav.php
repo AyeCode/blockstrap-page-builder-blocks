@@ -60,7 +60,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 				),
 				array(
 					'element'         => 'script',
-					'content'         => 'jQuery("#navbarNav_[%anchor%]").on("show.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_[%anchor%]").on("hidden.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});',
+					'content'         => 'jQuery("#navbarNav_[%anchor%]").on("show.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open"); jQuery(window).trigger("scroll");});jQuery("#navbarNav_[%anchor%]").on("hidden.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open"); jQuery(window).trigger("scroll");});',
 					'element_require' => '[%inside_navbar%]=="1"',
 				),
 

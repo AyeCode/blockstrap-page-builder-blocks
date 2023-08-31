@@ -3,8 +3,8 @@ Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
-Tested up to: 6.2
-Stable tag: 0.1.6
+Tested up to: 6.3
+Stable tag: 0.1.7
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -155,6 +155,10 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
+= 0.1.7 =
+* Button block can now use GD meta as value - ADDED
+* SD and AUI updated to latest - UPDATED
+ 
 = 0.1.6 = 
 * Title and Heading blocks now have more border controls - ADDED
 * Super Duper lib updated - UPDATED

@@ -104,6 +104,20 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'element_require' => '[%type%]=="page"',
 		);
 
+		$arguments['meta_key'] = defined( 'GEODIRECTORY_VERSION' ) ? array(
+			'type'            => 'select',
+			'title'           => __( 'Meta Key', 'blockstrap-page-builder-blocks' ),
+			'options'         => $this->get_custom_field_keys(),
+			'placeholder'     => __( 'Select Key', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%type%]=="gd_meta"',
+		) : array(
+			'type'  => 'hidden',
+			'group' => __( 'Link', 'blockstrap-page-builder-blocks' ),
+		);
+
 		$arguments['post_id'] = array(
 			'type'            => 'number',
 			'title'           => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
@@ -407,6 +421,8 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		);
 
 		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
+
+			$links['gd_meta']     = __( 'GD Post Meta', 'blockstrap-page-builder-blocks' );
 			$post_types           = geodir_get_posttypes( 'options-plural' );
 			$links['gd_search']   = __( 'GD Search', 'blockstrap-page-builder-blocks' );
 			$links['gd_location'] = __( 'GD Location', 'blockstrap-page-builder-blocks' );
@@ -438,6 +454,33 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 	}
 
 	/**
+	 * Gets an array of custom field keys.
+	 *
+	 * @return array
+	 */
+	public function get_custom_field_keys() {
+		$fields = geodir_post_custom_fields( '', 'all', 'all', 'none' );
+		$keys   = array();
+		$keys[] = __( 'Select Key', 'geodirectory' );
+		if ( ! empty( $fields ) ) {
+			$address = array();
+			foreach ( $fields as $field ) {
+				$keys[ $field['htmlvar_name'] ] = $field['htmlvar_name'];
+			}
+		}
+
+		// Advance fields
+		$advance_fields = geodir_post_meta_advance_fields();
+		if ( ! empty( $advance_fields ) ) {
+			foreach ( $advance_fields as $field => $args ) {
+				$keys[ $field ] = $field;
+			}
+		}
+
+		return $keys;
+	}
+
+	/**
 	 * This is the output function for the widget, shortcode and block (front end).
 	 *
 	 * @param array $args The arguments values.
@@ -447,7 +490,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-		global $aui_bs5;
+		global $aui_bs5,$gd_post;
 
 		//      print_r( $args );
 		//      $args['text'] = str_replace("&#039;","'",$args['text']);
@@ -485,6 +528,13 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		} elseif ( 'gd_location' === $args['type'] ) {
 			$link      = function_exists( 'geodir_location_page_id' ) ? get_permalink( geodir_location_page_id() ) : '#';
 			$link_text = __( 'Location', 'blockstrap-page-builder-blocks' );
+		} elseif ( 'gd_meta' === $args['type'] ) {
+			$meta_key = ! empty( $args['meta_key'] ) ? esc_attr( $args['meta_key'] ) : '';
+			$link     = $meta_key && function_exists( 'geodir_location_page_id' ) && isset( $gd_post->ID ) ? geodir_get_post_meta( $gd_post->ID, $meta_key ) : '#';
+			if ( empty( $link ) && ! $this->is_preview() ) {
+				return '';
+			}
+			$link_text = __( 'Click here', 'blockstrap-page-builder-blocks' );
 		} elseif ( substr( $args['type'], 0, 3 ) === 'gd_' ) {
 			$post_types = function_exists( 'geodir_get_posttypes' ) ? geodir_get_posttypes( 'options-plural' ) : '';
 			if ( ! empty( $post_types ) ) {
@@ -597,6 +647,9 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		//          $wrap_class .= ' form-inline';
 		//      }
 
+		// maybe prefix
+		$link = $this->prefix_link( $link );
+
 		$href = 'a' === $tag ? 'href="' . esc_url_raw( $link ) . '"' : '';
 
 		if ( $this->is_preview() ) {
@@ -610,6 +663,30 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 		return $link_text || $icon_left || $icon_right ? '<' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '"' . $link_attr . '>' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $styles : ''; // shortcode
 
+	}
+
+	/**
+	 * Maybe prefix a link if it is a phone number of email.
+	 *
+	 * @param $link
+	 *
+	 * @return string
+	 */
+	public function prefix_link( $link ) {
+		// Regular expression pattern for email
+		$emailPattern = '/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
+
+		// Regular expression pattern for phone number (adjust as per your needs)
+		// This pattern matches numbers like: (123) 456-7890 or 123-456-7890 or 1234567890 or +31636363634 etc.
+		$phonePattern = '/^(\+?\d{1,4}[\s\-]?)?(\(?\d{1,4}\)?[\s\-]?)?[\d\s\-]{7,13}$/';
+
+		if ( preg_match( $emailPattern, $link ) ) {
+			return 'mailto:' . $link;
+		} elseif ( preg_match( $phonePattern, $link ) ) {
+			return 'tel:' . $link;
+		} else {
+			return $link; // return the original link if it's neither an email nor a phone number
+		}
 	}
 
 
