@@ -13,29 +13,29 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 		$options = array(
 			'textdomain'                 => 'blockstrap',
 			'output_types'               => array( 'block' ),
-			//          'nested-block'   => true,
-							'block-icon' => 'fas fa-th',
+										
+			'block-icon'                 => 'fas fa-th',
 			'block-category'             => 'layout',
 			'block-keywords'             => "['gallery','images','photo']",
 			'block-supports'             => array(
-				'customClassName' => false,
+				'customClassName' => false
 			),
-			'block-edit-return'          => "el('div', wp.blockEditor.useBlockProps({
-									dangerouslySetInnerHTML: {__html: onChangeContent()},
-									style: {'minHeight': '30px'}
-								}))",
+			'block-edit-return'          => "el('div', wp.blockEditor.useBlockProps({dangerouslySetInnerHTML: {__html: onChangeContent()}, style: {'minHeight': '30px'} }))",
+																							 
+									 
+			 
 			'block-wrap'                 => '',
 			'class_name'                 => __CLASS__,
 			'base_id'                    => 'bs_gallery',
 			'name'                       => __( 'BS > Gallery', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'                 => array(
 				'classname'   => 'bs-image',
-				'description' => esc_html__( 'An image gallery.', 'blockstrap-page-builder-blocks' ),
+				'description' => esc_html__( 'An image gallery.', 'blockstrap-page-builder-blocks' )
 			),
 			'example'                    => array(
 				'attributes' => array(
-					'after_text' => 'Earth',
-				),
+					'after_text' => 'Earth'
+				)
 			),
 			'no_wrap'                    => true,
 			'block_group_tabs'           => array(
@@ -46,8 +46,8 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 						'key'       => 'bs_tab_content',
 						'tabs_open' => true,
 						'open'      => true,
-						'class'     => 'text-center flex-fill d-flex justify-content-center',
-					),
+						'class'     => 'text-center flex-fill d-flex justify-content-center'
+					)
 				),
 				'styles'   => array(
 					'groups' => array(
@@ -446,7 +446,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 
 		$output = '';
 
-		//            print_r($args);//exit;
+									  
 		$gd_images = false;
 		if ( function_exists( 'geodir_get_images' ) && ! empty( $args['img_source'] ) && $args['img_source'] === 'gd_post_images' ) {
 			$images = $this->is_block_content_call() ? $this->get_dummy_images() : geodir_get_images( $post->ID );
@@ -495,16 +495,17 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 
 		$cols = array();
 		if ( ! empty( $images ) ) {
-
 			$i = 0;
+
+		  
 			foreach ( $images as $image ) {
 
 				if ( $gd_images ) {
 					$img_src = geodir_get_image_src( $image, $image_size );
-				}else{
-					$img_src = ! empty( $image['sizes'][ $image_size ]['url'] ) ? esc_url_raw( $image['sizes'][ $image_size ]['url'] ) : '';
+				} else {
+					$img_src = ! empty( $image['sizes'][ $image_size ]['url'] ) ? esc_url_raw( $image['sizes'][ $image_size ]['url'] ) : ( ! empty( $image['url'] ) ? esc_url_raw( $image['url'] ) : '' );
 
-					// fallback to full size
+					// Fallback to full size
 					if ( ! $img_src && ! empty( $image['sizes']['full']['url'] ) ){
 						$img_src = esc_url_raw( $image['sizes']['full']['url'] );
 					}
@@ -512,18 +513,19 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 
 
 				if ( $img_src ) {
+					$caption = $gd_images ? esc_attr( $image->caption ) : esc_attr( $image['caption'] );
 
-					$caption = $gd_images ? esc_attr($image->caption) : esc_attr($image['caption']);
+																					 
 
 					if ( $gd_images ) {
 						$img = geodir_get_image_tag($image,$image_size,'',$image_class );
 						$meta = isset($image->metadata) ? maybe_unserialize($image->metadata) : '';
 
 						// only set different sizes if not thumbnail
-						if($image_size!='thumbnail'){
+						if ( $image_size != 'thumbnail' ) {
 							$img =  wp_image_add_srcset_and_sizes( $img, $meta , 0 );
 						}
-					}else{
+					} else {
 						$img = sprintf(
 							'<img src="%1$s" class="%2$s" />',
 							$img_src,
@@ -534,7 +536,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 
 					$figcaption_class = 'figure-caption sr-only';
 
-					$caption          = ! empty( $caption ) ? sprintf(
+					$caption = ! empty( $caption ) ? sprintf(
 						'<figcaption class="%1$s" style="position: initial;">%2$s</figcaption>',
 						$figcaption_class,
 						esc_attr( $caption)
@@ -551,14 +553,14 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 						if ( $gd_images ) {
 							$lightbox_src = geodir_get_image_src( $image, $lightbox_size );
 						}else{
-							$lightbox_src = ! empty( $image['sizes'][ $lightbox_size ]['url'] ) ? esc_url_raw( $image['sizes'][ $lightbox_size ]['url'] ) : '';
+							$lightbox_src = ! empty( $image['sizes'][ $lightbox_size ]['url'] ) ? esc_url_raw( $image['sizes'][ $lightbox_size ]['url'] ) : ( ! empty( $image['url'] ) ? esc_url_raw( $image['url'] ) : '' );
 							// fallback to full size
 							if ( ! $lightbox_src && ! empty( $image['sizes']['full']['url'] ) ){
 								$lightbox_src = esc_url_raw( $image['sizes']['full']['url'] );
 							}
 						}
 
-						$fig          = sprintf(
+						$fig = sprintf(
 							'<a href="%1$s" class="aui-lightbox-image embed-has-action">%2$s<i class="fas fa-search-plus w-auto h-auto"></i></a>',
 							$lightbox_src,
 							$fig
@@ -636,7 +638,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 
 					// maybe close
 					if ( $i === $i_count && $i_count < 8 && $i_count >= 2) {
-					 //echo '###';exit;
+						
 						$cols[ $key ] = $col . '</div></div>';
 					}
 				}
@@ -646,7 +648,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 
 		$cols = implode( '', $cols );
 
-		//        echo '###'.$cols;exit;
+								  
 
 		// class
 		$wrap_class        = sd_build_aui_class( $args );
@@ -655,15 +657,15 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 
 		// styles
 		$wrap_styles = sd_build_aui_styles( $args );
-		//      $figure_attributes .= $wrap_class ? ' style="'.sd_sanitize_html_classes($wrap_styles).'"' : '';
+																										 
 
-		//        print_r($args);
+						   
 
-		//        $figcaption_class = $args['text_color'] ? 'text-'.sd_sanitize_html_classes($args['text_color']) : '';
-		//      $figcaption = $args['text'] ? '<figcaption  class="figure-caption '.$figcaption_class.'">'.wp_kses_post($args['text']).'</figcaption>' :  '';
-		//      $figcaption = $args['text'] ? '<figcaption  class="figure-caption '.$figcaption_class.'">'.$args['text'].'</figcaption>' :  '';
+																												 
+																																																																						 
+																																													  
 
-		// maybe link
+			   
 
 		$output .= sprintf(
 			'<div class="%1$s" %2$s>%3$s</div>',
@@ -677,33 +679,33 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 	}
 
 	public function block_global_js() {
-		ob_start();
-		if ( false ) {
-			?>
-		<script>
-			<?php
-		}
-		?>
+		$script = 'function bs_build_heading_html($args) { let $html = \'\'; $html += $args.text; return $html; }';
+				
+	 
+		  
+		
+   
+	
 
-			function bs_build_heading_html($args) {
+										  
 
-				let $html = '';
+				   
 
-				$html += $args.text;
-
-
-				return $html;
-			}
+						
 
 
-		<?php
-		//      return str_replace("\n"," ",ob_get_clean()) ;
-		return ob_get_clean();
+		return $script;
+	
+
+
+	   
+													   
+						
 	}
 
 }
 
-// register it.
+// Register widget.
 add_action(
 	'widgets_init',
 	function () {
