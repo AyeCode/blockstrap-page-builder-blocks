@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.3
-Stable tag: 0.1.7
+Stable tag: 0.1.8
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -157,6 +157,8 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 = 0.1.8 =
 * BS > Gallery working when image don't have different sizes - FIXED
+* Button gets display options - ADDED
+* 1-2-2 Gallery layout missing closing div if only 2 or 3 images - FIXED
 
 = 0.1.7 =
 * Button block can now use GD meta as value - ADDED
