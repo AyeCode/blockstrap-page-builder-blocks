@@ -123,9 +123,18 @@ final class BlockStrap {
 	 * @return void
 	 */
 	public function enqueue_editor_scripts() {
+		global $wp_version;
+
+		// WP 6.3 moved the loop column settings from query block to post-template block
+		if( version_compare($wp_version,'6.3','<') ){
+			$js_filters_filename = 'blockstrap-block-filters.js';
+		}else{
+			$js_filters_filename = 'blockstrap-block-filters-new.js';
+		}
+
 		wp_enqueue_script(
 			'blockstrap-blocks-filters',
-			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/js/blockstrap-block-filters.js',
+			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/js/' . $js_filters_filename,
 			array( 'wp-block-library', 'wp-element', 'wp-i18n' ), // required dependencies for blocks
 			BLOCKSTRAP_BLOCKS_VERSION
 		);

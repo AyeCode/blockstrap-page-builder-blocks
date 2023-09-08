@@ -155,6 +155,9 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
+= 0.1.9 =
+* WP 6.3 breaks AUI query loop columns selection - FIXED
+
 = 0.1.8 =
 * BS > Gallery working when image don't have different sizes - FIXED
 * Button gets display options - ADDED
