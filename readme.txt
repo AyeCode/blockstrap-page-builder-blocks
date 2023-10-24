@@ -157,6 +157,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 = 0.1.9 =
 * WP 6.3 breaks AUI query loop columns selection - FIXED
+* Visibility conditions is not working for tab action link - FIXED
 
 = 0.1.8 =
 * BS > Gallery working when image don't have different sizes - FIXED

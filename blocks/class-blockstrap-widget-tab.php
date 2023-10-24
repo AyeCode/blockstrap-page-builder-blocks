@@ -227,8 +227,11 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-
 		if ( $content ) {
+			if ( trim( $content ) == '' && ! $this->is_preview() ) {
+				return;
+			}
+
 			$wrap_class = sd_build_aui_class( $args );
 			$id         = ! empty( $args['anchor'] ) ? sanitize_html_class( $args['anchor'] ) : '';
 			$content    = sprintf(
@@ -241,10 +244,7 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 		}
 
 		return $content;
-
 	}
-
-
 }
 
 // register it.
@@ -254,4 +254,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Tab' );
 	}
 );
-
