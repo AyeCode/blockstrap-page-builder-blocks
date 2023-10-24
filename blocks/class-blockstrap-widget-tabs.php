@@ -57,8 +57,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 											let active_index = 0
 
 											childBlocks.map((tab, index) => (
-												(tab.attributes.visibility_conditions ? tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor,visibility_conditions:JSON.parse(tab.attributes.visibility_conditions)}) :
-													tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor})),
+												(tab.attributes.visibility_conditions ? tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor,visibility_conditions:JSON.parse(tab.attributes.visibility_conditions)}) : tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor})),
 												 active_index = tab.clientId === wp.data.select('core/editor').getBlockSelectionStart() || hasSelectedInnerBlock(tab) ? index : active_index
 											));
 
