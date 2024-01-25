@@ -1,3 +1,33 @@
+= 1.1.33 - 2024-01-25 =
+* Escape new line characters from option label - FIXED
+
+= 1.1.32 - 2023-12-14 =
+* Update textdomain - CHANGED
+* Escape placeholder t o prevent JS error - FIXED
+* Site editor sidebar navigation auto closed - FIXED
+
+= 1.1.31 =
+* Detect Bricks builder preview - ADDED
+
+= 1.1.30 =
+* element_require condition is not working with checkbox - FIXED
+
+= 1.1.29 =
+* Show device type name with title for multi-device option setting - CHANGED
+* element_require condition is not working with checkbox - FIXED
+
+= 1.1.28 =
+* Shortcode button added twice in the page content editor - FIXED
+
+= 1.1.27 =
+* Tablet padding option values are not working properly - FIXED
+
+= 1.1.26 =
+* Attempt auto recovery block on non edit template mode - CHANGED
+
+= 1.1.25 =
+* Undefined array key "title" thrown for some blocks when using Avada - FIXED
+
 = 1.1.24 =
 * Gallery block shows image when requested image size don't exists - FIXED
 * Gallery block shows JS error when image title contains multiple single quote - FIXED

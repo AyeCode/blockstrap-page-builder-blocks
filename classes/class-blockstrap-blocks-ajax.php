@@ -23,6 +23,9 @@ class BlockStrap_Blocks_AJAX {
 
 	}
 
+	/**
+	 *
+	 */
 	public static function contact_form_block_send() {
 
 		if ( ! isset( $_POST['security'] ) || wp_hash( get_site_url() ) !== $_POST['security'] ) {
@@ -82,6 +85,7 @@ Submitted from: %%submitted_from_url%%
 			$subject           = ! empty( $_POST['settings'][2] ) ? esc_attr( $_POST['settings'][2] ) : $subject;
 			$post_id           = absint( $_POST['settings'][3] );
 			$recaptcha_enabled = absint( $_POST['settings'][4] );
+			$newsletter        = isset( $_POST['settings'][5] ) ? esc_attr( $_POST['settings'][5] ) : '';
 
 			if ( $recaptcha_enabled && empty( $data['g-recaptcha-response'] ) ) {
 				wp_send_json_error( __( 'Please complete the recaptcha', 'blockstrap-page-builder-blocks' ) );
@@ -115,7 +119,7 @@ Submitted from: %%submitted_from_url%%
 					$recaptcha_response = json_decode( wp_remote_retrieve_body( $response ), true );
 
 					if ( empty( $recaptcha_response['success'] ) ) {
-						wp_send_json_error(__( 'Recaptcha error, please refresh and try again', 'blockstrap-page-builder-blocks' ) );
+						wp_send_json_error( __( 'Recaptcha error, please refresh and try again', 'blockstrap-page-builder-blocks' ) );
 						wp_die();
 					}
 				}
@@ -141,6 +145,36 @@ Submitted from: %%submitted_from_url%%
 				wp_mail( $bcc_email, $subject . ' - BCC ', $email_template );
 			}
 		}
+
+		// maybe subscribe to newsletter
+		if ( ! empty( $newsletter ) && 'noptin' === $newsletter && function_exists( 'add_noptin_subscriber' ) ) {
+			$filtered          = array();
+			$filtered['name']  = ! empty( $data['field_name'] ) ? esc_attr( $data['field_name'] ) : '';
+			$filtered['email'] = ! empty( $data['field_email'] ) ? sanitize_email( $data['field_email'] ) : '';
+
+			if ( ! empty( $filtered['email'] ) ) {
+				// Add the subscriber's IP address.
+				$address = noptin_get_user_ip();
+				if ( ! empty( $address ) && '::1' !== $address ) {
+					$filtered['ip_address'] = $address;
+				}
+
+				$filtered['tags']            = array();
+				$filtered['_subscriber_via'] = 'BlockStrap Blocks';
+				/**
+				 * Filters subscriber details when adding a new subscriber via ajax.
+				 *
+				 * @since 1.2.4
+				 */
+				$filtered = apply_filters( 'noptin_add_ajax_subscriber_filter_details', wp_unslash( $filtered ), 0 );
+
+				$inserted = add_noptin_subscriber( $filtered );
+				do_action( 'noptin_add_ajax_subscriber', $inserted, 0 );
+			}
+		}
+
+		do_action( 'blockstrap_blocks_after_contact_sent', $sent, $data );
+
 		wp_send_json_success();
 		if ( $sent ) {
 			wp_send_json_success();
