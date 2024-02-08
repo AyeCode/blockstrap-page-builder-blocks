@@ -53,7 +53,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 					'groups' => array(
 						__( 'Background', 'blockstrap-page-builder-blocks' ),
 						__( 'Button', 'blockstrap-page-builder-blocks' ),
-						__( 'Field Styles', 'blockstrap-page-builder-blocks' )
+						__( 'Field Styles', 'blockstrap-page-builder-blocks' ),
 					),
 					'tab'    => array(
 						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
@@ -208,8 +208,8 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 					'group'    => __( 'Fields', 'blockstrap-page-builder-blocks' ),
 				);
 
-//				$keys = get_option('blockstrap_recaptcha_keys');
-//				if()
+				//              $keys = get_option('blockstrap_recaptcha_keys');
+				//              if()
 				$arguments['recaptcha_notice'] = array(
 					'type'            => 'notice',
 					'desc'            => __( 'Set your keys under Appearances > Theme Setup > Recaptcha Keys', 'blockstrap-page-builder-blocks' ),
@@ -255,6 +255,18 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 				'group'    => __( 'Email', 'blockstrap-page-builder-blocks' ),
 			);
 
+			$arguments['newsletter'] = array(
+				'type'     => 'select',
+				'title'    => __( 'Newsletter Subscribe', 'blockstrap-page-builder-blocks' ),
+				'options'  => array(
+					'0'      => __( 'No', 'blockstrap-page-builder-blocks' ),
+					'noptin' => defined( 'NOPTIN_VERIFY_NONCE' ) ? __( 'Noptin', 'blockstrap-page-builder-blocks' ) : __( 'Noptin (plugin needs to be installed)', 'blockstrap-page-builder-blocks' ),
+				),
+				'default'  => '0',
+				'desc_tip' => true,
+				'group'    => __( 'Email', 'blockstrap-page-builder-blocks' ),
+			);
+
 			$arguments['sent_message'] = array(
 				'type'                  => 'text',
 				'title'                 => __( 'Sent message', 'blockstrap-page-builder-blocks' ),
@@ -287,12 +299,10 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			//          'element_require' => '[%icon_class%]!=""',
 			//      );
 
+			// background
+			$arguments = $arguments + sd_get_background_inputs( 'bg' );
 
-		// background
-		$arguments = $arguments + sd_get_background_inputs( 'bg' );
-
-
-		// button styles
+			// button styles
 			$arguments['link_type'] = array(
 				'type'     => 'select',
 				'title'    => __( 'Link style', 'blockstrap-page-builder-blocks' ),
@@ -482,6 +492,19 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			'group'       => __( 'Field Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
+		$arguments['field_layout'] = array(
+			'type'            => 'select',
+			'title'           => __( 'Layout', 'blockstrap-page-builder-blocks' ),
+			'options'         => array(
+				''           => __( 'Vertical', 'blockstrap-page-builder-blocks' ),
+				'horizontal' => __( 'Horizontal (use with fewer fields)', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Field Styles', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%display%]==""',
+		);
+
 		// Typography
 		//      // custom font size
 		//      $arguments['font_size_custom'] = sd_get_font_custom_size_input();
@@ -606,8 +629,9 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		$link_text = __( 'Send', 'blockstrap-page-builder-blocks' );
 
 		// maybe set custom link text
-		$link_text   = ! empty( $args['email_submit_text'] ) ? esc_attr( $args['email_submit_text'] ) : $link_text;
-		$is_lightbox = ! empty( $args['display'] );
+		$link_text     = ! empty( $args['email_submit_text'] ) ? esc_attr( $args['email_submit_text'] ) : $link_text;
+		$is_lightbox   = ! empty( $args['display'] );
+		$is_horizontal = ! empty( $args['field_layout'] ) && 'horizontal' === $args['field_layout'];
 
 		//      echo '###'.$link_text;
 
@@ -732,6 +756,8 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			),
 		);
 
+		$form_hz_col_class = ! $is_lightbox && $is_horizontal ? ' col' : '';
+
 		foreach ( $field_types as $field_slug => $field ) {
 
 			if ( 'hide' !== $args[ $field_slug ] ) {
@@ -754,6 +780,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 						'placeholder' => empty( $args['display_labels'] ) ? $label . $required : '',
 						'size'        => ! empty( $args['field_size'] ) ? $args['field_size'] : '',
 						'rows'        => ! empty( $args['textarea_rows'] ) ? $args['textarea_rows'] : '4',
+						'wrap_class'  => $form_hz_col_class,
 					)
 				);
 			}
@@ -764,7 +791,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		if ( defined( 'BLOCKSTRAP_VERSION' ) && empty( $args['field_recaptcha'] ) ) {
 			$keys = get_option( 'blockstrap_recaptcha_keys' );
 			if ( ! empty( $keys['site_key'] ) && ! empty( $keys['site_secret'] ) ) {
-				$field_content .= '<div class="g-recaptcha mb-3" id="x" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';
+				$field_content    .= '<div class="g-recaptcha mb-3" id="x" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';
 				$recaptcha_enabled = true;
 				//if(!$is_lightbox){
 					add_action( 'wp_footer', array( $this, 'get_recaptcha_js' ) );
@@ -778,6 +805,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		$subject      = esc_attr( $args['email_name'] );
 		$sent_message = ! empty( $args['sent_message'] ) ? esc_attr( $args['sent_message'] ) : __( 'Thanks for your email, we will get back to you shortly!', 'blockstrap-page-builder-blocks' );
 		$send_to      = ! empty( $args['send_to'] ) ? esc_attr( $args['send_to'] ) : 'site';
+		$newsletter   = ! empty( $args['newsletter'] ) ? esc_attr( $args['newsletter'] ) : '0';
 		$send_bcc     = esc_attr( $args['send_bcc'] );
 		$post_id      = ! empty( $post->ID ) ? absint( $post->ID ) : 0;
 
@@ -788,19 +816,22 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			(string) esc_attr( $subject ),
 			(string) absint( $post_id ),
 			(string) absint( $recaptcha_enabled ),
+			(string) esc_attr( $newsletter ),
 		);
 
 		$lightbox_id = ! empty( $args['lightbox_id'] ) ? esc_attr( sanitize_title_with_dashes( $args['lightbox_id'] ) ) : 'contact-form';
 
 		$form_html     = '';
+		$lightbox_html = '';
+		$button_html   = '';
 		$preview_click = $this->is_preview() ? ' onclick="alert(\'' . esc_html__( 'This is a preview, please test on the frontend.', 'blockstrap-page-builder-blocks' ) . '\');return false;" ' : '';
 
 		if ( $is_lightbox ) {
-			$button_text = ! empty( $args['lightbox_button_text'] ) ? esc_attr( $args['lightbox_button_text'] ) : __( 'Contact form', 'blockstrap-page-builder-blocks' );
-			$modal_title = ! empty( $args['lightbox_title'] ) ? esc_attr( $args['lightbox_title'] ) : __( 'Contact form', 'blockstrap-page-builder-blocks' );
-			$form_html  .= '<div class="' . esc_attr( $args['button_position'] ) . '">';
+			$button_text  = ! empty( $args['lightbox_button_text'] ) ? esc_attr( $args['lightbox_button_text'] ) : __( 'Contact form', 'blockstrap-page-builder-blocks' );
+			$modal_title  = ! empty( $args['lightbox_title'] ) ? esc_attr( $args['lightbox_title'] ) : __( 'Contact form', 'blockstrap-page-builder-blocks' );
+			$button_html .= '<div class="' . esc_attr( $args['button_position'] ) . '">';
 			if ( 'lightbox-link' === $args['display'] ) {
-				$form_html .= $this->is_preview() ? aui()->alert(
+				$button_html .= $this->is_preview() ? aui()->alert(
 					array(
 						'type'    => 'info',
 						'content' => sprintf( __( 'This is a placeholder for the lightbox for contact form: %s', 'blockstrap-page-builder-blocks' ), esc_attr( $args['lightbox_id'] ) ),
@@ -809,11 +840,12 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 				) : '';
 			} else {
 
-				$form_html .= $preview_click ? '<button type="button" class="' . esc_attr( $link_class ) . '" ' . $preview_click . '>' . esc_attr( $button_text ) . '</button>' : '<button type="button" class="' . esc_attr( $link_class ) . '" data-bs-toggle="modal" data-bs-target="#' . esc_attr( $lightbox_id ) . '">' . esc_attr( $button_text ) . '</button>';
+				$button_html .= $preview_click ? '<button type="button" class="' . esc_attr( $link_class ) . '" ' . $preview_click . '>' . esc_attr( $button_text ) . '</button>' : '<button type="button" class="' . esc_attr( $link_class ) . '" data-bs-toggle="modal" data-bs-target="#' . esc_attr( $lightbox_id ) . '">' . esc_attr( $button_text ) . '</button>';
 			}
-			$form_html .= '</div>';
+			$button_html    .= '</div>';
 			$recaptcha_class = $recaptcha_enabled ? 'bspbb-contact-form-recaptcha-lightbox' : '';
-			$form_html .= '<div class="modal fade ' . esc_attr( $recaptcha_class ) . '" id="' . esc_attr( $lightbox_id ) . '" tabindex="-1" aria-labelledby="' . esc_attr( $lightbox_id ) . 'Label" aria-hidden="true">
+
+			$lightbox_html .= '<div class="modal fade ' . esc_attr( $recaptcha_class ) . '" id="' . esc_attr( $lightbox_id ) . '" tabindex="-1" aria-labelledby="' . esc_attr( $lightbox_id ) . 'Label" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -823,38 +855,60 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
       <div class="modal-body">';
 		}
 
-		$recaptcha_class = !$is_lightbox && $recaptcha_enabled ? ' bspbb-contact-form-recaptcha' : '';
+		$recaptcha_class = ! $is_lightbox && $recaptcha_enabled ? ' bspbb-contact-form-recaptcha' : '';
+
+		$form_hz_class     = ! $is_lightbox && $is_horizontal ? ' row' : '';
+		$form_hz_btn_class = ! $is_lightbox && $is_horizontal ? ' col-auto' : '';
 
 		$form_html .= '<form
 		data-settings=\'' . wp_json_encode( $settings ) . '\'
 		data-settings-nonce=\'' . wp_hash( wp_json_encode( $settings ) ) . '\'
 		data-sent="' . esc_attr( $sent_message ) . '"
-		class="' . esc_attr( $wrap_class ) . esc_attr( $recaptcha_class ) . '" ' . $style . '
+		class="' . esc_attr( $wrap_class ) . esc_attr( $recaptcha_class ) . esc_attr( $form_hz_class ) . '" ' . $style . '
 		onsubmit="bpbb_send_contact_form(this);return false;">';
 
 		$form_html .= $field_content;
-		$form_html .= '<div class="' . esc_attr( $args['button_position'] ) . '">';
+		$form_html .= '<div class="' . esc_attr( $args['button_position'] ) . esc_attr( $form_hz_btn_class ) . '">';
 		$form_html .= '<button type="submit" class="' . esc_attr( $link_class ) . '" ' . $preview_click . ' ><span class="spinner-border spinner-border-sm mt-n1 d-none" role="status" aria-hidden="true"></span> ' . $icon_left . esc_attr( $link_text ) . $icon_right . '</button>';
 		$form_html .= '</div>';
 		$form_html .= '</form>';
 
 		if ( $is_lightbox ) {
-			$form_html .= '</div>
+
+			$lightbox_html .= $form_html;
+
+			$lightbox_html .= '</div>
 
     </div>
   </div>
 </div>';
+
+			$html = $button_html;
+
+			// Add the modal HTML to footer to prevent any z-index issues.
+			add_action(
+				'wp_footer',
+				function() use ( $lightbox_html ) {
+					echo $lightbox_html;
+				}
+			);
+		} else {
+			$html = $button_html . $form_html . $lightbox_html;
 		}
 
-		return $form_html;
+		return apply_filters( 'blockstrap_blocks_block_output_contact', $html, $args );
 
-		return $link_text || $icon_left || $icon_right ? '<' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $styles : ''; // shortcode
+		//return $link_text || $icon_left || $icon_right ? '<' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $styles : ''; // shortcode
+
+	}
+
+	public function get_modal_footer_html() {
 
 	}
 
 	public function get_recaptcha_js() {
-		$keys = get_option('blockstrap_recaptcha_keys');
-		$site_key = !empty($keys['site_key']) ? esc_attr($keys['site_key']) : '';
+		$keys     = get_option( 'blockstrap_recaptcha_keys' );
+		$site_key = ! empty( $keys['site_key'] ) ? esc_attr( $keys['site_key'] ) : '';
 		ob_start();
 		//bsppb-contact-form
 		?>
@@ -924,7 +978,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			function bspbb_init_form_recaptcha(){
 				jQuery('.bspbb-contact-form-recaptcha,.bspbb-contact-form-recaptcha-lightbox').each(function(i, obj) {
 					try{
-						grecaptcha.render(jQuery(this).find('.g-recaptcha').get( 0 ),{'sitekey' : '<?php echo esc_attr($site_key); ?>' });
+						grecaptcha.render(jQuery(this).find('.g-recaptcha').get( 0 ),{'sitekey' : '<?php echo esc_attr( $site_key ); ?>' });
 					}catch(error){/*possible duplicated instances*/}
 				});
 			}

@@ -21,7 +21,7 @@
  */
 
 
-define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.8' );
+define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.9' );
 
 /**
  * The BlockStrap Class

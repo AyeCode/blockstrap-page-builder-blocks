@@ -46,7 +46,7 @@ function blockstrap_blocks_get_default_menu() {
 
 				<!-- wp:blockstrap/blockstrap-widget-nav-item {"type":"custom","custom_url":"https://wpblockstrap.com/","text":"Buy now","icon_class":"fas fa-shopping-bag","link_type":"btn-round","link_bg":"danger","text_align_lg":"text-lg-end","ml":"0","ml_md":"0","mt_lg":"0","mb_lg":"0","ml_lg":"3","pt_lg":"0","pr_lg":"0","pb_lg":"0","pl_lg":"0","content":""} -->
 				[bs_nav_item type='custom'  page_id=''  post_id=''  custom_url='https://wpblockstrap.com/'  text='Buy now'  icon_class='fas fa-shopping-bag'  icon_aria_label=''  link_type='btn-round'  link_size=''  link_bg='danger'  link_pt=''  link_pr=''  link_pb=''  link_pl=''  link_pt_md=''  link_pr_md=''  link_pb_md=''  link_pl_md=''  link_pt_lg=''  link_pr_lg=''  link_pb_lg=''  link_pl_lg=''  link_divider=''  text_color=''  text_justify='false'  text_align=''  text_align_md=''  text_align_lg='text-lg-end'  font_weight=''  mt=''  mr=''  mb=''  ml='0'  mt_md=''  mr_md=''  mb_md=''  ml_md='0'  mt_lg='0'  mr_lg=''  mb_lg='0'  ml_lg='3'  pt=''  pr=''  pb=''  pl=''  pt_md=''  pr_md=''  pb_md=''  pl_md=''  pt_lg='0'  pr_lg='0'  pb_lg='0'  pl_lg='0'  border=''  rounded=''  rounded_size=''  shadow=''  visibility_conditions=''  css_class='' ]
-				<!-- /wp:blockstrap/blockstrap-widget-nav-item --></ul></div><script>jQuery("#navbarNav_main-nav").on("show.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_main-nav").on("hidden.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});</script>[/bs_nav]
+				<!-- /wp:blockstrap/blockstrap-widget-nav-item --></ul></div><script>jQuery("#navbarNav_main-nav").on("show.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open"); jQuery(window).trigger("scroll");});jQuery("#navbarNav_main-nav").on("hidden.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open"); jQuery(window).trigger("scroll");});</script>[/bs_nav]
 		<!-- /wp:blockstrap/blockstrap-widget-nav -->
 		<?php
 	} else {
@@ -132,7 +132,7 @@ function blockstrap_blocks_get_default_menu() {
 
 
 
-			</ul></div><script>jQuery("#navbarNav_main-nav").on("show.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");});jQuery("#navbarNav_main-nav").on("hidden.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");});</script>[/bs_nav]
+			</ul></div><script>jQuery("#navbarNav_main-nav").on("show.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open"); jQuery(window).trigger("scroll");});jQuery("#navbarNav_main-nav").on("hidden.bs.collapse", function () {jQuery("#navbarNav_main-nav").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open"); jQuery(window).trigger("scroll");});</script>[/bs_nav]
 		<!-- /wp:blockstrap/blockstrap-widget-nav -->
 		<?php
 	}
