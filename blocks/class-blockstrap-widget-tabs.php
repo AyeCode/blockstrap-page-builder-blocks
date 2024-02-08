@@ -57,9 +57,8 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 											let active_index = 0
 
 											childBlocks.map((tab, index) => (
-												tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor}),
+												(tab.attributes.visibility_conditions ? tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor,visibility_conditions:JSON.parse(tab.attributes.visibility_conditions)}) : tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor})),
 												 active_index = tab.clientId === wp.data.select('core/editor').getBlockSelectionStart() || hasSelectedInnerBlock(tab) ? index : active_index
-
 											));
 
 											props.setAttributes({
@@ -67,7 +66,6 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 											});
 
 											childBlocks.map((tab, index) => (
-												//console.log('tab:'+index)
 												tabs.push(
 													el('li',{className:'nav-item'}, el('button',{
 															className: active_index === index ? 'nav-link active ' + sd_build_aui_class({rounded_size: props.attributes.tabs_rounded_size}) : 'nav-link ' + sd_build_aui_class({rounded_size: props.attributes.tabs_rounded_size}),
@@ -82,7 +80,6 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 													 )
 													 )
 												 )
-
 											));
 										}
 
@@ -331,6 +328,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
 		global $aui_bs5;
+
 		if ( $content ) {
 			$bs5          = $aui_bs5 ? 'bs-' : '';
 			$wrap_class   = sd_build_aui_class( $args );
@@ -339,13 +337,34 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 			$first_tab_id = '';
 
 			if ( ! empty( $tabs_array ) ) {
+				$_key = 0;
+
 				foreach ( $tabs_array as $key => $tab ) {
-					$active       = 0 === $key ? 'active' : '';
+					// Hide tab action button visibility conditions
+					if ( ! empty( $tab['visibility_conditions'] ) && ! $this->is_preview() ) {
+						$visibility_conditions = is_scalar( $tab['visibility_conditions'] ) ? json_decode( $tab['visibility_conditions'], true ) : $tab['visibility_conditions'];
+
+						if ( ! empty( $visibility_conditions['output']['type'] ) && $visibility_conditions['output']['type'] == 'hide' ) {
+							$visibility_rules = ! empty( $visibility_conditions ) ? sd_block_parse_rules( $visibility_conditions ) : array();
+
+							// Hide tab action button
+							if ( ! empty( $visibility_rules ) && sd_block_check_rules( $visibility_rules ) ) {
+								continue;
+							}
+						}
+					}
+
+					$active       = 0 === $_key ? 'active' : '';
 					$first_tab_id = $active ? esc_attr( $tab['id'] ) : $first_tab_id;
 					$aria_active  = $active ? 'true' : 'false';
 					$active      .= ' ' . sd_build_aui_class( array( 'rounded_size' => $args['tabs_rounded_size'] ) );
 					$tabs        .= '<li class="nav-item"><button class="nav-link ' . $active . '" id="' . esc_attr( $tab['id'] ) . '-tab" data-' . $bs5 . 'toggle="tab" data-' . $bs5 . 'target="#' . esc_attr( $tab['id'] ) . '" type="button" role="tab" aria-controls="nav-home" aria-selected="' . $aria_active . '">' . esc_attr( $tab['name'] ) . '</button></li>';
+					$_key++;
 				}
+			}
+
+			if ( empty( $tabs ) ) {
+				return $tabs;
 			}
 
 			// set the first tab active.
@@ -358,6 +377,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 			$tabs_style .= ! empty( $args['tabs_style'] ) && 'nav-pills' === $args['tabs_style'] ? ' border-0' : '';
 			$tabs_style .= ! empty( $args['tab_size'] ) ? ' ' . sanitize_html_class( $args['tab_size'] ) : '';
 			$tabs_style .= ! empty( $args['tabs_head_mb'] ) ? ' mb-' . sanitize_html_class( $args['tabs_head_mb'] ) : '';
+
 			$tabs_style .= ' ' . sd_build_aui_class(
 				array(
 					'flex_justify_content'    => $args['tabs_flex_justify_content'],
@@ -365,6 +385,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 					'flex_justify_content_lg' => $args['tabs_flex_justify_content_lg'],
 				)
 			);
+
 			$tabs_head   = sprintf(
 				'<nav class="%1$s"><ul class="nav nav-tabs %2$s" role="tablist">%3$s</ul></nav>',
 				$greedy,
@@ -381,7 +402,6 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 		}
 
 		return '';
-
 	}
 }
 
@@ -392,4 +412,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Tabs' );
 	}
 );
-

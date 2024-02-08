@@ -157,6 +157,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 = 0.1.9 =
 * WP 6.3 breaks AUI query loop columns selection - FIXED
+* Visibility conditions is not working for tab action link - FIXED
 * Contact form block modal moved to footer to avoid z-index issues - CHANGED
 
 = 0.1.8 =
