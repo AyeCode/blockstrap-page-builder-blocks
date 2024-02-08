@@ -5,7 +5,7 @@ Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.4
 Stable tag: 0.1.9
-Requires PHP: 5.6
+Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -159,6 +159,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 * WP 6.3 breaks AUI query loop columns selection - FIXED
 * Visibility conditions is not working for tab action link - FIXED
 * Contact form block modal moved to footer to avoid z-index issues - CHANGED
+* Missing composer files could cause fatal error - FIXED
 
 = 0.1.8 =
 * BS > Gallery working when image don't have different sizes - FIXED
