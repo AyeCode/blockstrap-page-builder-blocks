@@ -91,7 +91,7 @@ Submitted from: %%submitted_from_url%%
 				wp_send_json_error( __( 'Please complete the recaptcha', 'blockstrap-page-builder-blocks' ) );
 				wp_die();
 			} elseif ( $recaptcha_enabled && ! empty( $data['g-recaptcha-response'] ) ) {
-				$keys     = get_option( 'blockstrap_recaptcha_keys' );
+				$keys     = function_exists( 'blockstrap_get_option' ) ? blockstrap_get_option( 'blockstrap_recaptcha_keys' ) : get_option( 'blockstrap_recaptcha_keys' );
 				$response = wp_remote_post(
 					'https://www.google.com/recaptcha/api/siteverify',
 					array(

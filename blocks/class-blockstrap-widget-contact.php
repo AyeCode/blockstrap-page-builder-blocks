@@ -789,7 +789,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		// recaptcha
 		$recaptcha_enabled = false;
 		if ( defined( 'BLOCKSTRAP_VERSION' ) && empty( $args['field_recaptcha'] ) ) {
-			$keys = get_option( 'blockstrap_recaptcha_keys' );
+			$keys     = function_exists( 'blockstrap_get_option' ) ? blockstrap_get_option( 'blockstrap_recaptcha_keys' ) : get_option( 'blockstrap_recaptcha_keys' );
 			if ( ! empty( $keys['site_key'] ) && ! empty( $keys['site_secret'] ) ) {
 				$field_content    .= '<div class="g-recaptcha mb-3" id="x" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';
 				$recaptcha_enabled = true;
@@ -824,7 +824,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		$form_html     = '';
 		$lightbox_html = '';
 		$button_html   = '';
-		$preview_click = $this->is_preview() ? ' onclick="alert(\'' . esc_html__( 'This is a preview, please test on the frontend.', 'blockstrap-page-builder-blocks' ) . '\');return false;" ' : '';
+		$preview_click = $this->is_preview() ? ' onclick="alert(\'' . esc_attr__( 'This is a preview, please test on the frontend.', 'blockstrap-page-builder-blocks' ) . '\');return false;" ' : '';
 
 		if ( $is_lightbox ) {
 			$button_text  = ! empty( $args['lightbox_button_text'] ) ? esc_attr( $args['lightbox_button_text'] ) : __( 'Contact form', 'blockstrap-page-builder-blocks' );
@@ -889,7 +889,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			add_action(
 				'wp_footer',
 				function() use ( $lightbox_html ) {
-					echo $lightbox_html;
+					echo $lightbox_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			);
 		} else {
@@ -907,7 +907,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 	}
 
 	public function get_recaptcha_js() {
-		$keys     = get_option( 'blockstrap_recaptcha_keys' );
+		$keys     = function_exists( 'blockstrap_get_option' ) ? blockstrap_get_option( 'blockstrap_recaptcha_keys' ) : get_option( 'blockstrap_recaptcha_keys' );
 		$site_key = ! empty( $keys['site_key'] ) ? esc_attr( $keys['site_key'] ) : '';
 		ob_start();
 		//bsppb-contact-form
@@ -985,7 +985,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		</script>
 		<?php
 
-		echo ob_get_clean();
+		echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	public function get_js() {
@@ -1008,7 +1008,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 
 				jQuery.ajax({
 					type: 'POST',
-					url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 					data: data,
 					// dataType: 'html'
 					beforeSend: function() {
@@ -1039,7 +1039,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		</script>
 		<?php
 
-		echo ob_get_clean();
+		echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 
