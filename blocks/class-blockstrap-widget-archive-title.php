@@ -263,11 +263,13 @@ class BlockStrap_Widget_Archive_Title extends WP_Super_Duper {
 		}
 
 		if ( $title ) {
-			$tag     = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'h1';
-			$classes = sd_build_aui_class( $args );
-			$class   = $classes ? 'class="' . $classes . '"' : '';
-			$styles  = sd_build_aui_styles( $args );
-			$style   = $styles ? ' style="' . $styles . '"' : '';
+			$tag          = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'h1';
+			$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'p' );
+			$tag          = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'h2';
+			$classes      = sd_build_aui_class( $args );
+			$class        = $classes ? 'class="' . $classes . '"' : '';
+			$styles       = sd_build_aui_styles( $args );
+			$style        = $styles ? ' style="' . $styles . '"' : '';
 
 			$wrapper_attributes = $class . $style;
 

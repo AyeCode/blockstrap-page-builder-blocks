@@ -3,8 +3,8 @@ Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
-Tested up to: 6.4
-Stable tag: 0.1.10
+Tested up to: 6.5
+Stable tag: 0.1.11
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -117,6 +117,9 @@ Add individual items to your accordion with this block.
 ### BS > Contact Form
 Add a simple and easy contact form to your site with this block.
 
+### BS > Rating
+Add a start rating icons to your posts. (can also be used to output GeoDirectory post ratings)
+
 ## Get BlockStrap Today!
 Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
 
@@ -154,6 +157,9 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.11 =
+* BS > Rating block added to output rating stars, general use or for GeoDirectory - ADDED
 
 = 0.1.10 =
 * WP 6.3 breaks AUI query loop columns selection - FIXED

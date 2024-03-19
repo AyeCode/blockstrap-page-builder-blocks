@@ -97,7 +97,7 @@ class BlockStrap_Widget_Post_Excerpt extends WP_Super_Duper {
 				'div'  => 'div',
 				'p'    => 'p',
 			),
-			'default'  => 'h1',
+			'default'  => 'div',
 			'desc_tip' => true,
 			'group'    => __( 'Excerpt', 'blockstrap-page-builder-blocks' ),
 		);
@@ -277,11 +277,13 @@ Donec egestas urna vel lorem bibendum fringilla. Curabitur in dui augue. Interdu
 		}
 
 		if ( $content ) {
-			$tag     = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'div';
-			$classes = sd_build_aui_class( $args );
-			$class   = $classes ? 'class="' . $classes . '"' : '';
-			$styles  = sd_build_aui_styles( $args );
-			$style   = $styles ? ' style="' . $styles . '"' : '';
+			$tag          = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'div';
+			$allowed_tags = array( 'span', 'div', 'p' );
+			$tag          = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'div';
+			$classes      = sd_build_aui_class( $args );
+			$class        = $classes ? 'class="' . $classes . '"' : '';
+			$styles       = sd_build_aui_styles( $args );
+			$style        = $styles ? ' style="' . $styles . '"' : '';
 
 			$wrapper_attributes = $class . $style;
 

@@ -20,7 +20,7 @@ function bsb_pattern_header_default( $content ) {
 			[bs_navbar_brand text=''  icon_image='<?php echo esc_url( $img_url ); ?>'  img_max_width='150'  type='custom'  custom_url='/'  text_color=''  brand_font_size='h1'  brand_font_weight='font-weight-normal'  brand_font_italic='font-italic'  text_justify='false'  text_align=''  text_align_md=''  text_align_lg=''  bg=''  bg_color='#0073aa'  bg_gradient='linear-gradient(135deg,rgb(34,227,7) 0%,rgb(245,245,245) 100%)'  bg_on_text='true'  mt=''  mr=''  mb=''  ml=''  mt_md=''  mr_md=''  mb_md=''  ml_md=''  mt_lg=''  mr_lg=''  mb_lg=''  ml_lg=''  pt=''  pr=''  pb=''  pl=''  pt_md=''  pr_md=''  pb_md=''  pl_md=''  pt_lg='0'  pr_lg='3'  pb_lg='0'  pl_lg=''  border=''  rounded=''  rounded_size='lg'  shadow=''  css_class='' ]<a class="navbar-brand d-flex align-items-center pt-0 pe-3 pb-0 rounded-lg" href="/"><img class="" alt="Site logo" src="<?php echo esc_url( $img_url ); ?>" style="max-width:150px" width="150" height="50"/><span class="mb-0 props.attributes.brand_font_size props.attributes.brand_font_weight fst-italic"></span></a>[/bs_navbar_brand]
 			<!-- /wp:blockstrap/blockstrap-widget-navbar-brand -->
 			<?php
-			echo blockstrap_blocks_get_default_menu();
+			echo blockstrap_blocks_get_default_menu(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?></div></nav>[/bs_navbar]
 	<!-- /wp:blockstrap/blockstrap-widget-navbar -->
 	<?php

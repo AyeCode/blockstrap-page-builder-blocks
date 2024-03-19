@@ -135,15 +135,15 @@ class BlockStrap_Blocks_Admin {
 	public static function add_term_fields( $taxonomy ) {
 		?>
 		<div class="form-field term-_bs_term_bg_color-wrap bs-term-form-field">
-			<label for="_bs_term_bg_color"><?php _e( 'Background Color', 'blockstrap-page-builder-blocks' ); ?></label>
-			<?php echo self::render_term_color( '', '_bs_term_bg_color' ); ?>
-			<p class="description"><?php _e( 'Background color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p>
+			<label for="_bs_term_bg_color"><?php esc_html_e( 'Background Color', 'blockstrap-page-builder-blocks' ); ?></label>
+			<?php echo self::render_term_color( '', '_bs_term_bg_color' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fully escaped in wrapper function ?>
+			<p class="description"><?php esc_html_e( 'Background color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p>
 		</div>
 
 		<div class="form-field term-_bs_term_text_color-wrap bs-term-form-field">
-			<label for="_bs_term_text_color"><?php _e( 'Text Color', 'blockstrap-page-builder-blocks' ); ?></label>
-			<?php echo self::render_term_color( '', '_bs_term_text_color' ); ?>
-			<p class="description"><?php _e( 'Text color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p>
+			<label for="_bs_term_text_color"><?php esc_html_e( 'Text Color', 'blockstrap-page-builder-blocks' ); ?></label>
+			<?php echo self::render_term_color( '', '_bs_term_text_color' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fully escaped in wrapper function ?>
+			<p class="description"><?php esc_html_e( 'Text color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p>
 		</div>
 		<?php
 	}
@@ -162,13 +162,13 @@ class BlockStrap_Blocks_Admin {
 
 		?>
 		<tr class="form-field term-_bs_term_bg_color-wrap bs-term-form-field">
-			<th scope="row"><label for="_bs_term_bg_color"><?php _e( 'Background Color', 'blockstrap-page-builder-blocks' ); ?></label></th>
-			<td><?php echo self::render_term_color( $bg_color, '_bs_term_bg_color' ); ?><p class="description"><?php _e( 'Background color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p></td>
+			<th scope="row"><label for="_bs_term_bg_color"><?php esc_html_e( 'Background Color', 'blockstrap-page-builder-blocks' ); ?></label></th>
+			<td><?php echo self::render_term_color( $bg_color, '_bs_term_bg_color' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fully escaped in wrapper function ?><p class="description"><?php esc_html_e( 'Background color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p></td>
 		</tr>
 
 		<tr class="form-field term-_bs_term_text_color-wrap bs-term-form-field">
-			<th scope="row"><label for="_bs_term_text_color"><?php _e( 'Text Color', 'blockstrap-page-builder-blocks' ); ?></label></th>
-			<td><?php echo self::render_term_color( $text_color, '_bs_term_text_color' ); ?><p class="description"><?php _e( 'Text color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p></td>
+			<th scope="row"><label for="_bs_term_text_color"><?php esc_html_e( 'Text Color', 'blockstrap-page-builder-blocks' ); ?></label></th>
+			<td><?php echo self::render_term_color( $text_color, '_bs_term_text_color' );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fully escaped in wrapper function ?><p class="description"><?php esc_html_e( 'Text color to use for this item for frontend.', 'blockstrap-page-builder-blocks' ); ?></p></td>
 		</tr>
 		<?php
 	}
