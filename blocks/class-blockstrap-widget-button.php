@@ -180,6 +180,12 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'element_require' => '[%icon_class%]!=""',
 		);
 
+		if ( function_exists( 'sd_get_new_window_input' ) ) {
+			$arguments['link_new_window'] = sd_get_new_window_input();
+			$arguments['link_nofollow']   = sd_get_nofollow_input();
+			$arguments['link_attributes'] = sd_get_attributes_input();
+		}
+
 		// button styles
 		$arguments['link_type'] = array(
 			'type'     => 'select',
@@ -658,6 +664,20 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 		if ( $this->is_preview() ) {
 			$href = '';//'href="#"';
+		}
+
+		if ( $href && function_exists( 'sd_build_attributes_string_escaped' ) ) {
+			$attributes_escaped = sd_build_attributes_string_escaped(
+				array(
+					'new_window' => ! empty( $args['link_new_window'] ) ? 1 : '',
+					'nofollow'   => ! empty( $args['link_nofollow'] ) ? 1 : '',
+					'custom'     => ! empty( $args['link_attributes'] ) ? $args['link_attributes'] : array(),
+				)
+			);
+
+			if ( $attributes_escaped ) {
+				$link_attr .= ' ' . $attributes_escaped;
+			}
 		}
 
 		$styles = sd_build_aui_styles( $args );

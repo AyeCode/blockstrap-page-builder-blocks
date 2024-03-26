@@ -43,7 +43,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 				array(
 					'element'       => 'BlocksProps',
 					'inner_element' => 'div',
-					'if_className'  => '[%inside_navbar%]=="1" ? "collapse navbar-collapse" : ""',
+					'if_className'  => '[%inside_navbar%]=="1" ? "blockstrap-nav collapse navbar-collapse" : "blockstrap-nav"',
 					'style'         => '{[%WrapStyle%]}',
 					'id'            => 'navbarNav_[%anchor%]',
 
@@ -58,11 +58,11 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 						),
 					),
 				),
-				array(
-					'element'         => 'script',
-					'content'         => 'jQuery("#navbarNav_[%anchor%]").on("show.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open"); jQuery(window).trigger("scroll");});jQuery("#navbarNav_[%anchor%]").on("hidden.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open"); jQuery(window).trigger("scroll");});',
-					'element_require' => '[%inside_navbar%]=="1"',
-				),
+//				array(
+//					'element'         => 'script',
+//					'content'         => 'jQuery("#navbarNav_[%anchor%]").on("show.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open"); jQuery(window).trigger("scroll");});jQuery("#navbarNav_[%anchor%]").on("hidden.bs.collapse", function () {jQuery("#navbarNav_[%anchor%]").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open"); jQuery(window).trigger("scroll");});',
+//					'element_require' => '[%inside_navbar%]=="1"',
+//				),
 
 			),
 			'block-wrap'       => '',
@@ -325,9 +325,27 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 		if ( empty( $content ) ) {
 			return '';
 		} else {
+			add_action( 'wp_enqueue_scripts',array( $this, 'enqueue_scripts' ) );
 			return $content;
 		}
 
+	}
+
+	/**
+	 * Enqueues the necessary scripts for the widget, shortcode, and block (front end).
+	 *
+	 * @return void
+	 * @global $blockstrap_nav_js
+	 *
+	 */
+	public function enqueue_scripts() {
+		global $blockstrap_nav_js;
+
+		// Don't load JS again.
+		if ( empty( $blockstrap_nav_js ) && class_exists( 'AyeCode_UI_Settings' ) ) {
+			$script = 'jQuery(function() { jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").on("show.bs.collapse", function () {jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open"); jQuery(window).trigger("scroll");});jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").on("hidden.bs.collapse", function () {jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open"); jQuery(window).trigger("scroll");}); });';
+			$blockstrap_nav_js = wp_add_inline_script( 'bootstrap-js-bundle', $script );
+		}
 	}
 
 }
