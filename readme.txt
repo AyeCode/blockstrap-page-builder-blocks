@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.5
-Stable tag: 0.1.11
+Stable tag: 0.1.12
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -157,6 +157,10 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.12 =
+* BS > Nav inline script move to wp_add_inline_script() call - CHANGED
+* BS > Button added link attributes options - ADDED
 
 = 0.1.11 =
 * BS > Rating block added to output rating stars, general use or for GeoDirectory - ADDED
