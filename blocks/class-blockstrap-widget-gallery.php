@@ -394,7 +394,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 	 */
 	public function get_dummy_images(){
 		$images = array();
-		$dummy_image_url = 'https://u8e8u2d3.stackpathcdn.com/dummy/plugin/';
+		$dummy_image_url = 'https://ayecode.b-cdn.net/dummy/plugin/';
 		$dummy_images = array(
 			'happy-pasta.jpg',
 			'burger.jpg',

@@ -21,6 +21,7 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			'block-supports'   => array(
 				//'anchor' => 'true',
 				'customClassName' => false,
+				//'renaming' => false,
 			),
 			'block-output'     => array(
 				array(
@@ -281,6 +282,10 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 		$arguments['anchor'] = sd_get_anchor_input();
 
 		$arguments['css_class'] = sd_get_class_input();
+
+		if ( function_exists( 'sd_get_custom_name_input' ) ) {
+			$arguments['metadata_name'] = sd_get_custom_name_input();
+		}
 
 		return $arguments;
 	}

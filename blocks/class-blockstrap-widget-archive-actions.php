@@ -217,6 +217,10 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 			'group'    => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 		);
 
+		if ( function_exists( 'sd_get_custom_name_input' ) ) {
+			$arguments['metadata_name'] = sd_get_custom_name_input();
+		}
+
 		return $arguments;
 	}
 

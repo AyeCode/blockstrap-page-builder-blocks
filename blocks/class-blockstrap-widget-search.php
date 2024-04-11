@@ -296,6 +296,10 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 			'group'    => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 		);
 
+		if ( function_exists( 'sd_get_custom_name_input' ) ) {
+			$arguments['metadata_name'] = sd_get_custom_name_input();
+		}
+
 		return $arguments;
 	}
 
@@ -402,7 +406,7 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 		$input = aui()->input(
 			array(
 				'id'                => 'bs-block-search-s',
-				'name'              => 's', 
+				'name'              => 's',
 				'type'              => 'text',
 				'placeholder'       => esc_html( $args['placeholder'] ),
 				'value'             => get_search_query(),

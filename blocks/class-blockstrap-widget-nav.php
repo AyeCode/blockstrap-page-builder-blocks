@@ -306,6 +306,9 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 
 		$arguments['css_class'] = sd_get_class_input();
 
+		if ( function_exists( 'sd_get_custom_name_input' ) ) {
+			$arguments['metadata_name'] = sd_get_custom_name_input();
+		}
 
 		return $arguments;
 	}
