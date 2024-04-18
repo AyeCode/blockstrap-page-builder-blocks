@@ -221,8 +221,11 @@ class BlockStrap_Widget_Accordion extends WP_Super_Duper {
 		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
 		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
 
-
 		$arguments['css_class'] = sd_get_class_input();
+
+		if ( function_exists( 'sd_get_custom_name_input' ) ) {
+			$arguments['metadata_name'] = sd_get_custom_name_input();
+		}
 
 		return $arguments;
 	}
