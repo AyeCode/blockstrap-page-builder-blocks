@@ -15,20 +15,30 @@ BlockStrap Page Builder Blocks combines the power of BootStrap with the power of
 
 BlockStrap Page Builder Blocks gives you a selection of bootstrap blocks that let you craft a whole site including header, footer and even menus.
 
+This plugin, combined with the [BlockTrap theme](https://wordpress.org/themes/blockstrap/), turbocharges your website's loading speed effortlessly.
+
 # BlockStrap: The Ultimate BootStrap Page Builder for WordPress
 
 Transform your WordPress website with BlockStrap, the ultimate page builder plugin that brings the power of the Bootstrap CSS framework to your fingertips. 
 
 ## Why Choose BlockStrap?
 
-BlockStrap is not just a plugin, it's a complete page builder that gives you the freedom to create any type of theme. It integrates seamlessly with the WordPress block editor, providing a wide range of blocks that are fully customizable and easy to use. 
+BlockStrap is not just a plugin, it's a complete page builder that gives you the freedom to create any type of theme. It integrates seamlessly with the WordPress block editor, providing a wide range of fully customizable blocks and easy to use. 
 
 ## Build Anything with BlockStrap
 
 Whether you're building a blog, a Directory, an e-commerce store, a portfolio, or a business website, BlockStrap has got you covered. With over 30+ unique blocks, you can create anything from stylish navigation bars and responsive image galleries to dynamic accordions and interactive maps. 
 
+## BlockStrap Free Child Themes
 
-## Features
+* [Directory Theme](https://wordpress.org/themes/directory/) - Built for our plugin [GeoDirectory](https://wordpress.org/plugins/geodirectory), this is the [best free WordPress directory theme] (https://wpgeodirectory.com/downloads/directory-theme/) you will find on WordPress.org.
+* [Real Estate Theme](https://wpgeodirectory.com/downloads/real-estate-directory-theme/) - Designed specifically for our GeoDirectory plugin, this is the top free WordPress Real Estate theme available. When used alongside the free [Real Estate Directory add-on ](https://wpgeodirectory.com/downloads/real-estate-directory/), for GeoDirectory, it puts premium real estate themes to shame.
+* [Job Board Theme](https://wpgeodirectory.com/downloads/job-board-theme/) Seamlessly integrated with GeoDirectory, this theme offers a robust platform for managing and showcasing job opportunities. Whether running a local job board or a large-scale employment site, the Job Board Theme ensures a professional look and smooth user experience.
+* [School Child Theme](https://wordpress.org/themes/school/) Build a professional-looking educational website with the free School Child Theme for Blockstrap. Tailored for academic institutions, this theme provides a clean, user-friendly design that enhances the online presence of schools and educational programs. Fully compatible with the Blockstrap framework, the School Child Theme offers seamless functionality and a professional aesthetic to engage students, parents, and educators alike.
+
+Many more BLockstrap Child themes are in the pipeline. We aim to release at least 2 per month.
+
+## Blockstrap Blocks
 
 ### BS > Archive Actions
 Perfect for blogs and news sites, this block allows you to add category selector and sort options to archive pages.
@@ -122,7 +132,6 @@ Add a start rating icons to your posts. (can also be used to output GeoDirectory
 
 ## Get BlockStrap Today!
 Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
-
 
 == Installation ==
 
