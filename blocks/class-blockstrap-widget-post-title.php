@@ -28,7 +28,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 									//dangerouslySetInnerHTML: {__html: 'Post Title' },
 									style: sd_build_aui_styles(props.attributes),
 									className: sd_build_aui_class(props.attributes),
-								}), el('a',{dangerouslySetInnerHTML: {__html: 'Post Title' },href: '#post-link', className: 'nav-link-' + props.attributes.text_color, style: sd_build_aui_styles(props.attributes)  }) )",
+								}), el('a',{dangerouslySetInnerHTML: {__html: 'Post Title' },href: '#post-link', className: 'nav-link nav-link-' + props.attributes.text_color, style: sd_build_aui_styles(props.attributes)  }) )",
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_post_title',
@@ -270,6 +270,10 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			$tag          = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'h2';
 			$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'p' );
 			$tag          = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'h2';
+			/**
+			 * A GeoDirectory filter to adjust the tag if based inside a GD Listings loop
+			 */
+			$tag          = apply_filters( 'geodir_widget_gd_post_title_tag', $tag, $args, $widget_args, $this );
 			$classes      = sd_build_aui_class( $args );
 			$class        = $classes ? 'class="' . $classes . '"' : '';
 			$styles       = sd_build_aui_styles( $args );
@@ -278,7 +282,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			$wrapper_attributes = $class . $style;
 
 			if ( $args['is_link'] ) {
-				$class  = $args['text_color'] ? 'nav-link-' . esc_attr( $args['text_color'] ) : 'nav-link';
+				$class  = $args['text_color'] ? 'nav-link nav-link-' . esc_attr( $args['text_color'] ) : 'nav-link';
 				$class .= ! empty( $args['stretched_link'] ) ? ' stretched-link' : '';
 				$link   = get_permalink();
 				$title  = sprintf(
@@ -297,9 +301,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			$wrapper_attributes,
 			$title
 		) : '';
-
 	}
-
 }
 
 // register it.
@@ -309,4 +311,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Post_Title' );
 	}
 );
-

@@ -100,7 +100,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'group'    => __( 'Output', 'blockstrap-page-builder-blocks' )
+			'group'    => __( 'Output', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['custom_next_text'] = array(
@@ -115,7 +115,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 		);
 
 		$arguments['custom_next_icon_class'] = array(
-			'type'           => 'text',
+			'type'            => 'text',
 			'title'           => __( 'Next page link icon class', 'blockstrap-page-builder-blocks' ),
 			'desc'            => __( 'Enter a font awesome icon class. Default: fas fa-chevron-right', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => __( 'fas fa-chevron-right', 'blockstrap-page-builder-blocks' ),
@@ -137,7 +137,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 		);
 
 		$arguments['custom_prev_icon_class'] = array(
-			'type'           => 'text',
+			'type'            => 'text',
 			'title'           => __( 'Previous page link icon class', 'blockstrap-page-builder-blocks' ),
 			'desc'            => __( 'Enter a font awesome icon class. Default: fas fa-chevron-left', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => __( 'fas fa-chevron-left', 'blockstrap-page-builder-blocks' ),
@@ -170,14 +170,20 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 			'group'    => __( 'Paging', 'blockstrap-page-builder-blocks' ),
 		);
 
-		$arguments = $arguments + sd_get_flex_justify_content_input_group( 'flex_justify_content', array( 'group' => __( 'Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '![%show_custom_next_prev%]' ) );
+		$arguments = $arguments + sd_get_flex_justify_content_input_group(
+            'flex_justify_content',
+            array(
+				'group'           => __( 'Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '![%show_custom_next_prev%]',
+            )
+        );
 
 		$arguments['paging_style'] = array(
 			'title'    => __( 'Style', 'blockstrap-page-builder-blocks' ),
 			'type'     => 'select',
 			'options'  => array(
-				''      => __( 'Default', 'blockstrap-page-builder-blocks' ),
-				'rounded' => __( 'Rounded', 'blockstrap-page-builder-blocks' ),
+				''             => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'rounded'      => __( 'Rounded', 'blockstrap-page-builder-blocks' ),
 				'rounded-pill' => __( 'Rounded Pill', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
@@ -186,70 +192,101 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 			'group'    => __( 'Paging', 'blockstrap-page-builder-blocks' ),
 		);
 
-		$arguments['paging_rounded_size'] = sd_get_border_input( 'rounded_size', array( 'title'    => __( 'Page Link Border Radius Size', 'blockstrap-page-builder-blocks' ), 'group' => __( 'Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%paging_style%]=="rounded"' ) );
+		$arguments['paging_rounded_size'] = sd_get_border_input(
+            'rounded_size',
+            array(
+				'title'           => __( 'Page Link Border Radius Size', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%paging_style%]=="rounded"',
+            )
+        );
 
 		//
 		$arguments['size'] = array(
-			'title'    => __( 'Size', 'blockstrap-page-builder-blocks' ),
-			'type'     => 'select',
-			'options'  => array(
-				''      => __( 'Default', 'blockstrap-page-builder-blocks' ),
-				'small' => __( 'Small', 'blockstrap-page-builder-blocks' ),
+			'title'           => __( 'Size', 'blockstrap-page-builder-blocks' ),
+			'type'            => 'select',
+			'options'         => array(
+				''       => __( 'Default', 'blockstrap-page-builder-blocks' ),
+				'small'  => __( 'Small', 'blockstrap-page-builder-blocks' ),
 				'medium' => __( 'Medium', 'blockstrap-page-builder-blocks' ),
-				'large' => __( 'Large', 'blockstrap-page-builder-blocks' ),
+				'large'  => __( 'Large', 'blockstrap-page-builder-blocks' ),
 			),
-			'default'  => '',
-			'desc_tip' => true,
-			'advanced' => false,
-			'group'    => __( 'Paging', 'blockstrap-page-builder-blocks' ),
-			'element_require' => '[%paging_style%]==""'
+			'default'         => '',
+			'desc_tip'        => true,
+			'advanced'        => false,
+			'group'           => __( 'Paging', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%paging_style%]==""',
 		);
 
 		$arguments['ap_text_color'] = sd_get_text_color_input(
 			'text_color',
 			array(
-				'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
-				'element_require' => '[%show_advanced%]'
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%show_advanced%]',
 			)
 		);
 
 		$arguments['ap_font_size'] = sd_get_font_size_input(
 			'font_size',
 			array(
-				'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
-				'element_require' => '[%show_advanced%]'
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%show_advanced%]',
 			)
 		);
 
 		// padding
-		$arguments['ap_pt'] = sd_get_padding_input( 'pt', array( 'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%show_advanced%]' ) );
-		$arguments['ap_pr'] = sd_get_padding_input( 'pr', array( 'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%show_advanced%]' ) );
-		$arguments['ap_pb'] = sd_get_padding_input( 'pb', array( 'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%show_advanced%]' ) );
-		$arguments['ap_pl'] = sd_get_padding_input( 'pl', array( 'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ), 'element_require' => '[%show_advanced%]' ) );
+		$arguments['ap_pt'] = sd_get_padding_input(
+            'pt',
+            array(
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%show_advanced%]',
+            )
+        );
+		$arguments['ap_pr'] = sd_get_padding_input(
+            'pr',
+            array(
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%show_advanced%]',
+            )
+        );
+		$arguments['ap_pb'] = sd_get_padding_input(
+            'pb',
+            array(
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%show_advanced%]',
+            )
+        );
+		$arguments['ap_pl'] = sd_get_padding_input(
+            'pl',
+            array(
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%show_advanced%]',
+            )
+        );
 
 		// text align
 		$arguments['ap_text_align']    = sd_get_text_align_input(
 			'text_align',
 			array(
-				'device_type' => 'Mobile',
+				'device_type'     => 'Mobile',
 				'element_require' => '[%show_advanced%]',
-				'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' )
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['ap_text_align_md'] = sd_get_text_align_input(
 			'text_align',
 			array(
-				'device_type' => 'Tablet',
+				'device_type'     => 'Tablet',
 				'element_require' => '[%show_advanced%]',
-				'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' )
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 		$arguments['ap_text_align_lg'] = sd_get_text_align_input(
 			'text_align',
 			array(
-				'device_type' => 'Desktop',
+				'device_type'     => 'Desktop',
 				'element_require' => '[%show_advanced%]',
-				'group' => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' )
+				'group'           => __( 'Advanced Paging', 'blockstrap-page-builder-blocks' ),
 			)
 		);
 
@@ -335,32 +372,32 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 		global $wp_query;
 
 		$defaults = array(
-			'show_advanced' => '',
-			'bg'            => '',
-			'mt'            => '',
-			'mb'            => '3',
-			'mr'            => '',
-			'ml'            => '',
-			'pt'            => '',
-			'pb'            => '',
-			'pr'            => '',
-			'pl'            => '',
-			'border'        => '',
-			'rounded'       => '',
-			'rounded_size'  => '',
-			'shadow'        => '',
-			'mid_size'      => '',
+			'show_advanced'           => '',
+			'bg'                      => '',
+			'mt'                      => '',
+			'mb'                      => '3',
+			'mr'                      => '',
+			'ml'                      => '',
+			'pt'                      => '',
+			'pb'                      => '',
+			'pr'                      => '',
+			'pl'                      => '',
+			'border'                  => '',
+			'rounded'                 => '',
+			'rounded_size'            => '',
+			'shadow'                  => '',
+			'mid_size'                => '',
 
-			'show_custom_next_prev' => '',
-			'custom_next_text' => '',
-			'custom_next_icon_class' => '',
-			'custom_prev_text' => '',
-			'custom_prev_icon_class' => '',
-			'paging_style' => '',
-			'paging_rounded_size' => '',
+			'show_custom_next_prev'   => '',
+			'custom_next_text'        => '',
+			'custom_next_icon_class'  => '',
+			'custom_prev_text'        => '',
+			'custom_prev_icon_class'  => '',
+			'paging_style'            => '',
+			'paging_rounded_size'     => '',
 
-			'size' => '',
-			'flex_justify_content' => '',
+			'size'                    => '',
+			'flex_justify_content'    => '',
 			'flex_justify_content_md' => '',
 			'flex_justify_content_lg' => '',
 		);
@@ -394,7 +431,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 
 		if ( $args['size'] == 'lg' || $args['size'] == 'large' ) {
 			$args['size'] = 'lg';
-		} else if ( $args['size'] == 'sm' || $args['size'] == 'small' ) {
+		} elseif ( $args['size'] == 'sm' || $args['size'] == 'small' ) {
 			$args['size'] = 'sm';
 		} else {
 			$args['size'] = '';
@@ -452,7 +489,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 				'flex_justify_content_lg' => $args['flex_justify_content_lg'],
 			)
 		);
-		$args['class'] = trim( implode( " ", $pagination_class ) );
+		$args['class'] = trim( implode( ' ', $pagination_class ) );
 		$advanced_pagination_inline = false;
 
 		if ( ! empty( $args['show_advanced'] ) ) {
@@ -463,20 +500,20 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 			if ( $advance_pagination ) {
 				if ( $show_advanced == 'before' ) {
 					$args['before_paging'] = $advance_pagination;
-				} else if ( $show_advanced == 'after' ) {
+				} elseif ( $show_advanced == 'after' ) {
 					$args['after_paging'] = $advance_pagination;
-				} else if ( $show_advanced == 'inline_before' ) {
+				} elseif ( $show_advanced == 'inline_before' ) {
 					$args['before_paging'] = $advance_pagination;
 					$wrap_class .= ' d-flex align-items-center justify-content-between';
 					$advanced_pagination_inline = true;
-				} else if ( $show_advanced == 'inline_after' ) {
+				} elseif ( $show_advanced == 'inline_after' ) {
 					$args['after_paging'] = $advance_pagination;
 					$wrap_class .= ' d-flex align-items-center justify-content-between';
 					$advanced_pagination_inline = true;
-				} else if ( $show_advanced == 'only' ) {
+				} elseif ( $show_advanced == 'only' ) {
 					$args['advanced_pagination_only'] = $advance_pagination;
 				}
-			} else if ( $show_advanced == 'only' ) {
+			} elseif ( $show_advanced == 'only' ) {
 				return;
 			}
 		}
@@ -497,7 +534,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 
 		if ( ! empty( $args['paging_style'] ) && $args['paging_style'] == 'rounded' ) {
 			$paging_rounded_size = $args['paging_rounded_size'] !== '' ? '-' . absint( $args['paging_rounded_size'] ) : '';
-			$output = str_replace( "rounded-pill", "rounded" . $paging_rounded_size, $output );
+			$output = str_replace( 'rounded-pill', 'rounded' . $paging_rounded_size, $output );
 		}
 
 		if ( $advanced_pagination_inline ) {
@@ -560,7 +597,7 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 				'pl'         => $args['ap_pl'],
 				'text_align' => $args['ap_text_align'] ? $args['ap_text_align'] : 'text-center',
 				'text_align' => $args['ap_text_align_md'] ? $args['ap_text_align_md'] : 'text-center',
-				'text_align' => $args['ap_text_align_lg'] ? $args['ap_text_align_lg'] : 'text-center'
+				'text_align' => $args['ap_text_align_lg'] ? $args['ap_text_align_lg'] : 'text-center',
 			)
 		);
 

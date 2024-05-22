@@ -310,7 +310,29 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			} elseif ( ! $featured_image ) {
 				$featured_image = '';
 			}
+
+			// check if we are on a GD location page
+			$gd_location_img = $this->maybe_get_gd_location_image();
+			if ($gd_location_img) {
+				$featured_image = $gd_location_img;
+			}
+
+			// GD archive page images
+			$gd_archive_img = $this->maybe_get_gd_archive_image();
+			if ($gd_archive_img) {
+				$featured_image = $gd_archive_img;
+			}
+
+			// replace the old URL based placeholder image @todo remove once all products have latest SD in their release.
 			$content = preg_replace( '/:url\(\w+:\/\/\S*\/icons\/placeholder.png/', ':url(' . $featured_image, $content );
+
+			// replace the new inline placeholder image
+			$content = preg_replace(
+				'/:url\(data:image\/svg\+xml;base64,PD94bW[\w+\/=]*\)/',
+				':url(' . $featured_image . ')',
+				$content
+			);
+
 		}
 
 		//$content = str_replace( '&lt;', '<', $content ); // this could cause XSS in search
@@ -327,10 +349,45 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 
 			return '<section class="' . $wrap_class . '"' . $style . '>' . $content . '</section>'; // shortcode
 		}
-
 	}
 
+	/**
+	 * Get the GeoDirectory archive page image if available.
+	 *
+	 * @return string
+	 */
+	public function maybe_get_gd_archive_image(){
+		$url = '';
 
+		if( defined('GEODIRECTORY_VERSION') && geodir_is_page( 'archive' ) ){
+			$images = geodir_get_images( 0, 1, false, '', array() , array( 'cat_default', 'cpt_default', 'listing_default' ));
+			if (!empty($images)) {
+				$url = geodir_get_image_src( $images[0], 'original' );
+			}
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Get the GeoDirectory location page image if available.
+	 *
+	 * @return string
+	 */
+	public function maybe_get_gd_location_image(){
+		$url = '';
+		if( defined('GEODIRLOCATION_VERSION') && geodir_is_page( 'location' ) ){
+			global $geodirectory;
+
+			$attachment = GeoDir_Location_SEO::get_post_attachment( $geodirectory->location );
+			if (!empty($attachment)) {
+				$upload_dir = wp_get_upload_dir();
+				$url = esc_url($upload_dir['baseurl'] . $attachment->file );
+			}
+		}
+
+		return $url;
+	}
 }
 
 // register it.
@@ -340,4 +397,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Container' );
 	}
 );
-

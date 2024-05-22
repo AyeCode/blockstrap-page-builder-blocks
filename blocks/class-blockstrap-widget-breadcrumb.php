@@ -206,7 +206,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 		$output = '';
 		$crumbs = $this->get_breadcrumbs();
 
-//		/print_r($crumbs);exit();
+//      /print_r($crumbs);exit();
 
 		// maybe remove home link
 		if ( ! empty( $crumbs ) && ! empty( $args['hide_home'] ) ) {
@@ -252,7 +252,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 						$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . '"></i> ';
 					}
 				}
-				$i++;
+				++$i;
 
 				$link    = $i < $total && $crumb['link'] ? esc_url_raw( $crumb['link'] ) : '';
 				$name    = $crumb['name'] ? esc_attr( $crumb['name'] ) : '';
@@ -268,7 +268,6 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 		}
 
 		return $output;
-
 	}
 
 	/**
@@ -536,9 +535,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 		// Return the breadcrumbs
 		return $breadcrumbs;
-
 	}
-
 }
 
 
@@ -549,4 +546,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Breadcrumb' );
 	}
 );
-

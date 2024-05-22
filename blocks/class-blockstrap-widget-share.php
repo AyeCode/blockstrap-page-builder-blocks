@@ -536,7 +536,7 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		$output = '';
 
 		global $wp;
-		$current_url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+		$current_url = $this->get_current_page_url();
 
 		if ( 'icons' === $output_type ) {
 			$tag         = 'span';
@@ -547,10 +547,22 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			}
 
 			if ( ! empty( $args['service_twitter'] ) ) {
+				// what icon shoudl we use
+				$twitter_icon_class = 'fab fa-twitter';
+				if(class_exists('WP_Font_Awesome_Settings')) {
+					$FAS = WP_Font_Awesome_Settings::instance();
+					$fas_settings = $FAS->get_settings();
+					$version = $fas_settings['version'] ?? '';
+
+					if( !$version || version_compare($version,'5.999','>')){
+						$twitter_icon_class = 'fab fa-x-twitter';
+					}
+				}
+
 				$handel     = ! empty( $args['twitter_handel'] ) ? '&via=' . esc_attr( $args['twitter_handel'] ) : '';
 				$share_text = ! empty( $args['share_text'] ) ? '&text=' . esc_attr( $args['share_text'] ) : '';
 				$link       = 'https://twitter.com/share?url=' . urlencode_deep( $current_url ) . $handel . $share_text;
-				$output    .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Twitter', 'blockstrap-page-builder-blocks' ) . '" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600\');return false;"><i class="fab fa-twitter"></i></a>';
+				$output    .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Twitter', 'blockstrap-page-builder-blocks' ) . '" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600\');return false;"><i class="' . esc_attr( $twitter_icon_class ) . '"></i></a>';
 			}
 
 			if ( ! empty( $args['service_linkedin'] ) ) {
@@ -659,6 +671,44 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 		}
 
+	}
+
+	public function get_current_page_url() {
+		$pageURL = is_ssl() ? 'https://' : 'http://';
+
+		// Host
+		if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+			$host = wp_unslash( $_SERVER['HTTP_HOST'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		} else {
+			$host = wp_parse_url( home_url(), PHP_URL_HOST );
+		}
+
+		/*
+		 * Since we are assigning the URI from the server variables, we first need
+		 * to determine if we are running on apache or IIS.  If PHP_SELF and REQUEST_URI
+		 * are present, we will assume we are running on apache.
+		 */
+		if ( ! empty( $_SERVER['PHP_SELF'] ) && ! empty( $_SERVER['REQUEST_URI'] ) ) {
+			// To build the entire URI we need to prepend the protocol, and the http host
+			// to the URI string.
+			$pageURL .= $host . $_SERVER['REQUEST_URI'];
+		} else {
+			/*
+			 * Since we do not have REQUEST_URI to work with, we will assume we are
+			 * running on IIS and will therefore need to work some magic with the SCRIPT_NAME and
+			 * QUERY_STRING environment variables.
+			 *
+			 * IIS uses the SCRIPT_NAME variable instead of a REQUEST_URI variable... thanks, MS
+			 */
+			$pageURL .= $host . $_SERVER['SCRIPT_NAME'];
+
+			// If the query string exists append it to the URI string
+			if ( isset( $_SERVER['QUERY_STRING'] ) && ! empty( $_SERVER['QUERY_STRING'] ) ) {
+				$pageURL .= '?' . $_SERVER['QUERY_STRING'];
+			}
+		}
+
+		return $pageURL;
 	}
 
 

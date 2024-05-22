@@ -251,9 +251,7 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 			$link_two,
 			$link_three
 		) : '';
-
 	}
-
 }
 
 // register it.
@@ -263,4 +261,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Skip_Links' );
 	}
 );
-

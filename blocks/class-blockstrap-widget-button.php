@@ -504,7 +504,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-		global $aui_bs5,$gd_post;
+		global $aui_bs5, $gd_post;
 
 		//      print_r( $args );
 		//      $args['text'] = str_replace("&#039;","'",$args['text']);
@@ -690,7 +690,6 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$styles = function_exists( 'sd_build_hover_styles' ) ? sd_build_hover_styles( $args, $this->is_preview() ) : '';
 
 		return $link_text || $icon_left || $icon_right ? '<' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '"' . $link_attr . '>' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $styles : ''; // shortcode
-
 	}
 
 	/**
@@ -716,8 +715,6 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			return $link; // return the original link if it's neither an email nor a phone number
 		}
 	}
-
-
 }
 
 
@@ -728,4 +725,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Button' );
 	}
 );
-

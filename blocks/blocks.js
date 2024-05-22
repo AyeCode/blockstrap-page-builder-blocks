@@ -37,6 +37,7 @@ registerBlockType( 'blockstrap/blockstrap-widget-accordion', { title: 'BS > Acco
 registerBlockType( 'blockstrap/blockstrap-widget-accordion-item', { title: 'BS > Accordion Item' } );
 registerBlockType( 'blockstrap/blockstrap-widget-contact', { title: 'BS > Contact Form' } );
 registerBlockType( 'blockstrap/blockstrap-widget-rating', { title: 'BS > Rating' } );
+registerBlockType( 'blockstrap/blockstrap-widget-scroll-top', { title: 'BS > Scroll Top' } );
 */
 
 

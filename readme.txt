@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.5
-Stable tag: 0.1.15
+Stable tag: 0.1.16
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -166,6 +166,17 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.16 =
+* Nav item can show class in name for UWP login in/out - FIXED
+* Accordion block now has option to enable FAQ Schema - ADDED
+* New BS > Scroll Top block for scrolling the page back to the top - NEW/ADDED
+* BS > Post Title will now dynamically change h tag if inside GD Loop - ADDED
+* BD > Post Title link color not showing correct color when set - FIXED
+* BS > Share block current URl function improved - CHANGED
+* BS > Share block will use new twitter X logo if current Font Awesome version supports it - CHANGED
+* BS > Container block background as featured image will now USE GD location, category and CPT images when available - ADDED
+* BS > Container block background in editor will now use inline SVG image instead of URL for better template compatibility - CHANGED
 
 = 0.1.15 =
 * Better block auto-recovery to auto recover blocks - UPDATED
