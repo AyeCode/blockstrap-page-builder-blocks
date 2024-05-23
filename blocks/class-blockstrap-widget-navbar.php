@@ -67,24 +67,24 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 
 		// transparent until scroll
 		$arguments['bgtus'] = array(
-			'type'     => 'checkbox',
-			'title'    => __( 'Transparent until scroll', 'blockstrap-page-builder-blocks' ),
-			'default'  => '',
-			'value'    => '1',
-			'desc_tip' => false,
-			'desc'     => __( 'This may not show in block preview.', 'blockstrap-page-builder-blocks' ),
-			'group'    => __( 'Background', 'blockstrap-page-builder-blocks' ),
+			'type'            => 'checkbox',
+			'title'           => __( 'Transparent until scroll', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'value'           => '1',
+			'desc_tip'        => false,
+			'desc'            => __( 'This may not show in block preview.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Background', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '([%bg%]!="" || [%bg_image%]!="")',
 		);
 
 		$arguments['cscos'] = array(
-			'type'     => 'checkbox',
-			'title'    => __( 'Flip color scheme on scroll', 'blockstrap-page-builder-blocks' ),
-			'default'  => '',
-			'value'    => '1',
-			'desc_tip' => false,
-			'desc'     => __( 'This may not show in block preview.', 'blockstrap-page-builder-blocks' ),
-			'group'    => __( 'Background', 'blockstrap-page-builder-blocks' ),
+			'type'            => 'checkbox',
+			'title'           => __( 'Flip color scheme on scroll', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'value'           => '1',
+			'desc_tip'        => false,
+			'desc'            => __( 'This may not show in block preview.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Background', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '([%bg%]!="" || [%bg_image%]!="") && [%bgtus%]',
 		);
 
@@ -204,9 +204,7 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 			$wrap_class = sd_build_aui_class( $args );
 			return '<section class="' . $wrap_class . '">' . $content . '</section>'; // shortcode
 		}
-
 	}
-
 }
 
 // register it.
@@ -216,4 +214,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Navbar' );
 	}
 );
-

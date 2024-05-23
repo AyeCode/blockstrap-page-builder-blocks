@@ -80,27 +80,27 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 
 		// Search input
 		$arguments['placeholder'] = array(
-			'type'            => 'text',
-			'title'           => __( 'Placeholder', 'blockstrap-page-builder-blocks' ),
-			'desc'            => __( 'Search input placeholder text.', 'blockstrap-page-builder-blocks' ),
-			'placeholder'     => __( 'Search...', 'blockstrap-page-builder-blocks' ),
-			'default'         => '',
-			'desc_tip'        => true,
-			'group'           => __( 'Search Input', 'blockstrap-page-builder-blocks' )
+			'type'        => 'text',
+			'title'       => __( 'Placeholder', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Search input placeholder text.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Search...', 'blockstrap-page-builder-blocks' ),
+			'default'     => '',
+			'desc_tip'    => true,
+			'group'       => __( 'Search Input', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['input_size'] = array(
-			'type'            => 'select',
-			'title'           => __( 'Size', 'blockstrap-page-builder-blocks' ),
-			'options'         => array(
+			'type'     => 'select',
+			'title'    => __( 'Size', 'blockstrap-page-builder-blocks' ),
+			'options'  => array(
 				''       => __( 'Default', 'blockstrap-page-builder-blocks' ),
 				'small'  => __( 'Small', 'blockstrap-page-builder-blocks' ),
 				'medium' => __( 'Medium', 'blockstrap-page-builder-blocks' ),
 				'large'  => __( 'Large', 'blockstrap-page-builder-blocks' ),
 			),
-			'default'         => '',
-			'desc_tip'        => true,
-			'group'           => __( 'Search Input', 'blockstrap-page-builder-blocks' )
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Search Input', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['button_hide'] = array(
@@ -109,7 +109,7 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'group'    => __( 'Search Button', 'blockstrap-page-builder-blocks' )
+			'group'    => __( 'Search Button', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// Search button
@@ -121,18 +121,18 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 			'default'         => '',
 			'desc_tip'        => true,
 			'element_require' => '![%button_hide%]',
-			'group'           => __( 'Search Button', 'blockstrap-page-builder-blocks' )
+			'group'           => __( 'Search Button', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['button_icon_class'] = array(
-			'type'        => 'text',
-			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
-			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
-			'placeholder' => __( 'fas fa-search', 'blockstrap-page-builder-blocks' ),
-			'default'     => '',
-			'desc_tip'    => true,
+			'type'            => 'text',
+			'title'           => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'fas fa-search', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'desc_tip'        => true,
 			'element_require' => '![%button_hide%]',
-			'group'       => __( 'Search Button', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Search Button', 'blockstrap-page-builder-blocks' ),
 		);
 
 		$arguments['button_icon_position'] = array(
@@ -178,13 +178,13 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_text_color_input_group(
 			'text_color',
 			array(
-				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '![%button_hide%]',
 			),
 			array(
-				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '![%button_hide%]',
-				'tab'   => array(
+				'tab'             => array(
 					'close' => true,
 				),
 			)
@@ -220,13 +220,13 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 		$arguments = $arguments + sd_get_text_color_input_group(
 			'text_color_hover',
 			array(
-				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '![%button_hide%]',
 			),
 			array(
-				'group' => __( 'Button', 'blockstrap-page-builder-blocks' ),
+				'group'           => __( 'Button', 'blockstrap-page-builder-blocks' ),
 				'element_require' => '![%button_hide%]',
-				'tab'   => array(
+				'tab'             => array(
 					'close'      => true,
 					'tabs_close' => true,
 				),
@@ -318,13 +318,13 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 		$args = wp_parse_args(
 			$args,
 			array(
-				'placeholder' => '',
-				'input_size' => '',
-				'button_hide' => '',
-				'button_title' => '',
-				'button_icon_class' => '',
+				'placeholder'          => '',
+				'input_size'           => '',
+				'button_hide'          => '',
+				'button_title'         => '',
+				'button_icon_class'    => '',
 				'button_icon_position' => '',
-				'font_size' => ''
+				'font_size'            => '',
 			)
 		);
 
@@ -339,10 +339,10 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 			if ( ! empty( $args['button_icon_class'] ) ) {
 				if ( $args['button_icon_position'] == 'right' ) {
 					$ml = $button_title ? ( $aui_bs5 ? ' ms-2' : ' ml-2' ) : '';
-					$icon_right =  '<i class="' . sd_sanitize_html_classes( $args['button_icon_class'] ) . $ml . '"></i>';
+					$icon_right = '<i class="' . sd_sanitize_html_classes( $args['button_icon_class'] ) . $ml . '"></i>';
 				} else {
 					$mr = $button_title ? ( $aui_bs5 ? ' me-2' : ' mr-2' ) : '';
-					$icon_left =  '<i class="' . sd_sanitize_html_classes( $args['button_icon_class'] ) . $mr . '"></i>';
+					$icon_left = '<i class="' . sd_sanitize_html_classes( $args['button_icon_class'] ) . $mr . '"></i>';
 				}
 			}
 
@@ -369,9 +369,9 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 
 			$button_class .= ' ' . sd_build_aui_class(
 				array(
-					'text_color' => $args['text_color'],
-					'font_size' => $args['font_size'],
-					'font_case' => $args['font_case'],
+					'text_color'  => $args['text_color'],
+					'font_size'   => $args['font_size'],
+					'font_case'   => $args['font_case'],
 					'font_weight' => $args['font_weight'],
 				)
 			);
@@ -397,7 +397,7 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 		// Size
 		if ( $args['input_size'] == 'small' ) {
 			$size = 'sm';
-		} else if ( $args['input_size'] == 'large' ) {
+		} elseif ( $args['input_size'] == 'large' ) {
 			$size = 'lg';
 		} else {
 			$size = '';
@@ -412,7 +412,7 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 				'value'             => get_search_query(),
 				'size'              => $size,
 				'input_group_right' => $button,
-				'no_wrap'           => true
+				'no_wrap'           => true,
 			)
 		);
 
@@ -420,7 +420,6 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 
 		return $output;
 	}
-
 }
 
 // Register block.

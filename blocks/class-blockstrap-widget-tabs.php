@@ -363,7 +363,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 					$aria_active  = $active ? 'true' : 'false';
 					$active      .= ' ' . sd_build_aui_class( array( 'rounded_size' => $args['tabs_rounded_size'] ) );
 					$tabs        .= '<li class="nav-item"><button class="nav-link ' . $active . '" id="' . esc_attr( $tab['id'] ) . '-tab" data-' . $bs5 . 'toggle="tab" data-' . $bs5 . 'target="#' . esc_attr( $tab['id'] ) . '" type="button" role="tab" aria-controls="nav-home" aria-selected="' . $aria_active . '">' . esc_attr( $tab['name'] ) . '</button></li>';
-					$_key++;
+					++$_key;
 				}
 			}
 

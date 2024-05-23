@@ -393,7 +393,6 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 			$style,
 			$iframe
 		);
-
 	}
 
 
@@ -482,7 +481,6 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 
 		return ob_get_clean();
 	}
-
 }
 
 // register it.
