@@ -107,7 +107,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
             'name'             => __('BS > Modal', 'blockstrap-page-builder-blocks'),
             'widget_ops'       => [
                 'classname'   => 'bs-modal',
-                'description' => esc_html__('A Bootstrap Modal builder', 'blockstrap-page-builder-blocks'),
+                'description' => esc_html__('A Bootstrap Modal builder for creating popups.', 'blockstrap-page-builder-blocks'),
             ],
             'no_wrap'          => true,
             'block_group_tabs' => [

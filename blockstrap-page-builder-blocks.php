@@ -3,7 +3,7 @@
  * This is the main plugin file, here we declare and call the important stuff
  *
  * @package   BlockStrap
- * @copyright 2022 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2024 AyeCode Ltd
  * @license   GPL-3.0+
  * @since     1.0.0
  *
@@ -11,7 +11,7 @@
  * Plugin Name: BlockStrap Page Builder Blocks
  * Plugin URI: https://ayecode.io/
  * Description: BlockStrap - A FSE page builder for WordPress
- * Version: 0.1.16
+ * Version: 0.1.17
  * Author: AyeCode
  * Author URI: https://ayecode.io
  * Text Domain: blockstrap-page-builder-blocks
@@ -21,7 +21,7 @@
  */
 
 
-define('BLOCKSTRAP_BLOCKS_VERSION', '0.1.16');
+define('BLOCKSTRAP_BLOCKS_VERSION', '0.1.17');
 
 /**
  * The BlockStrap Class
