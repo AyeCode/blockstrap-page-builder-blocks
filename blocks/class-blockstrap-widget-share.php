@@ -29,8 +29,11 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			),
 			'example'          => array(
 				'attributes' => array(
-					'after_text' => 'Earth',
+					'output_type' => 'icons',
+					'service_email' => 1,
+					'service_link' => 1,
 				),
+				'viewportWidth' => 250
 			),
 			'no_wrap'          => true,
 			'block_group_tabs' => array(

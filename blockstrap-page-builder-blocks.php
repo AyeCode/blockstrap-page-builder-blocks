@@ -285,7 +285,7 @@ final class BlockStrap
         include_once 'blocks/class-blockstrap-widget-contact.php';
 		include_once 'blocks/class-blockstrap-widget-rating.php';
 		include_once 'blocks/class-blockstrap-widget-scroll-top.php';
-//		include_once 'blocks/class-blockstrap-widget-modal.php';
+		include_once 'blocks/class-blockstrap-widget-modal.php';
 
         // require_once 'blocks/class-blockstrap-widget-popup-test.php'; //@todo remove before release
         // Frontend comments

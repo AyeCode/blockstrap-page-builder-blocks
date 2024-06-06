@@ -3,6 +3,16 @@
 	transform: translate(-50%, 0%);
 }
 
+.modal {
+	@at-root .modal:has(.wp-block-blockstrap-blockstrap-widget-modal.is-selected),
+	.modal:has(.wp-block-blockstrap-blockstrap-widget-modal.has-child-selected) {
+		display: block;
+		position: relative;
+		opacity: 1 !important;
+	}
+}
+
+
 /* show responsive menu if selected */
 @media ( max-width: 840px ) {
 	.wp-block-blockstrap-blockstrap-widget-navbar {
@@ -21,4 +31,3 @@
 		background: #f8f9fa !important;
 	}
 }
-

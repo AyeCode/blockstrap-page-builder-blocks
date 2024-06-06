@@ -31,11 +31,7 @@ class BlockStrap_Widget_Skip_Links extends WP_Super_Duper {
 				'classname'   => 'bd-skip-links',
 				'description' => esc_html__( 'Skip links for accessibility users. This should be the first thing in your header and link to places such as your main content.', 'blockstrap-page-builder-blocks' ),
 			),
-			'example'           => array(
-				'attributes' => array(
-					'after_text' => 'Earth',
-				),
-			),
+			'example'           => false,
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(

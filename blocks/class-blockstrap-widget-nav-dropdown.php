@@ -21,6 +21,7 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'block-supports'   => array(
 				'customClassName' => false,
 			),
+			'parent'		   => array('blockstrap/blockstrap-widget-nav','blockstrap/blockstrap-widget-nav-dropdown'),
 			'block-output'     => array(
 				array(
 					'element'       => 'BlocksProps',

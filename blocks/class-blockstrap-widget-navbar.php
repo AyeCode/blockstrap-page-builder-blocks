@@ -17,6 +17,7 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 			'block-icon'     => 'fas fa-bars',
 			'block-category' => 'layout',
 			'block-keywords' => "['nav','navbar']",
+			'allowed-blocks'   => array('blockstrap/blockstrap-widget-navbar-brand','blockstrap/blockstrap-widget-nav'),
 			'block-output'   => array(
 				array(
 					'element'   => 'nav',
@@ -30,6 +31,20 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 						),
 						'innerBlocksProps' => array(
 							'orientation' => 'horizontal',
+							'if_template' => "[
+								[ 'blockstrap/blockstrap-widget-navbar-brand'],
+								[ 'blockstrap/blockstrap-widget-nav', {text:'Tab2',anchor:'tab-2'}, [
+										[ 'blockstrap/blockstrap-widget-nav-item', { type:'home' } ],
+										[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'About' } ],
+										[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'Contact Us' } ],
+										[ 'blockstrap/blockstrap-widget-nav-dropdown', { text:'Dropdown' },[
+												[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'Item 1' } ],
+												[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'Item 2' } ],
+											]
+										]
+									]
+								],
+							]",
 						),
 					),
 				),
@@ -110,7 +125,7 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 				'container-fluid px-0' => __( 'Full width', 'blockstrap-page-builder-blocks' ),
 				'container'            => __( 'Contain', 'blockstrap-page-builder-blocks' ),
 			),
-			'default'  => '',
+			'default'  => 'container-fluid px-0',
 			'desc_tip' => true,
 			'group'    => __( 'Content Container', 'blockstrap-page-builder-blocks' ),
 		);

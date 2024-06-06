@@ -30,11 +30,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 				'classname'   => 'bs-image',
 				'description' => esc_html__( 'An image gallery.', 'blockstrap-page-builder-blocks' ),
 			),
-			'example'           => array(
-				'attributes' => array(
-					'after_text' => 'Earth',
-				),
-			),
+			'example'           => false,
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(

@@ -130,6 +130,12 @@ Add a simple and easy contact form to your site with this block.
 ### BS > Rating
 Add a start rating icons to your posts. (can also be used to output GeoDirectory post ratings)
 
+### BS > Scroll Top
+Add a button to the page so users can scroll back to the top of the page easily.
+
+### BS > Modal
+Add a modal (popup) to the page containing any content.
+
 ## Get BlockStrap Today!
 Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
 
@@ -166,6 +172,13 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.17 =
+* BS > Modal block added for creating popups - ADDED
+* Most blocks now show better previews - ADDED
+* Parent and allowedBlocks params added to some blocks to remove them from main list when they can only be nested - CHANGED
+* Some blocks such as Navbar will now auto add child element dummy data on insert for faster building - ADDED
+* Some blocks such as tabs were not working in editor with certain AyeCode UI setting - FIXED
 
 = 0.1.16 =
 * Nav item can show class in name for UWP login in/out - FIXED

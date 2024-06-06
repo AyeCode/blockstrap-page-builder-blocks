@@ -32,11 +32,9 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 				'classname'   => 'bs-rating',
 				'description' => esc_html__( 'A bootstrap rating icons', 'blockstrap-page-builder-blocks' ),
 			),
-			//          'example'           => array(
-			//              'attributes' => array(
-			//                  'after_text' => 'Earth',
-			//              ),
-			//          ),
+			  'example'           => array(
+				  'viewportWidth' => 200
+			  ),
 				'no_wrap'      => true,
 			'block_group_tabs' => array(
 				'content'  => array(

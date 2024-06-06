@@ -34,9 +34,10 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
                 'classname'   => 'bd-nav-item',
                 'description' => esc_html__('A navigation item for the navbar.', 'blockstrap-page-builder-blocks'),
             ],
-            'example'           => [
-                'attributes' => ['after_text' => 'Earth'],
-            ],
+			'parent'		   => array('blockstrap/blockstrap-widget-nav','blockstrap/blockstrap-widget-nav-dropdown'),
+			'example'           => [
+				'viewportWidth' => 80
+			],
             'no_wrap'           => true,
             'block_group_tabs'  => [
                 'content'  => [
@@ -238,6 +239,12 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             'group'           => __('Link', 'blockstrap-page-builder-blocks'),
             'element_require' => '( [%icon_class%]!="" && [%text%]=="" )',
         ];
+
+		if ( function_exists( 'sd_get_new_window_input' ) ) {
+			$arguments['link_new_window'] = sd_get_new_window_input();
+			$arguments['link_nofollow']   = sd_get_nofollow_input();
+			$arguments['link_attributes'] = sd_get_attributes_input();
+		}
 
         // Link styles.
         $arguments['link_type'] = [
@@ -746,6 +753,20 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
         if (! empty($args['link_type'])) {
             $wrap_class .= $aui_bs5 ? ' align-self-center' : ' form-inline';
         }
+
+		if (!$this->is_preview() && $link && function_exists( 'sd_build_attributes_string_escaped' ) ) {
+			$attributes_escaped = sd_build_attributes_string_escaped(
+				array(
+					'new_window' => ! empty( $args['link_new_window'] ) ? 1 : '',
+					'nofollow'   => ! empty( $args['link_nofollow'] ) ? 1 : '',
+					'custom'     => ! empty( $args['link_attributes'] ) ? $args['link_attributes'] : array(),
+				)
+			);
+
+			if ( $attributes_escaped ) {
+				$link_attr .= ' ' . $attributes_escaped;
+			}
+		}
 
         if ($this->is_block_content_call()) {
             $is_sub = ! empty($_REQUEST['block_parent_name']) && 'blockstrap/blockstrap-widget-nav-dropdown' === $_REQUEST['block_parent_name']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
