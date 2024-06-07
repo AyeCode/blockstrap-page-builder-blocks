@@ -21,6 +21,7 @@ class BlockStrap_Widget_Accordion_Item extends WP_Super_Duper {
 				'anchor'          => false,
 				'customClassName' => false,
 			),
+			'parent'		   => array('blockstrap/blockstrap-widget-accordion'),
 			'block-output'     => array(
 				array(
 					'element'   => 'div',
@@ -44,7 +45,7 @@ class BlockStrap_Widget_Accordion_Item extends WP_Super_Duper {
 					array(
 						'element'              => 'div',
 						'if_className'         => 'props.attributes.state === "closed" ? "accordion-collapse collapse" : "accordion-collapse collapse show"',
-						'if_x'                 => '( typeof parentBlocks !== "undefined" && parentBlocks[parentBlocks.length - 1].attributes.anchor ) ? props.setAttributes({parent_anchor: parentBlocks[parentBlocks.length - 1].attributes.anchor}) : ""', // required
+						'if_x'                 => '( typeof parentBlocks !== "undefined" && parentBlocks[parentBlocks.length - 1]?.attributes?.length && parentBlocks[parentBlocks.length - 1].attributes.anchor ) ? props.setAttributes({parent_anchor: parentBlocks[parentBlocks.length - 1].attributes.anchor}) : ""', // required
 						'if_id'                => '"collapse-"+props.attributes.anchor',
 						'if_"aria-labelledby"' => '"heading-"+props.attributes.anchor',
 						'if_"data-bs-parent"'  => 'props.attributes.parent_anchor ? "#"+props.attributes.parent_anchor : ""',

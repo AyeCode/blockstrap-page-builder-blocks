@@ -65,9 +65,15 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 				'description' => esc_html__( 'A container for content', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'          => array(
-				'attributes' => array(
-					'after_text' => 'Earth',
-				),
+				'viewportWidth' => 300,
+				'innerBlocks'   => array(
+					array(
+						'name'	=> 'core/paragraph',
+						'attributes'	=>	array(
+							'content'	=> esc_html__( 'A container for content', 'blockstrap-page-builder-blocks' ),
+						)
+					)
+				)
 			),
 			'no_wrap'          => true,
 			'block_group_tabs' => array(

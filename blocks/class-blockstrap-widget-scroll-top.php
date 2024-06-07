@@ -34,9 +34,7 @@ class BlockStrap_Widget_Scroll_Top extends WP_Super_Duper
                 'classname'   => 'bs-scroll-top',
                 'description' => esc_html__('A button for scrolling the website back tot he top of the page.', 'blockstrap-page-builder-blocks'),
             ],
-            'example'            => [
-                'attributes' => ['after_text' => 'Earth'],
-            ],
+            'example'            => false,
             'no_wrap'            => true,
             'block_group_tabs'   => [
 //                'content'  => [

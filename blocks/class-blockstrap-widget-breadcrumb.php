@@ -33,9 +33,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'description' => esc_html__( 'A bootstrap breadcrumb output.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'            => array(
-				'attributes' => array(
-					'after_text' => 'Earth',
-				),
+				'viewportWidth' => 300
 			),
 			'no_wrap'            => true,
 			'block_group_tabs'   => array(

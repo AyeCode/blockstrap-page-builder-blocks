@@ -34,8 +34,9 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			),
 			'example'             => array(
 				'attributes' => array(
-					'after_text' => 'Earth',
+					'type' => 'comments',
 				),
+				'viewportWidth' => 200
 			),
 			'no_wrap'             => true,
 			'block_edit_wrap_tag' => 'span',

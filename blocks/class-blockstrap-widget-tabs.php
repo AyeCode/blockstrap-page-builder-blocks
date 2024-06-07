@@ -10,7 +10,8 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 	 */
 	public function __construct() {
 
-		$aui_settings = is_admin() ? get_option( 'ayecode-ui-settings' ) : array();
+		$aui_settings = is_admin() ? get_option( 'ayecode-ui-settings', array() ) : array();
+		$aui_settings = apply_filters( 'ayecode-ui-settings', $aui_settings, array(), array() );
 		$bs5          = ! empty( $aui_settings['bs_ver'] ) && '5' === $aui_settings['bs_ver'] ? 'bs-' : '';
 
 		$options = array(
@@ -23,6 +24,8 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 			'block-supports'    => array(
 				'customClassName' => false,
 			),
+			'example'		   => false,
+			'allowed-blocks'   => array('blockstrap/blockstrap-widget-tab'),
 			'block-outputx'     => array(
 				array(
 					'element'    => 'innerBlocksProps',

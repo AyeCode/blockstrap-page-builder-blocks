@@ -33,9 +33,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 				'description' => esc_html__( 'A bootstrap button, badge or iconbox.', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
-				'attributes' => array(
-					'after_text' => 'Earth',
-				),
+				'viewportWidth' => 200
 			),
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
@@ -132,7 +130,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'type'            => 'text',
 			'title'           => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
 			'desc'            => __( 'Add custom link URL', 'blockstrap-page-builder-blocks' ),
-			'placeholder'     => __( 'https://example.com', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com or #contact-form', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
 			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
@@ -141,7 +139,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 		$arguments['lightbox_notice'] = array(
 			'type'            => 'notice',
-			'desc'            => __( 'Enter the BS > Contact form ID prefixed by a `#` eg: #contact-form', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Enter the BS > Contact or BS > Modal form ID prefixed by a `#` eg: #contact-form', 'blockstrap-page-builder-blocks' ),
 			'status'          => 'info',
 			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
 			'element_require' => '[%type%]=="lightbox"',

@@ -13,11 +13,17 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 		$options = array(
 			'textdomain'     => 'blockstrap',
 			'output_types'   => array( 'block', 'shortcode' ),
-			'block-icon'     => 'far fa-square',
+			'block-icon'     => 'fas fa-water',
 			'block-category' => 'layout',
 			'block-keywords' => "['shape','divider']",
 			'block-supports' => array(
 				'anchor' => 'true',
+			),
+			'example'          => array(
+				'attributes' => array(
+					'sd' => 'mountains',
+					'sd_color' => 'primary',
+				),
 			),
 			'block-output'   => array(
 				array(

@@ -24,6 +24,12 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'block-supports'   => array(
 				'customClassName' => false,
 			),
+// this might be too restrictive currently
+//			'allowed-blocks'   => array(
+//				'blockstrap/blockstrap-widget-nav-item',
+//				'blockstrap/blockstrap-widget-nav-dropdown',
+//				'blockstrap/blockstrap-widget-button',
+//			),
 			'block-output'     => array(
 				array(
 					'element'         => 'button',
@@ -55,6 +61,16 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 						),
 						'innerBlocksProps' => array(
 							'orientation' => 'horizontal',
+							'if_template' => "[
+										[ 'blockstrap/blockstrap-widget-nav-item', { type:'home' } ],
+										[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'About' } ],
+										[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'Contact Us' } ],
+										[ 'blockstrap/blockstrap-widget-nav-dropdown', { text:'Dropdown' },[
+												[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'Item 1' } ],
+												[ 'blockstrap/blockstrap-widget-nav-item', { type:'custom',text:'Item 2' } ],
+											]
+										],
+							]",
 						),
 					),
 				),
@@ -75,8 +91,25 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			),
 			'example'          => array(
 				'attributes' => array(
-					'after_text' => 'Earth',
+					'inside_navbar' => '0',
 				),
+				'innerBlocks'   => array(
+					array(
+						'name'	=> 'blockstrap/blockstrap-widget-nav-item',
+						'attributes'	=>	array(
+							'type'	=> 'custom',
+							'text'	=> esc_html__( 'Item 1', 'blockstrap-page-builder-blocks' ),
+						)
+					),
+					array(
+						'name'	=> 'blockstrap/blockstrap-widget-nav-item',
+						'attributes'	=>	array(
+							'type'	=> 'custom',
+							'text'	=> esc_html__( 'Item 2', 'blockstrap-page-builder-blocks' ),
+						)
+					)
+				),
+				'viewportWidth' => 200
 			),
 			'no_wrap'          => true,
 			'block_group_tabs' => array(
@@ -148,7 +181,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 				'1' => __( 'Inside Navbar (collapse on mobile)', 'blockstrap-page-builder-blocks' ),
 				'0' => __( 'Standalone (never collapse)', 'blockstrap-page-builder-blocks' ),
 			),
-			'default'  => '',
+			'default'  => '1',
 			'desc_tip' => true,
 			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
