@@ -491,6 +491,12 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 			global $bs_modal_content,$bs_modal_header_count;
 			if ($bs_modal_header_count) {
 				foreach ($bs_modal_content as  $content) {
+					$content = do_shortcode( $content );
+
+					if (function_exists('do_blocks')) {
+						$content = do_blocks( $content );
+					}
+
 					echo $content;
 				}
 				$bs_modal_header_count = 0; // reset the

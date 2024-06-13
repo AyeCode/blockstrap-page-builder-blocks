@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.5
-Stable tag: 0.1.18
+Stable tag: 0.1.19
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,10 +176,11 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
-= 0.1.18 =
+= 0.1.19 =
 * BS > Offcanvas block added for creating Offcanvas items - ADDED
 * Accordion block not setting parent ID which could break some advanced features - FIXED
 * Gallery block not setting uploaded images alt tag - FIXED
+* Modal and Offcanvas in footer not rendering shortcodes - FIXED
 
 = 0.1.17 =
 * BS > Modal block added for creating popups - ADDED
