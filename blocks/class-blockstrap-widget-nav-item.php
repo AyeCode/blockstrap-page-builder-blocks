@@ -93,7 +93,8 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             'wp-login'  => __('WP Login (logged out)', 'blockstrap-page-builder-blocks'),
             'wp-logout' => __('WP Logout (logged in)', 'blockstrap-page-builder-blocks'),
             'custom'    => __('Custom URL', 'blockstrap-page-builder-blocks'),
-            'lightbox'  => __('Open Lightbox', 'blockstrap-page-builder-blocks'),
+			'lightbox'  => __('Open Lightbox', 'blockstrap-page-builder-blocks'),
+			'offcanvas'  => __('Open Offcanvas', 'blockstrap-page-builder-blocks'),
         ];
 
         if (defined('GEODIRECTORY_VERSION')) {
@@ -198,7 +199,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             'default'         => '',
             'desc_tip'        => true,
             'group'           => __('Link', 'blockstrap-page-builder-blocks'),
-            'element_require' => '( [%type%]=="custom" || [%type%]=="lightbox" )',
+            'element_require' => '( [%type%]=="custom" || [%type%]=="lightbox" || [%type%]=="offcanvas" )',
         ];
 
         $arguments['lightbox_notice'] = [
@@ -206,7 +207,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             'desc'            => __('Enter the BS > Contact form ID prefixed by a `#` eg: #contact-form', 'blockstrap-page-builder-blocks'),
             'status'          => 'info',
             'group'           => __('Link', 'blockstrap-page-builder-blocks'),
-            'element_require' => '[%type%]=="lightbox"',
+            'element_require' => '( [%type%]=="lightbox" || [%type%]=="offcanvas" )',
         ];
 
         $arguments['text'] = [
@@ -577,10 +578,14 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             $link               = esc_url(wp_logout_url(get_permalink()));
             $link_text          = __('Sign out', 'blockstrap-page-builder-blocks');
         } else if ('lightbox' === $args['type']) {
-            $link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
-            $link_text = __('Open Lightbox', 'blockstrap-page-builder-blocks');
-            $link_attr = ' data-bs-toggle="modal" ';
-        } else if ('custom' === $args['type']) {
+			$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
+			$link_text = __('Open Lightbox', 'blockstrap-page-builder-blocks');
+			$link_attr = ' data-bs-toggle="modal" ';
+		} else if ('offcanvas' === $args['type']) {
+			$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
+			$link_text = __('Open Offcanvas', 'blockstrap-page-builder-blocks');
+			$link_attr = ' data-bs-toggle="offcanvas" ';
+		} else if ('custom' === $args['type']) {
             $link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
             $link_text = __('Custom', 'blockstrap-page-builder-blocks');
         } else if ('gd_search' === $args['type']) {

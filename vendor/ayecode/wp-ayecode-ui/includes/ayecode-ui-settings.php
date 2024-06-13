@@ -35,7 +35,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version = '0.2.15';
+		public $version = '0.2.16';
 
 		/**
 		 * Class textdomain.
@@ -529,7 +529,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 				.bs-tooltip-top .arrow{
 					margin-left:0px;
 				}
-
+				
 				.custom-switch input[type=checkbox]{
 				    display:none;
 				}
@@ -1443,7 +1443,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
 			//  buttons
 			$output .= $prefix . ' .btn-'.esc_attr($type).'{';
-			$output .= '
+			$output .= ' 
             --bs-btn-bg: '.esc_attr($color_code).';
             --bs-btn-border-color: '.esc_attr($color_code).';
             --bs-btn-hover-bg: rgba(var(--bs-'.esc_attr($type).'-rgb), .9);
@@ -1465,7 +1465,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
 			//  buttons outline
 			$output .= $prefix . ' .btn-outline-'.esc_attr($type).'{';
-			$output .= '
+			$output .= ' 
 			--bs-btn-color: '.esc_attr($color_code).';
             --bs-btn-border-color: '.esc_attr($color_code).';
             --bs-btn-hover-bg: rgba(var(--bs-'.esc_attr($type).'-rgb), .9);
@@ -1488,7 +1488,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
             // button hover
 			$output .= $prefix . ' .btn-'.esc_attr($type).':hover{';
-			$output .= '
+			$output .= ' 
             box-shadow: 0 0.25rem 0.25rem 0.125rem rgb(var(--bs-'.esc_attr($type).'-rgb), .1), 0 0.375rem 0.75rem -0.125rem rgb(var(--bs-'.esc_attr($type).'-rgb) , .4);
             }
             ';
@@ -1583,7 +1583,8 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 //			$output .= $prefix ." .btn-{$type}:hover, $prefix .btn-{$type}:focus, $prefix .btn-{$type}.focus{background-color: #000;    border-color: #000;} ";
 			$output .= $prefix ." .btn-outline-{$type}:not(:disabled):not(.disabled):active:focus, $prefix .btn-outline-{$type}:not(:disabled):not(.disabled).active:focus, .show>$prefix .btn-outline-{$type}.dropdown-toggle:focus{box-shadow: 0 0 0 0.2rem $op_25;} ";
 			$output .= $prefix ." .btn-{$type}:not(:disabled):not(.disabled):active, $prefix .btn-{$type}:not(:disabled):not(.disabled).active, .show>$prefix .btn-{$type}.dropdown-toggle{background-color: ".$darker_10.";    border-color: ".$darker_125.";} ";
-			$output .= $prefix ." .btn-{$type}:not(:disabled):not(.disabled):active:focus, $prefix .btn-{$type}:not(:disabled):not(.disabled).active:focus, .show>$prefix .btn-{$type}.dropdown-toggle:focus {box-shadow: 0 0 0 0.2rem $op_25;} ";
+            $output .= $prefix ." .btn-{$type}:not(:disabled):not(.disabled):active:focus, $prefix .btn-{$type}:not(:disabled):not(.disabled).active:focus, .show>$prefix .btn-{$type}.dropdown-toggle:focus {box-shadow: 0 0 0 0.2rem $op_25;} ";
+            $output .= $prefix ." .btn-{$type}:not(:disabled):not(.disabled):active:focus, $prefix .btn-{$type}:not(:disabled):not(.disabled):focus {box-shadow: 0 0.25rem 0.25rem 0.125rem rgba(var(--bs-{$type}-rgb), 0.1), 0 0.375rem 0.75rem -0.125rem rgba(var(--bs-{$type}-rgb), 0.4);} ";
 
 			// text
 //			$output .= $prefix .".xxx, .text-{$type} {color: var(--bs-".esc_attr($type).");} ";
@@ -2793,7 +2794,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
                                             found = true;
                                         }
                                     }
-
+                    
                                     if (found) {
                                         $keys[condition.key][index] = true;
                                     } else {

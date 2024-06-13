@@ -523,10 +523,12 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 							$img = wp_image_add_srcset_and_sizes( $img, $meta, 0 );
 						}
 					} else {
+						$image_alt = ! empty( $image['alt'] ) ? esc_attr( $image['alt'] ) : '';
 						$img = sprintf(
-							'<img src="%1$s" class="%2$s" />',
+							'<img src="%1$s" class="%2$s" alt="%3$s"/>',
 							$img_src,
-							$image_class
+							$image_class,
+							$image_alt
 						);
 					}
 

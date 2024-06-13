@@ -134,7 +134,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'default'         => '',
 			'desc_tip'        => true,
 			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
-			'element_require' => '( [%type%]=="custom" || [%type%]=="lightbox" )',
+			'element_require' => '( [%type%]=="custom" || [%type%]=="lightbox" || [%type%]=="offcanvas" )',
 		);
 
 		$arguments['lightbox_notice'] = array(
@@ -142,7 +142,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'desc'            => __( 'Enter the BS > Contact or BS > Modal form ID prefixed by a `#` eg: #contact-form', 'blockstrap-page-builder-blocks' ),
 			'status'          => 'info',
 			'group'           => __( 'Link', 'blockstrap-page-builder-blocks' ),
-			'element_require' => '[%type%]=="lightbox"',
+			'element_require' => '( [%type%]=="lightbox" || [%type%]=="offcanvas" )',
 		);
 
 		$arguments['text'] = array(
@@ -429,7 +429,8 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			'page'     => __( 'Page', 'blockstrap-page-builder-blocks' ),
 			'post-id'  => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
 			'custom'   => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
-			'lightbox' => __( 'Open Lightbox', 'blockstrap-page-builder-blocks' ), // not implemented yet
+			'lightbox' => __( 'Open Lightbox', 'blockstrap-page-builder-blocks' ),
+			'offcanvas' => __( 'Open Offcanvas', 'blockstrap-page-builder-blocks' ),
 		);
 
 		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
@@ -531,6 +532,10 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
 			$link_text = __( 'Open Lightbox', 'blockstrap-page-builder-blocks' );
 			$link_attr = ' data-bs-toggle="modal" ';
+		} elseif ( 'offcanvas' === $args['type'] ) {
+			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
+			$link_text = __( 'Open Offcanvas', 'blockstrap-page-builder-blocks' );
+			$link_attr = ' data-bs-toggle="offcanvas" ';
 		} elseif ( 'custom' === $args['type'] ) {
 			$link      = ! empty( $args['custom_url'] ) ? esc_url_raw( $args['custom_url'] ) : '#';
 			$link_text = __( 'Custom', 'blockstrap-page-builder-blocks' );

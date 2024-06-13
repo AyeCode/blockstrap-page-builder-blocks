@@ -3,6 +3,7 @@
 	transform: translate(-50%, 0%);
 }
 
+/* Show modal when selected in Editor */
 .modal {
 	@at-root .modal:has(.wp-block-blockstrap-blockstrap-widget-modal.is-selected),
 	.modal:has(.wp-block-blockstrap-blockstrap-widget-modal.has-child-selected) {
@@ -11,6 +12,38 @@
 		opacity: 1 !important;
 	}
 }
+
+/* Show offcanvas when selected in Editor */
+.offcanvas {
+	@at-root .offcanvas:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected),
+	.offcanvas:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.has-child-selected) {
+		transform: none !important;
+	}
+}
+
+/* Show offcanvas when selected in Editor */
+#editor {
+	@at-root {
+		#editor .offcanvas.offcanvas-top:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected),
+		#editor .offcanvas.offcanvas-start:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected),
+		#editor .offcanvas.offcanvas-end:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected),
+		#editor .offcanvas:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.has-child-selected) {
+			top: 61px !important;
+		}
+	}
+
+	.is-sidebar-opened {
+		@at-root {
+			#editor .offcanvas.offcanvas-top:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected, .is-sidebar-opened),
+			#editor .offcanvas.offcanvas-bottom:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected, .is-sidebar-opened),
+			#editor .offcanvas.offcanvas-end:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected, .is-sidebar-opened),
+			#editor .offcanvas:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.has-child-selected, .is-sidebar-opened) {
+				right: 310px !important;
+			}
+		}
+	}
+}
+
 
 
 /* show responsive menu if selected */

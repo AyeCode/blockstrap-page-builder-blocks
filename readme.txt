@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.5
-Stable tag: 0.1.17
+Stable tag: 0.1.18
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -136,6 +136,9 @@ Add a button to the page so users can scroll back to the top of the page easily.
 ### BS > Modal
 Add a modal (popup) to the page containing any content.
 
+### BS > Offcanvas
+Add a Offcanvas element to the page containing any content.
+
 ## Get BlockStrap Today!
 Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
 
@@ -172,6 +175,11 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.18 =
+* BS > Offcanvas block added for creating Offcanvas items - ADDED
+* Accordion block not setting parent ID which could break some advanced features - FIXED
+* Gallery block not setting uploaded images alt tag - FIXED
 
 = 0.1.17 =
 * BS > Modal block added for creating popups - ADDED
