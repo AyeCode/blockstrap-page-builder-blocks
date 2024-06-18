@@ -15,7 +15,7 @@ BlockStrap Page Builder Blocks combines the power of BootStrap with the power of
 
 BlockStrap Page Builder Blocks gives you a selection of bootstrap blocks that let you craft a whole site including header, footer and even menus.
 
-This plugin, combined with the [BlockTrap theme](https://wordpress.org/themes/blockstrap/), turbocharges your website's loading speed effortlessly.
+This plugin, combined with the [BlockStrap theme](https://wordpress.org/themes/blockstrap/), turbocharges your website's loading speed effortlessly.
 
 # BlockStrap: The Ultimate BootStrap Page Builder for WordPress
 
