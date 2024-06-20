@@ -23,7 +23,7 @@ class BlockStrap_Widget_Tab extends WP_Super_Duper {
 			),
 			"parent" 		=>  array( 'blockstrap/blockstrap-widget-tabs' ),
 			'block-edit-return'  => "el( 'div', wp.blockEditor.useBlockProps( {
-										className: ( parentBlocks[parentBlocks.length - 1]?.innerBlocks?.length && parentBlocks[parentBlocks.length - 1].innerBlocks[0].clientId === props.clientId ?  'tab-pane fade show active ' : 'tab-pane fade ' ) +  sd_build_aui_class(props.attributes)
+										className: ( ( parentBlocks.length > 0 && parentBlocks[parentBlocks.length - 1].innerBlocks[0].clientId === props.clientId ) ?  'tab-pane fade show active ' : 'tab-pane fade ' ) +  sd_build_aui_class(props.attributes)
 										} ),
 
 										 el( 'div', wp.blockEditor.useInnerBlocksProps( {className: 'tab-content'},  {orientation: 'horizontal',inner_element: 'div' }))

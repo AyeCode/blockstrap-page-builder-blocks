@@ -1,6 +1,6 @@
 <?php
 
-class BlockStrap_Widget_Modal extends WP_Super_Duper
+class BlockStrap_Widget_Offcanvas extends WP_Super_Duper
 {
 
     public $arguments;
@@ -23,18 +23,16 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
             'nested-block'     => true,
             'block-icon'       => 'fas fa-square',
             'block-category'   => 'layout',
-            'block-keywords'   => "['modal','popup','lightbox']",
+            'block-keywords'   => "['modal','popup','lightbox','offcanvas']",
             'block-supports'   => ['customClassName' => false],
             'block-output'     => [
 				[
 					'element'       => 'BlocksProps',
 					'blockProps'       => array(
-						'if_className'	=> 'bs_build_modal_button_class(props.attributes)',
+						'if_className'	=> 'bs_build_offcanvas_button_class(props.attributes)',
 					),
 					'inner_element' => 'button',
-//					setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 1000);"
-//					'if_onclick'	=> 'alert(1)',//'setTimeout(function() { window.dispatchEvent(new Event("resize")); }, 1000);',
-					'"data-bs-togglex"'	=> 'modal',
+					'"data-bs-togglex"'	=> 'offcanvas',
 					'if_"data-bs-target"'	=> 'props.attributes.anchor ? "#" + props.attributes.anchor : "#" + props.attributes.styleid',
 					'if_content'	=> 'props.attributes.button_text',
 					'element_require' => '[%open_with%]==""',
@@ -45,42 +43,43 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 						'className'	=> 'alert alert-info',
 					),
 					'inner_element' => 'div',
-					'if_content'	=> '"Modal Placeholder for #" + bs_build_modal_id(props.attributes)',
+					'if_content'	=> '"Offcanvas Placeholder for #" + bs_build_offcanvas_id(props.attributes)',
 					'element_require' => '[%open_with%]=="external"',
 				],
 				array(
 					'element'              => 'div',
 					'if_id'	=> 'props.attributes.anchor ? props.attributes.anchor : props.attributes.styleid',
-					'if_class'	=> 'props.attributes.animation && props.attributes.animation === "no" ? "modal" : "modal fade"',
+					'if_class' => '"offcanvas " + bs_build_offcanvas_class(props.attributes)',
+					'style'        => '{zIndex:100000,[%WrapStyle%]}',
 					'tabindex'	=> '-1',
 					'if_"data-bs-backdrop"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "static" : "true"',
 					'if_"data-bs-keyboard"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "false" : "true"',
-					array(
-						'element' => 'div',
-						'if_class' => '"modal-dialog " + bs_build_modal_dialog_class(props.attributes)',
-						array(
-							'element' => 'div',
-							'if_class' => '"modal-content overflow-hidden " [%WrapClass%]',
-							'style'        => '{[%WrapStyle%]}',
+//					array(
+//						'element' => 'div',
+//						'if_class' => '"modal-dialog " + bs_build_offcanvas_dialog_class(props.attributes)',
+//						array(
+//							'element' => 'div',
+//							'if_class' => '"modal-content overflow-hidden " [%WrapClass%]',
+//							'style'        => '{[%WrapStyle%]}',
 							array(
 								'element' => 'div',
-								'if_class' => '"modal-header " +  bs_build_modal_header_class(props.attributes)',
+								'if_class' => '"offcanvas-header " +  bs_build_offcanvas_header_class(props.attributes)',
 								array(
 									'element' => 'h1',
-									'if_class' => '"modal-title " +  bs_build_modal_title_class(props.attributes)',
+									'if_class' => '"offcanvas-title " +  bs_build_offcanvas_title_class(props.attributes)',
 									'if_content' => 'props.attributes.header_title',
 								),
 								array(
 									'element' => 'button',
 									'if_class' => 'props.attributes.close_icon=="hide" ? "d-none" : "btn-close bg-white"',
-									'"data-bs-dismiss"' => 'modal',
+									'"data-bs-dismiss"' => 'offcanvas',
 									'"aria-label"' => 'Close',
 								),
 
 							),
 							array(
 								'element' => 'div',
-								'if_class' => '"modal-body " +  bs_build_modal_body_class(props.attributes)',
+								'if_class' => '"offcanvas-body " +  bs_build_offcanvas_body_class(props.attributes)',
 								array(
 									'element'          => 'innerBlocksProps',
 									'blockProps'       => array(
@@ -92,8 +91,8 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 								),
 							)
 
-						)
-					),
+//						)
+//					),
 
 				),
             ],
@@ -103,17 +102,17 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
             'block-wrap'       => '',
 			'block-api-version' => 3, // this is needed to make the block selectable in the editor if not using innerBlockProps https://wordpress.stackexchange.com/questions/384004/cant-select-my-block-by-clicking-on-it
 			'class_name'       => __CLASS__,
-            'base_id'          => 'bs_modal',
-            'name'             => __('BS > Modal', 'blockstrap-page-builder-blocks'),
+            'base_id'          => 'bs_offcanvas',
+            'name'             => __('BS > Offcanvas', 'blockstrap-page-builder-blocks'),
             'widget_ops'       => [
-                'classname'   => 'bs-modal',
-                'description' => esc_html__('A Bootstrap Modal builder for creating popups.', 'blockstrap-page-builder-blocks'),
+                'classname'   => 'bs-offcanvas',
+                'description' => esc_html__('A Bootstrap Offcanvas builder for creating off page elements.', 'blockstrap-page-builder-blocks'),
             ],
             'no_wrap'          => true,
             'block_group_tabs' => [
 				'content'  => array(
 					'groups' => array(
-						__( 'Modal', 'blockstrap-page-builder-blocks' ),
+						__( 'Offcanvas', 'blockstrap-page-builder-blocks' ),
 						__( 'Header', 'blockstrap-page-builder-blocks' ),
 						__( 'Body', 'blockstrap-page-builder-blocks' ),
 						__( 'Footer', 'blockstrap-page-builder-blocks' ),
@@ -129,8 +128,8 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
                 'styles'   => [
                     'groups' => [
 						__('Button', 'blockstrap-page-builder-blocks'),
-						__('Modal Header', 'blockstrap-page-builder-blocks'),
-						__('Modal Body', 'blockstrap-page-builder-blocks'),
+						__('Offcanvas Header', 'blockstrap-page-builder-blocks'),
+						__('Offcanvas Body', 'blockstrap-page-builder-blocks'),
 					],
                     'tab'    => [
                         'title'     => __('Styles', 'blockstrap-page-builder-blocks'),
@@ -175,7 +174,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 			'desc'            => __('Place in the theme footer to be able to open on any page.', 'blockstrap-page-builder-blocks'),
 			'status'          => 'info',
 			// 'warning' | 'success' | 'error' | 'info'
-			'group'           => __('Modal', 'blockstrap-page-builder-blocks'),
+			'group'           => __('Offcanvas', 'blockstrap-page-builder-blocks'),
 			'element_require' => '[%open_with%]=="external"',
 		];
 
@@ -188,28 +187,28 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
             ],
             'default'  => '',
             'desc_tip' => true,
-            'group'    => __('Modal', 'blockstrap-page-builder-blocks'),
+            'group'    => __('Offcanvas', 'blockstrap-page-builder-blocks'),
         ];
 
 		$arguments['anchor'] = [
 			'type'    => 'text',
-			'title'   => __('Modal ID', 'blockstrap-page-builder-blocks'),
+			'title'   => __('Offcanvas ID', 'blockstrap-page-builder-blocks'),
 			'default' => '',
 //			'custom_attributes' => array(
 ////				'pattern' => '[A-Za-z0-9_\-\.]+',
 //					'onkeyup' => "alert(1)",
 //			),
 			'desc'	=> __('Enter an ID with no spaces, only dashes allowed, eg: contact-form', 'blockstrap-page-builder-blocks'),
-			'group'   => __('Modal', 'blockstrap-page-builder-blocks'),
+			'group'   => __('Offcanvas', 'blockstrap-page-builder-blocks'),
 			'element_require' => '[%open_with%]=="external"',
 		];
 
 		$arguments['anchor_notice'] = [
 			'type'            => 'notice',
-			'desc'            => __('The Modal ID can be used by other blocks to open the Modal, BS > Button or BS > Nav item', 'blockstrap-page-builder-blocks'),
+			'desc'            => __('The Offcanvas ID can be used by other blocks to open the Offcanvas, BS > Button or BS > Nav item', 'blockstrap-page-builder-blocks'),
 			'status'          => 'error',
 			// 'warning' | 'success' | 'error' | 'info'
-			'group'           => __('Modal', 'blockstrap-page-builder-blocks'),
+			'group'           => __('Offcanvas', 'blockstrap-page-builder-blocks'),
 			'element_require' => '[%open_with%]=="external"',
 		];
 
@@ -217,48 +216,59 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 			'type'    => 'text',
 			'title'   => __('Button text', 'blockstrap-page-builder-blocks'),
 			'placeholder'   => __('Open Popup', 'blockstrap-page-builder-blocks'),
-			'default' => __('Open Modal', 'blockstrap-page-builder-blocks'),
-			'group'   => __('Modal', 'blockstrap-page-builder-blocks'),
+			'default' => __('Open Offcanvas', 'blockstrap-page-builder-blocks'),
+			'group'   => __('Offcanvas', 'blockstrap-page-builder-blocks'),
 		];
 
-		$arguments['size'] = [
-			'type'     => 'select',
-			'title'    => __('Size', 'blockstrap-page-builder-blocks'),
-			'options'  => [
-				'sm'      => __('Small', 'blockstrap-page-builder-blocks'),
-				''      => __('Default', 'blockstrap-page-builder-blocks'),
-				'lg'      => __('Large', 'blockstrap-page-builder-blocks'),
-				'xl'      => __('Extra Large', 'blockstrap-page-builder-blocks'),
-				'100' => __('100% Width', 'blockstrap-page-builder-blocks'),
-				'fullscreen' => __('Full Screen', 'blockstrap-page-builder-blocks'),
-			],
-			'default'  => '',
-			'desc_tip' => true,
-			'group'    => __('Modal', 'blockstrap-page-builder-blocks'),
-		];
+//		$arguments['size_width'] = [
+//			'type'     => 'select',
+//			'title'    => __('Width Size', 'blockstrap-page-builder-blocks'),
+//			'options'  => [
+//				'sm'      => __('Small', 'blockstrap-page-builder-blocks'),
+//				''      => __('Default', 'blockstrap-page-builder-blocks'),
+//				'lg'      => __('Large', 'blockstrap-page-builder-blocks'),
+//				'xl'      => __('Extra Large', 'blockstrap-page-builder-blocks'),
+//				'100' => __('100% Width', 'blockstrap-page-builder-blocks'),
+//				'fullscreen' => __('Full Screen', 'blockstrap-page-builder-blocks'),
+//			],
+//			'default'  => '',
+//			'desc_tip' => true,
+//			'group'    => __('Offcanvas', 'blockstrap-page-builder-blocks'),
+//		];
 
-		$arguments['modal_position'] = [
+		if (function_exists('sd_get_width_input')) {
+
+			$arguments['width_height_notice'] = [
+				'type'            => 'notice',
+				'desc'            => __('If manually adjusting the height or width, be sure to adjust the responsive values also.', 'blockstrap-page-builder-blocks'),
+				'status'          => 'info',
+				// 'warning' | 'success' | 'error' | 'info'
+				'group'           => __('Offcanvas', 'blockstrap-page-builder-blocks'),
+				'element_require' => '[%with%]!="" ',
+			];
+
+			$arguments['width']    = sd_get_width_input( 'width', array( 'device_type' => 'Mobile', 'group' => __('Offcanvas', 'blockstrap-page-builder-blocks') ) );
+			$arguments['width_md'] = sd_get_width_input( 'width', array( 'device_type' => 'Tablet', 'group' => __('Offcanvas', 'blockstrap-page-builder-blocks') ) );
+			$arguments['width_lg'] = sd_get_width_input( 'width', array( 'device_type' => 'Desktop', 'group' => __('Offcanvas', 'blockstrap-page-builder-blocks') ) );
+
+			$arguments['height']    = sd_get_height_input( 'height', array( 'device_type' => 'Mobile', 'group' => __('Offcanvas', 'blockstrap-page-builder-blocks') ) );
+			$arguments['height_md'] = sd_get_height_input( 'height', array( 'device_type' => 'Tablet', 'group' => __('Offcanvas', 'blockstrap-page-builder-blocks') ) );
+			$arguments['height_lg'] = sd_get_height_input( 'height', array( 'device_type' => 'Desktop', 'group' => __('Offcanvas', 'blockstrap-page-builder-blocks') ) );
+		}
+
+
+		$arguments['offcanvas_position'] = [
 			'type'     => 'select',
 			'title'    => __('Vertical Position', 'blockstrap-page-builder-blocks'),
 			'options'  => [
-				''      => __('Top', 'blockstrap-page-builder-blocks'),
-				'center'      => __('Centered', 'blockstrap-page-builder-blocks'),
+				'start'      => __('Left', 'blockstrap-page-builder-blocks'),
+				'end'      => __('Right', 'blockstrap-page-builder-blocks'),
+				'top'      => __('Top', 'blockstrap-page-builder-blocks'),
+				'bottom'      => __('Bottom', 'blockstrap-page-builder-blocks'),
 			],
-			'default'  => 'center',
+			'default'  => 'start',
 			'desc_tip' => true,
-			'group'    => __('Modal', 'blockstrap-page-builder-blocks'),
-		];
-
-		$arguments['animation'] = [
-			'type'     => 'select',
-			'title'    => __('Fade-in Animation', 'blockstrap-page-builder-blocks'),
-			'options'  => [
-				''      => __('Yes', 'blockstrap-page-builder-blocks'),
-				'no'      => __('no', 'blockstrap-page-builder-blocks'),
-			],
-			'default'  => '',
-			'desc_tip' => true,
-			'group'    => __('Modal', 'blockstrap-page-builder-blocks'),
+			'group'    => __('Offcanvas', 'blockstrap-page-builder-blocks'),
 		];
 
 		$arguments['static_backdrop'] = [
@@ -271,7 +281,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 			'default'  => '',
 			'desc'    => __('Prevents modal close on clicks outside modal and on keyboard Esc', 'blockstrap-page-builder-blocks'),
 			'desc_tip' => true,
-			'group'    => __('Modal', 'blockstrap-page-builder-blocks'),
+			'group'    => __('Offcanvas', 'blockstrap-page-builder-blocks'),
 		];
 
 
@@ -295,7 +305,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 			'type'    => 'text',
 			'title'   => __('Header title', 'blockstrap-page-builder-blocks'),
 			'placeholder'   => __('Popup title', 'blockstrap-page-builder-blocks'),
-			'default' => __('Modal title', 'blockstrap-page-builder-blocks'),
+			'default' => __('Offcanvas title', 'blockstrap-page-builder-blocks'),
 			'group'   => __('Header', 'blockstrap-page-builder-blocks'),
 		];
 
@@ -365,47 +375,49 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 
 
 		$arguments['header_text_color'] = sd_get_text_color_input( 'text_color', array(
-			'group' => __( 'Modal Header', 'blockstrap-page-builder-blocks' ),
+			'group' => __( 'Offcanvas Header', 'blockstrap-page-builder-blocks' ),
+			false
 		));
 
 		// font size
 		$arguments['header_font_size'] =  sd_get_font_size_input( 'font_size', array(
-			'group' => __( 'Modal Header', 'blockstrap-page-builder-blocks' ),
+			'group' => __( 'Offcanvas Header', 'blockstrap-page-builder-blocks' ),
 			'default'	=> 'fs-5',
 		));
 
 		// font size
 		$arguments['header_font_weight'] = sd_get_font_weight_input('font_weight', array(
-			'group' => __( 'Modal Header', 'blockstrap-page-builder-blocks' ),
+			'group' => __( 'Offcanvas Header', 'blockstrap-page-builder-blocks' ),
 		));
 
 
 		// background
 		$arguments = $arguments + sd_get_background_inputs(
 			'header_bg',
-			array('group' => __('Modal Header', 'blockstrap-page-builder-blocks')),
-			array('group' => __('Modal Header', 'blockstrap-page-builder-blocks')),
-			array('group' => __('Modal Header', 'blockstrap-page-builder-blocks')),
+			array('group' => __('Offcanvas Header', 'blockstrap-page-builder-blocks')),
+				false,
+				false,
 			false
 			);
 
 
-		// Modal Content
+		// Offcanvas Content
 		// background
 		$arguments = $arguments + sd_get_background_inputs(
 				'body_bg',
-				array('group' => __('Modal Body', 'blockstrap-page-builder-blocks')),
-				array('group' => __('Modal Body', 'blockstrap-page-builder-blocks')),
-				array('group' => __('Modal Body', 'blockstrap-page-builder-blocks')),
+				array('group' => __('Offcanvas Body', 'blockstrap-page-builder-blocks')),
+				false,
+				false,
+				false,
 				false
 			);
 
 
 		// padding
-		$arguments['body_pt'] = sd_get_padding_input('pt', array('group' => __('Modal Body', 'blockstrap-page-builder-blocks') ) );
-		$arguments['body_pr'] = sd_get_padding_input('pr', array('group' => __('Modal Body', 'blockstrap-page-builder-blocks') ) );
-		$arguments['body_pb'] = sd_get_padding_input('pb', array('group' => __('Modal Body', 'blockstrap-page-builder-blocks') ));
-		$arguments['body_pl'] = sd_get_padding_input('pl', array('group' => __('Modal Body', 'blockstrap-page-builder-blocks') ) );
+		$arguments['body_pt'] = sd_get_padding_input('pt', array('group' => __('Offcanvas Body', 'blockstrap-page-builder-blocks') ) );
+		$arguments['body_pr'] = sd_get_padding_input('pr', array('group' => __('Offcanvas Body', 'blockstrap-page-builder-blocks') ) );
+		$arguments['body_pb'] = sd_get_padding_input('pb', array('group' => __('Offcanvas Body', 'blockstrap-page-builder-blocks') ));
+		$arguments['body_pl'] = sd_get_padding_input('pl', array('group' => __('Offcanvas Body', 'blockstrap-page-builder-blocks') ) );
 
 
         // border
@@ -414,7 +426,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
         $arguments['rounded_size'] = sd_get_border_input('rounded_size');
 
         // shadow
-        $arguments['shadow'] = sd_get_shadow_input('shadow');
+        $arguments['shadow'] = sd_get_shadow_input('shadow', array('default'=>'shadow'));
 
 		// block visibility conditions
 		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
@@ -451,10 +463,10 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
      */
     public function output($args=[], $widget_args=[], $content='')
     {
-		global $bs_modal_content,$bs_modal_header_count;
+		global $bs_offcanvas_content,$bs_offcanvas_header_count;
 
-		if (!$bs_modal_header_count) {
-			$bs_modal_header_count = 0;
+		if (!$bs_offcanvas_header_count) {
+			$bs_offcanvas_header_count = 0;
 		}
 
 		// we add the x so it will not open popup in editor, then we remove it here so on frontend it will
@@ -463,7 +475,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 		// Maybe remove the placeholder div
 		if ($content) {
 			// Define the pattern to match the first div with the specific classes
-			$pattern = '/<div class="wp-block-blockstrap-blockstrap-widget-modal alert alert-info">.*?<\/div>/s';
+			$pattern = '/<div class="wp-block-blockstrap-blockstrap-widget-offcanvas alert alert-info">.*?<\/div>/s';
 
 			// Replace the first occurrence of the pattern with an empty string
 			$content = preg_replace($pattern, '', $content, 1);
@@ -477,20 +489,20 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 
 		// Initialize variables
 		$buttonHtml = '';
-		$bs_modal_content[$bs_modal_header_count] = $content;
+		$bs_offcanvas_content[$bs_offcanvas_header_count] = $content;
 
 		// Find the first top-level button and separate it from the content
 		if (preg_match($buttonRegex, $content, $matches)) {
 			$buttonHtml = $matches[0];
 			// Remove the button from the remaining content
-			$bs_modal_content[$bs_modal_header_count] = preg_replace($buttonRegex, '', $content, 1);
+			$bs_offcanvas_content[$bs_offcanvas_header_count] = preg_replace($buttonRegex, '', $content, 1);
 		}
 
 		// add the modal HTML to the footer, this needs to work for multiple instances
 		add_action('wp_footer', function() {
-			global $bs_modal_content,$bs_modal_header_count;
-			if ($bs_modal_header_count) {
-				foreach ($bs_modal_content as  $content) {
+			global $bs_offcanvas_content,$bs_offcanvas_header_count;
+			if ($bs_offcanvas_header_count) {
+				foreach ($bs_offcanvas_content as  $content) {
 					$content = do_shortcode( $content );
 
 					if (function_exists('do_blocks')) {
@@ -499,11 +511,11 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 
 					echo $content;
 				}
-				$bs_modal_header_count = 0; // reset the
+				$bs_offcanvas_header_count = 0; // reset the
 			}
-		});
+		}, 1);
 
-		$bs_modal_header_count++;
+		$bs_offcanvas_header_count++;
 
 		return $buttonHtml;
 
@@ -518,24 +530,27 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 			}
 			?>
 
-			function bs_build_modal_dialog_class($args) {
+			function bs_build_offcanvas_class($args) {
 				let $class = ''
 
 				// sizing
-				if ($args.size && $args.size == 100) {
-					$class += 'mw-100';
-				}else if($args.size && $args.size){
-					$class += 'modal-'+jQuery.escapeSelector($args.size);
+				// if ($args.size && $args.size == 100) {
+				// 	$class += ' mw-100';
+				// }else if($args.size && $args.size){
+				// 	$class += ' modal-'+jQuery.escapeSelector($args.size);
+				// }
+
+				// position
+				if ($args.offcanvas_position && $args.offcanvas_position) {
+					$class += ' offcanvas-'+jQuery.escapeSelector($args.offcanvas_position);
 				}
 
-				// position modal-dialog-centered
-				if ($args.modal_position && $args.modal_position == 'center') {
-					$class += ' modal-dialog-centered';
-				}
+				$class += ' ' + sd_build_aui_class($args);
+
 				return $class;
 			}
 
-			function bs_build_modal_id($args) {
+			function bs_build_offcanvas_id($args) {
 				let $id = ''
 
 				// sizing
@@ -548,7 +563,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 			}
 
 
-			function bs_build_modal_header_class($args) {
+			function bs_build_offcanvas_header_class($args) {
 				let $class = '';
 				let $sd_args = [];
 
@@ -563,7 +578,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 				return $class;
 			}
 
-			function bs_build_modal_title_class($args) {
+			function bs_build_offcanvas_title_class($args) {
 				let $class = '';
 				let $sd_args = [];
 
@@ -576,7 +591,7 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 				return $class;
 			}
 
-			function bs_build_modal_body_class($args) {
+			function bs_build_offcanvas_body_class($args) {
 				let $class = '';
 				let $sd_args = [];
 
@@ -586,13 +601,12 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 				$sd_args.pl = $args.body_pl;
 				$sd_args.bg = $args.body_bg;
 
-
 				$class += ' ' + sd_build_aui_class($sd_args);
 
 				return $class;
 			}
 
-			function bs_build_modal_button_class($args) {
+			function bs_build_offcanvas_button_class($args) {
 				let $class = '';
 				let $sd_args = [];
 
@@ -652,6 +666,6 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 add_action(
     'widgets_init',
     function () {
-        register_widget('BlockStrap_Widget_Modal');
+        register_widget('BlockStrap_Widget_Offcanvas');
     }
 );

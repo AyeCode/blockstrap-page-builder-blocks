@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.5
-Stable tag: 0.1.17
+Stable tag: 0.1.19
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -15,7 +15,7 @@ BlockStrap Page Builder Blocks combines the power of BootStrap with the power of
 
 BlockStrap Page Builder Blocks gives you a selection of bootstrap blocks that let you craft a whole site including header, footer and even menus.
 
-This plugin, combined with the [BlockTrap theme](https://wordpress.org/themes/blockstrap/), turbocharges your website's loading speed effortlessly.
+This plugin, combined with the [BlockStrap theme](https://wordpress.org/themes/blockstrap/), turbocharges your website's loading speed effortlessly.
 
 # BlockStrap: The Ultimate BootStrap Page Builder for WordPress
 
@@ -136,6 +136,9 @@ Add a button to the page so users can scroll back to the top of the page easily.
 ### BS > Modal
 Add a modal (popup) to the page containing any content.
 
+### BS > Offcanvas
+Add a Offcanvas element to the page containing any content.
+
 ## Get BlockStrap Today!
 Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
 
@@ -172,6 +175,12 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.19 =
+* BS > Offcanvas block added for creating Offcanvas items - ADDED
+* Accordion block not setting parent ID which could break some advanced features - FIXED
+* Gallery block not setting uploaded images alt tag - FIXED
+* Modal and Offcanvas in footer not rendering shortcodes - FIXED
 
 = 0.1.17 =
 * BS > Modal block added for creating popups - ADDED
