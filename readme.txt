@@ -176,6 +176,10 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
+= 1.0.0-beta =
+* Icon box block description text can get stuck in custom color even if not selected - FIXED
+
+
 = 0.1.19 =
 * BS > Offcanvas block added for creating Offcanvas items - ADDED
 * Accordion block not setting parent ID which could break some advanced features - FIXED

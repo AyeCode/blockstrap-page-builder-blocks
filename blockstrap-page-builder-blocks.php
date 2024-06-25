@@ -287,6 +287,7 @@ final class BlockStrap
 		include_once 'blocks/class-blockstrap-widget-scroll-top.php';
 		include_once 'blocks/class-blockstrap-widget-modal.php';
 		include_once 'blocks/class-blockstrap-widget-offcanvas.php';
+		include_once 'blocks/class-blockstrap-widget-nav-color-mode.php'; // @todd not ready for production - should only be enabled by theme
 
         // Frontend comments
         include_once 'classes/class-blockstrap-blocks-comments.php';

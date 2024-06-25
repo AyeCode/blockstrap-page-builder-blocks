@@ -829,7 +829,7 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			$styles = sd_build_aui_styles(
 				array(
 					'font_size_custom'  => 'custom' === $args['desc_size'] ? $args['desc_size_custom'] : '',
-					'text_color_custom' => $args['desc_color_custom'],
+					'text_color_custom' => 'custom' === $args['desc_color'] ? $args['desc_color_custom'] : '',
 					'font_line_height'  => $args['desc_font_line_height'],
 				)
 			);
