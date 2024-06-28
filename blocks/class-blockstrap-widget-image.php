@@ -600,21 +600,39 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 			$link_image_src_arr = wp_get_attachment_image_src( absint( $args['img_image_id'] ), $lightbox_size );
 			$link_image_src     = ! empty( $link_image_src_arr[0] ) ? esc_url_raw( $link_image_src_arr[0] ) : '';
-
 		}
 
 		if ( ! $image_src && $this->is_block_content_call() ) {
 			$image = '<img src="' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg" class="' . sd_sanitize_html_classes( $image_class ) . '" />';
 		} elseif ( ! $image ) {
-
 			if ( 'featured' === $args['img_src'] && 'upload' === $args['fallback_img_src'] && ! empty( $args['fallback_img_image_id'] ) ) {
 				$image         = wp_get_attachment_image( absint( $args['fallback_img_image_id'] ), $image_size, false, $img_attr );
 				$image_src_arr = wp_get_attachment_image_src( absint( $args['fallback_img_image_id'] ), 'large' );
 				$image_src     = ! empty( $image_src_arr[0] ) ? esc_url_raw( $image_src_arr[0] ) : '';
 			} elseif ( 'featured' === $args['img_src'] && 'default' === $args['fallback_img_src'] ) {
-				$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg';
+				$post_image = array();
+
+				if ( ! empty( $post ) && ! empty( $post->post_type ) && function_exists( 'geodir_is_gd_post_type' ) && geodir_is_gd_post_type( $post->post_type ) ) {
+					$post_images = geodir_get_images( (int) $post->ID, 1, true, 0, array( 'post_images' ) );
+
+					if ( ! empty( $post_images ) ) {
+						$post_image = $post_images[0];
+
+						$image_src = geodir_get_image_src( $post_image, $image_size );
+						$link_image_src = geodir_get_image_src( $post_image, $lightbox_size );
+					}
+				}
+
+				if ( ! $image_src ) {
+					$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg';
+				}
+
 				if ( ! $img_alt ) {
-					$img_alt_tag = 'alt="' . __( 'Placeholder image', 'blockstrap-page-builder-blocks' ) . '"';
+					if ( ! empty( $post_image ) && ! empty( $post_image->title ) ) {
+						$img_alt_tag = 'alt="' . esc_attr( wp_strip_all_tags( stripslashes_deep( $post_image->title ) ) ) . '"';
+					} else {
+						$img_alt_tag = 'alt="' . __( 'Placeholder image', 'blockstrap-page-builder-blocks' ) . '"';
+					}
 				}
 				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
 			} else {
@@ -699,10 +717,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		);
 
 		return $image ? $figure : '';
-
 	}
-
-
 }
 
 // register it.
@@ -712,4 +727,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Image' );
 	}
 );
-

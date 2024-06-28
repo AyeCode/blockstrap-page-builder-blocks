@@ -178,6 +178,7 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 = 0.1.20 - TBD = 
 * JS error in rating block breaks modal functionality - FIXED
+* Changes to show GD post fallback images on GD post page - CHANGED
 
 = 0.1.19 =
 * BS > Offcanvas block added for creating Offcanvas items - ADDED
