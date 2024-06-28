@@ -36,7 +36,7 @@ Whether you're building a blog, a Directory, an e-commerce store, a portfolio, o
 * [Job Board Theme](https://wpgeodirectory.com/downloads/job-board-theme/) Seamlessly integrated with GeoDirectory, this theme offers a robust platform for managing and showcasing job opportunities. Whether running a local job board or a large-scale employment site, the Job Board Theme ensures a professional look and smooth user experience.
 * [School Child Theme](https://wordpress.org/themes/school/) Build a professional-looking educational website with the free School Child Theme for Blockstrap. Tailored for academic institutions, this theme provides a clean, user-friendly design that enhances the online presence of schools and educational programs. Fully compatible with the Blockstrap framework, the School Child Theme offers seamless functionality and a professional aesthetic to engage students, parents, and educators alike.
 
-Many more BLockstrap Child themes are in the pipeline. We aim to release at least 2 per month.
+Many more BlockStrap Child themes are in the pipeline. We aim to release at least 2 per month.
 
 ## Blockstrap Blocks
 
@@ -175,6 +175,9 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.20 - TBD = 
+* JS error in rating block breaks modal functionality - FIXED
 
 = 0.1.19 =
 * BS > Offcanvas block added for creating Offcanvas items - ADDED
