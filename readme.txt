@@ -176,7 +176,8 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
-= 0.1.20 - TBD = 
+= 0.1.20 - TBD =
+* BS Container has `undefined` class if style ID not set - FIXED
 * JS error in rating block breaks modal functionality - FIXED
 * Changes to show GD post fallback images on GD post page - CHANGED
 

@@ -28,7 +28,7 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 					'element'          => 'innerBlocksProps',
 					'blockProps'       => array(
 						//                      'if_className' => 'props.attributes.styleid + " " [%WrapClass%]',
-						'if_className' => 'props.attributes.styleid + " " [%WrapClass%]',
+						'if_className' => ' ( typeof  props.attributes.styleid !== "undefined" )  ?  props.attributes.styleid + " " [%WrapClass%] : ""  [%WrapClass%]',
 						'style'        => '{[%WrapStyle%]}',
 						'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : props.clientId',
 		//                      'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : "bbb"',
