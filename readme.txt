@@ -176,6 +176,9 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 == Changelog ==
 
+= 0.1.20 =
+* BS Container has `undefined` class if style ID not set - FIXED
+
 = 0.1.19 =
 * BS > Offcanvas block added for creating Offcanvas items - ADDED
 * Accordion block not setting parent ID which could break some advanced features - FIXED
