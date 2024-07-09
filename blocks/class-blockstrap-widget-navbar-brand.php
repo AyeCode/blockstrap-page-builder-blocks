@@ -27,7 +27,7 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					'element_require' => '[%type%]=="none"',
 					array(
 						'element'         => 'img',
-						'class'           => '',
+						'class'           => 'aui-light-mode-hide',
 						'alt'             => __( 'Site logo', 'blockstrap-page-builder-blocks' ),
 						'element_require' => '[%icon_image%]!=""',
 						'if_src'          => '[%icon_image%]==="Blockstrap-white.png" ? "' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/Blockstrap-white.png" : [%icon_image%]',
@@ -35,6 +35,16 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 						'width'           => '[%img_max_width%]',
 						'height'          => '50',
 
+					),
+					array(
+						'element'         => 'img',
+						'class'           => 'aui-dark-mode-hide',
+						'alt'             => __( 'Site logo dark', 'blockstrap-page-builder-blocks' ),
+						'element_require' => '[%icon_image_dark%]!=""',
+						'if_src'          => '[%icon_image_dark%]==="Blockstrap.png" ? "' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/Blockstrap.png" : [%icon_image_dark%]',
+						'style'           => '{maxWidth:\'[%img_max_width%]px\'}',
+						'width'           => '[%img_max_width%]',
+						'height'          => '50',
 					),
 					array(
 						'element'  => 'span',
@@ -51,14 +61,23 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 					'element_require' => '[%type%]!="none"',
 					array(
 						'element'         => 'img',
-						'class'           => '',
+						'class'           => 'aui-light-mode-hide',
 						'alt'             => __( 'Site logo', 'blockstrap-page-builder-blocks' ),
 						'element_require' => '[%icon_image%]!=""',
 						'if_src'          => '[%icon_image%]==="Blockstrap-white.png" ? "' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/Blockstrap-white.png" : [%icon_image%]',
 						'style'           => '{maxWidth:\'[%img_max_width%]px\'}',
 						'width'           => '[%img_max_width%]',
 						'height'          => '50',
-
+					),
+					array(
+						'element'         => 'img',
+						'class'           => 'aui-dark-mode-hide',
+						'alt'             => __( 'Site logo dark', 'blockstrap-page-builder-blocks' ),
+						'element_require' => '[%icon_image_dark%]!=""',
+						'if_src'          => '[%icon_image_dark%]==="Blockstrap.png" ? "' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/Blockstrap.png" : [%icon_image_dark%]',
+						'style'           => '{maxWidth:\'[%img_max_width%]px\'}',
+						'width'           => '[%img_max_width%]',
+						'height'          => '50',
 					),
 					array(
 						'element'                    => 'span',
@@ -164,6 +183,25 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 			'placeholder' => __( '150', 'blockstrap-page-builder-blocks' ),
 			'default'     => '150',
 			'desc_tip'    => true,
+			'group'       => __( 'Icon', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['recaptcha_notice'] = array(
+			'type'            => 'notice',
+			'desc'            => __( 'Below you can set a different logo to be used when dark mode is set (not required)', 'blockstrap-page-builder-blocks' ),
+			'status'          => 'info',
+			'group'           => __( 'Icon', 'blockstrap-page-builder-blocks' ),
+//			'element_require' => '[%field_recaptcha%]!="disabled"',
+		);
+
+		$arguments['icon_image_dark'] = array(
+			'type'        => 'image',
+			'title'       => __( 'Image (dark mode)', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => '',
+			'focalpoint'  => 0,
+			'default'     => '',
+			'desc_tip'    => true,
+//			'desc'        => __( 'Set a different logo to be used when dark mode is set (not required)', 'blockstrap-page-builder-blocks' ),
 			'group'       => __( 'Icon', 'blockstrap-page-builder-blocks' ),
 		);
 

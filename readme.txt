@@ -178,6 +178,8 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 
 = 1.0.0-beta =
 * Icon box block description text can get stuck in custom color even if not selected - FIXED
+* Navbar Brand added option for dark mode logo upload - ADDED
+* BS Container has `undefined` class if style ID not set - FIXED
 
 
 = 0.1.19 =
