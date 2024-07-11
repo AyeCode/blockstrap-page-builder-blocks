@@ -354,7 +354,7 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 		$wrap_styles = sd_build_aui_styles( $args );
 
 		// map mask
-		$wrap_styles .= ! empty( $args['mask'] ) ? '-webkit-mask-image: url("' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/masks/' . esc_attr( $args['mask'] ) . '.svg");' : '';
+		$wrap_styles .= ! empty( $args['mask'] ) ? '-webkit-mask-image: url("' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/masks/' . esc_attr( $args['mask'] ) . '.svg");' : '';
 		$wrap_styles .= ! empty( $args['mask'] ) ? '-webkit-mask-size: contain;-webkit-mask-repeat: no-repeat;' : '';
 		$wrap_styles .= ! empty( $args['mask'] ) && ! empty( $args['mask_position'] ) ? '-webkit-mask-position: ' . esc_attr( $args['mask_position'] ) . ';' : '';
 

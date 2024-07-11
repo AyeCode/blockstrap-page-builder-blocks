@@ -559,7 +559,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$image_class   .= ! empty( $args['img_aspect'] ) ? ' embed-responsive-item' : '';
 
 		// image mask
-		$image_styles  = ! empty( $args['img_mask'] ) ? '-webkit-mask-image: url("' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/masks/' . esc_attr( $args['img_mask'] ) . '.svg");' : '';
+		$image_styles  = ! empty( $args['img_mask'] ) ? '-webkit-mask-image: url("' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/masks/' . esc_attr( $args['img_mask'] ) . '.svg");' : '';
 		$image_styles .= ! empty( $args['img_mask'] ) ? '-webkit-mask-size: contain;-webkit-mask-repeat: no-repeat;' : '';
 		$image_styles .= ! empty( $args['img_mask'] ) && ! empty( $args['img_mask_position'] ) ? '-webkit-mask-position: ' . esc_attr( $args['img_mask_position'] ) . ';' : '';
 		$image_style   = $image_styles ? "style='$image_styles'" : '';
@@ -603,7 +603,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		}
 
 		if ( ! $image_src && $this->is_block_content_call() ) {
-			$image = '<img src="' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg" class="' . sd_sanitize_html_classes( $image_class ) . '" />';
+			$image = '<img src="' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/images/block-image-placeholder.jpg" class="' . sd_sanitize_html_classes( $image_class ) . '" />';
 		} elseif ( ! $image ) {
 			if ( 'featured' === $args['img_src'] && 'upload' === $args['fallback_img_src'] && ! empty( $args['fallback_img_image_id'] ) ) {
 				$image         = wp_get_attachment_image( absint( $args['fallback_img_image_id'] ), $image_size, false, $img_attr );
@@ -624,7 +624,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 				}
 
 				if ( ! $image_src ) {
-					$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg';
+					$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/images/block-image-placeholder.jpg';
 				}
 
 				if ( ! $img_alt ) {
