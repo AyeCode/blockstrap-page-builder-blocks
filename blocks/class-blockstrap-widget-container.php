@@ -362,13 +362,24 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 	 *
 	 * @return string
 	 */
-	public function maybe_get_gd_archive_image(){
+	public function maybe_get_gd_archive_image() {
+		global $post;
+
 		$url = '';
 
-		if( defined('GEODIRECTORY_VERSION') && geodir_is_page( 'archive' ) ){
-			$images = geodir_get_images( 0, 1, false, '', array() , array( 'cat_default', 'cpt_default', 'listing_default' ));
-			if (!empty($images)) {
-				$url = geodir_get_image_src( $images[0], 'original' );
+		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
+			if ( geodir_is_page( 'single' ) && ! empty( $post->ID ) ) {
+				$images = geodir_get_images( (int) $post->ID, 1, true, 0, array( 'post_images' ) );
+
+				if ( ! empty( $images ) ) {
+					$url = geodir_get_image_src( $images[0], 'full' );
+				}
+			} else if ( geodir_is_page( 'archive' ) ) {
+				$images = geodir_get_images( 0, 1, false, '', array(), array( 'cat_default', 'cpt_default', 'listing_default' ) );
+
+				if ( ! empty( $images ) ) {
+					$url = geodir_get_image_src( $images[0], 'full' );
+				}
 			}
 		}
 
@@ -380,15 +391,16 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 	 *
 	 * @return string
 	 */
-	public function maybe_get_gd_location_image(){
-		$url = '';
-		if( defined('GEODIRLOCATION_VERSION') && geodir_is_page( 'location' ) ){
-			global $geodirectory;
+	public function maybe_get_gd_location_image() {
+		global $geodirectory;
 
+		$url = '';
+
+		if ( defined( 'GEODIRLOCATION_VERSION' ) && geodir_is_page( 'location' ) ) {
 			$attachment = GeoDir_Location_SEO::get_post_attachment( $geodirectory->location );
-			if (!empty($attachment)) {
-				$upload_dir = wp_get_upload_dir();
-				$url = esc_url($upload_dir['baseurl'] . $attachment->file );
+
+			if ( ! empty( $attachment ) ) {
+				$url = esc_url( geodir_get_image_src( $attachment , 'full' ) );
 			}
 		}
 

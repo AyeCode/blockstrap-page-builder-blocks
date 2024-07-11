@@ -179,6 +179,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 = 0.1.20 - TBD =
 * BS Container has `undefined` class if style ID not set - FIXED
 * JS error in rating block breaks modal functionality - FIXED
+* Changes to show GD post fallback images on GD post page - CHANGED
 
 = 0.1.19 =
 * BS > Offcanvas block added for creating Offcanvas items - ADDED
