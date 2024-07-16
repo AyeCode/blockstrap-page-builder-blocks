@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.6
-Stable tag: 0.1.20
+Stable tag: 0.1.21
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,7 +176,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.20 - 2024-07-16 =
+= 0.1.21 - 2024-07-16 =
 * BS Container has `undefined` class if style ID not set - FIXED
 * JS error in rating block breaks modal functionality - FIXED
 * Changes to show GD post fallback images on GD post page - CHANGED
