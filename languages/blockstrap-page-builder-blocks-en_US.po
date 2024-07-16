@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Blocks\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-06 16:17+0100\n"
-"PO-Revision-Date: 2024-06-06 16:17+0100\n"
+"POT-Creation-Date: 2024-07-16 11:11+0530\n"
+"PO-Revision-Date: 2024-07-16 11:11+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -17,7 +17,7 @@ msgstr ""
 "gettext_noop\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 
@@ -56,12 +56,12 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav-dropdown.php:71
 #: blocks/class-blockstrap-widget-nav-item.php:46
 #: blocks/class-blockstrap-widget-navbar-brand.php:96
+#: blocks/class-blockstrap-widget-offcanvas.php:121
 #: blocks/class-blockstrap-widget-pagination.php:40
-#: blocks/class-blockstrap-widget-popup-test.php:47
 #: blocks/class-blockstrap-widget-post-excerpt.php:50
 #: blocks/class-blockstrap-widget-post-info.php:47
 #: blocks/class-blockstrap-widget-post-title.php:50
-#: blocks/class-blockstrap-widget-rating.php:46
+#: blocks/class-blockstrap-widget-rating.php:45
 #: blocks/class-blockstrap-widget-search.php:40
 #: blocks/class-blockstrap-widget-share.php:43
 #: blocks/class-blockstrap-widget-skip-links.php:40
@@ -76,7 +76,6 @@ msgstr ""
 #: blocks/class-blockstrap-widget-container.php:164
 #: blocks/class-blockstrap-widget-navbar.php:91
 #: blocks/class-blockstrap-widget-navbar.php:102
-#: blocks/class-blockstrap-widget-newsletter.php:39
 #: blocks/class-blockstrap-widget-scroll-top.php:52
 #: blocks/class-blockstrap-widget-tab.php:60
 #: blocks/class-blockstrap-widget-tabs.php:127
@@ -96,7 +95,6 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav-item.php:56
 #: blocks/class-blockstrap-widget-nav.php:127
 #: blocks/class-blockstrap-widget-navbar-brand.php:104
-#: blocks/class-blockstrap-widget-popup-test.php:55
 #: blocks/class-blockstrap-widget-post-excerpt.php:58
 #: blocks/class-blockstrap-widget-post-info.php:55
 #: blocks/class-blockstrap-widget-post-title.php:58
@@ -130,12 +128,12 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav-item.php:59
 #: blocks/class-blockstrap-widget-nav.php:129
 #: blocks/class-blockstrap-widget-navbar-brand.php:106
+#: blocks/class-blockstrap-widget-offcanvas.php:135
 #: blocks/class-blockstrap-widget-pagination.php:50
-#: blocks/class-blockstrap-widget-popup-test.php:57
 #: blocks/class-blockstrap-widget-post-excerpt.php:60
 #: blocks/class-blockstrap-widget-post-info.php:57
 #: blocks/class-blockstrap-widget-post-title.php:60
-#: blocks/class-blockstrap-widget-rating.php:56
+#: blocks/class-blockstrap-widget-rating.php:55
 #: blocks/class-blockstrap-widget-scroll-top.php:56
 #: blocks/class-blockstrap-widget-search.php:50
 #: blocks/class-blockstrap-widget-share.php:53
@@ -176,9 +174,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-navbar-brand.php:115
 #: blocks/class-blockstrap-widget-navbar-brand.php:232
 #: blocks/class-blockstrap-widget-navbar-brand.php:241
-#: blocks/class-blockstrap-widget-newsletter.php:46
+#: blocks/class-blockstrap-widget-offcanvas.php:144
 #: blocks/class-blockstrap-widget-pagination.php:58
-#: blocks/class-blockstrap-widget-popup-test.php:65
 #: blocks/class-blockstrap-widget-post-excerpt.php:68
 #: blocks/class-blockstrap-widget-post-excerpt.php:174
 #: blocks/class-blockstrap-widget-post-excerpt.php:183
@@ -186,8 +183,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-post-title.php:68
 #: blocks/class-blockstrap-widget-post-title.php:170
 #: blocks/class-blockstrap-widget-post-title.php:179
-#: blocks/class-blockstrap-widget-rating.php:64
-#: blocks/class-blockstrap-widget-rating.php:247
+#: blocks/class-blockstrap-widget-rating.php:63
+#: blocks/class-blockstrap-widget-rating.php:246
 #: blocks/class-blockstrap-widget-scroll-top.php:65
 #: blocks/class-blockstrap-widget-search.php:58
 #: blocks/class-blockstrap-widget-share.php:61
@@ -239,21 +236,19 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav.php:142
 #: blocks/class-blockstrap-widget-navbar-brand.php:116
 #: blocks/class-blockstrap-widget-navbar-brand.php:119
-#: blocks/class-blockstrap-widget-newsletter.php:47
-#: blocks/class-blockstrap-widget-newsletter.php:404
+#: blocks/class-blockstrap-widget-offcanvas.php:145
+#: blocks/class-blockstrap-widget-offcanvas.php:148
+#: blocks/class-blockstrap-widget-offcanvas.php:443
 #: blocks/class-blockstrap-widget-pagination.php:58
 #: blocks/class-blockstrap-widget-pagination.php:60
-#: blocks/class-blockstrap-widget-popup-test.php:65
-#: blocks/class-blockstrap-widget-popup-test.php:67
-#: blocks/class-blockstrap-widget-popup-test.php:398
 #: blocks/class-blockstrap-widget-post-excerpt.php:68
 #: blocks/class-blockstrap-widget-post-excerpt.php:70
 #: blocks/class-blockstrap-widget-post-info.php:67
 #: blocks/class-blockstrap-widget-post-info.php:70
 #: blocks/class-blockstrap-widget-post-title.php:68
 #: blocks/class-blockstrap-widget-post-title.php:70
-#: blocks/class-blockstrap-widget-rating.php:64
-#: blocks/class-blockstrap-widget-rating.php:66
+#: blocks/class-blockstrap-widget-rating.php:63
+#: blocks/class-blockstrap-widget-rating.php:65
 #: blocks/class-blockstrap-widget-scroll-top.php:66
 #: blocks/class-blockstrap-widget-scroll-top.php:69
 #: blocks/class-blockstrap-widget-search.php:58
@@ -274,8 +269,6 @@ msgstr ""
 #: blocks/class-blockstrap-widget-accordion-item.php:127
 #: blocks/class-blockstrap-widget-contact.php:155
 #: blocks/class-blockstrap-widget-contact.php:743
-#: blocks/class-blockstrap-widget-newsletter.php:69
-#: blocks/class-blockstrap-widget-newsletter.php:571
 #: blocks/class-blockstrap-widget-tab.php:99
 #: classes/class-blockstrap-blocks-comments.php:39
 msgid "Name"
@@ -347,15 +340,13 @@ msgstr ""
 #: blocks/class-blockstrap-widget-modal.php:229
 #: blocks/class-blockstrap-widget-modal.php:336
 #: blocks/class-blockstrap-widget-nav-dropdown.php:154
-#: blocks/class-blockstrap-widget-nav-item.php:270
+#: blocks/class-blockstrap-widget-nav-item.php:271
 #: blocks/class-blockstrap-widget-nav.php:223
 #: blocks/class-blockstrap-widget-nav.php:328
 #: blocks/class-blockstrap-widget-navbar.php:188
-#: blocks/class-blockstrap-widget-newsletter.php:168
-#: blocks/class-blockstrap-widget-newsletter.php:323
+#: blocks/class-blockstrap-widget-offcanvas.php:346
 #: blocks/class-blockstrap-widget-pagination.php:185
 #: blocks/class-blockstrap-widget-pagination.php:209
-#: blocks/class-blockstrap-widget-popup-test.php:196
 #: blocks/class-blockstrap-widget-post-info.php:192
 #: blocks/class-blockstrap-widget-post-info.php:250
 #: blocks/class-blockstrap-widget-search.php:96
@@ -476,11 +467,9 @@ msgstr ""
 #: blocks/class-blockstrap-widget-modal.php:226
 #: blocks/class-blockstrap-widget-modal.php:334
 #: blocks/class-blockstrap-widget-nav-dropdown.php:152
-#: blocks/class-blockstrap-widget-nav-item.php:268
-#: blocks/class-blockstrap-widget-newsletter.php:166
-#: blocks/class-blockstrap-widget-newsletter.php:321
+#: blocks/class-blockstrap-widget-nav-item.php:269
+#: blocks/class-blockstrap-widget-offcanvas.php:344
 #: blocks/class-blockstrap-widget-pagination.php:206
-#: blocks/class-blockstrap-widget-popup-test.php:194
 #: blocks/class-blockstrap-widget-post-info.php:248
 #: blocks/class-blockstrap-widget-search.php:94
 #: blocks/class-blockstrap-widget-share.php:258
@@ -495,11 +484,9 @@ msgstr ""
 #: blocks/class-blockstrap-widget-modal.php:228
 #: blocks/class-blockstrap-widget-modal.php:337
 #: blocks/class-blockstrap-widget-nav-dropdown.php:155
-#: blocks/class-blockstrap-widget-nav-item.php:272
-#: blocks/class-blockstrap-widget-newsletter.php:169
-#: blocks/class-blockstrap-widget-newsletter.php:324
+#: blocks/class-blockstrap-widget-nav-item.php:273
+#: blocks/class-blockstrap-widget-offcanvas.php:347
 #: blocks/class-blockstrap-widget-pagination.php:210
-#: blocks/class-blockstrap-widget-popup-test.php:197
 #: blocks/class-blockstrap-widget-post-info.php:252
 #: blocks/class-blockstrap-widget-search.php:97
 #: blocks/class-blockstrap-widget-share.php:261
@@ -512,10 +499,9 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:213
 #: blocks/class-blockstrap-widget-modal.php:338
 #: blocks/class-blockstrap-widget-nav-dropdown.php:156
-#: blocks/class-blockstrap-widget-nav-item.php:273
-#: blocks/class-blockstrap-widget-newsletter.php:170
+#: blocks/class-blockstrap-widget-nav-item.php:274
+#: blocks/class-blockstrap-widget-offcanvas.php:348
 #: blocks/class-blockstrap-widget-pagination.php:211
-#: blocks/class-blockstrap-widget-popup-test.php:198
 #: blocks/class-blockstrap-widget-post-info.php:253
 #: blocks/class-blockstrap-widget-search.php:98
 #: blocks/class-blockstrap-widget-share.php:262
@@ -530,11 +516,9 @@ msgstr ""
 #: blocks/class-blockstrap-widget-modal.php:230
 #: blocks/class-blockstrap-widget-modal.php:339
 #: blocks/class-blockstrap-widget-nav-dropdown.php:157
-#: blocks/class-blockstrap-widget-nav-item.php:274
-#: blocks/class-blockstrap-widget-newsletter.php:171
-#: blocks/class-blockstrap-widget-newsletter.php:325
+#: blocks/class-blockstrap-widget-nav-item.php:275
+#: blocks/class-blockstrap-widget-offcanvas.php:349
 #: blocks/class-blockstrap-widget-pagination.php:212
-#: blocks/class-blockstrap-widget-popup-test.php:199
 #: blocks/class-blockstrap-widget-post-info.php:254
 #: blocks/class-blockstrap-widget-search.php:99
 #: blocks/class-blockstrap-widget-share.php:263
@@ -545,8 +529,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-button.php:413
 #: blocks/class-blockstrap-widget-contact.php:569
 #: blocks/class-blockstrap-widget-modal.php:429
-#: blocks/class-blockstrap-widget-newsletter.php:402
-#: blocks/class-blockstrap-widget-popup-test.php:396
+#: blocks/class-blockstrap-widget-offcanvas.php:441
 #: blocks/class-blockstrap-widget-search.php:294
 #: blocks/class-blockstrap-widget-shape-divider.php:69
 #: blocks/class-blockstrap-widget-share.php:455
@@ -630,9 +613,8 @@ msgid "This will show the background on the text."
 msgstr ""
 
 #: blocks/class-blockstrap-widget-archive-title.php:265
-#: blocks/class-blockstrap-widget-button.php:539
-#: blocks/class-blockstrap-widget-nav-item.php:588
-#: blocks/class-blockstrap-widget-popup-test.php:484
+#: blocks/class-blockstrap-widget-button.php:544
+#: blocks/class-blockstrap-widget-nav-item.php:593
 #: blocks/class-blockstrap-widget-search.php:120
 #: blocks/class-blockstrap-widget-search.php:352
 msgid "Search"
@@ -668,17 +650,14 @@ msgstr ""
 #: blocks/class-blockstrap-widget-breadcrumb.php:98
 #: blocks/class-blockstrap-widget-button.php:152
 #: blocks/class-blockstrap-widget-button.php:427
-#: blocks/class-blockstrap-widget-button.php:518
+#: blocks/class-blockstrap-widget-button.php:519
 #: blocks/class-blockstrap-widget-icon-box.php:528
 #: blocks/class-blockstrap-widget-nav-dropdown.php:118
 #: blocks/class-blockstrap-widget-nav-item.php:90
-#: blocks/class-blockstrap-widget-nav-item.php:216
-#: blocks/class-blockstrap-widget-nav-item.php:558
+#: blocks/class-blockstrap-widget-nav-item.php:217
+#: blocks/class-blockstrap-widget-nav-item.php:559
 #: blocks/class-blockstrap-widget-navbar-brand.php:174
-#: blocks/class-blockstrap-widget-popup-test.php:145
-#: blocks/class-blockstrap-widget-popup-test.php:406
-#: blocks/class-blockstrap-widget-popup-test.php:467
-#: blocks/class-blockstrap-widget-rating.php:314
+#: blocks/class-blockstrap-widget-rating.php:313
 #: blocks/class-blockstrap-widget-share.php:101
 msgid "Home"
 msgstr ""
@@ -691,10 +670,9 @@ msgstr ""
 #: blocks/class-blockstrap-widget-button.php:161
 #: blocks/class-blockstrap-widget-icon-box.php:94
 #: blocks/class-blockstrap-widget-nav-dropdown.php:127
-#: blocks/class-blockstrap-widget-nav-item.php:225
-#: blocks/class-blockstrap-widget-popup-test.php:154
+#: blocks/class-blockstrap-widget-nav-item.php:226
 #: blocks/class-blockstrap-widget-post-info.php:203
-#: blocks/class-blockstrap-widget-rating.php:103
+#: blocks/class-blockstrap-widget-rating.php:102
 #: blocks/class-blockstrap-widget-scroll-top.php:103
 #: blocks/class-blockstrap-widget-search.php:130
 #: blocks/class-blockstrap-widget-share.php:111
@@ -710,7 +688,6 @@ msgid "BS > Button"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:33
-#: blocks/class-blockstrap-widget-popup-test.php:35
 msgid "A bootstrap button, badge or iconbox."
 msgstr ""
 
@@ -741,26 +718,17 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav-dropdown.php:121
 #: blocks/class-blockstrap-widget-nav-dropdown.php:131
 #: blocks/class-blockstrap-widget-nav-item.php:44
-#: blocks/class-blockstrap-widget-nav-item.php:169
-#: blocks/class-blockstrap-widget-nav-item.php:179
-#: blocks/class-blockstrap-widget-nav-item.php:189
-#: blocks/class-blockstrap-widget-nav-item.php:200
-#: blocks/class-blockstrap-widget-nav-item.php:208
-#: blocks/class-blockstrap-widget-nav-item.php:219
-#: blocks/class-blockstrap-widget-nav-item.php:229
-#: blocks/class-blockstrap-widget-nav-item.php:239
+#: blocks/class-blockstrap-widget-nav-item.php:170
+#: blocks/class-blockstrap-widget-nav-item.php:180
+#: blocks/class-blockstrap-widget-nav-item.php:190
+#: blocks/class-blockstrap-widget-nav-item.php:201
+#: blocks/class-blockstrap-widget-nav-item.php:209
+#: blocks/class-blockstrap-widget-nav-item.php:220
+#: blocks/class-blockstrap-widget-nav-item.php:230
+#: blocks/class-blockstrap-widget-nav-item.php:240
 #: blocks/class-blockstrap-widget-navbar-brand.php:93
 #: blocks/class-blockstrap-widget-navbar-brand.php:180
 #: blocks/class-blockstrap-widget-navbar-brand.php:190
-#: blocks/class-blockstrap-widget-popup-test.php:45
-#: blocks/class-blockstrap-widget-popup-test.php:95
-#: blocks/class-blockstrap-widget-popup-test.php:105
-#: blocks/class-blockstrap-widget-popup-test.php:115
-#: blocks/class-blockstrap-widget-popup-test.php:126
-#: blocks/class-blockstrap-widget-popup-test.php:137
-#: blocks/class-blockstrap-widget-popup-test.php:148
-#: blocks/class-blockstrap-widget-popup-test.php:158
-#: blocks/class-blockstrap-widget-popup-test.php:170
 #: blocks/class-blockstrap-widget-share.php:41
 #: blocks/class-blockstrap-widget-share.php:94
 #: blocks/class-blockstrap-widget-share.php:104
@@ -799,29 +767,13 @@ msgstr ""
 #: blocks/class-blockstrap-widget-modal.php:343
 #: blocks/class-blockstrap-widget-modal.php:352
 #: blocks/class-blockstrap-widget-nav-dropdown.php:140
-#: blocks/class-blockstrap-widget-nav-item.php:255
-#: blocks/class-blockstrap-widget-newsletter.php:40
-#: blocks/class-blockstrap-widget-newsletter.php:156
-#: blocks/class-blockstrap-widget-newsletter.php:161
-#: blocks/class-blockstrap-widget-newsletter.php:175
-#: blocks/class-blockstrap-widget-newsletter.php:211
-#: blocks/class-blockstrap-widget-newsletter.php:223
-#: blocks/class-blockstrap-widget-newsletter.php:242
-#: blocks/class-blockstrap-widget-popup-test.php:55
-#: blocks/class-blockstrap-widget-popup-test.php:180
-#: blocks/class-blockstrap-widget-popup-test.php:189
-#: blocks/class-blockstrap-widget-popup-test.php:203
-#: blocks/class-blockstrap-widget-popup-test.php:211
-#: blocks/class-blockstrap-widget-popup-test.php:239
-#: blocks/class-blockstrap-widget-popup-test.php:251
-#: blocks/class-blockstrap-widget-popup-test.php:255
-#: blocks/class-blockstrap-widget-popup-test.php:265
-#: blocks/class-blockstrap-widget-popup-test.php:268
-#: blocks/class-blockstrap-widget-popup-test.php:298
-#: blocks/class-blockstrap-widget-popup-test.php:309
-#: blocks/class-blockstrap-widget-popup-test.php:313
-#: blocks/class-blockstrap-widget-popup-test.php:324
-#: blocks/class-blockstrap-widget-popup-test.php:327
+#: blocks/class-blockstrap-widget-nav-item.php:256
+#: blocks/class-blockstrap-widget-offcanvas.php:130
+#: blocks/class-blockstrap-widget-offcanvas.php:185
+#: blocks/class-blockstrap-widget-offcanvas.php:333
+#: blocks/class-blockstrap-widget-offcanvas.php:339
+#: blocks/class-blockstrap-widget-offcanvas.php:353
+#: blocks/class-blockstrap-widget-offcanvas.php:362
 #: blocks/class-blockstrap-widget-post-info.php:233
 #: blocks/class-blockstrap-widget-search.php:48
 #: blocks/class-blockstrap-widget-search.php:155
@@ -854,9 +806,8 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:87
 #: blocks/class-blockstrap-widget-icon-box.php:136
-#: blocks/class-blockstrap-widget-nav-item.php:165
+#: blocks/class-blockstrap-widget-nav-item.php:166
 #: blocks/class-blockstrap-widget-navbar-brand.php:172
-#: blocks/class-blockstrap-widget-popup-test.php:91
 #: blocks/class-blockstrap-widget-post-info.php:108
 msgid "Link Type"
 msgstr ""
@@ -866,22 +817,18 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:145
 #: blocks/class-blockstrap-widget-icon-box.php:530
 #: blocks/class-blockstrap-widget-nav-item.php:91
-#: blocks/class-blockstrap-widget-nav-item.php:174
-#: blocks/class-blockstrap-widget-popup-test.php:100
-#: blocks/class-blockstrap-widget-popup-test.php:408
-#: blocks/class-blockstrap-widget-rating.php:316
+#: blocks/class-blockstrap-widget-nav-item.php:175
+#: blocks/class-blockstrap-widget-rating.php:315
 msgid "Page"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:98
-#: blocks/class-blockstrap-widget-button.php:453
+#: blocks/class-blockstrap-widget-button.php:454
 #: blocks/class-blockstrap-widget-icon-box.php:147
 #: blocks/class-blockstrap-widget-icon-box.php:551
-#: blocks/class-blockstrap-widget-nav-item.php:137
-#: blocks/class-blockstrap-widget-nav-item.php:176
-#: blocks/class-blockstrap-widget-popup-test.php:102
-#: blocks/class-blockstrap-widget-popup-test.php:430
-#: blocks/class-blockstrap-widget-rating.php:337
+#: blocks/class-blockstrap-widget-nav-item.php:138
+#: blocks/class-blockstrap-widget-nav-item.php:177
+#: blocks/class-blockstrap-widget-rating.php:336
 msgid "Select Page"
 msgstr ""
 
@@ -890,7 +837,7 @@ msgid "Meta Key"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:109
-#: blocks/class-blockstrap-widget-button.php:476
+#: blocks/class-blockstrap-widget-button.php:477
 msgid "Select Key"
 msgstr ""
 
@@ -899,10 +846,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:156
 #: blocks/class-blockstrap-widget-icon-box.php:531
 #: blocks/class-blockstrap-widget-nav-item.php:92
-#: blocks/class-blockstrap-widget-nav-item.php:185
-#: blocks/class-blockstrap-widget-popup-test.php:111
-#: blocks/class-blockstrap-widget-popup-test.php:409
-#: blocks/class-blockstrap-widget-rating.php:317
+#: blocks/class-blockstrap-widget-nav-item.php:186
+#: blocks/class-blockstrap-widget-rating.php:316
 msgid "Post ID"
 msgstr ""
 
@@ -911,22 +856,17 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:166
 #: blocks/class-blockstrap-widget-icon-box.php:532
 #: blocks/class-blockstrap-widget-nav-item.php:95
-#: blocks/class-blockstrap-widget-nav-item.php:195
+#: blocks/class-blockstrap-widget-nav-item.php:196
 #: blocks/class-blockstrap-widget-navbar-brand.php:185
-#: blocks/class-blockstrap-widget-popup-test.php:121
-#: blocks/class-blockstrap-widget-popup-test.php:410
-#: blocks/class-blockstrap-widget-popup-test.php:411
 #: blocks/class-blockstrap-widget-post-info.php:179
-#: blocks/class-blockstrap-widget-rating.php:318
+#: blocks/class-blockstrap-widget-rating.php:317
 msgid "Custom URL"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:132
 #: blocks/class-blockstrap-widget-icon-box.php:167
-#: blocks/class-blockstrap-widget-nav-item.php:196
+#: blocks/class-blockstrap-widget-nav-item.php:197
 #: blocks/class-blockstrap-widget-navbar-brand.php:186
-#: blocks/class-blockstrap-widget-popup-test.php:122
-#: blocks/class-blockstrap-widget-popup-test.php:133
 #: blocks/class-blockstrap-widget-post-info.php:180
 msgid "Add custom link URL"
 msgstr ""
@@ -943,16 +883,14 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:150
 #: blocks/class-blockstrap-widget-nav-dropdown.php:116
-#: blocks/class-blockstrap-widget-nav-item.php:214
-#: blocks/class-blockstrap-widget-popup-test.php:143
+#: blocks/class-blockstrap-widget-nav-item.php:215
 #: blocks/class-blockstrap-widget-share.php:99
 msgid "Link Text"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:151
 #: blocks/class-blockstrap-widget-nav-dropdown.php:117
-#: blocks/class-blockstrap-widget-nav-item.php:215
-#: blocks/class-blockstrap-widget-popup-test.php:144
+#: blocks/class-blockstrap-widget-nav-item.php:216
 #: blocks/class-blockstrap-widget-share.php:100
 msgid "Add custom link text or leave blank for dynamic"
 msgstr ""
@@ -960,10 +898,9 @@ msgstr ""
 #: blocks/class-blockstrap-widget-button.php:160
 #: blocks/class-blockstrap-widget-icon-box.php:93
 #: blocks/class-blockstrap-widget-nav-dropdown.php:126
-#: blocks/class-blockstrap-widget-nav-item.php:224
-#: blocks/class-blockstrap-widget-popup-test.php:153
+#: blocks/class-blockstrap-widget-nav-item.php:225
 #: blocks/class-blockstrap-widget-post-info.php:202
-#: blocks/class-blockstrap-widget-rating.php:102
+#: blocks/class-blockstrap-widget-rating.php:101
 #: blocks/class-blockstrap-widget-search.php:129
 #: blocks/class-blockstrap-widget-share.php:110
 msgid "Icon class"
@@ -973,8 +910,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:95
 #: blocks/class-blockstrap-widget-icon-box.php:104
 #: blocks/class-blockstrap-widget-nav-dropdown.php:128
-#: blocks/class-blockstrap-widget-nav-item.php:226
-#: blocks/class-blockstrap-widget-popup-test.php:155
+#: blocks/class-blockstrap-widget-nav-item.php:227
 #: blocks/class-blockstrap-widget-post-info.php:204
 #: blocks/class-blockstrap-widget-share.php:112
 msgid "fas fa-ship"
@@ -982,7 +918,6 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:170
 #: blocks/class-blockstrap-widget-icon-box.php:177
-#: blocks/class-blockstrap-widget-popup-test.php:163
 #: blocks/class-blockstrap-widget-search.php:140
 #: blocks/class-blockstrap-widget-share.php:121
 msgid "Icon position"
@@ -992,9 +927,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:389
 #: blocks/class-blockstrap-widget-icon-box.php:180
 #: blocks/class-blockstrap-widget-nav-dropdown.php:184
-#: blocks/class-blockstrap-widget-nav-item.php:427
-#: blocks/class-blockstrap-widget-newsletter.php:235
-#: blocks/class-blockstrap-widget-popup-test.php:165
+#: blocks/class-blockstrap-widget-nav-item.php:428
+#: blocks/class-blockstrap-widget-offcanvas.php:264
 #: blocks/class-blockstrap-widget-post-info.php:408
 #: blocks/class-blockstrap-widget-search.php:142
 #: blocks/class-blockstrap-widget-share.php:123
@@ -1002,7 +936,6 @@ msgid "Left"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:173
-#: blocks/class-blockstrap-widget-popup-test.php:166
 #: blocks/class-blockstrap-widget-search.php:143
 #: blocks/class-blockstrap-widget-share.php:124
 msgid "right"
@@ -1012,9 +945,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:308
 #: blocks/class-blockstrap-widget-modal.php:321
 #: blocks/class-blockstrap-widget-nav-dropdown.php:137
-#: blocks/class-blockstrap-widget-nav-item.php:252
-#: blocks/class-blockstrap-widget-newsletter.php:154
-#: blocks/class-blockstrap-widget-popup-test.php:177
+#: blocks/class-blockstrap-widget-nav-item.php:253
+#: blocks/class-blockstrap-widget-offcanvas.php:331
 #: blocks/class-blockstrap-widget-post-info.php:230
 #: blocks/class-blockstrap-widget-share.php:241
 msgid "Link style"
@@ -1030,13 +962,11 @@ msgstr ""
 #: blocks/class-blockstrap-widget-map.php:285
 #: blocks/class-blockstrap-widget-nav-dropdown.php:139
 #: blocks/class-blockstrap-widget-nav-dropdown.php:183
-#: blocks/class-blockstrap-widget-nav-item.php:254
-#: blocks/class-blockstrap-widget-nav-item.php:426
+#: blocks/class-blockstrap-widget-nav-item.php:255
+#: blocks/class-blockstrap-widget-nav-item.php:427
 #: blocks/class-blockstrap-widget-nav.php:194
 #: blocks/class-blockstrap-widget-navbar-brand.php:176
 #: blocks/class-blockstrap-widget-navbar.php:111
-#: blocks/class-blockstrap-widget-newsletter.php:110
-#: blocks/class-blockstrap-widget-popup-test.php:179
 #: blocks/class-blockstrap-widget-post-info.php:232
 #: blocks/class-blockstrap-widget-post-info.php:407
 #: blocks/class-blockstrap-widget-share.php:243
@@ -1048,9 +978,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:311
 #: blocks/class-blockstrap-widget-modal.php:324
 #: blocks/class-blockstrap-widget-nav-dropdown.php:141
-#: blocks/class-blockstrap-widget-nav-item.php:256
-#: blocks/class-blockstrap-widget-newsletter.php:157
-#: blocks/class-blockstrap-widget-popup-test.php:181
+#: blocks/class-blockstrap-widget-nav-item.php:257
+#: blocks/class-blockstrap-widget-offcanvas.php:334
 #: blocks/class-blockstrap-widget-post-info.php:234
 #: blocks/class-blockstrap-widget-share.php:245
 msgid "Button rounded"
@@ -1059,8 +988,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-button.php:195
 #: blocks/class-blockstrap-widget-icon-box.php:195
 #: blocks/class-blockstrap-widget-nav-dropdown.php:142
-#: blocks/class-blockstrap-widget-nav-item.php:258
-#: blocks/class-blockstrap-widget-popup-test.php:182
+#: blocks/class-blockstrap-widget-nav-item.php:259
 #: blocks/class-blockstrap-widget-post-info.php:236
 #: blocks/class-blockstrap-widget-share.php:246
 msgid "Iconbox bordered"
@@ -1070,28 +998,25 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:196
 #: blocks/class-blockstrap-widget-modal.php:325
 #: blocks/class-blockstrap-widget-nav-dropdown.php:143
-#: blocks/class-blockstrap-widget-nav-item.php:259
-#: blocks/class-blockstrap-widget-popup-test.php:183
+#: blocks/class-blockstrap-widget-nav-item.php:260
+#: blocks/class-blockstrap-widget-offcanvas.php:335
 #: blocks/class-blockstrap-widget-post-info.php:237
 #: blocks/class-blockstrap-widget-share.php:247
 msgid "Iconbox filled"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:197
-#: blocks/class-blockstrap-widget-popup-test.php:184
 #: blocks/class-blockstrap-widget-post-info.php:238
 #: blocks/class-blockstrap-widget-share.php:248
 msgid "Badge"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:198
-#: blocks/class-blockstrap-widget-popup-test.php:185
 #: blocks/class-blockstrap-widget-share.php:249
 msgid "Pill Badge"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:222
-#: blocks/class-blockstrap-widget-popup-test.php:209
 #: blocks/class-blockstrap-widget-share.php:273
 msgid "Badge size is inherited from the parent text size"
 msgstr ""
@@ -1101,10 +1026,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:364
 #: blocks/class-blockstrap-widget-modal.php:351
 #: blocks/class-blockstrap-widget-nav-dropdown.php:166
-#: blocks/class-blockstrap-widget-nav-item.php:283
-#: blocks/class-blockstrap-widget-newsletter.php:210
-#: blocks/class-blockstrap-widget-popup-test.php:238
-#: blocks/class-blockstrap-widget-popup-test.php:297
+#: blocks/class-blockstrap-widget-nav-item.php:284
+#: blocks/class-blockstrap-widget-offcanvas.php:361
 #: blocks/class-blockstrap-widget-post-info.php:263
 #: blocks/class-blockstrap-widget-scroll-top.php:114
 #: blocks/class-blockstrap-widget-search.php:154
@@ -1115,14 +1038,12 @@ msgid "Color"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:256
-#: blocks/class-blockstrap-widget-popup-test.php:243
 #: blocks/class-blockstrap-widget-search.php:159
 #: blocks/class-blockstrap-widget-share.php:307
 msgid "Normal"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:315
-#: blocks/class-blockstrap-widget-popup-test.php:302
 #: blocks/class-blockstrap-widget-search.php:201
 #: blocks/class-blockstrap-widget-share.php:365
 msgid "Hover"
@@ -1130,80 +1051,80 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:428
 #: blocks/class-blockstrap-widget-icon-box.php:529
-#: blocks/class-blockstrap-widget-popup-test.php:407
-#: blocks/class-blockstrap-widget-rating.php:315
+#: blocks/class-blockstrap-widget-rating.php:314
 msgid "None (non link)"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:432
-#: blocks/class-blockstrap-widget-button.php:532
+#: blocks/class-blockstrap-widget-button.php:533
 #: blocks/class-blockstrap-widget-nav-item.php:96
-#: blocks/class-blockstrap-widget-nav-item.php:581
+#: blocks/class-blockstrap-widget-nav-item.php:582
 msgid "Open Lightbox"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:437
+#: blocks/class-blockstrap-widget-button.php:433
+#: blocks/class-blockstrap-widget-button.php:537
+#: blocks/class-blockstrap-widget-nav-item.php:97
+#: blocks/class-blockstrap-widget-nav-item.php:586
+#: blocks/class-blockstrap-widget-offcanvas.php:219
+msgid "Open Offcanvas"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-button.php:438
 msgid "GD Post Meta"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:439
+#: blocks/class-blockstrap-widget-button.php:440
 #: blocks/class-blockstrap-widget-icon-box.php:537
-#: blocks/class-blockstrap-widget-nav-item.php:101
-#: blocks/class-blockstrap-widget-popup-test.php:416
-#: blocks/class-blockstrap-widget-rating.php:323
+#: blocks/class-blockstrap-widget-nav-item.php:102
+#: blocks/class-blockstrap-widget-rating.php:322
 msgid "GD Search"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:440
+#: blocks/class-blockstrap-widget-button.php:441
 #: blocks/class-blockstrap-widget-icon-box.php:538
-#: blocks/class-blockstrap-widget-nav-item.php:102
-#: blocks/class-blockstrap-widget-popup-test.php:417
-#: blocks/class-blockstrap-widget-rating.php:324
+#: blocks/class-blockstrap-widget-nav-item.php:103
+#: blocks/class-blockstrap-widget-rating.php:323
 msgid "GD Location"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:443
+#: blocks/class-blockstrap-widget-button.php:444
 #: blocks/class-blockstrap-widget-icon-box.php:541
-#: blocks/class-blockstrap-widget-nav-item.php:105
-#: blocks/class-blockstrap-widget-popup-test.php:420
-#: blocks/class-blockstrap-widget-rating.php:327
+#: blocks/class-blockstrap-widget-nav-item.php:106
+#: blocks/class-blockstrap-widget-rating.php:326
 #, php-format
 msgid "%s (archive)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:445
+#: blocks/class-blockstrap-widget-button.php:446
 #: blocks/class-blockstrap-widget-icon-box.php:543
-#: blocks/class-blockstrap-widget-nav-item.php:107
-#: blocks/class-blockstrap-widget-popup-test.php:422
-#: blocks/class-blockstrap-widget-rating.php:329
+#: blocks/class-blockstrap-widget-nav-item.php:108
+#: blocks/class-blockstrap-widget-rating.php:328
 #, php-format
 msgid "%s (add listing)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:536
+#: blocks/class-blockstrap-widget-button.php:541
 #: blocks/class-blockstrap-widget-image.php:217
-#: blocks/class-blockstrap-widget-nav-item.php:585
+#: blocks/class-blockstrap-widget-nav-item.php:590
 #: blocks/class-blockstrap-widget-navbar-brand.php:175
-#: blocks/class-blockstrap-widget-popup-test.php:481
 #: blocks/class-blockstrap-widget-post-info.php:91
 #: blocks/class-blockstrap-widget-post-info.php:150
 #: blocks/class-blockstrap-widget-post-info.php:193
 msgid "Custom"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:542
-#: blocks/class-blockstrap-widget-nav-item.php:591
-#: blocks/class-blockstrap-widget-popup-test.php:487
+#: blocks/class-blockstrap-widget-button.php:547
+#: blocks/class-blockstrap-widget-nav-item.php:596
 msgid "Location"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:549
+#: blocks/class-blockstrap-widget-button.php:554
 msgid "Click here"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-button.php:567
-#: blocks/class-blockstrap-widget-nav-item.php:636
-#: blocks/class-blockstrap-widget-popup-test.php:505
+#: blocks/class-blockstrap-widget-button.php:572
+#: blocks/class-blockstrap-widget-nav-item.php:641
 #, php-format
 msgid "Add %s"
 msgstr ""
@@ -1223,8 +1144,6 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:131
 #: blocks/class-blockstrap-widget-contact.php:141
 #: blocks/class-blockstrap-widget-contact.php:149
-#: blocks/class-blockstrap-widget-newsletter.php:32
-#: blocks/class-blockstrap-widget-newsletter.php:65
 msgid "Display"
 msgstr ""
 
@@ -1237,10 +1156,6 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:208
 #: blocks/class-blockstrap-widget-contact.php:217
 #: blocks/class-blockstrap-widget-contact.php:228
-#: blocks/class-blockstrap-widget-newsletter.php:33
-#: blocks/class-blockstrap-widget-newsletter.php:72
-#: blocks/class-blockstrap-widget-newsletter.php:79
-#: blocks/class-blockstrap-widget-newsletter.php:86
 msgid "Fields"
 msgstr ""
 
@@ -1252,13 +1167,6 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:267
 #: blocks/class-blockstrap-widget-contact.php:276
 #: blocks/class-blockstrap-widget-contact.php:747
-#: blocks/class-blockstrap-widget-newsletter.php:34
-#: blocks/class-blockstrap-widget-newsletter.php:76
-#: blocks/class-blockstrap-widget-newsletter.php:95
-#: blocks/class-blockstrap-widget-newsletter.php:104
-#: blocks/class-blockstrap-widget-newsletter.php:113
-#: blocks/class-blockstrap-widget-newsletter.php:122
-#: blocks/class-blockstrap-widget-newsletter.php:575
 #: blocks/class-blockstrap-widget-share.php:193
 #: blocks/class-blockstrap-widget-share.php:616
 #: classes/class-blockstrap-blocks-comments.php:45
@@ -1269,9 +1177,6 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:483
 #: blocks/class-blockstrap-widget-contact.php:492
 #: blocks/class-blockstrap-widget-contact.php:504
-#: blocks/class-blockstrap-widget-newsletter.php:41
-#: blocks/class-blockstrap-widget-newsletter.php:329
-#: blocks/class-blockstrap-widget-newsletter.php:338
 msgid "Field Styles"
 msgstr ""
 
@@ -1286,6 +1191,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:96
 #: blocks/class-blockstrap-widget-icon-box.php:179
 #: blocks/class-blockstrap-widget-modal.php:244
+#: blocks/class-blockstrap-widget-offcanvas.php:266
 msgid "Top"
 msgstr ""
 
@@ -1314,13 +1220,12 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:129
 #: blocks/class-blockstrap-widget-contact.php:834
 #: blocks/class-blockstrap-widget-contact.php:835
-#: blocks/class-blockstrap-widget-newsletter.php:655
-#: blocks/class-blockstrap-widget-newsletter.php:656
 msgid "Contact form"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:128
 #: blocks/class-blockstrap-widget-modal.php:218
+#: blocks/class-blockstrap-widget-offcanvas.php:217
 msgid "Button text"
 msgstr ""
 
@@ -1334,6 +1239,7 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:140
 #: blocks/class-blockstrap-widget-modal.php:202
+#: blocks/class-blockstrap-widget-offcanvas.php:201
 msgid "Enter an ID with no spaces, only dashes allowed, eg: contact-form"
 msgstr ""
 
@@ -1346,19 +1252,16 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:173
 #: blocks/class-blockstrap-widget-contact.php:751
-#: blocks/class-blockstrap-widget-newsletter.php:579
 msgid "Phone"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:182
 #: blocks/class-blockstrap-widget-contact.php:755
-#: blocks/class-blockstrap-widget-newsletter.php:583
 msgid "Subject"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:191
 #: blocks/class-blockstrap-widget-contact.php:759
-#: blocks/class-blockstrap-widget-newsletter.php:587
 msgid "Message"
 msgstr ""
 
@@ -1389,7 +1292,6 @@ msgid "Set your keys under Appearances > Theme Setup > Recaptcha Keys"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:224
-#: blocks/class-blockstrap-widget-newsletter.php:83
 msgid "Submit text"
 msgstr ""
 
@@ -1398,22 +1300,18 @@ msgid "Leave this blank to be able to translate it."
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:233
-#: blocks/class-blockstrap-widget-newsletter.php:91
 msgid "Email Name"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:236
-#: blocks/class-blockstrap-widget-newsletter.php:94
 msgid "This helps identify the form emails"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:242
-#: blocks/class-blockstrap-widget-newsletter.php:100
 msgid "Send to"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:251
-#: blocks/class-blockstrap-widget-newsletter.php:109
 msgid "Send BCC"
 msgstr ""
 
@@ -1426,6 +1324,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-image.php:236
 #: blocks/class-blockstrap-widget-modal.php:268
 #: blocks/class-blockstrap-widget-nav.php:240
+#: blocks/class-blockstrap-widget-offcanvas.php:278
 msgid "No"
 msgstr ""
 
@@ -1438,46 +1337,39 @@ msgid "Noptin (plugin needs to be installed)"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:272
-#: blocks/class-blockstrap-widget-newsletter.php:118
 msgid "Sent message"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:273
 #: blocks/class-blockstrap-widget-contact.php:810
-#: blocks/class-blockstrap-widget-newsletter.php:119
-#: blocks/class-blockstrap-widget-newsletter.php:635
 msgid "Thanks for your email, we will get back to you shortly!"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:387
 #: blocks/class-blockstrap-widget-image.php:504
 #: blocks/class-blockstrap-widget-map.php:304
-#: blocks/class-blockstrap-widget-newsletter.php:233
 msgid "Position"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:390
 #: blocks/class-blockstrap-widget-icon-box.php:181
 #: blocks/class-blockstrap-widget-nav-dropdown.php:185
-#: blocks/class-blockstrap-widget-nav-item.php:428
-#: blocks/class-blockstrap-widget-newsletter.php:236
+#: blocks/class-blockstrap-widget-nav-item.php:429
+#: blocks/class-blockstrap-widget-offcanvas.php:265
 #: blocks/class-blockstrap-widget-post-info.php:409
 msgid "Right"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:391
-#: blocks/class-blockstrap-widget-newsletter.php:237
 msgid "Center"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:392
 #: blocks/class-blockstrap-widget-navbar.php:125
-#: blocks/class-blockstrap-widget-newsletter.php:238
 msgid "Full width"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:489
-#: blocks/class-blockstrap-widget-newsletter.php:335
 msgid "Textarea rows"
 msgstr ""
 
@@ -1487,7 +1379,6 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:499
 #: blocks/class-blockstrap-widget-nav.php:211
-#: blocks/class-blockstrap-widget-newsletter.php:61
 msgid "Vertical"
 msgstr ""
 
@@ -1498,7 +1389,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:583
 #: blocks/class-blockstrap-widget-modal.php:286
 #: blocks/class-blockstrap-widget-modal.php:307
-#: blocks/class-blockstrap-widget-newsletter.php:412
+#: blocks/class-blockstrap-widget-offcanvas.php:296
+#: blocks/class-blockstrap-widget-offcanvas.php:317
 msgid "Show"
 msgstr ""
 
@@ -1506,53 +1398,45 @@ msgstr ""
 #: blocks/class-blockstrap-widget-gallery.php:131
 #: blocks/class-blockstrap-widget-modal.php:287
 #: blocks/class-blockstrap-widget-modal.php:308
-#: blocks/class-blockstrap-widget-newsletter.php:413
+#: blocks/class-blockstrap-widget-offcanvas.php:297
+#: blocks/class-blockstrap-widget-offcanvas.php:318
 msgid "Hide"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:585
-#: blocks/class-blockstrap-widget-newsletter.php:414
 msgid "Require"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:593
-#: blocks/class-blockstrap-widget-newsletter.php:422
 msgid "Site Email"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:594
-#: blocks/class-blockstrap-widget-newsletter.php:423
 msgid "Post Author"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:598
-#: blocks/class-blockstrap-widget-newsletter.php:427
 msgid "GD Listing Email"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:633
-#: blocks/class-blockstrap-widget-newsletter.php:462
 msgid "Send"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:771
-#: blocks/class-blockstrap-widget-newsletter.php:597
 msgid "(required)"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:831
-#: blocks/class-blockstrap-widget-newsletter.php:652
 msgid "This is a preview, please test on the frontend."
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:841
-#: blocks/class-blockstrap-widget-newsletter.php:662
 #, php-format
 msgid "This is a placeholder for the lightbox for contact form: %s"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:1027
-#: blocks/class-blockstrap-widget-newsletter.php:824
 msgid "Something went wrong, please try again"
 msgstr ""
 
@@ -1587,6 +1471,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-image.php:237
 #: blocks/class-blockstrap-widget-modal.php:256
 #: blocks/class-blockstrap-widget-modal.php:269
+#: blocks/class-blockstrap-widget-offcanvas.php:279
 msgid "Yes"
 msgstr ""
 
@@ -1905,8 +1790,8 @@ msgstr ""
 msgid "Demo image caption %d"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-gallery.php:598
-#: blocks/class-blockstrap-widget-gallery.php:631
+#: blocks/class-blockstrap-widget-gallery.php:600
+#: blocks/class-blockstrap-widget-gallery.php:633
 #, php-format
 msgid "+%s photo"
 msgid_plural "+%s photos"
@@ -1954,15 +1839,15 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:270
 #: blocks/class-blockstrap-widget-icon-box.php:278
 #: blocks/class-blockstrap-widget-icon-box.php:287
-#: blocks/class-blockstrap-widget-rating.php:54
-#: blocks/class-blockstrap-widget-rating.php:194
-#: blocks/class-blockstrap-widget-rating.php:198
-#: blocks/class-blockstrap-widget-rating.php:206
-#: blocks/class-blockstrap-widget-rating.php:211
-#: blocks/class-blockstrap-widget-rating.php:218
-#: blocks/class-blockstrap-widget-rating.php:223
-#: blocks/class-blockstrap-widget-rating.php:232
-#: blocks/class-blockstrap-widget-rating.php:243
+#: blocks/class-blockstrap-widget-rating.php:53
+#: blocks/class-blockstrap-widget-rating.php:193
+#: blocks/class-blockstrap-widget-rating.php:197
+#: blocks/class-blockstrap-widget-rating.php:205
+#: blocks/class-blockstrap-widget-rating.php:210
+#: blocks/class-blockstrap-widget-rating.php:217
+#: blocks/class-blockstrap-widget-rating.php:222
+#: blocks/class-blockstrap-widget-rating.php:231
+#: blocks/class-blockstrap-widget-rating.php:242
 msgid "Icon Style"
 msgstr ""
 
@@ -2012,16 +1897,15 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-icon-box.php:168
 #: blocks/class-blockstrap-widget-image.php:227
-#: blocks/class-blockstrap-widget-nav-item.php:197
+#: blocks/class-blockstrap-widget-nav-item.php:198
 #: blocks/class-blockstrap-widget-navbar-brand.php:187
-#: blocks/class-blockstrap-widget-popup-test.php:123
-#: blocks/class-blockstrap-widget-popup-test.php:134
 #: blocks/class-blockstrap-widget-post-info.php:181
 msgid "https://example.com"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-icon-box.php:182
 #: blocks/class-blockstrap-widget-image.php:365
+#: blocks/class-blockstrap-widget-offcanvas.php:267
 msgid "Bottom"
 msgstr ""
 
@@ -2272,7 +2156,7 @@ msgstr ""
 msgid "bottom right"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-image.php:617
+#: blocks/class-blockstrap-widget-image.php:634
 msgid "Placeholder image"
 msgstr ""
 
@@ -2409,14 +2293,21 @@ msgstr ""
 #: blocks/class-blockstrap-widget-modal.php:291
 #: blocks/class-blockstrap-widget-modal.php:299
 #: blocks/class-blockstrap-widget-modal.php:312
+#: blocks/class-blockstrap-widget-offcanvas.php:116
+#: blocks/class-blockstrap-widget-offcanvas.php:294
+#: blocks/class-blockstrap-widget-offcanvas.php:301
+#: blocks/class-blockstrap-widget-offcanvas.php:309
+#: blocks/class-blockstrap-widget-offcanvas.php:322
 msgid "Header"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:118
+#: blocks/class-blockstrap-widget-offcanvas.php:117
 msgid "Body"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:119
+#: blocks/class-blockstrap-widget-offcanvas.php:118
 msgid "Footer"
 msgstr ""
 
@@ -2442,14 +2333,17 @@ msgid "Modal Body"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:175
+#: blocks/class-blockstrap-widget-offcanvas.php:174
 msgid "Place in the theme footer to be able to open on any page."
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:184
+#: blocks/class-blockstrap-widget-offcanvas.php:183
 msgid "Open with"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:187
+#: blocks/class-blockstrap-widget-offcanvas.php:186
 msgid "Another Element"
 msgstr ""
 
@@ -2464,6 +2358,7 @@ msgid ""
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:219
+#: blocks/class-blockstrap-widget-offcanvas.php:218
 msgid "Open Popup"
 msgstr ""
 
@@ -2484,6 +2379,7 @@ msgid "Full Screen"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:242
+#: blocks/class-blockstrap-widget-offcanvas.php:262
 msgid "Vertical Position"
 msgstr ""
 
@@ -2500,18 +2396,22 @@ msgid "no"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:266
+#: blocks/class-blockstrap-widget-offcanvas.php:276
 msgid "Static Backdrop"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:272
+#: blocks/class-blockstrap-widget-offcanvas.php:282
 msgid "Prevents modal close on clicks outside modal and on keyboard Esc"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:296
+#: blocks/class-blockstrap-widget-offcanvas.php:306
 msgid "Header title"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:297
+#: blocks/class-blockstrap-widget-offcanvas.php:307
 msgid "Popup title"
 msgstr ""
 
@@ -2520,6 +2420,7 @@ msgid "Modal title"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-modal.php:305
+#: blocks/class-blockstrap-widget-offcanvas.php:315
 msgid "Close Icon"
 msgstr ""
 
@@ -2541,22 +2442,22 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav-dropdown.php:175
 #: blocks/class-blockstrap-widget-nav-dropdown.php:189
 #: blocks/class-blockstrap-widget-nav-item.php:55
-#: blocks/class-blockstrap-widget-nav-item.php:263
-#: blocks/class-blockstrap-widget-nav-item.php:278
-#: blocks/class-blockstrap-widget-nav-item.php:292
-#: blocks/class-blockstrap-widget-nav-item.php:302
-#: blocks/class-blockstrap-widget-nav-item.php:312
-#: blocks/class-blockstrap-widget-nav-item.php:322
-#: blocks/class-blockstrap-widget-nav-item.php:332
-#: blocks/class-blockstrap-widget-nav-item.php:344
-#: blocks/class-blockstrap-widget-nav-item.php:354
-#: blocks/class-blockstrap-widget-nav-item.php:364
-#: blocks/class-blockstrap-widget-nav-item.php:374
-#: blocks/class-blockstrap-widget-nav-item.php:386
-#: blocks/class-blockstrap-widget-nav-item.php:396
-#: blocks/class-blockstrap-widget-nav-item.php:406
-#: blocks/class-blockstrap-widget-nav-item.php:416
-#: blocks/class-blockstrap-widget-nav-item.php:432
+#: blocks/class-blockstrap-widget-nav-item.php:264
+#: blocks/class-blockstrap-widget-nav-item.php:279
+#: blocks/class-blockstrap-widget-nav-item.php:293
+#: blocks/class-blockstrap-widget-nav-item.php:303
+#: blocks/class-blockstrap-widget-nav-item.php:313
+#: blocks/class-blockstrap-widget-nav-item.php:323
+#: blocks/class-blockstrap-widget-nav-item.php:333
+#: blocks/class-blockstrap-widget-nav-item.php:345
+#: blocks/class-blockstrap-widget-nav-item.php:355
+#: blocks/class-blockstrap-widget-nav-item.php:365
+#: blocks/class-blockstrap-widget-nav-item.php:375
+#: blocks/class-blockstrap-widget-nav-item.php:387
+#: blocks/class-blockstrap-widget-nav-item.php:397
+#: blocks/class-blockstrap-widget-nav-item.php:407
+#: blocks/class-blockstrap-widget-nav-item.php:417
+#: blocks/class-blockstrap-widget-nav-item.php:433
 #: blocks/class-blockstrap-widget-post-info.php:55
 #: blocks/class-blockstrap-widget-post-info.php:243
 #: blocks/class-blockstrap-widget-post-info.php:258
@@ -2578,19 +2479,19 @@ msgid "Link styles"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-nav-dropdown.php:167
-#: blocks/class-blockstrap-widget-nav-item.php:284
+#: blocks/class-blockstrap-widget-nav-item.php:285
 #: blocks/class-blockstrap-widget-post-info.php:264
 msgid "Select the color."
 msgstr ""
 
 #: blocks/class-blockstrap-widget-nav-dropdown.php:170
-#: blocks/class-blockstrap-widget-nav-item.php:287
+#: blocks/class-blockstrap-widget-nav-item.php:288
 #: blocks/class-blockstrap-widget-post-info.php:267
 msgid "Custom colors"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-nav-dropdown.php:181
-#: blocks/class-blockstrap-widget-nav-item.php:424
+#: blocks/class-blockstrap-widget-nav-item.php:425
 #: blocks/class-blockstrap-widget-post-info.php:405
 msgid "Link Divider"
 msgstr ""
@@ -2616,109 +2517,109 @@ msgstr ""
 msgid "WP Logout (logged in)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:112
+#: blocks/class-blockstrap-widget-nav-item.php:113
 msgid "GD Location Switcher"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:117
+#: blocks/class-blockstrap-widget-nav-item.php:118
 msgid "UWP Login (logged out)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:118
+#: blocks/class-blockstrap-widget-nav-item.php:119
 msgid "UWP Register (logged out)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:119
+#: blocks/class-blockstrap-widget-nav-item.php:120
 msgid "UWP Forgot Password? (logged out)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:122
+#: blocks/class-blockstrap-widget-nav-item.php:123
 msgid "Account (logged in)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:123
+#: blocks/class-blockstrap-widget-nav-item.php:124
 msgid "Change Password (logged in)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:124
+#: blocks/class-blockstrap-widget-nav-item.php:125
 msgid "Profile (logged in)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:125
+#: blocks/class-blockstrap-widget-nav-item.php:126
 msgid "Log out (logged in)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:128
+#: blocks/class-blockstrap-widget-nav-item.php:129
 msgid "spacer (non link)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:206
+#: blocks/class-blockstrap-widget-nav-item.php:207
 msgid "Enter the BS > Contact form ID prefixed by a `#` eg: #contact-form"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:234
+#: blocks/class-blockstrap-widget-nav-item.php:235
 msgid "Aria label"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:235
+#: blocks/class-blockstrap-widget-nav-item.php:236
 msgid "Describe the link for assistive technologies."
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:236
+#: blocks/class-blockstrap-widget-nav-item.php:237
 msgid "Visit our facebook page"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:257
+#: blocks/class-blockstrap-widget-nav-item.php:258
 #: blocks/class-blockstrap-widget-post-info.php:235
 msgid "Button Icon Circle"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:271
+#: blocks/class-blockstrap-widget-nav-item.php:272
 #: blocks/class-blockstrap-widget-post-info.php:251
 msgid "Extra Small (BS5)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:573
+#: blocks/class-blockstrap-widget-nav-item.php:574
 msgid "Sign in"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:578
+#: blocks/class-blockstrap-widget-nav-item.php:579
 msgid "Sign out"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:594
+#: blocks/class-blockstrap-widget-nav-item.php:599
 msgid "Set Locationx"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:612
+#: blocks/class-blockstrap-widget-nav-item.php:617
 msgid "Clear Location"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:642
+#: blocks/class-blockstrap-widget-nav-item.php:647
 msgid "Login"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:646
+#: blocks/class-blockstrap-widget-nav-item.php:651
 msgid "Register"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:650
+#: blocks/class-blockstrap-widget-nav-item.php:655
 msgid "Forgot Password"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:654
+#: blocks/class-blockstrap-widget-nav-item.php:659
 msgid "Account"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:657
+#: blocks/class-blockstrap-widget-nav-item.php:662
 msgid "Change password"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:660
+#: blocks/class-blockstrap-widget-nav-item.php:665
 msgid "Profile"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-nav-item.php:663
+#: blocks/class-blockstrap-widget-nav-item.php:668
 msgid "Log out"
 msgstr ""
 
@@ -2791,7 +2692,6 @@ msgid "Horizontal / Vertical"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-nav.php:210
-#: blocks/class-blockstrap-widget-newsletter.php:62
 msgid "Horizontal"
 msgstr ""
 
@@ -2905,16 +2805,67 @@ msgstr ""
 msgid "Sticky top"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-newsletter.php:19
-msgid "BS > Newsletter Signup"
+#: blocks/class-blockstrap-widget-offcanvas.php:106
+msgid "BS > Offcanvas"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-newsletter.php:22
-msgid "A simple newsletter signup form."
+#: blocks/class-blockstrap-widget-offcanvas.php:109
+msgid "A Bootstrap Offcanvas builder for creating off page elements."
 msgstr ""
 
-#: blocks/class-blockstrap-widget-newsletter.php:59
-msgid "Form Layout"
+#: blocks/class-blockstrap-widget-offcanvas.php:115
+#: blocks/class-blockstrap-widget-offcanvas.php:177
+#: blocks/class-blockstrap-widget-offcanvas.php:190
+#: blocks/class-blockstrap-widget-offcanvas.php:202
+#: blocks/class-blockstrap-widget-offcanvas.php:211
+#: blocks/class-blockstrap-widget-offcanvas.php:220
+#: blocks/class-blockstrap-widget-offcanvas.php:246
+#: blocks/class-blockstrap-widget-offcanvas.php:250
+#: blocks/class-blockstrap-widget-offcanvas.php:251
+#: blocks/class-blockstrap-widget-offcanvas.php:252
+#: blocks/class-blockstrap-widget-offcanvas.php:254
+#: blocks/class-blockstrap-widget-offcanvas.php:255
+#: blocks/class-blockstrap-widget-offcanvas.php:256
+#: blocks/class-blockstrap-widget-offcanvas.php:271
+#: blocks/class-blockstrap-widget-offcanvas.php:284
+msgid "Offcanvas"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-offcanvas.php:131
+#: blocks/class-blockstrap-widget-offcanvas.php:378
+#: blocks/class-blockstrap-widget-offcanvas.php:384
+#: blocks/class-blockstrap-widget-offcanvas.php:390
+#: blocks/class-blockstrap-widget-offcanvas.php:397
+msgid "Offcanvas Header"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-offcanvas.php:132
+#: blocks/class-blockstrap-widget-offcanvas.php:408
+#: blocks/class-blockstrap-widget-offcanvas.php:417
+#: blocks/class-blockstrap-widget-offcanvas.php:418
+#: blocks/class-blockstrap-widget-offcanvas.php:419
+#: blocks/class-blockstrap-widget-offcanvas.php:420
+msgid "Offcanvas Body"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-offcanvas.php:195
+msgid "Offcanvas ID"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-offcanvas.php:208
+msgid ""
+"The Offcanvas ID can be used by other blocks to open the Offcanvas, BS > "
+"Button or BS > Nav item"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-offcanvas.php:243
+msgid ""
+"If manually adjusting the height or width, be sure to adjust the responsive "
+"values also."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-offcanvas.php:308
+msgid "Offcanvas title"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-pagination.php:25
@@ -3074,14 +3025,6 @@ msgstr ""
 msgid "Viewing %1$s posts %2$d - %3$d of %4$d"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-popup-test.php:32
-msgid "BS > Popup"
-msgstr ""
-
-#: blocks/class-blockstrap-widget-popup-test.php:132
-msgid "Popup"
-msgstr ""
-
 #: blocks/class-blockstrap-widget-post-excerpt.php:35
 msgid "BS > Post Excerpt"
 msgstr ""
@@ -3237,64 +3180,64 @@ msgid ""
 "make a whole area clickable)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:30
+#: blocks/class-blockstrap-widget-rating.php:29
 msgid "BS > Rating"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:33
+#: blocks/class-blockstrap-widget-rating.php:32
 msgid "A bootstrap rating icons"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:42
-#: blocks/class-blockstrap-widget-rating.php:97
-#: blocks/class-blockstrap-widget-rating.php:107
-#: blocks/class-blockstrap-widget-rating.php:127
-#: blocks/class-blockstrap-widget-rating.php:137
-#: blocks/class-blockstrap-widget-rating.php:147
+#: blocks/class-blockstrap-widget-rating.php:41
+#: blocks/class-blockstrap-widget-rating.php:96
+#: blocks/class-blockstrap-widget-rating.php:106
+#: blocks/class-blockstrap-widget-rating.php:126
+#: blocks/class-blockstrap-widget-rating.php:136
+#: blocks/class-blockstrap-widget-rating.php:146
 msgid "Rating"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:90
+#: blocks/class-blockstrap-widget-rating.php:89
 msgid "Type"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:104
+#: blocks/class-blockstrap-widget-rating.php:103
 msgid "fas fa-star"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:112
+#: blocks/class-blockstrap-widget-rating.php:111
 msgid "Rating Count"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:133
+#: blocks/class-blockstrap-widget-rating.php:132
 msgid "Rating Percent"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:143
+#: blocks/class-blockstrap-widget-rating.php:142
 msgid "Hover Text"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:144
+#: blocks/class-blockstrap-widget-rating.php:143
 msgid "User rated 5/5"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:207
+#: blocks/class-blockstrap-widget-rating.php:206
 msgid "Rating Color On"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:219
+#: blocks/class-blockstrap-widget-rating.php:218
 msgid "Rating Color Off"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:231
+#: blocks/class-blockstrap-widget-rating.php:230
 msgid "Padding"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:238
+#: blocks/class-blockstrap-widget-rating.php:237
 msgid "Icon Fixed Width"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-rating.php:242
+#: blocks/class-blockstrap-widget-rating.php:241
 msgid "Some icons may require the fixed width setting."
 msgstr ""
 
