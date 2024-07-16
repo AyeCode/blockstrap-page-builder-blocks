@@ -232,7 +232,7 @@ function sd_get_border_input( $type = 'border', $overwrite = array() ) {
 			'rounded-bottom' => 'rounded-bottom',
 			'rounded-left'   => 'rounded-left',
 		);
-		$defaults['element_require'] = '[%border%]';
+		$defaults['element_require'] = '([%border%]&&[%border%]!="0")';
 	} elseif ( 'rounded_size' === $type ) {
 		$defaults['title'] = __( 'Border radius size', 'ayecode-connect' );
 
@@ -254,7 +254,7 @@ function sd_get_border_input( $type = 'border', $overwrite = array() ) {
 				'lg' => __( 'Large', 'ayecode-connect' ),
 			);
 		}
-		$defaults['element_require'] = '[%border%]';
+		$defaults['element_require'] = '([%border%]&&[%border%]!="0")';
 	} elseif ( 'width' === $type ) { // BS%
 		$defaults['title']           = __( 'Border width', 'ayecode-connect' );
 		$defaults['options']         = array(
@@ -264,7 +264,7 @@ function sd_get_border_input( $type = 'border', $overwrite = array() ) {
 			'border-4' => '4',
 			'border-5' => '5',
 		);
-		$defaults['element_require'] = $aui_bs5 ? '[%border%]' : '1==2';
+		$defaults['element_require'] = $aui_bs5 ? '([%border%]&&[%border%]!="0")' : '1==2';
 	} elseif ( 'opacity' === $type ) { // BS%
 		$defaults['title']           = __( 'Border opacity', 'ayecode-connect' );
 		$defaults['options']         = array(
@@ -274,7 +274,7 @@ function sd_get_border_input( $type = 'border', $overwrite = array() ) {
 			'border-opacity-25' => '25%',
 			'border-opacity-10' => '10%',
 		);
-		$defaults['element_require'] = $aui_bs5 ? '[%border%]' : '1==2';
+		$defaults['element_require'] = $aui_bs5 ? '([%border%]&&[%border%]!="0")' : '1==2';
 	} elseif ( 'type' === $type ) {
 		$defaults['title']           = __( 'Border show', 'ayecode-connect' );
 		$defaults['options']         = array(
@@ -288,14 +288,13 @@ function sd_get_border_input( $type = 'border', $overwrite = array() ) {
 			'border-left-0'   => __( '-Left', 'ayecode-connect' ),
 			'border-right-0'  => __( '-Right', 'ayecode-connect' ),
 		);
-		$defaults['element_require'] = '[%border%]';
-
+		$defaults['element_require'] = '([%border%]&&[%border%]!="0")';
 	} else {
 		$defaults['title']   = __( 'Border color', 'ayecode-connect' );
 		$defaults['options'] = array(
-				''  => __( 'Default', 'ayecode-connect' ),
-				'0' => __( 'None', 'ayecode-connect' ),
-			) + sd_aui_colors(false,false,false,false,true);
+			''  => __( 'Default', 'ayecode-connect' ),
+			'0' => __( 'None', 'ayecode-connect' )
+		) + sd_aui_colors( false, false, false, false, true );
 	}
 
 	$input = wp_parse_args( $overwrite, $defaults );
@@ -343,9 +342,9 @@ function sd_get_shadow_input( $type = 'shadow', $overwrite = array() ) {
  */
 function sd_get_background_input( $type = 'bg', $overwrite = array() ) {
 	$options = array(
-			''            => __( 'None', 'ayecode-connect' ),
-			'transparent' => __( 'Transparent', 'ayecode-connect' ),
-		) + sd_aui_colors(false,false,false,false,true);
+		           ''            => __( 'None', 'ayecode-connect' ),
+		           'transparent' => __( 'Transparent', 'ayecode-connect' ),
+	           ) + sd_aui_colors(false,false,false,false,true);
 
 	$defaults = array(
 		'type'     => 'select',
@@ -414,9 +413,9 @@ function sd_get_background_inputs( $type = 'bg', $overwrite = array(), $overwrit
 	$color_options = $include_button_colors ? sd_aui_colors( false, true, true, true, true ) : sd_aui_colors(false, false, false, false, true );
 
 	$options = array(
-			''            => __( 'None', 'ayecode-connect' ),
-			'transparent' => __( 'Transparent', 'ayecode-connect' ),
-		) + $color_options;
+		           ''            => __( 'None', 'ayecode-connect' ),
+		           'transparent' => __( 'Transparent', 'ayecode-connect' ),
+	           ) + $color_options;
 
 	if ( false !== $overwrite_color ) {
 		$options['custom-color'] = __( 'Custom Color', 'ayecode-connect' );
@@ -598,12 +597,12 @@ function sd_get_shape_divider_inputs( $type = 'sd', $overwrite = array(), $overw
 	);
 
 	$options = array(
-			''            => __( 'None', 'ayecode-connect' ),
-			'transparent' => __( 'Transparent', 'ayecode-connect' ),
-		) + sd_aui_colors(false,false,false,false,true )
-		+ array(
-			'custom-color' => __( 'Custom Color', 'ayecode-connect' ),
-		);
+		           ''            => __( 'None', 'ayecode-connect' ),
+		           'transparent' => __( 'Transparent', 'ayecode-connect' ),
+	           ) + sd_aui_colors(false,false,false,false,true )
+	           + array(
+		           'custom-color' => __( 'Custom Color', 'ayecode-connect' ),
+	           );
 
 	$input[ $type . '_color' ] = wp_parse_args(
 		$overwrite_color,
@@ -750,8 +749,8 @@ function sd_get_element_require_string( $args, $key, $type ) {
  */
 function sd_get_text_color_input( $type = 'text_color', $overwrite = array(), $has_custom = false, $emphasis = true ) {
 	$options = array(
-			'' => __( 'None', 'ayecode-connect' ),
-		) + sd_aui_colors(false,false,false,false,false, true);
+		           '' => __( 'None', 'ayecode-connect' ),
+	           ) + sd_aui_colors(false,false,false,false,false, true);
 
 	if ( $has_custom ) {
 		$options['custom'] = __( 'Custom color', 'ayecode-connect' );
@@ -3704,27 +3703,40 @@ function sd_gd_field_rule_search( $search, $post_type, $rule, $field = array(), 
 }
 
 
-/**
- * Add the shortcodes to the block content if sett as an attribute.
- *
- * We have moved the shortcodes from the block content to a block argument to help prevent broken blocks.
- *
- * @param $block_content
- * @param $parsed_block
- * @param $thiss
- * @return mixed|string
- */
-function blockstrap_blocks_render_blocks($block_content, $parsed_block, $thiss ){
+if(!function_exists('sd_blocks_render_blocks')){
+	/**
+	 * Add the shortcodes to the block content if set as an attribute.
+	 *
+	 * We have moved the shortcodes from the block content to a block argument to help prevent broken blocks.
+	 *
+	 * @param $block_content
+	 * @param $parsed_block
+	 * @param $thiss
+	 * @return mixed|string
+	 */
+	function sd_blocks_render_blocks($block_content, $parsed_block, $thiss ){
 
-	// Check if ita a nested block that needs to be wrapped
-	if(! empty($parsed_block['attrs']['sd_shortcode_close'])){
-		$content = isset($parsed_block['attrs']['html']) ? $parsed_block['attrs']['html'] : $block_content;
-		$block_content = $parsed_block['attrs']['sd_shortcode'].$content.$parsed_block['attrs']['sd_shortcode_close'];
-	}elseif(! empty($parsed_block['attrs']['sd_shortcode'])){
-		// Add the shortcode if its not a wrapped block
-		$block_content .= $parsed_block['attrs']['sd_shortcode'];
+		// Check if ita a nested block that needs to be wrapped
+		if(! empty($parsed_block['attrs']['sd_shortcode_close'])){
+			$content = isset($parsed_block['attrs']['html']) ? $parsed_block['attrs']['html'] : $block_content;
+			$block_content = $parsed_block['attrs']['sd_shortcode'].$content.$parsed_block['attrs']['sd_shortcode_close'];
+		}elseif(! empty($parsed_block['attrs']['sd_shortcode'])){
+			$has_warp = false;
+			if($block_content && strpos(trim($block_content), '<div class="wp-block-') === 0 ){
+				$parts = explode('></', $block_content);
+				if(count($parts) === 2){
+					$block_content = $parts[0].'>'.$parsed_block['attrs']['sd_shortcode'].'</'.$parts[1];
+					$has_warp = true;
+				}
+			}
+			if (!$has_warp) {
+				// Add the shortcode if its not a wrapped block
+				$block_content .= $parsed_block['attrs']['sd_shortcode'];
+			}
+		}
+		return $block_content;
 	}
-	return $block_content;
 }
-add_filter('render_block', 'blockstrap_blocks_render_blocks',10,3);
+
+add_filter('render_block', 'sd_blocks_render_blocks',10,3);
 
