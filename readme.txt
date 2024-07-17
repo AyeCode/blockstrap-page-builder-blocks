@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.6
-Stable tag: 0.1.21
+Stable tag: 0.1.22
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -175,6 +175,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.22 - 2024-07-17 =
+* Templates updated to new block output standards for less broken blocks - CHANGED
 
 = 0.1.21 - 2024-07-16 =
 * BS Container has `undefined` class if style ID not set - FIXED
