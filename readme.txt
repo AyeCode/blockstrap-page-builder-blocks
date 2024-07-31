@@ -176,6 +176,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.23 - TBD =
+* Top menu is not scrollable with landscape mode in small screen device - FIXED
+
 = 0.1.22 - 2024-07-17 =
 * Templates updated to new block output standards for less broken blocks - CHANGED
 
