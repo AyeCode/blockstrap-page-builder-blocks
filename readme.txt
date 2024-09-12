@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.6
-Stable tag: 0.1.22
+Stable tag: 0.1.23
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,8 +176,10 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.23 - TBD =
+= 0.1.23 - 2024-09-12 =
 * Top menu is not scrollable with landscape mode in small screen device - FIXED
+* Button block missing UWP options for links - ADDED
+* Function added to get page IDs for page selects in blocks for better memory use - ADDED
 
 = 0.1.22 - 2024-07-17 =
 * Templates updated to new block output standards for less broken blocks - CHANGED

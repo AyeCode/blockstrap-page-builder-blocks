@@ -1,3 +1,21 @@
+= 0.2.26 - 2024-09-12 =
+* Primary color setting not working after update - FIXED
+
+= 0.2.25 - 2024-09-05 =
+* Don't apply custom colors to wp-admin - CHANGED
+
+= 0.2.24 - 2024-08-29 =
+* Changes for search form conditional fields - CHANGED
+
+= 0.2.23 - 2024-08-08 =
+* Conditional field set default value changes - CHANGED
+
+= 0.2.22 - 2024-08-01 =
+* Conditional field don't reset field value on hide element - FIXED
+
+= 0.2.21 - 2024-07-31 =
+* JS error on FSE theme edit template part page - FIXED
+
 = 0.2.20 - 2024-07-05 =
 * Multiple carousels breaks carousel in modal - FIXED
 

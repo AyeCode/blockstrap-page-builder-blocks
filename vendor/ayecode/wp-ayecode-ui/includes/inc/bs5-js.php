@@ -1033,8 +1033,8 @@
                 cs_scroll  = 'navbar-light';
             }
 
-            navbar.dataset.cso = cs_original
-            navbar.dataset.css = cs_scroll
+            navbar.dataset.cso = cs_original;
+            navbar.dataset.css = cs_scroll;
         }
 
         if($value > 0 || navbar.classList.contains('nav-menu-open') ){
@@ -1146,39 +1146,22 @@
      * @param $color
      */
     function aui_fse_sync_site_typography(){
-        // const select = wp.data.select('core/edit-site').getSettings();
-        // const select = wp.data.select('core/edit-site');
-        // console.log(select);
-
-
-        // console.log(settings.styles[3].css);
-
         const getGlobalStyles = () => {
             const { select } = wp.data;
             const settings = select('core/block-editor').getSettings();
-            // console.log(settings);
-            return settings.styles[3].css ? settings.styles[3].css : null;
 
+            return ( settings && settings.styles && settings.styles[3].css ? settings.styles[3].css : null );
         };
 
         // set the initial styles
         let Styles = getGlobalStyles();
 
-        // console.log('#####'+colorHex);
-
         wp.data.subscribe(() => {
-
-            // console.log(wp.data);
-
             // get the current styles
             const newStyles = getGlobalStyles();
 
-            // console.log(newStyles);
-
             // only do something if newStyles has changed.
             if( newStyles && Styles !== newStyles ) {
-
-
                 // heading sizes
                 aui_updateCssRule('body.editor-styles-wrapper h1', 'font-size', aui_parseCSS(newStyles, 'h1', 'font-size'));
                 aui_updateCssRule('body.editor-styles-wrapper h2', 'font-size', aui_parseCSS(newStyles, 'h2', 'font-size'));

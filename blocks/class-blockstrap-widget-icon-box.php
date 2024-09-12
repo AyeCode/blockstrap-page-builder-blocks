@@ -143,7 +143,7 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 		$arguments['page_id'] = array(
 			'type'            => 'select',
 			'title'           => __( 'Page', 'blockstrap-page-builder-blocks' ),
-			'options'         => $this->get_pages_array(),
+			'options'         => blockstrap_pbb_page_options(),
 			'placeholder'     => __( 'Select Page', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
@@ -547,21 +547,6 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 		return $links;
 	}
 
-	public function get_pages_array() {
-		$options = array( '' => __( 'Select Page', 'blockstrap-page-builder-blocks' ) );
-
-		$pages = get_pages();
-
-		if ( ! empty( $pages ) ) {
-			foreach ( $pages as $page ) {
-				if ( $page->post_title ) {
-					$options[ $page->ID ] = esc_attr( $page->post_title );
-				}
-			}
-		}
-
-		return $options;
-	}
 
 	/**
 	 * This is the output function for the widget, shortcode and block (front end).
