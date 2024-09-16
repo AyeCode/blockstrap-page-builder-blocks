@@ -176,6 +176,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.24 - 2024-09-16 =
+* Background featured image not getting correct image for GD Location manager locations - FIXED
+
 = 0.1.23 - 2024-09-12 =
 * Top menu is not scrollable with landscape mode in small screen device - FIXED
 * Button block missing UWP options for links - ADDED
