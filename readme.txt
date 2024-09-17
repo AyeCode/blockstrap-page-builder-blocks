@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.6
-Stable tag: 0.1.23
+Stable tag: 0.1.25
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,7 +176,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.24 - 2024-09-16 =
+= 0.1.25 - 2024-09-17 =
 * Background featured image not getting correct image for GD Location manager locations - FIXED
 
 = 0.1.23 - 2024-09-12 =
