@@ -176,6 +176,10 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.25 - 2024-TBD =
+* Post Info block not working for custom meta - FIXED
+* Post Info block before and after texts not working - FIXED
+
 = 0.1.25 - 2024-09-17 =
 * Background featured image not getting correct image for GD Location manager locations - FIXED
 
