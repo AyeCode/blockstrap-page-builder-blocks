@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.6
-Stable tag: 0.1.25
+Stable tag: 0.1.26
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,7 +176,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.25 - 2024-TBD =
+= 0.1.26 - 2024-09-26 =
 * Post Info block not working for custom meta - FIXED
 * Post Info block before and after texts not working - FIXED
 

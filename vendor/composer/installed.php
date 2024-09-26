@@ -3,7 +3,7 @@
         'name' => 'ayecode/blockstrap-page-builder-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd4d3c6a6e9fa71486f9d6befce03e53382d4f93b',
+        'reference' => 'fa9018070030967dda36c070e452db9fa15d34dd',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'ayecode/blockstrap-page-builder-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd4d3c6a6e9fa71486f9d6befce03e53382d4f93b',
+            'reference' => 'fa9018070030967dda36c070e452db9fa15d34dd',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
