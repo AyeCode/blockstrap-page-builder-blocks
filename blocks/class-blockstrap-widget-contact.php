@@ -765,7 +765,6 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		foreach ( $field_types as $field_slug => $field ) {
 
 			if ( 'hide' !== $args[ $field_slug ] ) {
-				$label    = ucfirst( str_replace( 'field_', '', $field_slug ) );
 				$required = 'require' === $args[ $field_slug ] ? ' <span class="text-danger">*</span>' : '';
 				if ( $required && empty( $args['display_labels'] ) ) {
 					$required = ' ' . __( '(required)', 'blockstrap-page-builder-blocks' );
@@ -779,9 +778,9 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 						'value'       => '',
 						'required'    => 'require' === $args[ $field_slug ],
 						'label_show'  => true,
-						'label'       => $label . $required,
+						'label'       => $field['label'] . $required,
 						'label_type'  => $args['display_labels'],
-						'placeholder' => empty( $args['display_labels'] ) ? $label . $required : '',
+						'placeholder' => empty( $args['display_labels'] ) ? $field['label'] . $required : '',
 						'size'        => ! empty( $args['field_size'] ) ? $args['field_size'] : '',
 						'rows'        => ! empty( $args['textarea_rows'] ) ? $args['textarea_rows'] : '4',
 						'wrap_class'  => $form_hz_col_class,
