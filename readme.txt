@@ -176,6 +176,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.27 - TBD =
+* BS > Contact Form labels are not translatable - FIXED
+
 = 0.1.26 - 2024-09-26 =
 * Post Info block not working for custom meta - FIXED
 * Post Info block before and after texts not working - FIXED
