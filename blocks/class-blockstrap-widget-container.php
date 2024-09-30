@@ -397,11 +397,26 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 		$url = '';
 
 		if ( defined( 'GEODIRLOCATION_VERSION' ) && geodir_is_page( 'location' ) ) {
-			$attachment = GeoDir_Location_SEO::get_post_attachment( $geodirectory->location );
 
-			if ( ! empty( $attachment ) ) {
-				$url = esc_url( geodir_get_image_src( $attachment , 'full' ) );
+			$img = do_shortcode( '[gd_location_meta key="location_image" image_size="full" no_wrap="1"]' );//exit;
+
+			if( ! empty( $img ) ) {
+				if (preg_match('/<img[^>]+src="([^"]+)"/i', $img, $matches)) {
+					$url = esc_url( $matches[1] );
+				}
 			}
+
+//			if(!empty($geodirectory->location->type)){
+//				$attachment = GeoDir_Location_SEO::get_seo_by_slug( $slug, $geodirectory->location->type, $geodirectory->location->country_slug, $region_slug = '' )
+//
+//			}
+//
+//			$attachment = GeoDir_Location_SEO::get_post_attachment( $geodirectory->location );
+//			print_r($geodirectory->location);echo '####';print_r($attachment);exit;
+//
+//			if ( ! empty( $attachment ) ) {
+//				$url = esc_url( geodir_get_image_src( $attachment , 'full' ) );
+//			}
 		}
 
 		return $url;

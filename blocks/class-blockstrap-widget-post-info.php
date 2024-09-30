@@ -88,7 +88,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			'comments'       => __( 'Comments', 'blockstrap-page-builder-blocks' ),
 			'taxonomy'       => __( 'Taxonomy', 'blockstrap-page-builder-blocks' ),
 			'read_time'      => __( 'Read Time', 'blockstrap-page-builder-blocks' ),
-			'custom'         => __( 'Custom', 'blockstrap-page-builder-blocks' ),
+			'custom'         => __( 'Custom Meta', 'blockstrap-page-builder-blocks' ),
 		);
 
 		return $types;
@@ -110,6 +110,17 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			'default'  => '',
 			'desc_tip' => true,
 			'group'    => __( 'Meta', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['custom_meta'] = array(
+			'type'            => 'text',
+			'title'           => __( 'Meta Key', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Enter a meta key', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'my_custom_meta_key', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Meta', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%type%]=="custom"',
 		);
 
 		$arguments['taxonomy'] = array(
@@ -557,6 +568,12 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			$link = $is_preview ? '#author' : get_author_posts_url( $post_author );
 			$text = $is_preview ? 'John Doe' : get_the_author_meta( 'display_name' );
 			$icon = 'fas fa-user-circle';
+		} elseif ( 'custom' === $args['type'] && !empty( $args['custom_meta'] ) ) {
+			$meta_key = sanitize_key( $args['custom_meta'] );
+			$link = $is_preview ? '#custom_meta' : get_author_posts_url( $post_author );
+			$text =  esc_html( get_post_meta( $post->ID, $meta_key, true ) );
+			$text =  $is_preview && !$text ? 'Custom Meta' : $text;
+			$icon = 'fas fa-info-circle';
 		} elseif ( 'date_published' === $args['type'] || 'date_updated' === $args['type'] ) {
 			$link     = $is_preview ? '#post-link' : get_the_permalink();
 			$time_ago = 'time-ago' === $args['date_format'];
@@ -641,6 +658,15 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 		// maybe set custom link text
 		$text = ! empty( $args['text'] ) ? esc_attr( $args['text'] ) : $text;
+
+
+		// maybe add before and after text
+		if (!empty($args['before'])) {
+			$text = esc_attr( $args['before'] ) . $text;
+		}
+		if (!empty($args['after'])) {
+			$text .= esc_attr( $args['after'] );
+		}
 
 		// link type
 		if ( ! empty( $args['link_type'] ) ) {
