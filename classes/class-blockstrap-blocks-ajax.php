@@ -27,14 +27,52 @@ class BlockStrap_Blocks_AJAX {
 	 *
 	 */
 	public static function contact_form_block_send() {
-
 		if ( ! isset( $_POST['security'] ) || wp_hash( get_site_url() ) !== $_POST['security'] ) {
 			wp_send_json_error( 'Invalid nonce' );
 			wp_die();
 		}
 
-		//      print_r( $_POST );
-		//      exit;
+		parse_str( $_POST['form_data'], $data );
+
+		// Default fields
+		$field_types = array(
+			'field_name'    => array(
+				'type'  => 'text',
+				'label' => __( 'Name', 'blockstrap-page-builder-blocks' ),
+			),
+			'field_email'   => array(
+				'type'  => 'email',
+				'label' => __( 'Email', 'blockstrap-page-builder-blocks' ),
+			),
+			'field_phone'   => array(
+				'type'  => 'phone',
+				'label' => __( 'Phone', 'blockstrap-page-builder-blocks' ),
+			),
+			'field_subject' => array(
+				'type'  => 'text',
+				'label' => __( 'Subject', 'blockstrap-page-builder-blocks' ),
+			),
+			'field_message' => array(
+				'type'  => 'textarea',
+				'label' => __( 'Message', 'blockstrap-page-builder-blocks' ),
+			),
+		);
+
+		$field_types = apply_filters( 'blockstrap_blocks_contact_block_field_types', $field_types, array(), array() );
+
+		$fields = array();
+
+		foreach ( $field_types as $key => $field ) {
+			if ( isset( $data[ $key ] ) ) {
+				if ( $field['type'] == 'textarea' ) {
+					$field['value'] = nl2br( sanitize_textarea_field( wp_unslash( $data[ $key ] ) ) );
+				} else {
+					$field['value'] = sanitize_text_field( wp_unslash( $data[ $key ] ) );
+				}
+
+				$fields[ $key ] = $field;
+			}
+		}
 
 		$email_template = nl2br(
 			apply_filters(
@@ -46,17 +84,17 @@ Submitted from: %%submitted_from_url%%
 %%form_data%%
 
 %%blockstrap_contact_footer%%',
-				$_POST
+				$_POST,
+				$data,
+				$fields
 			)
 		);
 
 		$content = '';
-		parse_str( $_POST['form_data'], $data );
 
-		if ( ! empty( $data ) ) {
-			foreach ( $data as $key => $val ) {
-				$content .= ucfirst( esc_attr( str_replace( 'field_', '', $key ) ) ) . ': ' . nl2br( stripslashes_deep( esc_attr( $val ) ) ) . '<br/>';
-
+		if ( ! empty( $fields ) ) {
+			foreach ( $fields as $key => $field ) {
+				$content .= '<b>' . $field['label'] . ':</b> ' . $field['value'] . '<br/>';
 			}
 		}
 
@@ -78,8 +116,8 @@ Submitted from: %%submitted_from_url%%
 
 		$email     = '';
 		$bcc_email = '';
+
 		if ( ! empty( $_POST['settings'] ) && ! empty( $_POST['settingsNonce'] ) && wp_hash( wp_json_encode( $_POST['settings'] ) ) === $_POST['settingsNonce'] ) {
-			//          print_r($settings); exit;
 			$to                = isset( $_POST['settings'][0] ) ? esc_attr( $_POST['settings'][0] ) : '';
 			$bcc               = isset( $_POST['settings'][1] ) ? esc_attr( $_POST['settings'][1] ) : '';
 			$subject           = ! empty( $_POST['settings'][2] ) ? esc_attr( $_POST['settings'][2] ) : $subject;
@@ -123,9 +161,6 @@ Submitted from: %%submitted_from_url%%
 						wp_die();
 					}
 				}
-
-				//              print_r($recaptcha_response);
-				//              wp_die();
 			}
 
 			$email     = self::get_email( $to, $post_id );
@@ -135,7 +170,7 @@ Submitted from: %%submitted_from_url%%
 			wp_die();
 		}
 
-		$subject = apply_filters( 'blockstrap_blocks_contact_email_subject', 'CF: ' . $subject, $_POST );
+		$subject = apply_filters( 'blockstrap_blocks_contact_email_subject', 'CF: ' . $subject, $_POST, $data, $fields );
 
 		$sent = false;
 		if ( $email ) {
@@ -155,12 +190,14 @@ Submitted from: %%submitted_from_url%%
 			if ( ! empty( $filtered['email'] ) ) {
 				// Add the subscriber's IP address.
 				$address = noptin_get_user_ip();
+
 				if ( ! empty( $address ) && '::1' !== $address ) {
 					$filtered['ip_address'] = $address;
 				}
 
 				$filtered['tags']            = array();
 				$filtered['_subscriber_via'] = 'BlockStrap Blocks';
+
 				/**
 				 * Filters subscriber details when adding a new subscriber via ajax.
 				 *
@@ -169,13 +206,15 @@ Submitted from: %%submitted_from_url%%
 				$filtered = apply_filters( 'noptin_add_ajax_subscriber_filter_details', wp_unslash( $filtered ), 0 );
 
 				$inserted = add_noptin_subscriber( $filtered );
+
 				do_action( 'noptin_add_ajax_subscriber', $inserted, 0 );
 			}
 		}
 
-		do_action( 'blockstrap_blocks_after_contact_sent', $sent, $data );
+		do_action( 'blockstrap_blocks_after_contact_sent', $sent, $data, $fields );
 
 		wp_send_json_success();
+
 		if ( $sent ) {
 			wp_send_json_success();
 		} else {
@@ -204,9 +243,6 @@ Submitted from: %%submitted_from_url%%
 
 		return sanitize_email( $email );
 	}
-
-
-
 }
 
 BlockStrap_Blocks_AJAX::init();

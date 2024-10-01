@@ -760,6 +760,8 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			),
 		);
 
+		$field_types = apply_filters( 'blockstrap_blocks_contact_block_field_types', $field_types, $args, $this );
+
 		$form_hz_col_class = ! $is_lightbox && $is_horizontal ? ' col' : '';
 
 		foreach ( $field_types as $field_slug => $field ) {
