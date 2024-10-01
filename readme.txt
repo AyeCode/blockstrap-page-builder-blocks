@@ -178,6 +178,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 = 0.1.27 - TBD =
 * BS > Contact Form labels are not translatable - FIXED
+* Contact Form sends reCAPTCHA value along with other fields - FIXED
 
 = 0.1.26 - 2024-09-26 =
 * Post Info block not working for custom meta - FIXED
