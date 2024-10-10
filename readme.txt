@@ -3,8 +3,8 @@ Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
-Tested up to: 6.6
-Stable tag: 0.1.26
+Tested up to: 6.7
+Stable tag: 0.1.27
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,9 +176,10 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.27 - TBD =
+= 0.1.27 - 2024-10-10 =
 * BS > Contact Form labels are not translatable - FIXED
 * Contact Form sends reCAPTCHA value along with other fields - FIXED
+* Block editor speed and stability improvements with less initial ajax calls - IMPROVED
 
 = 0.1.26 - 2024-09-26 =
 * Post Info block not working for custom meta - FIXED
