@@ -225,10 +225,10 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
  *
  * @global array $blockstrap_pbb_page_options Cached page options to avoid redundant database queries.
  */
-function blockstrap_pbb_page_options() {
+function blockstrap_pbb_page_options($exclude_blog = true, $exclude_front = true, $parent_only = false ) {
 
 	// Same function, lets not call it twice if we don't need to
-	if(function_exists('sd_template_page_options')){
+	if(function_exists('sd_template_page_options') && $exclude_blog && $exclude_front) {
 		return sd_template_page_options();
 	}
 
@@ -239,11 +239,11 @@ function blockstrap_pbb_page_options() {
 	}
 
 	$exclude_pages = array();
-	if ( $page_on_front = get_option( 'page_on_front' ) ) {
+	if ( $page_on_front = get_option( 'page_on_front' ) && $exclude_front ) {
 		$exclude_pages[] = $page_on_front;
 	}
 
-	if ( $page_for_posts = get_option( 'page_for_posts' ) ) {
+	if ( $page_for_posts = get_option( 'page_for_posts' ) && $exclude_blog ) {
 		$exclude_pages[] = $page_for_posts;
 	}
 
@@ -259,8 +259,11 @@ function blockstrap_pbb_page_options() {
 		FROM $wpdb->posts
 		WHERE post_type = 'page'
 		AND post_status = 'publish'
-		AND post_parent = 0,
 	";
+
+	if ($parent_only) {
+		$sql .= " AND post_parent = 0 ";
+	}
 
 	// Add the exclusion if there are pages to exclude
 	if ( ! empty( $exclude_pages ) ) {
@@ -276,8 +279,8 @@ function blockstrap_pbb_page_options() {
 		$sql .= $wpdb->prepare(" LIMIT %d", $limit);
 	}
 
-	// Prepare the SQL query to include the excluded pages
-	$pages = $wpdb->get_results( $wpdb->prepare( $sql, ...$exclude_pages ) );
+	// Prepare the SQL query to include the excluded pages only if we have placeholders.
+	$pages = $exclude_pages_placeholders ? $wpdb->get_results( $wpdb->prepare( $sql, ...$exclude_pages ) ) : $wpdb->get_results( $sql );
 
 	$options = array( '' => __( 'Select Page...', 'blockstrap-page-builder-blocks' ) );
 	if ( ! empty( $pages ) ) {

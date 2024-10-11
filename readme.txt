@@ -176,6 +176,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.28 - 2024-10-TBD =
+* BS Nav Item and other links not including Blog or Front page in pages list, or child pages - FIXED
+
 = 0.1.27 - 2024-10-10 =
 * BS > Contact Form labels are not translatable - FIXED
 * Contact Form sends reCAPTCHA value along with other fields - FIXED

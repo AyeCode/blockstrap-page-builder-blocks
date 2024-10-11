@@ -94,7 +94,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 		$arguments['page_id'] = array(
 			'type'            => 'select',
 			'title'           => __( 'Page', 'blockstrap-page-builder-blocks' ),
-			'options'         => blockstrap_pbb_page_options(),
+			'options'         => blockstrap_pbb_page_options(false, false ),
 			'placeholder'     => __( 'Select Page', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
