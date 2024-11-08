@@ -213,8 +213,6 @@ Submitted from: %%submitted_from_url%%
 
 		do_action( 'blockstrap_blocks_after_contact_sent', $sent, $data, $fields );
 
-		wp_send_json_success();
-
 		if ( $sent ) {
 			wp_send_json_success();
 		} else {
