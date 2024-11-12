@@ -35,7 +35,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version = '0.2.27';
+		public $version = '0.2.28';
 
 		/**
 		 * Class textdomain.
@@ -521,7 +521,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 				.bs-tooltip-top .arrow{
 					margin-left:0px;
 				}
-
+				
 				.custom-switch input[type=checkbox]{
 				    display:none;
 				}
@@ -1250,7 +1250,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 					 }
 				}
 			}
-
+			
 			if ( $custom_css ) {
 				echo $custom_css; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
@@ -1431,7 +1431,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
 			//  buttons
 			$output .= $prefix . ' .btn-'.esc_attr($type).'{';
-			$output .= '
+			$output .= ' 
             --bs-btn-bg: '.esc_attr($color_code).';
             --bs-btn-border-color: '.esc_attr($color_code).';
             --bs-btn-hover-bg: rgba(var(--bs-'.esc_attr($type).'-rgb), .9);
@@ -1453,7 +1453,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
 			//  buttons outline
 			$output .= $prefix . ' .btn-outline-'.esc_attr($type).'{';
-			$output .= '
+			$output .= ' 
 			--bs-btn-color: '.esc_attr($color_code).';
             --bs-btn-border-color: '.esc_attr($color_code).';
             --bs-btn-hover-bg: rgba(var(--bs-'.esc_attr($type).'-rgb), .9);
@@ -1476,7 +1476,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 
             // button hover
 			$output .= $prefix . ' .btn-'.esc_attr($type).':hover{';
-			$output .= '
+			$output .= ' 
             box-shadow: 0 0.25rem 0.25rem 0.125rem rgb(var(--bs-'.esc_attr($type).'-rgb), .1), 0 0.375rem 0.75rem -0.125rem rgb(var(--bs-'.esc_attr($type).'-rgb) , .4);
             }
             ';
@@ -2782,7 +2782,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
                                             found = true;
                                         }
                                     }
-
+                    
                                     if (found) {
                                         $keys[condition.key][index] = true;
                                     } else {

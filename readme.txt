@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.7
-Stable tag: 0.1.28
+Stable tag: 0.1.29
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -175,6 +175,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.29 - 2024-11-12 =
+* iOS fixed background image does not display correctly due to iOS bug - FIXED
 
 = 0.1.28 - 2024-11-08 =
 * BS Nav Item and other links not including Blog or Front page in pages list, or child pages - FIXED
