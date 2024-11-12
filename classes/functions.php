@@ -63,6 +63,8 @@ function blockstrap_pbb_get_block_link_types(){
  */
 function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 {
+	global $aui_bs5;
+
 	$link_parts = [];
 	if ('spacer' === $args['type']) {
 		return '<li class="nav-item '.$wrap_class.'"></li>';
@@ -108,7 +110,7 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 		$link_text = __('Location', 'blockstrap-page-builder-blocks');
 	} else if ('gd_location_switcher' === $args['type']) {
 		global $geodirectory;
-		$location_name = __('Set Locationx', 'blockstrap-page-builder-blocks');
+		$location_name = ! empty( $args['text'] ) ? esc_attr( $args['text'] ) : __('Set Location', 'blockstrap-page-builder-blocks');
 		$location_set  = true;
 
 		// print_r($geodirectory->location);
@@ -124,10 +126,12 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 			$location_set = false;
 		}
 
+		$icon_class         = ! empty($args['icon_class']) ? esc_attr($args['icon_class']) : 'fas fa-map-marker-alt fa-lg text-primary';
+		$args['icon_class'] = $icon_class;
+
 		if ($location_set) {
-			$icon_class         = ! empty($args['icon_class']) ? esc_attr($args['icon_class']) : 'fas fa-map-marker-alt fa-lg text-primary';
-			$icon               = '<span class="hover-swap gdlmls-menu-icon"><i class="'.$icon_class.' hover-content-original"></i><i class="fas fa-times hover-content c-pointer" title="'.__('Clear Location', 'geodirlocation').'" data-toggle="tooltip"></i></span> ';
-			$args['icon_class'] = '';
+			$mr   = $aui_bs5 ? ' me-1' : ' mr-1';
+			$icon               = '<span class="hover-swap gdlmls-menu-icon '.$mr.'"><i class="'.$icon_class.' hover-content-original"></i><i class="fas fa-times hover-content c-pointer" title="'.__('Clear Location', 'geodirlocation').'" data-toggle="tooltip"></i></span> ';
 			$args['text']       = esc_attr($location_name);
 		}
 
@@ -186,7 +190,7 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 	}
 
 	// set text
-	if ( isset( $link ) ) {
+	if ( isset( $link_text ) ) {
 		$link_parts['text'] = $link_text;
 	}
 
@@ -194,6 +198,11 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 	if ( isset( $icon ) ) {
 		$link_parts['icon'] = $icon;
 	}
+
+	// set icon_class
+	//if ( isset( $link_parts['icon_class'] ) ) {
+		$link_parts['icon_class'] = $args['icon_class'];
+	//}
 
 	// set link_attr
 	if ( isset( $link_attr ) ) {

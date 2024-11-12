@@ -901,6 +901,22 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			$html = $button_html . $form_html . $lightbox_html;
 		}
 
+
+		// show notice that form will only show if GD email exists
+		if ($send_to === 'gd_post_email') {
+			global $gd_post;
+			if ($this->is_preview()) {
+				$html = aui()->alert( array(
+					'type'    => 'info',
+					'content' => __( 'GD contact form will only show if the listing has an email set.', 'blockstrap-page-builder-blocks' ),
+					'class'   => 'mb-0',
+				)) . $html ;
+			}elseif(empty($gd_post->email)){
+				// if the GD post has no email then don't show the form
+				$html = '';
+			}
+		}
+
 		return apply_filters( 'blockstrap_blocks_block_output_contact', $html, $args );
 
 		//return $link_text || $icon_left || $icon_right ? '<' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $styles : ''; // shortcode

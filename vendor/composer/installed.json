@@ -59,20 +59,20 @@
         },
         {
             "name": "ayecode/wp-ayecode-ui",
-            "version": "0.2.26",
-            "version_normalized": "0.2.26.0",
+            "version": "0.2.27",
+            "version_normalized": "0.2.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AyeCode/wp-ayecode-ui.git",
-                "reference": "0c3b7f0c6693ae51da2b40ccbbbb52eab09f40bb"
+                "reference": "8e93928b10fbd22bad2860623d2f77a013cef8ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AyeCode/wp-ayecode-ui/zipball/0c3b7f0c6693ae51da2b40ccbbbb52eab09f40bb",
-                "reference": "0c3b7f0c6693ae51da2b40ccbbbb52eab09f40bb",
+                "url": "https://api.github.com/repos/AyeCode/wp-ayecode-ui/zipball/8e93928b10fbd22bad2860623d2f77a013cef8ce",
+                "reference": "8e93928b10fbd22bad2860623d2f77a013cef8ce",
                 "shasum": ""
             },
-            "time": "2024-09-12T15:31:54+00:00",
+            "time": "2024-11-06T12:41:19+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -101,7 +101,7 @@
             ],
             "support": {
                 "issues": "https://github.com/AyeCode/wp-ayecode-ui/issues",
-                "source": "https://github.com/AyeCode/wp-ayecode-ui/tree/0.2.26"
+                "source": "https://github.com/AyeCode/wp-ayecode-ui/tree/0.2.27"
             },
             "install-path": "../ayecode/wp-ayecode-ui"
         },

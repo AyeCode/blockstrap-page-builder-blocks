@@ -487,9 +487,11 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
 
 		// set link parts
 		$link_parts = blockstrap_pbb_get_link_parts( $args, $wrap_class );
+//		print_r($link_parts);
 		if(!empty($link_parts['link'])){$link = $link_parts['link'];}
 		if(!empty($link_parts['text'])){$link_text = $link_parts['text'];}
-		if(!empty($link_parts['icon'])){$icon = $link_parts['text'];}
+		if(!empty($link_parts['icon'])){$icon = $link_parts['icon'];}
+		if(!empty($link_parts['icon_class'])){$args['icon_class'] = $link_parts['icon_class'];}
 		if(!empty($link_parts['link_attr'])){$link_attr = $link_parts['link_attr'];}
 		if(!empty($link_parts['wrap_class'])){$wrap_class = $link_parts['wrap_class'];}
 
@@ -505,8 +507,12 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             }
         }
 
-        // maybe set custom link text
-        $link_text = ! empty($args['text']) ? esc_attr($args['text']) : $link_text;
+        // maybe set custom link text if not set dynamically like for location switcher
+		if ('gd_location_switcher' === $args['type'] && ( empty($args['text']) || $args['text'] !== $link_parts['text'])) {
+			// don't set the text if its dynamic
+		}else{
+			$link_text = ! empty($args['text']) ? esc_attr($args['text']) : $link_text;
+		}
 
         // link type
         if (! empty($args['link_type'])) {
@@ -570,6 +576,10 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             ]
         );
 
+		if ('spacer' == $args['type'] && $link_text == '') {
+			$link_text = ' '; // we need to trick it to show
+		}
+
         if (! empty($args['icon_class']) && $args['icon_class'] !== ' ') {
             // remove default text if icon exists.
             if (empty($args['text'])) {
@@ -577,7 +587,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             }
 
             $mr   = $aui_bs5 ? ' me-2' : ' mr-2';
-            $icon = ! empty($link_text) ? '<i class="'.esc_attr($args['icon_class']).$mr.'"></i>' : '<i class="'.esc_attr($args['icon_class']).'"></i>';
+			if(!$icon){
+				$icon = ! empty($link_text) ? '<i class="'.esc_attr($args['icon_class']).$mr.'"></i>' : '<i class="'.esc_attr($args['icon_class']).'"></i>';
+			}
         }
 
         // if a button add form-inline
@@ -608,6 +620,11 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             return $link_text || $icon ? '<a href="#'.esc_url_raw($link).'" class="'.esc_attr($link_class).'" '.$icon_aria_label.$link_attr.'>'.$link_divider_left.$icon.esc_attr($link_text).$link_divider_right.'</a>' : '';
             // shortcode
         } else {
+
+			if ('spacer' == $args['type']) {
+				return $link_text || $icon ? '<li class="nav-item '.$wrap_class.'">'.$link_divider_left.$icon.esc_attr($link_text).$link_divider_right.'</li>' : '';
+
+			}
             return $link_text || $icon ? '<li class="nav-item '.$wrap_class.'"><a href="'.esc_url_raw($link).'" class="'.esc_attr($link_class).'" '.$icon_aria_label.$link_attr.'>'.$link_divider_left.$icon.esc_attr($link_text).$link_divider_right.'</a></li>' : '';
             // shortcode
         }

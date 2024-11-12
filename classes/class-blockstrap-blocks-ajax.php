@@ -166,7 +166,7 @@ Submitted from: %%submitted_from_url%%
 			$email     = self::get_email( $to, $post_id );
 			$bcc_email = self::get_email( $bcc, $post_id );
 		} else {
-			wp_send_json_error();
+			wp_send_json_error(__( 'There is a settings error with this contact form', 'blockstrap-page-builder-blocks' ));
 			wp_die();
 		}
 
@@ -174,10 +174,28 @@ Submitted from: %%submitted_from_url%%
 
 		$sent = false;
 		if ( $email ) {
-			$sent = wp_mail( $email, $subject, $email_template );
+
+			$headers = '';
+
+			// from
+			$from_email = sanitize_email( get_bloginfo('admin_email') );
+			$headers = "From: " . stripslashes_deep( html_entity_decode( get_bloginfo('name'), ENT_COMPAT, 'UTF-8' ) ) . " <$from_email>\r\n";
+
+
+			// If a GeoDirectory Contact form then set the reply to address to the submitter
+			if ( 'gd_post_email' === $to && !empty($fields['field_email']['value'])) {
+				$reply_to = sanitize_email( $fields['field_email']['value'] );
+				$headers .= "Reply-To: " . $reply_to . "\r\n";
+			}
+
+			// Set content as HTML
+			$headers .= "Content-Type: text/html; charset=\"" . get_option( 'blog_charset' ) . "\"\r\n";
+
+
+			$sent = wp_mail( $email, $subject, $email_template, $headers );
 
 			if ( $bcc_email ) {
-				wp_mail( $bcc_email, $subject . ' - BCC ', $email_template );
+				wp_mail( $bcc_email, $subject . ' - BCC ', $email_template, $headers );
 			}
 		}
 

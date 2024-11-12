@@ -587,6 +587,13 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'class'   => $image_class,
 		);
 
+		// if eager
+		if ('eager' === $img_lazy) {
+			$img_attr['fetchpriority'] = 'high';
+			$img_attr['decoding'] = 'async';
+			$img_attr['importance'] = 'high';
+		}
+
 		if ( 'url' === $args['img_src'] ) {
 			$image_src = $args['img_url'] ? esc_url_raw( $args['img_url'] ) : '';
 		} elseif ( 'featured' === $args['img_src'] ) {
@@ -636,7 +643,15 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 				}
 				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
 			} else {
-				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
+				$custom_attr_string = implode(',', array_map(
+					function($key, $value) {
+						return esc_attr($key) . '|' . esc_attr($value);
+					},
+					array_keys($img_attr),
+					$img_attr
+				));
+				$attributes_escaped = sd_build_attributes_string_escaped( array('custom'=> $custom_attr_string) );
+				$image = '<img src="' . esc_url_raw( $image_src ) . '" ' . $attributes_escaped . ' />';
 			}
 		}
 
