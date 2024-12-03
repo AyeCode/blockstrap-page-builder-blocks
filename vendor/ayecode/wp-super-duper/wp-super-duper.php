@@ -1814,6 +1814,7 @@ function sd_set_view_type($device){
 jQuery(function(){
 	sd_block_visibility_init();
 });
+
 function sd_block_visibility_init() {
 	jQuery(document).off('change', '.bs-vc-modal-form').on('change', '.bs-vc-modal-form', function() {
 		try {
@@ -1849,12 +1850,16 @@ function sd_block_visibility_init() {
 						oRule.search = jQuery(this).find('.bsvc_gd_field_search').val();
 					}
 				}
-			}
+            } else {
+                oRule = jQuery(document).triggerHandler('sd_block_visibility_init', [vRule, oRule, jQuery(this)]);
+            }
+
 			if (Object.keys(oRule).length > 0) {
 				iRule++;
 				oVal['rule'+iRule] = oRule;
 			}
 		});
+
 		if (vOutput == 'hide') {
 			oOut.type = vOutput;
 		} else if (vOutput == 'message') {
@@ -1885,6 +1890,7 @@ function sd_block_visibility_init() {
 		$bsvcModal.find('[name="bsvc_raw_value"]').val(rawValue).trigger('change');
 		$bsvcModal.find('.bs-vc-close').trigger('click');
 	});
+
 	jQuery(document).off('click', '.bs-vc-add-rule').on('click', '.bs-vc-add-rule', function() {
 		var bsvcTmpl = jQuery('.bs-vc-rule-template').html();
 		var c = parseInt(jQuery('.bs-vc-modal-form .bs-vc-rule-sets .bs-vc-rule:last').data('bs-index'));
@@ -1913,6 +1919,7 @@ function sd_block_visibility_init() {
 		jQuery(this).closest('.bs-vc-rule').remove();
 	});
 }
+
 function sd_block_visibility_render_fields(oValue) {
 	if (typeof oValue == 'object' && oValue.rule1 && typeof oValue.rule1 == 'object') {
 		for(k = 1; k <= Object.keys(oValue).length; k++) {
@@ -1942,7 +1949,10 @@ function sd_block_visibility_render_fields(oValue) {
 							}
 						}
 					}
-				}
+				} else {
+                    jQuery(document).trigger('sd_block_visibility_render_fields', [oRule, elRule]);
+                }
+
 				jQuery('.bs-vc-modal-form .bs-vc-add-rule').removeClass('bs-vc-rendering');
 			}
 		}
@@ -5160,6 +5170,8 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 
 							$content .= '</div>';
 						}
+
+                        $content .= apply_filters( 'sd_block_visibility_fields', '', $args );
 
 					$content .= '</div>';
 

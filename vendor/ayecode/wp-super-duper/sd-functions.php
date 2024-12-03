@@ -3147,6 +3147,7 @@ function sd_visibility_field_condition_options(){
  */
 function sd_visibility_output_options() {
 	$options = array(
+		''              => __( 'Default Output', 'ayecode-connect' ),
 		'hide'          => __( 'Hide Block', 'ayecode-connect' ),
 		'message'       => __( 'Show Custom Message', 'ayecode-connect' ),
 		'page'          => __( 'Show Page Content', 'ayecode-connect' ),
@@ -3488,9 +3489,13 @@ function sd_block_check_rule( $match, $rule ) {
 				}
 
 				break;
+
 			case 'gd_field':
 				$match = sd_block_check_rule_gd_field( $rule );
+				break;
 
+            default:
+				$match = apply_filters( 'sd_block_check_custom_rule', $match, $rule );
 				break;
 		}
 	}
