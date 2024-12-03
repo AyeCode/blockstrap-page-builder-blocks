@@ -327,7 +327,7 @@
 * Multi-select not always adding [] to name attribute - FIXED
 * Multi-select not checking if values is_array - FIXED
 
-= 0.1.30 =
+= 0.1.31 =
 * Changes for theme check - CHANGED
 
 = 0.1.28 =
