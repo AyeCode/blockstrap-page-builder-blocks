@@ -611,6 +611,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 		} elseif ( 'read_time' === $args['type'] ) {
 			$words = $is_preview ? 1000 : str_word_count( wp_strip_all_tags( $post->post_content ) );
 			$m     = floor( $words / 200 );
+			$m  = $m == 0 ? 1 : $m; // if very short just default to 1 min
 			$link  = '';
 			/* translators: the number of minutes to read */
 			$text = sprintf( __( '%d min read', 'blockstrap-page-builder-blocks' ), absint( $m ) );
