@@ -791,17 +791,24 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			}
 		}
 
+
+		// Captcha Input
+		$captcha_input = apply_filters( 'blockstrap_blocks_contact_form_captcha_input', '', $args );
+
 		// recaptcha
 		$recaptcha_enabled = false;
-		if ( defined( 'BLOCKSTRAP_VERSION' ) && empty( $args['field_recaptcha'] ) ) {
+		if ( !$captcha_input && defined( 'BLOCKSTRAP_VERSION' ) && empty( $args['field_recaptcha'] ) ) {
 			$keys     = function_exists( 'blockstrap_get_option' ) ? blockstrap_get_option( 'blockstrap_recaptcha_keys' ) : get_option( 'blockstrap_recaptcha_keys' );
 			if ( ! empty( $keys['site_key'] ) && ! empty( $keys['site_secret'] ) ) {
-				$field_content    .= '<div class="g-recaptcha mb-3" id="x" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';
-				$recaptcha_enabled = true;
+				$field_content    .= '<div class="g-recaptcha mb-3" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';
+				$recaptcha_enabled = 'g-recaptcha-response';
 				//if(!$is_lightbox){
 					add_action( 'wp_footer', array( $this, 'get_recaptcha_js' ) );
 				//}
 			}
+		} elseif ( $captcha_input ) {
+			$field_content .= $captcha_input;
+			$recaptcha_enabled = 'cf-turnstile-response';
 		}
 
 		// add to footer
@@ -820,7 +827,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			(string) esc_attr( $send_bcc ),
 			(string) esc_attr( $subject ),
 			(string) absint( $post_id ),
-			(string) absint( $recaptcha_enabled ),
+			(string) esc_attr( $recaptcha_enabled ),
 			(string) esc_attr( $newsletter ),
 		);
 
@@ -1039,17 +1046,19 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 
 						if (data.success) {
 							jQuery($form).html( '<div class="alert alert-success" role="alert">'+$message+'</div>' );
-							aui_toast('blockstrap_page_management_error','success', $message );
+							aui_toast('blockstrap_contact_form_success','success', $message );
 						}else{
 							var message = data.data ? data.data : '<?php esc_html_e( 'Something went wrong, please try again', 'blockstrap-page-builder-blocks' ); ?>';
-							aui_toast('blockstrap_contact_corm_error','error', message );
+							aui_toast('','error', message );
 							jQuery($form).find('.btn-primary').prop('disabled', false).find('.spinner-border').addClass('d-none');
+							document.dispatchEvent(new Event('ayecode_reset_captcha'));
 						}
 
 					},
 					error: function(xhr) { // if error occured
 						jQuery($form).find('.btn-primary').prop('disabled', false).find('.spinner-border').addClass('d-none');
 						alert("Error occured.please try again");
+						document.dispatchEvent(new Event('ayecode_reset_captcha'));
 					},
 					complete: function() {
 						jQuery($form).find('.btn-primary').prop('disabled', false).find('.spinner-border').addClass('d-none');
