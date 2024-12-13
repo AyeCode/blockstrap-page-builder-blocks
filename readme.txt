@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.7
-Stable tag: 0.1.30
+Stable tag: 0.1.31
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -175,6 +175,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.31 - 2024-12-12 =
+* Changes to better support AyeCode Connect Turnstile Captcha - ADDED
 
 = 0.1.30 - 2024-11-28 =
 * Read time can show 0m in some cases - FIXED

@@ -122,10 +122,11 @@ Submitted from: %%submitted_from_url%%
 			$bcc               = isset( $_POST['settings'][1] ) ? esc_attr( $_POST['settings'][1] ) : '';
 			$subject           = ! empty( $_POST['settings'][2] ) ? esc_attr( $_POST['settings'][2] ) : $subject;
 			$post_id           = absint( $_POST['settings'][3] );
-			$recaptcha_enabled = absint( $_POST['settings'][4] );
+			$recaptcha_enabled = esc_attr( $_POST['settings'][4] );
 			$newsletter        = isset( $_POST['settings'][5] ) ? esc_attr( $_POST['settings'][5] ) : '';
 
-			if ( $recaptcha_enabled && empty( $data['g-recaptcha-response'] ) ) {
+
+			if ( $recaptcha_enabled && empty( $data[$recaptcha_enabled] ) ) {
 				wp_send_json_error( __( 'Please complete the recaptcha', 'blockstrap-page-builder-blocks' ) );
 				wp_die();
 			} elseif ( $recaptcha_enabled && ! empty( $data['g-recaptcha-response'] ) ) {
@@ -161,6 +162,19 @@ Submitted from: %%submitted_from_url%%
 						wp_die();
 					}
 				}
+			} elseif ( $recaptcha_enabled && ! empty( $data[$recaptcha_enabled] ) ) {
+				$valid = apply_filters( 'blockstrap_blocks_contact_form_captcha_valid', false, $data );
+
+				if( is_wp_error( $valid ) ){
+					wp_send_json_error( $valid->get_error_message() );
+					wp_die();
+				} elseif ( ! $valid ) {
+					wp_send_json_error( __( 'Captcha error, please refresh and try again', 'blockstrap-page-builder-blocks' ) );
+					wp_die();
+				}
+
+				// unset the captcha so it's not sent in the email
+				unset( $data[$recaptcha_enabled] );
 			}
 
 			$email     = self::get_email( $to, $post_id );
