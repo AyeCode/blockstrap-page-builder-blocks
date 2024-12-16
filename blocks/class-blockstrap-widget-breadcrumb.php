@@ -299,6 +299,16 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 			}
 		} elseif ( is_archive() && is_tax() && ! is_category() && ! is_tag() ) {
 
+			// check if we can get the CTP link first
+			$post_type        = get_post_type();
+			$post_type_object = get_post_type_object( $post_type );
+			if ( isset( $post_type_object->label ) ) {
+				$breadcrumbs[] = array(
+					'name' => $post_type_object->label,
+					'link' => get_post_type_archive_link( $post_type ),
+				);
+			}
+
 			// Custom taxonomy archive
 			$custom_tax_name = get_queried_object()->name;
 			$breadcrumbs[]   = array(
@@ -341,8 +351,6 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 			if ( ! empty( $category ) ) {
 
-				//print_r( $category );
-
 				// Get last category post is in
 				$last_category = reset( $category );
 
@@ -354,28 +362,33 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 					);
 				}
 
-				// Get parent any categories and create array
-				//              $get_cat_parents = rtrim( get_category_parents( $last_category->term_id, false, ',' ), ',' );
-				//              $cat_parents     = explode( ',', $get_cat_parents );
-				//
-				////                print_r( $cat_parents );
-				//              // Loop through parent categories and add to breadcrumbs
-				//              foreach ( $cat_parents as $parent ) {
-				//                  print_r( $parent );
-				//                  $breadcrumbs[] = array(
-				//                      'name' => $parent,
-				//                      'link' => get_term_link( $parent->term_id ),
-				//                  );
-				//              }
+			}else{
+				global $wp_query;
+
+				// check for custom categories
+				$post_type = get_post_type();
+				if ( $post_type && ( ! empty( $wp_query->query_vars[ $post_type . 'category' ] ) || ! empty( $wp_query->query_vars[ $post_type . '_category' ] ) ) ) {
+					$taxonomy      = ! empty( $wp_query->query_vars[ $post_type . 'category' ] ) ? esc_attr( $post_type . 'category' ) : esc_attr( $post_type . '_category' );
+					$taxonomy_slug = ! empty( $wp_query->query_vars[ $post_type . 'category' ] ) ? esc_attr( $wp_query->query_vars[ $post_type . 'category' ] ) : esc_attr( $wp_query->query_vars[ $post_type . '_category' ] );
+					$term          = get_term_by( 'slug', $taxonomy_slug, $taxonomy );
+
+
+					if ( isset( $term->name ) ) {
+						$breadcrumbs[] = array(
+							'name' => esc_attr( $term->name ),
+							'link' => get_term_link( $term ),
+						);
+					}
+				}
 			}
+
+
 
 			// Add current page to breadcrumbs
 			$breadcrumbs[] = array(
 				'name' => $current_page_title,
 				'link' => '',
 			);
-
-			//          print_r( $breadcrumbs );
 
 		} elseif ( is_category() ) {
 
@@ -384,6 +397,8 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'name' => single_cat_title( '', false ),
 				'link' => '',
 			);
+
+
 
 		} elseif ( is_page() ) {
 
@@ -531,8 +546,17 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 			);
 		}
 
-		// Return the breadcrumbs
-		return $breadcrumbs;
+		/**
+		 * Filters the breadcrumbs array for the breadcrumb block.
+		 *
+		 * This filter allows modifying the breadcrumbs before they are displayed.
+		 *
+		 * @since 0.1.32
+		 *
+		 * @param array $breadcrumbs The array of breadcrumbs.
+		 */
+		return apply_filters( 'blockstrap_blocks_breadcrumb_block_breadcrumbs', $breadcrumbs );
+
 	}
 }
 
