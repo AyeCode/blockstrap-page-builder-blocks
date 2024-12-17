@@ -176,6 +176,10 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.32 - 2024-12-TBD =
+* Filter added to breadcrumbs block to be able to adjust the breadcrumbs - ADDED
+* Breadcrumbs block improved to show CPT and custom taxonomies in the crumbs - CHANGED
+
 = 0.1.31 - 2024-12-12 =
 * Changes to better support AyeCode Connect Turnstile Captcha - ADDED
 
