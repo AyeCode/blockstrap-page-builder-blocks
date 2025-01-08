@@ -176,8 +176,13 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.31 - 2024-12-02 =
-Introduced extensibility for block visibility field settings via hooks, filters and jQuery triggers - ADDED
+= 0.1.32 - 2024-12-TBD =
+* Added extensibility for block visibility field settings via hooks, filters and jQuery triggers - ADDED
+* Filter added to breadcrumbs block to be able to adjust the breadcrumbs - ADDED
+* Breadcrumbs block improved to show CPT and custom taxonomies in the crumbs - CHANGED
+
+= 0.1.31 - 2024-12-12 =
+* Changes to better support AyeCode Connect Turnstile Captcha - ADDED
 
 = 0.1.30 - 2024-11-28 =
 * Read time can show 0m in some cases - FIXED

@@ -35,7 +35,7 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version = '0.2.29';
+		public $version = '0.2.30';
 
 		/**
 		 * Class textdomain.
@@ -2959,6 +2959,9 @@ if ( ! class_exists( 'AyeCode_UI_Settings' ) ) {
                  * Reset field default value.
                  */
                 function aui_cf_field_reset_default_value($el, bHide, setVal) {
+                    if (!($el && $el.length)) {
+                        return;
+                    }
                     var type = aui_cf_field_get_type($el), key = $el.data('rule-key'), field = aui_cf_field_default_values[key];
                     if (typeof setVal === 'undefined' || (typeof setVal !== 'undefined' && setVal === null)) {
                         setVal = field.value;
