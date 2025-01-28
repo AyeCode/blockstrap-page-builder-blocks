@@ -772,12 +772,24 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 					$required = ' ' . __( '(required)', 'blockstrap-page-builder-blocks' );
 				}
 				$type           = 'textarea' === $field['type'] ? 'textarea' : 'input';
+
+				$value          = '';
+				// maybe set the name and email if the user is logged in
+				$current_user = wp_get_current_user();
+				if ( $current_user->exists() ) {
+					if($field_slug === 'field_name' && !empty($current_user->display_name)) {
+						$value = esc_attr( sanitize_text_field( $current_user->display_name ) );
+					}elseif ($field_slug === 'field_email' && !empty($current_user->user_email)) {
+						$value = esc_attr( sanitize_email( $current_user->user_email ) );
+					}
+				}
+
 				$field_content .= aui()->{$type}(
 					array(
 						'type'        => $field['type'],
 						//'id'          => $field_slug,
 						'name'        => $field_slug,
-						'value'       => '',
+						'value'       => $value,
 						'required'    => 'require' === $args[ $field_slug ],
 						'label_show'  => true,
 						'label'       => $field['label'] . $required,
