@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.7
-Stable tag: 0.1.31
+Stable tag: 0.1.32
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,9 +176,11 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.32 - 2024-12-TBD =
+= 0.1.32 - 2025-01-28 =
 * Filter added to breadcrumbs block to be able to adjust the breadcrumbs - ADDED
 * Breadcrumbs block improved to show CPT and custom taxonomies in the crumbs - CHANGED
+* Navbar can now accept template parts to be able to share menu items between normal and transparent menus - ADDED
+* Contact form will now prefill name and email for logged-in users - ADDED
 
 = 0.1.31 - 2024-12-12 =
 * Changes to better support AyeCode Connect Turnstile Captcha - ADDED
