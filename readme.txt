@@ -176,6 +176,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.33 - TBD =
+* BS > Post Title unable to unset text custom color if saved - FIXED
+
 = 0.1.32 - 2025-01-28 =
 * Filter added to breadcrumbs block to be able to adjust the breadcrumbs - ADDED
 * Breadcrumbs block improved to show CPT and custom taxonomies in the crumbs - CHANGED

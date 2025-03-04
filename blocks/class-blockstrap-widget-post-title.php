@@ -274,6 +274,12 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			 * A GeoDirectory filter to adjust the tag if based inside a GD Listings loop
 			 */
 			$tag          = apply_filters( 'geodir_widget_gd_post_title_tag', $tag, $args, $widget_args, $this );
+
+			// Unset custom color when color class already set.
+			if ( ! empty( $args['text_color'] ) && $args['text_color'] != 'custom' ) {
+				$args['text_color_custom'] = '';
+			}
+
 			$classes      = sd_build_aui_class( $args );
 			$class        = $classes ? 'class="' . $classes . '"' : '';
 			$styles       = sd_build_aui_styles( $args );
@@ -289,7 +295,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 					'<a href="%1$s" class=" %2$s" %3$s>%4$s</a>',
 					$link,
 					$class,
-					$styles,
+					$style,
 					$title
 				);
 			}
