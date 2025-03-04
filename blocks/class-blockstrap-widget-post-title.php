@@ -263,13 +263,13 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-
 		$title = get_the_title();
 
 		if ( $title ) {
 			$tag          = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'h2';
 			$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'p' );
 			$tag          = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'h2';
+
 			/**
 			 * A GeoDirectory filter to adjust the tag if based inside a GD Listings loop
 			 */
@@ -280,6 +280,11 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 				$args['text_color_custom'] = '';
 			}
 
+			// Unset custom font size when color class already set.
+			if ( ! empty( $args['font_size'] ) && $args['font_size'] != 'custom' ) {
+				$args['font_size_custom'] = '';
+			}
+
 			$classes      = sd_build_aui_class( $args );
 			$class        = $classes ? 'class="' . $classes . '"' : '';
 			$styles       = sd_build_aui_styles( $args );
@@ -288,11 +293,11 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			$wrapper_attributes = $class . $style;
 
 			if ( $args['is_link'] ) {
-				$class  = $args['text_color'] ? 'nav-link nav-link-' . esc_attr( $args['text_color'] ) : 'nav-link';
+				$class  = $args['text_color'] ? 'link-' . esc_attr( $args['text_color'] ) : '';
 				$class .= ! empty( $args['stretched_link'] ) ? ' stretched-link' : '';
 				$link   = get_permalink();
 				$title  = sprintf(
-					'<a href="%1$s" class=" %2$s" %3$s>%4$s</a>',
+					'<a href="%1$s" class="%2$s" %3$s>%4$s</a>',
 					$link,
 					$class,
 					$style,
