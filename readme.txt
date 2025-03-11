@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.7
-Stable tag: 0.1.32
+Stable tag: 0.1.33
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,8 +176,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.33 - TBD =
+= 0.1.33 - 2025-03-11 =
 * BS > Post Title unable to unset text custom color if saved - FIXED
+* SD and AUI packages updated - CHANGED
 
 = 0.1.32 - 2025-01-28 =
 * Filter added to breadcrumbs block to be able to adjust the breadcrumbs - ADDED
