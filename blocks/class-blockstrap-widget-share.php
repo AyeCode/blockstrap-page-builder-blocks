@@ -235,6 +235,18 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			'group'    => __( 'Services', 'blockstrap-page-builder-blocks' ),
 		);
 
+		$arguments['service_print'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Print', 'blockstrap-page-builder-blocks' ),
+			'options'  => array(
+				'0' => __( 'Disabled', 'blockstrap-page-builder-blocks' ),
+				'1' => __( 'Enabled', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Services', 'blockstrap-page-builder-blocks' ),
+		);
+
 		// button styles
 		$arguments['link_type'] = array(
 			'type'     => 'select',
@@ -586,6 +598,10 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Copy URL', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-link"></i></a>';
 			}
 
+			if ( ! empty( $args['service_print'] ) ) {
+				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $current_url ) . '" onclick="window.print();return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Print page', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-print"></i></a>';
+			}
+
 			$output .= '</div>';
 		} else {
 
@@ -618,6 +634,10 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 			if ( ! empty( $args['service_link'] ) ) {
 				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" class="dropdown-item"><i class="fas fa-link fa-fw opacity-75 fa-lg"></i> ' . __( 'Copy Link', 'blockstrap-page-builder-blocks' ) . '</a>';
+			}
+
+			if ( ! empty( $args['service_print'] ) ) {
+				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="window.print();return false;" class="dropdown-item"><i class="fas fa-print fa-fw opacity-75 fa-lg"></i> ' . __( 'Print page', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			$output .= '</div>';

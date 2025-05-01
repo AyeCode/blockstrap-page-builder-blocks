@@ -123,6 +123,27 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             'element_require' => '[%type%]=="post-id"',
         ];
 
+	    $arguments['taxonomy'] = [
+		    'type'            => 'select',
+		    'title'           => __('Taxonomy', 'blockstrap-page-builder-blocks'),
+		    'options'         => ['' => __('Select Taxonomy', 'blockstrap-page-builder-blocks')] + get_taxonomies(),
+		    'placeholder'     => __('Select Taxonomy', 'blockstrap-page-builder-blocks'),
+		    'default'         => '',
+		    'desc_tip'        => true,
+		    'group'           => __('Link', 'blockstrap-page-builder-blocks'),
+		    'element_require' => '[%type%]=="term-id"',
+	    ];
+
+	    $arguments['term_id'] = [
+		    'type'            => 'number',
+		    'title'           => __('Term ID', 'blockstrap-page-builder-blocks'),
+		    'placeholder'     => 123,
+		    'default'         => '',
+		    'desc_tip'        => true,
+		    'group'           => __('Link', 'blockstrap-page-builder-blocks'),
+		    'element_require' => '[%type%]=="term-id"',
+	    ];
+
         $arguments['custom_url'] = [
             'type'            => 'text',
             'title'           => __('Custom URL', 'blockstrap-page-builder-blocks'),

@@ -339,6 +339,8 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 		// border
 		$arguments['img_border']       = sd_get_border_input( 'border', array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ) ) );
+		$arguments['img_border_width']     = sd_get_border_input( 'width' , array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),'element_require' => '', )); // BS5 only
+		$arguments['img_border_opacity']   = sd_get_border_input( 'opacity' , array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),'element_require' => '', )); // BS5 only
 		$arguments['img_rounded']      = sd_get_border_input(
 			'rounded',
 			array(
@@ -353,6 +355,14 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 				'element_require' => '',
 			)
 		);
+
+//		// border
+//		$arguments['border']         = sd_get_border_input( 'border' );
+//		$arguments['border_type']    = sd_get_border_input( 'type' );
+//		$arguments['border_width']   = sd_get_border_input( 'width' ); // BS5 only
+//		$arguments['border_opacity'] = sd_get_border_input( 'opacity' ); // BS5 only
+//		$arguments['rounded']        = sd_get_border_input( 'rounded' );
+//		$arguments['rounded_size']   = sd_get_border_input( 'rounded_size' );
 
 		// shadow
 		$arguments['img_shadow'] = sd_get_shadow_input( 'shadow', array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ) ) );
@@ -458,9 +468,17 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$arguments['pl_lg'] = sd_get_padding_input( 'pl', array( 'device_type' => 'Desktop' ) );
 
 		// border
-		$arguments['border']       = sd_get_border_input( 'border' );
-		$arguments['rounded']      = sd_get_border_input( 'rounded' );
-		$arguments['rounded_size'] = sd_get_border_input( 'rounded_size' );
+//		$arguments['border']       = sd_get_border_input( 'border' );
+//		$arguments['rounded']      = sd_get_border_input( 'rounded' );
+//		$arguments['rounded_size'] = sd_get_border_input( 'rounded_size' );
+
+		// border
+		$arguments['border']         = sd_get_border_input( 'border' );
+		$arguments['border_type']    = sd_get_border_input( 'type' );
+		$arguments['border_width']   = sd_get_border_input( 'width' ); // BS5 only
+		$arguments['border_opacity'] = sd_get_border_input( 'opacity' ); // BS5 only
+		$arguments['rounded']        = sd_get_border_input( 'rounded' );
+		$arguments['rounded_size']   = sd_get_border_input( 'rounded_size' );
 
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
@@ -553,6 +571,8 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$image          = '';
 		$image_class    = 'mw-100 w-100';
 		$image_class   .= ! empty( $args['img_border'] ) ? ' border border-' . esc_attr( $args['img_border'] ) : '';
+		$image_class   .= ! empty( $args['img_border_width'] ) ? ' ' . esc_attr( $args['img_border_width'] ) : '';
+		$image_class   .= ! empty( $args['img_border_opacity'] ) ? ' ' . esc_attr( $args['img_border_opacity'] ) : '';
 		$image_class   .= ! empty( $args['img_rounded'] ) ? ' ' . esc_attr( $args['img_rounded'] ) : '';
 		$image_class   .= ! empty( $args['img_rounded_size'] ) ? ' rounded-' . esc_attr( $args['img_rounded_size'] ) : '';
 		$image_class   .= ! empty( $args['img_shadow'] ) ? ' ' . esc_attr( $args['img_shadow'] ) : '';
@@ -693,7 +713,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$ratio_cover_class .= ! empty( $args['img_aspect'] ) ? ' ' . $ratio_prefix . esc_attr( $ratio_val ) . ' ' : '';
 
 		// hover action
-		$ratio_cover_class .= 'none' === $link_hover ? '' : ' embed-has-action';
+		$ratio_cover_class .= 'none' === $link_hover ? '' : ' embed-has-action ';
 
 		if ( 'media' === $link_to ) {
 			$icon  = '' === $link_hover ? '<i class="fas fa-search-plus w-auto h-auto"></i>' : '';

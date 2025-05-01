@@ -11,17 +11,17 @@
  * Plugin Name: BlockStrap Page Builder Blocks
  * Plugin URI: https://ayecode.io/
  * Description: BlockStrap - A FSE page builder for WordPress
- * Version: 0.1.34
+ * Version: 0.1.35
  * Author: AyeCode
  * Author URI: https://ayecode.io
  * Text Domain: blockstrap-page-builder-blocks
  * Domain Path: /languages
  * Requires at least: 6.0
- * Tested up to: 6.7
+ * Tested up to: 6.8
  */
 
 
-define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.34' );
+define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.35' );
 
 /**
  * The BlockStrap Class
@@ -160,6 +160,30 @@ final class BlockStrap {
 			[ 'blockstrap-blocks-style' ],
 			BLOCKSTRAP_BLOCKS_VERSION
 		);
+
+
+		wp_enqueue_script(
+			'blockstrap-blocks-animated-headline',
+			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/js/animated-headline.min.js',
+			null,
+			BLOCKSTRAP_BLOCKS_VERSION,
+			[ 'in_footer' => true ]
+		);
+
+		wp_enqueue_script(
+			'blockstrap-blocks-highlight-headline',
+			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/js/highlight-headline.min.js',
+			null,
+			BLOCKSTRAP_BLOCKS_VERSION,
+			[ 'in_footer' => true ]
+		);
+
+		wp_enqueue_style(
+			'blockstrap-blocks-animated-headline',
+			BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/css/animated-headline.css',
+			null,
+			BLOCKSTRAP_BLOCKS_VERSION
+		);
 	}
 
 	/**
@@ -273,6 +297,8 @@ final class BlockStrap {
 		include_once 'blocks/class-blockstrap-widget-scroll-top.php';
 		include_once 'blocks/class-blockstrap-widget-modal.php';
 		include_once 'blocks/class-blockstrap-widget-offcanvas.php';
+		include_once 'blocks/class-blockstrap-widget-alert.php';
+		include_once 'blocks/class-blockstrap-widget-headline.php';
 
 		// Frontend comments
 		include_once 'classes/class-blockstrap-blocks-comments.php';

@@ -10,14 +10,15 @@
  */
 function blockstrap_pbb_get_block_link_types(){
 	$links = [
-		'home'      => __('Home', 'blockstrap-page-builder-blocks'),
-		'page'      => __('Page', 'blockstrap-page-builder-blocks'),
-		'post-id'   => __('Post ID', 'blockstrap-page-builder-blocks'),
-		'wp-login'  => __('WP Login (logged out)', 'blockstrap-page-builder-blocks'),
-		'wp-logout' => __('WP Logout (logged in)', 'blockstrap-page-builder-blocks'),
-		'custom'    => __('Custom URL', 'blockstrap-page-builder-blocks'),
-		'lightbox'  => __('Open Lightbox', 'blockstrap-page-builder-blocks'),
-		'offcanvas'  => __('Open Offcanvas', 'blockstrap-page-builder-blocks'),
+		'home'      => __( 'Home', 'blockstrap-page-builder-blocks' ),
+		'page'      => __( 'Page', 'blockstrap-page-builder-blocks' ),
+		'post-id'   => __( 'Post ID', 'blockstrap-page-builder-blocks' ),
+		'term-id'   => __( 'Term ID', 'blockstrap-page-builder-blocks' ),
+		'wp-login'  => __( 'WP Login (logged out)', 'blockstrap-page-builder-blocks' ),
+		'wp-logout' => __( 'WP Logout (logged in)', 'blockstrap-page-builder-blocks' ),
+		'custom'    => __( 'Custom URL', 'blockstrap-page-builder-blocks' ),
+		'lightbox'  => __( 'Open Lightbox', 'blockstrap-page-builder-blocks' ),
+		'offcanvas' => __( 'Open Offcanvas', 'blockstrap-page-builder-blocks' ),
 	];
 
 	if (defined('GEODIRECTORY_VERSION')) {
@@ -81,6 +82,25 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 				$link      = get_permalink($id);
 				$link_text = esc_attr($page->post_title);
 			}
+		}
+	} else if ('term-id' === $args['type']) {
+		$taxonomy = ! empty($args['taxonomy']) ? esc_attr($args['taxonomy']) : '';
+		$term_id = ! empty($args['term_id']) ? absint($args['term_id']) : 0;
+		if ($term_id && $taxonomy) {
+			$link = get_term_link($term_id, $taxonomy);
+			if (empty($args['text'])) {
+				// its more efficient to manually set a name but this is good UX
+				$term = get_term($term_id, $taxonomy);
+				if ( ! is_wp_error( $term ) && ! empty( $term ) ) {
+					$link_text = esc_attr($term->name);
+				}
+			}
+
+			// fallback
+			if(empty($link_text)) {
+				$link_text = __('Term link', 'blockstrap-page-builder-blocks');
+			}
+
 		}
 	} else if ('wp-login' === $args['type']) {
 		$args['icon_class'] = $args['icon_class'] ?: 'far fa-user';
