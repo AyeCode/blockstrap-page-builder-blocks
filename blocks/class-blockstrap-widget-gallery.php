@@ -144,7 +144,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 			//          'desc' => __('For a more consistent image view you can set the aspect ratio of the image view port.', 'blockstrap-page-builder-blocks'),
 							'type'  => 'select',
 			'options'               => array(
-				'grid'  => __( 'Grid (defaut)', 'blockstrap-page-builder-blocks' ),
+				'grid'  => __( 'Grid (default)', 'blockstrap-page-builder-blocks' ),
 				'1-2-5' => __( '1-2-5 Grid', 'blockstrap-page-builder-blocks' ),
 				'1-2-2' => __( '1-2-2 Grid', 'blockstrap-page-builder-blocks' ),
 			),

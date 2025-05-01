@@ -1,6 +1,6 @@
 <?php
 
-class BlockStrap_Widget_Heading extends WP_Super_Duper {
+class BlockStrap_Widget_Alert extends WP_Super_Duper {
 
 
 	public $arguments;
@@ -13,36 +13,79 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 		$options = array(
 			'textdomain'        => 'blockstrap',
 			'output_types'      => array( 'block', 'shortcode' ),
-			'block-icon'        => 'fas fa-heading',
+			'block-icon'        => 'fas fa-exclamation-triangle',
 			'block-category'    => 'layout',
-			'block-keywords'    => "['heading','title','text']",
+			'block-keywords'    => "['alert','notice','message']",
 			'block-supports'    => array(
 				'customClassName' => false,
 			),
 
-			'block-edit-return' => "wp.element.createElement(wp.blockEditor.RichText, Object.assign(wp.blockEditor.useBlockProps({className: sd_build_aui_class(props.attributes)}), {
-                tagName: props.attributes.html_tag ? props.attributes.html_tag : 'h1',
-                value: props.attributes.text,
-                style: sd_build_aui_styles(props.attributes),
-              //  allowedFormats: ['core/bold', 'core/italic'], // Allow the content to be made bold or italic, but do not allow other formatting options
-                onChange: function (text) {
-                    props.setAttributes({text: text}); // Store updated content as a block attribute
-                },
-                placeholder: __('Heading...'),
-            }))",
-			'block-save-return' => "wp.element.createElement( wp.blockEditor.RichText.Content, Object.assign( wp.blockEditor.useBlockProps.save({className: sd_build_aui_class(props.attributes)}), {
-             tagName: props.attributes.html_tag ? props.attributes.html_tag : 'h1',
-                value: props.attributes.text,
-                style: sd_build_aui_styles(props.attributes),
-            value: props.attributes.text
-        } ) )",
+			'block-edit-return' => "wp.element.createElement(
+			    'div',
+			    wp.blockEditor.useBlockProps({
+			        className: 'd-flex align-items-center fade show alert alert-' + props.attributes.alert_type + ' ' + sd_build_aui_class(props.attributes),
+			        style: sd_build_aui_styles(props.attributes),
+			        role: 'alert'
+			    }),
+			    props.attributes.icon_position === 'start'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes)  })
+			        : null,
+			    el(wp.blockEditor.RichText, {
+			        tagName: 'span',
+			        value: props.attributes.text,
+			        onChange: function (text) {
+			            props.setAttributes({ text: text });
+			        },
+			        className: 'flex-grow-1',
+			        placeholder: __('Heading...'),
+			    }),
+			    props.attributes.icon_position === 'end'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes) })
+			        : null,
+			    props.attributes.dismissible
+			        ? el('button', {
+						    type: 'button',
+						    className: 'btn-close',
+						    'aria-label': 'Close'
+						})
+			        : null
+			)
+			",
+			'block-save-return' => "wp.element.createElement(
+			    'div',
+			    wp.blockEditor.useBlockProps.save({
+			        className: 'd-flex align-items-center fade show alert alert-' + props.attributes.alert_type + ' ' + sd_build_aui_class(props.attributes),
+			        style: sd_build_aui_styles(props.attributes),
+			        role: 'alert'
+			    }),
+			    props.attributes.icon_position === 'start'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes) })
+			        : null,
+			    el(wp.blockEditor.RichText.Content, {
+			        tagName: 'span',
+			        value: props.attributes.text,
+			        className: 'flex-grow-1',
+			    }),
+			    props.attributes.icon_position === 'end'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes) })
+			        : null,
+			    props.attributes.dismissible
+			        ? el('button', {
+						    type: 'button',
+						    className: 'btn-close',
+						    'data-bs-dismiss': 'alert',
+						    'aria-label': 'Close'
+						})
+			        : null
+			)
+			",
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
-			'base_id'           => 'bs_heading',
-			'name'              => __( 'BS > Heading', 'blockstrap-page-builder-blocks' ),
+			'base_id'           => 'bs_alert',
+			'name'              => __( 'BS > Alert', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
 				'classname'   => 'bs-heading',
-				'description' => esc_html__( 'A heading element', 'blockstrap-page-builder-blocks' ),
+				'description' => esc_html__( 'An alert message box element', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -52,7 +95,7 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Title', 'blockstrap-page-builder-blocks' ) ),
+					'groups' => array( __( 'Text', 'blockstrap-page-builder-blocks' ),__( 'Icon', 'blockstrap-page-builder-blocks' )  ),
 					'tab'    => array(
 						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
@@ -98,30 +141,54 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 
 		$arguments['text'] = array(
 			'type'        => 'textarea',
-			'title'       => __( 'Title', 'blockstrap-page-builder-blocks' ),
-			'placeholder' => __( 'Enter your title!', 'blockstrap-page-builder-blocks' ),
-			'default'     => __( 'Add Your Heading Text', 'blockstrap-page-builder-blocks' ),
+			'title'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Enter you text!', 'blockstrap-page-builder-blocks' ),
+			'default'     => __( 'This is some information you should read', 'blockstrap-page-builder-blocks' ),
 			'desc_tip'    => true,
-			'group'       => __( 'Title', 'blockstrap-page-builder-blocks' ),
+			'desc'		=> __( 'Add class `alert-link` to links to make them stand out more', 'blockstrap-page-builder-blocks' ),
+			'group'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
-		$arguments['html_tag'] = array(
+		$arguments['alert_type'] = array(
 			'type'     => 'select',
-			'title'    => __( 'HTML tag', 'blockstrap-page-builder-blocks' ),
-			'options'  => array(
-				'h1'   => 'h1',
-				'h2'   => 'h2',
-				'h3'   => 'h3',
-				'h4'   => 'h4',
-				'h5'   => 'h5',
-				'h6'   => 'h6',
-				'span' => 'span',
-				'div'  => 'div',
-				'p'    => 'p',
-			),
-			'default'  => '',
+			'title'    => __( 'Alert type', 'blockstrap-page-builder-blocks' ),
+			'options'  => sd_aui_colors(),
+			'default'  => 'info',
 			'desc_tip' => true,
-			'group'    => __( 'Title', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['dismissible'] = array(
+			'type'     => 'checkbox',
+			'title'    => __( 'Dismissible', 'blockstrap-page-builder-blocks' ),
+			'default'  => '',
+			'value'    => '1',
+			'desc_tip' => false,
+			'desc'     => __( 'Hides the alert from the page until it’s refreshed (frontend only).', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['icon_class'] = array(
+			'type'        => 'text',
+			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'fas fa-info-circle', 'blockstrap-page-builder-blocks' ),
+			'default'     => '',
+			'desc_tip'    => true,
+			'group'       => __( 'Icon', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['icon_position'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Icon position', 'blockstrap-page-builder-blocks' ),
+			'options'  => array(
+				'start' => __( 'Start', 'blockstrap-page-builder-blocks' ),
+				'end' => __( 'End', 'blockstrap-page-builder-blocks' ),
+				'none' => __( 'Remove', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'  => 'start',
+			'desc_tip' => true,
+			'group'    => __( 'Icon', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
@@ -272,24 +339,34 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 
 	public function block_global_js() {
 		ob_start();
-		if ( false ) {
-			?>
+	if ( false ) {
+		?>
 		<script>
 			<?php
-		}
-		?>
-
-			function bs_build_heading_html($args) {
-
-				let $html = '';
-
-				$html += $args.text;
-
-
-				return $html;
 			}
+			?>
 
+            function bs_build_alert_icon_class($args) {
 
+                let $class = '';
+
+	            if($args.icon_class){
+                    $class +=  $args.icon_class;
+	            }else if($args.alert_type === 'info'){
+                    $class += 'fas fa-info-circle';
+                }else if($args.alert_type === 'warning' || $args.alert_type === 'danger'){
+                    $class += 'fas fa-exclamation-triangle';
+                }else if($args.alert_type === 'success' ){
+                    $class += 'fas fa-check-circle';
+                }
+
+                if ($class) {
+                    $class += $args.icon_position === 'start' ? ' me-2' : ' ms-auto' ;
+
+                }
+
+                return $class;
+            }
 		<?php
 		return ob_get_clean();
 	}
@@ -300,7 +377,7 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 add_action(
 	'widgets_init',
 	function () {
-		register_widget( 'BlockStrap_Widget_Heading' );
+		register_widget( 'BlockStrap_Widget_Alert' );
 	}
 );
 

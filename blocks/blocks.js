@@ -39,6 +39,8 @@ registerBlockType( 'blockstrap/blockstrap-widget-contact', { title: 'BS > Contac
 registerBlockType( 'blockstrap/blockstrap-widget-rating', { title: 'BS > Rating' } );
 registerBlockType( 'blockstrap/blockstrap-widget-scroll-top', { title: 'BS > Scroll Top' } );
 registerBlockType( 'blockstrap/blockstrap-widget-offcanvas', { title: 'BS > Offcanvas' } );
+registerBlockType( 'blockstrap/blockstrap-widget-alert', { title: 'BS > Alert' } );
+registerBlockType( 'blockstrap/blockstrap-widget-headline', { title: 'BS > Headline' } );
 */
 
 

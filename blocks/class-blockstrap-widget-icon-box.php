@@ -88,6 +88,78 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 		$arguments = array();
 
+		$arguments['img_src'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Icon source', 'blockstrap-page-builder-blocks' ),
+			'options'  => array(
+				''   => __( 'FontAwesome Class', 'blockstrap-page-builder-blocks' ),
+				'upload'   => __( 'Upload', 'blockstrap-page-builder-blocks' ),
+				'url'      => __( 'URL', 'blockstrap-page-builder-blocks' ),
+				'svg'      => __( 'SVG code (not URL)', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$type                          = 'img';
+		$arguments[ $type . '_image' ] = array(
+			'type'            => 'image',
+			'title'           => __( 'Custom image', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => '',
+			'default'         => '',
+			'desc_tip'        => true,
+			'focalpoint'      => false,
+			'group'           => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%img_src%]=="upload"',
+		);
+
+		$arguments[ $type . '_image_id' ] = array(
+			'type'        => 'hidden',
+			'hidden_type' => 'number',
+			'title'       => '',
+			'placeholder' => '',
+			'default'     => '',
+			'group'       => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$image_sizes = get_intermediate_image_sizes();
+
+		$arguments['img_size'] = array(
+			'type'            => 'select',
+			'title'           => __( 'Image size', 'blockstrap-page-builder-blocks' ),
+			'options'         => array( '' => 'Select image size' ) + array_combine( $image_sizes, $image_sizes ) + array( 'full' => 'full' ),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%img_src%]=="upload"',
+		);
+
+		$arguments['img_url'] = array(
+			'type'            => 'text',
+			'title'           => __( 'Image URL', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( 'https://example.com/uploads/my-iamge.jpg', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%img_src%]=="url"',
+		);
+
+		$arguments['svg_code'] = array(
+			'type'            => 'textarea',
+			'title'           => __( 'SVG Code', 'blockstrap-page-builder-blocks' ),
+			'placeholder'     => __( '<svg ...', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%img_src%]=="svg"',
+		);
+
+		// Max height
+		$arguments['svg_max_height'] = sd_get_max_height_input( 'svg_max_height',
+			array(
+				'group'           => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+				'element_require' => '[%img_src%]!=""',
+		) );
+
+		##########
+
 		$arguments['icon_class'] = array(
 			'type'        => 'text',
 			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
@@ -96,6 +168,8 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			'default'     => '',
 			'desc_tip'    => true,
 			'group'       => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%img_src%]==""',
+
 		);
 
 		$arguments['title'] = array(
@@ -596,9 +670,26 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 
 	public function build_icon( $args ) {
+
+		// check we have an icon to use
+		$has_icon = false;
+		$img_src = !empty($args['img_src']) ? $args['img_src'] : '';
+		if ('upload' === $img_src && !empty($args['img_image'])) {
+			$has_icon = true;
+
+//			print_r($args);exit;
+		}elseif('url' === $img_src && !empty($args['img_url'])) {
+			$has_icon = true;
+		}elseif('svg' === $img_src && !empty($args['svg_code'])) {
+			$has_icon = true;
+		}elseif(!empty($args['icon_class'])) {
+			$has_icon = true;
+		}
+
+//		print_r($args);//exit;
 		$html = '';
 		$wrap_class = '';
-		if ( ! empty( $args['icon_class'] ) ) {
+		if ( $has_icon ) {
 			$tag        = 'div';
 			$icon_class = '';
 			if ( ! empty( $args['icon_type'] ) ) {
@@ -659,7 +750,171 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 				$wrap_class .= ' me-3 mr-3 ';
 			}
 
-			$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . ' ' . sd_sanitize_html_classes( $icon_class ) . '"></i>';
+
+			// icon src
+			$icon = '';
+			$img_attr = array();
+			if ( empty( $args['img_src'] ) ) {
+				$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . ' ' . sd_sanitize_html_classes( $icon_class ) . '"></i>';
+			} elseif ( 'svg' === $args['img_src'] ) {
+				$allowed_svg_tags = [
+					'svg'   => [
+						'xmlns'         => true,
+						'viewbox'       => true,
+						'width'         => true,
+						'height'        => true,
+						'fill'          => true,
+						'stroke'        => true,
+						'stroke-width'  => true,
+						'role'          => true,
+						'aria-hidden'   => true,
+						'class'         => true,
+						'style'         => true,
+					],
+					'g'     => [
+						'id'             => true,
+						'fill'           => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'stroke-linecap' => true,
+						'stroke-linejoin'=> true,
+						'fill-rule'      => true,
+						'transform'      => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'path'  => [
+						'd'              => true,
+						'fill'           => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'stroke-linecap' => true,
+						'stroke-linejoin'=> true,
+						'fill-rule'      => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'rect'  => [
+						'x'              => true,
+						'y'              => true,
+						'width'          => true,
+						'height'         => true,
+						'fill'           => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'circle' => [
+						'cx'             => true,
+						'cy'             => true,
+						'r'              => true,
+						'fill'           => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'ellipse' => [
+						'cx'             => true,
+						'cy'             => true,
+						'rx'             => true,
+						'ry'             => true,
+						'fill'           => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'line' => [
+						'x1'             => true,
+						'y1'             => true,
+						'x2'             => true,
+						'y2'             => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'polyline' => [
+						'points'         => true,
+						'fill'           => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'polygon' => [
+						'points'         => true,
+						'fill'           => true,
+						'stroke'         => true,
+						'stroke-width'   => true,
+						'class'          => true,
+						'style'          => true,
+					],
+					'defs'   => [],
+					'title'  => [],
+					'desc'   => [],
+					'use'    => [
+						'xlink:href'     => true,
+						'href'           => true, // For newer browsers
+						'class'          => true,
+						'style'          => true,
+					],
+					'symbol' => [
+						'id'             => true,
+						'viewBox'        => true,
+						'preserveAspectRatio' => true,
+					],
+				];
+
+
+
+
+				$icon = $args['svg_code'] ? wp_kses( html_entity_decode( $args['svg_code'], ENT_QUOTES ), $allowed_svg_tags ) : '';
+
+
+				// maybe add styles
+				$img_attr['style'] = !empty($args['icon_color']) ? 'fill: currentColor;' . esc_attr( $args['icon_color_custom']).';' : '';
+				$img_attr['style'] .= 'max-width:100%;';
+				$img_attr['style'] .= !empty($args['svg_max_height']) ? 'max-height: ' . esc_attr( $args['svg_max_height']).';' : 'max-height: fit-content;';
+				$custom_attr_string = implode(',', array_map(
+					function($key, $value) {
+						return esc_attr($key) . '|' . esc_attr($value);
+					},
+					array_keys($img_attr),
+					$img_attr
+				));
+				$attributes_escaped = sd_build_attributes_string_escaped( array('custom'=> $custom_attr_string) );
+
+				$icon = str_replace('<svg ', '<svg ' . $attributes_escaped , $icon);
+
+			} elseif ( 'url' === $args['img_src'] ) {
+				$image_src = $args['img_url'] ? esc_url_raw( $args['img_url'] ) : '';
+				$img_attr['style'] = $args['icon_color'] === 'custom' && $args['icon_color_custom'] ? $this->hexToColorFilter($args['icon_color_custom']) : '';
+				$img_attr['style'] .= 'max-width:100%;width:auto;';
+				$img_attr['style'] .= !empty($args['svg_max_height']) ? 'max-height: ' . esc_attr( $args['svg_max_height']).';' : 'max-height: fit-content;';
+
+				$custom_attr_string = implode(',', array_map(
+					function($key, $value) {
+						return esc_attr($key) . '|' . esc_attr($value);
+					},
+					array_keys($img_attr),
+					$img_attr
+				));
+				$attributes_escaped = sd_build_attributes_string_escaped( array('custom'=> $custom_attr_string) );
+				$icon = '<img src="' . esc_url_raw( $image_src ) . '" ' . $attributes_escaped . ' />';
+			}  elseif ( ! empty( $args['img_image_id'] ) ) {
+				$img_attr['style'] = $args['icon_color'] === 'custom' && $args['icon_color_custom'] ? $this->hexToColorFilter($args['icon_color_custom']) : '';
+				$img_attr['style'] .= 'max-width:100%;width: auto;';
+				$img_attr['style'] .= !empty($args['svg_max_height']) ? 'max-height: ' . esc_attr( $args['svg_max_height']).';' : 'max-height: fit-content;';
+				$image_size     = ! empty( $args['img_size'] ) ? esc_attr( $args['img_size'] ) : 'full';
+				$icon         = wp_get_attachment_image( absint( $args['img_image_id'] ), $image_size, true,$img_attr );
+
+			}
+
+//			$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . ' ' . sd_sanitize_html_classes( $icon_class ) . '"></i>';
+//			$icon = '<img src="http://localhost/wp-content/uploads/2025/02/pin.png" class=" ' . sd_sanitize_html_classes( $icon_class ) . '"></i>';
 
 			$wrap_class .= sd_build_aui_class(
 				array(
@@ -692,6 +947,54 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 		return $html;
 	}
+
+	public function hexToColorFilter($hex) {
+		// Remove # if present
+		$hex = ltrim($hex, '#');
+
+		// Convert hex to RGB (0-255)
+		$r = hexdec(substr($hex, 0, 2));
+		$g = hexdec(substr($hex, 2, 2));
+		$b = hexdec(substr($hex, 4, 2));
+
+		// Normalize to 0-1
+		$rNorm = $r / 255;
+		$gNorm = $g / 255;
+		$bNorm = $b / 255;
+
+		// Convert to HSL for better filter mapping
+		$max = max($rNorm, $gNorm, $bNorm);
+		$min = min($rNorm, $gNorm, $bNorm);
+		$delta = $max - $min;
+
+		$l = ($max + $min) / 2; // Lightness
+		$s = $delta === 0 ? 0 : $delta / (1 - abs(2 * $l - 1)); // Saturation
+		$h = 0;
+		if ($delta !== 0) {
+			if ($max === $rNorm) {
+				$h = (($gNorm - $bNorm) / $delta);
+				// Handle negative values and wrap around 6 properly
+				$h = fmod($h + 6, 6); // fmod works with floats, ensures 0-6 range
+			} elseif ($max === $gNorm) {
+				$h = ($bNorm - $rNorm) / $delta + 2;
+			} else {
+				$h = ($rNorm - $gNorm) / $delta + 4;
+			}
+			// Convert to degrees (0-360)
+			$h = $h * 60;
+			if ($h < 0) $h += 360; // Ensure positive hue
+		}
+
+		// Map to filter values
+		$invert = round($l * 100); // 0-100%
+		$saturate = round(100 + ($s * 2000)); // Boost saturation
+		$hueRotate = round($h); // Degrees
+
+		// Return filter string
+		return "filter: invert({$invert}%) sepia(100%) saturate({$saturate}%) hue-rotate({$hueRotate}deg) brightness(100%) contrast(100%);";
+	}
+
+
 
 	/**
 	 * Build the iconbox title.

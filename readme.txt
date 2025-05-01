@@ -3,8 +3,8 @@ Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
-Tested up to: 6.7
-Stable tag: 0.1.34
+Tested up to: 6.8
+Stable tag: 0.1.35
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -139,6 +139,12 @@ Add a modal (popup) to the page containing any content.
 ### BS > Offcanvas
 Add an Offcanvas element to the page containing any content.
 
+### BS > Alert
+Add an Alert element to the page to show important information.
+
+### BS > Headline
+Add an animated headline to your site, this supports highlight and animations.
+
 ## Get BlockStrap Today!
 Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
 
@@ -175,6 +181,15 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.35 - 2025-05-01 =
+* BS > Alert - block added for showing messages in and alert box - ADDED
+* BS > Container - added more list group types - ADDED
+* BS > Share - added print option - ADDED
+* BS > Dropdown - added option to hide the dropdown pointer - ADDED
+* BS > Icon Box - added options to use image upload, URL or direct SVG code as icons - ADDED
+* BS > Nav Item & Button - can now set a term id as a link - ADDED 
+* BS > Headline - block added for showing animated headlines - ADDED 
 
 = 0.1.34 - 2025-03-11 =
 * BS > Post Title unable to unset text custom color if saved - FIXED
