@@ -182,6 +182,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.37 - TBD =
+* GD > Titles & Meta page title setting is not working on single page - FIXED
+
 = 0.1.36 - 2025-05-07 =
 * Add missing minified JS file - FIXED
 
