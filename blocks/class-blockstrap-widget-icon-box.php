@@ -877,6 +877,8 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 				// maybe add styles
 				$img_attr['style'] = !empty($args['icon_color']) ? 'fill: currentColor;' . esc_attr( $args['icon_color_custom']).';' : '';
 				$img_attr['style'] .= 'max-width:100%;';
+				$img_attr['style'] .= 'width:1em;';
+				$img_attr['style'] .= 'height:1em;';
 				$img_attr['style'] .= !empty($args['svg_max_height']) ? 'max-height: ' . esc_attr( $args['svg_max_height']).';' : 'max-height: fit-content;';
 				$custom_attr_string = implode(',', array_map(
 					function($key, $value) {
