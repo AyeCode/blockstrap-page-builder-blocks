@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 0.1.36
+Stable tag: 0.1.37
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -182,8 +182,11 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.37 - TBD =
+= 0.1.37 - 2025-06-09 =
 * GD > Titles & Meta page title setting is not working on single page - FIXED
+* Icon Box block if using image has title added as alt tag for accessibility score - ADDED
+* Icon Box block, SVG icons will now take size from font size - ADDED
+* Icon Box title tag extra sanitization for contributor+ levels users - ADDED
 
 = 0.1.36 - 2025-05-07 =
 * Add missing minified JS file - FIXED

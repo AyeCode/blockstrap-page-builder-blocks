@@ -754,6 +754,10 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			// icon src
 			$icon = '';
 			$img_attr = array();
+
+			// image alt
+			$img_attr['alt'] = ! empty( $args['title'] ) ? esc_attr( $args['title'] ) : ( ! empty( $args['description'] ) ? esc_attr( strip_tags( $args['description'] ) ) : '');
+
 			if ( empty( $args['img_src'] ) ) {
 				$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . ' ' . sd_sanitize_html_classes( $icon_class ) . '"></i>';
 			} elseif ( 'svg' === $args['img_src'] ) {
@@ -1009,7 +1013,9 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 		$html = '';
 
 		if ( ! empty( $args['title'] ) ) {
-			$tag = ! empty( $args['title_tag'] ) ? esc_attr( $args['title_tag'] ) : 'h3';
+			$tag          = ! empty( $args['title_tag'] ) ? esc_attr( $args['title_tag'] ) : 'h2';
+			$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'p' );
+			$tag          = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'h2';
 
 			$wrap_class = sd_build_aui_class(
 				array(
