@@ -754,6 +754,10 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			// icon src
 			$icon = '';
 			$img_attr = array();
+
+			// image alt
+			$img_attr['alt'] = ! empty( $args['title'] ) ? esc_attr( $args['title'] ) : ( ! empty( $args['description'] ) ? esc_attr( strip_tags( $args['description'] ) ) : '');
+
 			if ( empty( $args['img_src'] ) ) {
 				$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . ' ' . sd_sanitize_html_classes( $icon_class ) . '"></i>';
 			} elseif ( 'svg' === $args['img_src'] ) {
@@ -877,6 +881,8 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 				// maybe add styles
 				$img_attr['style'] = !empty($args['icon_color']) ? 'fill: currentColor;' . esc_attr( $args['icon_color_custom']).';' : '';
 				$img_attr['style'] .= 'max-width:100%;';
+				$img_attr['style'] .= 'width:1em;';
+				$img_attr['style'] .= 'height:1em;';
 				$img_attr['style'] .= !empty($args['svg_max_height']) ? 'max-height: ' . esc_attr( $args['svg_max_height']).';' : 'max-height: fit-content;';
 				$custom_attr_string = implode(',', array_map(
 					function($key, $value) {
@@ -1007,7 +1013,9 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 		$html = '';
 
 		if ( ! empty( $args['title'] ) ) {
-			$tag = ! empty( $args['title_tag'] ) ? esc_attr( $args['title_tag'] ) : 'h3';
+			$tag          = ! empty( $args['title_tag'] ) ? esc_attr( $args['title_tag'] ) : 'h2';
+			$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'p' );
+			$tag          = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'h2';
 
 			$wrap_class = sd_build_aui_class(
 				array(

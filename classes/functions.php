@@ -9,6 +9,7 @@
  * @return array
  */
 function blockstrap_pbb_get_block_link_types(){
+	global $ayecode_ui_version;
 	$links = [
 		'home'      => __( 'Home', 'blockstrap-page-builder-blocks' ),
 		'page'      => __( 'Page', 'blockstrap-page-builder-blocks' ),
@@ -20,6 +21,11 @@ function blockstrap_pbb_get_block_link_types(){
 		'lightbox'  => __( 'Open Lightbox', 'blockstrap-page-builder-blocks' ),
 		'offcanvas' => __( 'Open Offcanvas', 'blockstrap-page-builder-blocks' ),
 	];
+
+	if(version_compare($ayecode_ui_version, '0.2.99', '>')){
+		$links['dark-mode-toggle'] = __( 'Dark Mode Toggle', 'blockstrap-page-builder-blocks' );
+		$links['dark-mode-dropdown'] = __( 'Dark Mode Dropdown', 'blockstrap-page-builder-blocks' );
+	}
 
 	if (defined('GEODIRECTORY_VERSION')) {
 		$post_types           = function_exists('geodir_get_posttypes') ? geodir_get_posttypes('options-plural') : [];
@@ -119,6 +125,54 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 		$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
 		$link_text = __('Open Offcanvas', 'blockstrap-page-builder-blocks');
 		$link_attr = ' data-bs-toggle="offcanvas" ';
+	} else if ('dark-mode-toggle' === $args['type']) {
+		$icon = '<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+</div>';
+		//$icon = '<input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">';
+
+		$icon = '<span class="bs-dark-mode-toggle" role="button" aria-label="Toggle dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Toggle dark mode">
+  <i class="fa-solid fa-sun bs-is-light-mode" style="display: none;"></i>
+  <i class="fa-solid fa-moon bs-is-dark-mode" style="display: none;"></i>
+</span>'."<script>
+(function () {
+  const toggle = document.querySelector('.bs-dark-mode-toggle');
+  const sunIcon = toggle.querySelector('.bs-is-light-mode');
+  const moonIcon = toggle.querySelector('.bs-is-dark-mode');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  function setMode(mode) {
+    document.documentElement.setAttribute('data-bs-theme', mode);
+    localStorage.setItem('bs-theme', mode);
+    sunIcon.style.display = mode === 'light' ? 'inline' : 'none';
+    moonIcon.style.display = mode === 'dark' ? 'inline' : 'none';
+  }
+
+  function initMode() {
+    const saved = localStorage.getItem('bs-theme');
+    if (saved) {
+      setMode(saved);
+    } else {
+      setMode(prefersDark ? 'dark' : 'light');
+    }
+  }
+
+  toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-bs-theme');
+    setMode(current === 'dark' ? 'light' : 'dark');
+  });
+
+  initMode();
+})();
+</script>
+";
+		$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#dark-mode-toggle';
+		//$link_text = __('Dark Mode', 'blockstrap-page-builder-blocks');
+//		$link_attr = ' data-bs-toggle="offcanvas" ';
+//		$icon_class         = ! empty($args['icon_class']) ? esc_attr($args['icon_class']) : 'fas fa-map-marker-alt fa-lg text-primary';
+//		$args['icon_class'] = $icon_class;
+
+
 	} else if ('custom' === $args['type']) {
 		$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
 		$link_text = __('Custom', 'blockstrap-page-builder-blocks');
