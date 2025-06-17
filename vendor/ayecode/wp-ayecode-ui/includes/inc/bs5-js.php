@@ -14,7 +14,15 @@
 
             // Make sure its always expanded
             jQuery(this).addClass('navbar-expand');
-
+            jQuery(this).off('shown.bs.tab').on('shown.bs.tab', function (e) {
+                if (jQuery(e.target).closest('.dropdown-menu').hasClass('greedy-links')) {
+                    jQuery(e.target).closest('.greedy').find('.greedy-btn.dropdown').attr('aria-expanded', 'false');
+                    jQuery(e.target).closest('.greedy-links').removeClass('show').addClass('d-none');
+                }
+            });
+            jQuery(document).off('mousemove', '.greedy-btn').on('mousemove', '.greedy-btn', function(e){
+                jQuery('.dropdown-menu.greedy-links').removeClass('d-none');
+            });
             // vars
             var $vlinks = '';
             var $dDownClass = '';
@@ -31,7 +39,7 @@
                 return false;
             }
 
-            jQuery($vlinks).append('<li class="nav-item list-unstyled ml-auto greedy-btn d-none dropdown"><a href="javascript:void(0)" data-bs-toggle="collapse" class="nav-link greedy-nav-link"><i class="fas fa-ellipsis-h"></i> <span class="greedy-count badge bg-dark rounded-pill"></span></a><ul class="greedy-links dropdown-menu dropdown-menu-end '+$dDownClass+'"></ul></li>');
+            jQuery($vlinks).append('<li class="nav-item list-unstyled ml-auto greedy-btn d-none dropdown"><button data-bs-toggle="collapse" class="nav-link greedy-nav-link" role="button"><i class="fas fa-ellipsis-h"></i> <span class="greedy-count badge bg-dark rounded-pill"></span></button><ul class="greedy-links dropdown-menu dropdown-menu-end '+$dDownClass+'"></ul></li>');
 
             var $hlinks = jQuery(this).find('.greedy-links');
             var $btn = jQuery(this).find('.greedy-btn');
@@ -63,12 +71,12 @@
                 // There is not enough space
                 if (numOfVisibleItems > 1 && requiredSpace > availableSpace) {
                     var $li = $vlinks.children().last().prev();
-                    $li.addClass(ddItemClass);
+                    $li.removeClass('nav-item').addClass(ddItemClass);
                     if (!jQuery($hlinks).children().length) {
-                        $li.find('.nav-link').addClass('rounded-0 rounded-bottom');
+                        $li.find('.nav-link').addClass('w-100 dropdown-item rounded-0 rounded-bottom');
                     } else {
                         jQuery($hlinks).find('.nav-link').removeClass('rounded-top');
-                        $li.find('.nav-link').addClass('rounded-0 rounded-top');
+                        $li.find('.nav-link').addClass('w-100 dropdown-item rounded-0 rounded-top');
                     }
                     $li.prependTo($hlinks);
                     numOfVisibleItems -= 1;
@@ -637,7 +645,8 @@
 
             // items
             $i = 0;
-            $carousel += '<div class="carousel-inner d-flex align-items-center">';
+            $rtl_class = '<?php echo is_rtl() ? 'justify-content-end' : 'justify-content-start'; ?>'; 
+            $carousel += '<div class="carousel-inner d-flex align-items-center ' + $rtl_class + '">';
             $container.find('.aui-lightbox-image').each(function() {
                 var a = this;
                 var href = jQuery(a).attr('href');
@@ -1033,8 +1042,8 @@
                 cs_scroll  = 'navbar-light';
             }
 
-            navbar.dataset.cso = cs_original
-            navbar.dataset.css = cs_scroll
+            navbar.dataset.cso = cs_original;
+            navbar.dataset.css = cs_scroll;
         }
 
         if($value > 0 || navbar.classList.contains('nav-menu-open') ){
@@ -1067,7 +1076,7 @@
 
 	<?php
 	// FSE tweaks.
-	if(!empty($_REQUEST['postType'])){ ?>
+	if(!empty($_REQUEST['postType']) || !empty($_REQUEST['canvas']) ){ ?>
     function aui_fse_set_data_scroll() {
         console.log('init scroll');
         let Iframe = document.getElementsByClassName("edit-site-visual-editor__editor-canvas");
@@ -1146,39 +1155,22 @@
      * @param $color
      */
     function aui_fse_sync_site_typography(){
-        // const select = wp.data.select('core/edit-site').getSettings();
-        // const select = wp.data.select('core/edit-site');
-        // console.log(select);
-
-
-        // console.log(settings.styles[3].css);
-
         const getGlobalStyles = () => {
             const { select } = wp.data;
             const settings = select('core/block-editor').getSettings();
-            // console.log(settings);
-            return settings.styles[3].css ? settings.styles[3].css : null;
 
+            return ( settings && settings.styles && settings.styles[3].css ? settings.styles[3].css : null );
         };
 
         // set the initial styles
         let Styles = getGlobalStyles();
 
-        // console.log('#####'+colorHex);
-
         wp.data.subscribe(() => {
-
-            // console.log(wp.data);
-
             // get the current styles
             const newStyles = getGlobalStyles();
 
-            // console.log(newStyles);
-
             // only do something if newStyles has changed.
             if( newStyles && Styles !== newStyles ) {
-
-
                 // heading sizes
                 aui_updateCssRule('body.editor-styles-wrapper h1', 'font-size', aui_parseCSS(newStyles, 'h1', 'font-size'));
                 aui_updateCssRule('body.editor-styles-wrapper h2', 'font-size', aui_parseCSS(newStyles, 'h2', 'font-size'));

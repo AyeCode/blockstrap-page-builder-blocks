@@ -2,7 +2,6 @@
 
 class BlockStrap_Widget_Rating extends WP_Super_Duper {
 
-
 	public $arguments;
 
 	/**
@@ -25,17 +24,17 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 			//                                  style: {'minHeight': '30px'},
 			//                                  className: '',
 			//                              }))",
-				'class_name'   => __CLASS__,
+			'class_name'       => __CLASS__,
 			'base_id'          => 'bs_rating',
 			'name'             => __( 'BS > Rating', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'       => array(
 				'classname'   => 'bs-rating',
 				'description' => esc_html__( 'A bootstrap rating icons', 'blockstrap-page-builder-blocks' ),
 			),
-			  'example'           => array(
-				  'viewportWidth' => 200
-			  ),
-				'no_wrap'      => true,
+			'example'           => array(
+				'viewportWidth' => 200
+			),
+			'no_wrap'          => true,
 			'block_group_tabs' => array(
 				'content'  => array(
 					'groups' => array(
@@ -159,7 +158,7 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 		//      $arguments['page_id'] = array(
 		//          'type'            => 'select',
 		//          'title'           => __( 'Page', 'blockstrap-page-builder-blocks' ),
-		//          'options'         => $this->get_pages_array(),
+		//          'options'         => blockstrap_pbb_page_options(),
 		//          'placeholder'     => __( 'Select Page', 'blockstrap-page-builder-blocks' ),
 		//          'default'         => '',
 		//          'desc_tip'        => true,
@@ -333,21 +332,6 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 		return $links;
 	}
 
-	public function get_pages_array() {
-		$options = array( '' => __( 'Select Page', 'blockstrap-page-builder-blocks' ) );
-
-		$pages = get_pages();
-
-		if ( ! empty( $pages ) ) {
-			foreach ( $pages as $page ) {
-				if ( $page->post_title ) {
-					$options[ $page->ID ] = esc_attr( $page->post_title );
-				}
-			}
-		}
-
-		return $options;
-	}
 
 	/**
 	 * Returns the HTML output for a widget.
@@ -365,7 +349,7 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 		$icon_class   = ! empty( $args['icon_class'] ) ? esc_attr( $args['icon_class'] ) : 'fas fa-star';
 		$type         = isset( $args['type'] ) ? esc_attr( $args['type'] ) : '';
 		$rating_score = isset( $args['rating_score'] ) ? absint( $args['rating_score'] ) : 80;
-		$hover_text   = isset( $args['hover_text'] ) ? esc_attr( $args['hover_text'] ) : '';
+		$hover_text   = isset( $args['hover_text'] ) ? esc_attr( trim( $args['hover_text'] ) ) : '';
 		$icon_padding = isset( $args['icon_padding'] ) ? absint( $args['icon_padding'] ) : '';
 		$icon_fw      = ! empty( $args['icon_fw'] ) ? ' fa-fw' : '';
 
@@ -397,7 +381,6 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 		if ( 'gd' === $type && defined( 'GEODIRECTORY_VERSION' ) ) {
 			$rating_score = round( ( $gd_post->overall_rating / 5 ) * 100, 3 );
 		} else {
-
 		}
 
 		// rating color styles
@@ -407,8 +390,7 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 		$wrap_class = sd_build_aui_class( $args );
 
 		$styles  = sd_build_aui_styles( $args );
-		$styles .= ' text-wrap: nowrap;';
-		$style   = $styles ? ' style="' . $styles . '"' : '';
+		$styles .= ' text-wrap:nowrap';
 
 		$icon_padding      = $icon_padding ? ' pe-' . $icon_padding : '';
 		$icon_html         = '<i class="' . esc_attr( $icon_class ) . esc_attr( $icon_fw ) . esc_attr( $icon_padding ) . '" aria-hidden="true"></i>';
@@ -416,11 +398,9 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 
 		ob_start();
 		?>
-		<span class=" blockstrap-rating-wrap c-pointer justify-content-between flex-nowrap w-100 <?php echo esc_attr( $wrap_class ); ?>" <?php echo esc_html( $style ); ?>>
-			<span class="bs-rating-wrap d-inline-flex position-relative " data-bs-toggle="tooltip"
-				  data-bs-title="<?php echo esc_attr( $hover_text ); ?>">
-				<span class="bs-rating-foreground position-absolute text-nowrap overflow-hidden <?php echo esc_attr( $rating_on_class ); ?>"
-					  style="width:<?php echo absint( $rating_score ); ?>%; <?php echo esc_attr( $rating_on_color ); ?> ">
+		<span class="blockstrap-rating-wrap c-pointer justify-content-between flex-nowrap w-100 <?php echo esc_attr( $wrap_class ); ?>" style="<?php echo esc_attr( trim( $styles ) ); ?>">
+			<span class="bs-rating-wrap d-inline-flex position-relative"<?php echo( $hover_text ? ' data-bs-toggle="tooltip" data-bs-title="' . esc_attr( $hover_text ) . '"' : '' ); ?>>
+				<span class="bs-rating-foreground position-absolute text-nowrap overflow-hidden <?php echo esc_attr( $rating_on_class ); ?>" style="width:<?php echo absint( $rating_score ); ?>%;<?php echo esc_attr( $rating_on_color ); ?>">
 					<?php echo $icon_html_escaped; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</span>
 				<span class="bs-rating-background <?php echo esc_attr( $rating_off_class ); ?>" style="<?php echo esc_attr( $rating_off_color ); ?>">
@@ -429,13 +409,9 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 			</span>
 		</span>
 		<?php
-
 		return ob_get_clean();
-
 	}
-
 }
-
 
 // register it.
 add_action(
@@ -444,4 +420,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Rating' );
 	}
 );
-

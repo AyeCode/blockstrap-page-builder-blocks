@@ -1,3 +1,53 @@
+= 0.2.36 - 2025-05-01 =
+* WP 6.8 changed editor params and scroll page detector not working for fixed menu items color change - FIXED
+
+= 0.2.35 - 2025-04-10 =
+* Border width setting not working - FIXED
+
+= 0.2.34 - 2025-02-27 =
+* Greedy menu should auto close on tab select - CHANGED
+
+= 0.2.33 - 2025-02-20 =
+* Some hosts can show wp-content folder twice in asset URLs - FIXED
+
+= 0.2.32 - 2025-02-13 =
+* Astra theme woocommerce compatibility CSS breaks select2 in modals - FIXED
+
+= 0.2.31 - 2025-01-09 =
+* Changes to the get_url() function for getting asset URLs to better support docker containers - CHANGED
+
+= 0.2.30 - 2024-12-12 =
+* Minor JS fix for resetting value of field - FIXED
+
+= 0.2.29 - 2024-11-28 =
+* Load Select2 JavaScript only when required - CHANGED
+
+= 0.2.28 - 2024-11-12 =
+* iOS fixed images zoomed way in with background cover, changed to scroll for ios - CHANGED
+
+= 0.2.27 - 2024-11-06 =
+* Don't apply custom colors to standard wp-admin pages - CHANGED
+* Carousel in BootStrap modal not working on RTL - FIXED
+* Update FlatPickr JS library to v4.6.13 - CHANGED
+
+= 0.2.26 - 2024-09-12 =
+* Primary color setting not working after update - FIXED
+
+= 0.2.25 - 2024-09-05 =
+* Don't apply custom colors to wp-admin - CHANGED
+
+= 0.2.24 - 2024-08-29 =
+* Changes for search form conditional fields - CHANGED
+
+= 0.2.23 - 2024-08-08 =
+* Conditional field set default value changes - CHANGED
+
+= 0.2.22 - 2024-08-01 =
+* Conditional field don't reset field value on hide element - FIXED
+
+= 0.2.21 - 2024-07-31 =
+* JS error on FSE theme edit template part page - FIXED
+
 = 0.2.20 - 2024-07-05 =
 * Multiple carousels breaks carousel in modal - FIXED
 

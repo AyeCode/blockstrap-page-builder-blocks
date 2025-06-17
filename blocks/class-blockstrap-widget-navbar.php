@@ -17,7 +17,7 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 			'block-icon'     => 'fas fa-bars',
 			'block-category' => 'layout',
 			'block-keywords' => "['nav','navbar']",
-			'allowed-blocks'   => array('blockstrap/blockstrap-widget-navbar-brand','blockstrap/blockstrap-widget-nav'),
+			'allowed-blocks'   => array('blockstrap/blockstrap-widget-navbar-brand','blockstrap/blockstrap-widget-nav','core/template-part'),
 			'block-output'   => array(
 				array(
 					'element'   => 'nav',
@@ -214,6 +214,13 @@ class BlockStrap_Widget_Navbar extends WP_Super_Duper {
 		if ( empty( $content ) ) {
 			return '';
 		} elseif ( strpos( $content, 'class="wp-block-' ) !== false ) {//block
+
+			// The menu might be in a template part, if so we strip it away so it does not break frontend styles
+			if ( strpos( $content, 'class="directory-menu-wrapper d-contents wp-block-template-part' ) !== false ) {
+				$content  = str_replace( '<div class="directory-menu-wrapper d-contents wp-block-template-part">', '', $content );
+				$content  = preg_replace('~</div>\s*$~', '', $content, 1);
+			}
+
 			return $content;
 		} else {
 			$wrap_class = sd_build_aui_class( $args );

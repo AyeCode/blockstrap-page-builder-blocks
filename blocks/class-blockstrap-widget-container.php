@@ -362,13 +362,24 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 	 *
 	 * @return string
 	 */
-	public function maybe_get_gd_archive_image(){
+	public function maybe_get_gd_archive_image() {
+		global $post;
+
 		$url = '';
 
-		if( defined('GEODIRECTORY_VERSION') && geodir_is_page( 'archive' ) ){
-			$images = geodir_get_images( 0, 1, false, '', array() , array( 'cat_default', 'cpt_default', 'listing_default' ));
-			if (!empty($images)) {
-				$url = geodir_get_image_src( $images[0], 'original' );
+		if ( defined( 'GEODIRECTORY_VERSION' ) ) {
+			if ( geodir_is_page( 'single' ) && ! empty( $post->ID ) ) {
+				$images = geodir_get_images( (int) $post->ID, 1, true, 0, array( 'post_images' ) );
+
+				if ( ! empty( $images ) ) {
+					$url = geodir_get_image_src( $images[0], 'full' );
+				}
+			} else if ( geodir_is_page( 'archive' ) ) {
+				$images = geodir_get_images( 0, 1, false, '', array(), array( 'cat_default', 'cpt_default', 'listing_default' ) );
+
+				if ( ! empty( $images ) ) {
+					$url = geodir_get_image_src( $images[0], 'full' );
+				}
 			}
 		}
 
@@ -380,16 +391,32 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 	 *
 	 * @return string
 	 */
-	public function maybe_get_gd_location_image(){
-		$url = '';
-		if( defined('GEODIRLOCATION_VERSION') && geodir_is_page( 'location' ) ){
-			global $geodirectory;
+	public function maybe_get_gd_location_image() {
+		global $geodirectory;
 
-			$attachment = GeoDir_Location_SEO::get_post_attachment( $geodirectory->location );
-			if (!empty($attachment)) {
-				$upload_dir = wp_get_upload_dir();
-				$url = esc_url($upload_dir['baseurl'] . $attachment->file );
+		$url = '';
+
+		if ( defined( 'GEODIRLOCATION_VERSION' ) && geodir_is_page( 'location' ) ) {
+
+			$img = do_shortcode( '[gd_location_meta key="location_image" image_size="full" no_wrap="1"]' );//exit;
+
+			if( ! empty( $img ) ) {
+				if (preg_match('/<img[^>]+src="([^"]+)"/i', $img, $matches)) {
+					$url = esc_url( $matches[1] );
+				}
 			}
+
+//			if(!empty($geodirectory->location->type)){
+//				$attachment = GeoDir_Location_SEO::get_seo_by_slug( $slug, $geodirectory->location->type, $geodirectory->location->country_slug, $region_slug = '' )
+//
+//			}
+//
+//			$attachment = GeoDir_Location_SEO::get_post_attachment( $geodirectory->location );
+//			print_r($geodirectory->location);echo '####';print_r($attachment);exit;
+//
+//			if ( ! empty( $attachment ) ) {
+//				$url = esc_url( geodir_get_image_src( $attachment , 'full' ) );
+//			}
 		}
 
 		return $url;

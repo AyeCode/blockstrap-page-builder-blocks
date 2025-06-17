@@ -1166,23 +1166,28 @@ function sd_aui_branding_colors() {
 function sd_get_container_class_input( $type = 'container', $overwrite = array() ) {
 
 	$options = array(
-		'container'       => __( 'container (default)', 'ayecode-connect' ),
-		'container-sm'    => 'container-sm',
-		'container-md'    => 'container-md',
-		'container-lg'    => 'container-lg',
-		'container-xl'    => 'container-xl',
-		'container-xxl'   => 'container-xxl',
-		'container-fluid' => 'container-fluid',
-		'row'             => 'row',
-		'col'             => 'col',
-		'card'            => 'card',
-		'card-header'     => 'card-header',
-		'card-img-top'    => 'card-img-top',
-		'card-body'       => 'card-body',
-		'card-footer'     => 'card-footer',
-		'list-group'      => 'list-group',
-		'list-group-item' => 'list-group-item',
-		''                => __( 'no container class', 'ayecode-connect' ),
+		'container'                                                             => __( 'container (default)', 'ayecode-connect' ),
+		'container-sm'                                                          => 'container-sm',
+		'container-md'                                                          => 'container-md',
+		'container-lg'                                                          => 'container-lg',
+		'container-xl'                                                          => 'container-xl',
+		'container-xxl'                                                         => 'container-xxl',
+		'container-fluid'                                                       => 'container-fluid',
+		'row'                                                                   => 'row',
+		'col'                                                                   => 'col',
+		'card'                                                                  => 'card',
+		'card-header'                                                           => 'card-header',
+		'card-img-top'                                                          => 'card-img-top',
+		'card-body'                                                             => 'card-body',
+		'card-footer'                                                           => 'card-footer',
+		'list-group'                                                            => 'list-group',
+		'list-group list-group-flush'                                           => 'list-group list-group-flush',
+		'list-group list-group-numbered'                                        => 'list-group list-group-numbered',
+		'list-group list-group-flush list-group-numbered'                       => 'list-group list-group-flush list-group-numbered',
+		'list-group list-group-horizontal'                                      => 'list-group list-group-horizontal',
+		'list-group list-group-horizontal list-group-numbered'                  => 'list-group list-group-horizontal list-group-numbered',
+		'list-group-item'                                                       => 'list-group-item',
+		''                                                                      => __( 'no container class', 'ayecode-connect' ),
 	);
 
 	$defaults = array(
@@ -3014,6 +3019,9 @@ function sd_user_roles_options( $exclude = array() ) {
 		}
 	}
 
+	// Logged out as a custom role.
+	$user_roles['logged_out'] = __( 'Guest (logged out)', 'ayecode-connect' );
+
 	return apply_filters( 'sd_user_roles_options', $user_roles );
 }
 
@@ -3147,6 +3155,7 @@ function sd_visibility_field_condition_options(){
  */
 function sd_visibility_output_options() {
 	$options = array(
+		''              => __( 'Show Block', 'ayecode-connect' ),
 		'hide'          => __( 'Hide Block', 'ayecode-connect' ),
 		'message'       => __( 'Show Custom Message', 'ayecode-connect' ),
 		'page'          => __( 'Show Page Content', 'ayecode-connect' ),
@@ -3165,17 +3174,19 @@ function sd_visibility_output_options() {
  * @return array Template page options.
  */
 function sd_template_page_options( $args = array() ) {
-	global $sd_tmpl_page_options;
+	global $wpdb, $sd_tmpl_page_options;
 
-	if ( ! empty( $sd_tmpl_page_options ) ) {
+	$defaults = array(
+		'nocache' => false,
+		'with_slug' => false,
+		'default_label' => __( 'Select Page...', 'ayecode-connect' )
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	if ( ! empty( $sd_tmpl_page_options ) && empty( $args['nocache'] ) ) {
 		return $sd_tmpl_page_options;
 	}
-
-	$args = wp_parse_args( $args, array(
-		'child_of'    => 0,
-		'sort_column' => 'post_title',
-		'sort_order'  => 'ASC'
-	) );
 
 	$exclude_pages = array();
 	if ( $page_on_front = get_option( 'page_on_front' ) ) {
@@ -3186,24 +3197,50 @@ function sd_template_page_options( $args = array() ) {
 		$exclude_pages[] = $page_for_posts;
 	}
 
+	$exclude_pages_placeholders = '';
 	if ( ! empty( $exclude_pages ) ) {
-		$args['exclude'] = $exclude_pages;
+		// Sanitize the array of excluded pages and implode it for the SQL query.
+		$exclude_pages_placeholders = implode( ',', array_fill( 0, count( $exclude_pages ), '%d' ) );
 	}
 
-	$pages = get_pages( $args );
+	// Prepare the base SQL query.
+	$sql = "SELECT ID, post_title, post_name FROM " . $wpdb->posts . " WHERE post_type = 'page' AND post_status = 'publish'";
 
-	$options = array( '' => __( 'Select Page...', 'ayecode-connect' ) );
+	// Add the exclusion if there are pages to exclude
+	if ( ! empty( $exclude_pages ) ) {
+		$sql .= " AND ID NOT IN ($exclude_pages_placeholders)";
+	}
+
+	// Add sorting.
+	$sql .= " ORDER BY post_title ASC";
+
+	// Add a limit.
+	$limit = (int) apply_filters( 'sd_template_page_options_limit', 500, $args );
+
+	if ( $limit > 0 ) {
+		$sql .= " LIMIT " . (int) $limit;
+	}
+
+	// Prepare the SQL query to include the excluded pages only if we have placeholders.
+	$pages = $exclude_pages_placeholders ? $wpdb->get_results( $wpdb->prepare( $sql, ...$exclude_pages ) ) : $wpdb->get_results( $sql );
+
+	if ( ! empty( $args['default_label'] ) ) {
+		$options = array( '' => $args['default_label'] );
+	} else {
+		$options = array();
+	}
+
 	if ( ! empty( $pages ) ) {
 		foreach ( $pages as $page ) {
-			if ( ! empty( $page->ID ) && ! empty( $page->post_title ) ) {
-				$options[ $page->ID ] = $page->post_title . ' (#' . $page->ID . ')';
-			}
+			$title = ! empty( $args['with_slug'] ) ? $page->post_title . ' (' . $page->post_name . ')' : ( $page->post_title . ' (#' . $page->ID . ')' );
+
+			$options[ $page->ID ] = $title;
 		}
 	}
 
 	$sd_tmpl_page_options = $options;
 
-	return apply_filters( 'sd_template_page_options', $options );
+	return apply_filters( 'sd_template_page_options', $options, $args );
 }
 
 /**
@@ -3284,16 +3321,36 @@ function sd_render_block( $block_content, $block, $instance = '' ) {
 	$attributes = json_decode( $block['attrs']['visibility_conditions'], true );
 	$rules = ! empty( $attributes ) ? sd_block_parse_rules( $attributes ) : array();
 
+	// remove rules with missing validators.
+	$valid_rules = sd_visibility_rules_options();
+
+	if ( ! empty( $rules ) ) {
+		foreach ( $rules as $key => $rule ) {
+			if ( ! isset( $valid_rules[ $rule['type'] ] ) ) {
+				unset( $rules[ $key ] );
+			}
+		}
+	}
+
 	// No rules set.
 	if ( empty( $rules ) ) {
 		return $block_content;
 	}
 
+	$check_rules = null;
 	$_block_content = $block_content;
 
-	if ( ! empty( $rules ) && sd_block_check_rules( $rules ) ) {
-		if ( ! empty( $attributes['output']['type'] ) ) {
-			switch ( $attributes['output']['type'] ) {
+	if ( ! empty( $rules ) && ( ! empty( $attributes['output'] ) || ! empty( $attributes['outputN'] ) ) ) {
+		$check_rules = sd_block_check_rules( $rules );
+
+		if ( $check_rules ) {
+			$output_condition = ! empty( $attributes['output'] ) ? $attributes['output'] : array();
+		} else {
+			$output_condition = ! empty( $attributes['outputN'] ) ? $attributes['outputN'] : array();
+		}
+
+		if ( ! empty( $output_condition ) && ! empty( $output_condition['type'] ) ) {
+			switch ( $output_condition['type'] ) {
 				case 'hide':
 					$valid_type = true;
 					$content = '';
@@ -3302,12 +3359,12 @@ function sd_render_block( $block_content, $block, $instance = '' ) {
 				case 'message':
 					$valid_type = true;
 
-					if ( isset( $attributes['output']['message'] ) ) {
-						$content = $attributes['output']['message'] != '' ? __( stripslashes( $attributes['output']['message'] ), 'ayecode-connect' ) : $attributes['output']['message'];
+					if ( isset( $output_condition['message'] ) ) {
+						$content = $output_condition['message'] != '' ? __( stripslashes( $output_condition['message'] ), 'ayecode-connect' ) : $output_condition['message'];
 
-						if ( ! empty( $attributes['output']['message_type'] ) ) {
+						if ( ! empty( $output_condition['message_type'] ) ) {
 							$content = aui()->alert( array(
-									'type'=> $attributes['output']['message_type'],
+									'type'=> $output_condition['message_type'],
 									'content'=> $content
 								)
 							);
@@ -3318,14 +3375,14 @@ function sd_render_block( $block_content, $block, $instance = '' ) {
 				case 'page':
 					$valid_type = true;
 
-					$page_id = ! empty( $attributes['output']['page'] ) ? absint( $attributes['output']['page'] ) : 0;
+					$page_id = ! empty( $output_condition['page'] ) ? absint( $output_condition['page'] ) : 0;
 					$content = sd_get_page_content( $page_id );
 
 					break;
 				case 'template_part':
 					$valid_type = true;
 
-					$template_part = ! empty( $attributes['output']['template_part'] ) ? $attributes['output']['template_part'] : '';
+					$template_part = ! empty( $output_condition['template_part'] ) ? $output_condition['template_part'] : '';
 					$content = sd_get_template_part_content( $template_part );
 
 					break;
@@ -3335,12 +3392,12 @@ function sd_render_block( $block_content, $block, $instance = '' ) {
 			}
 
 			if ( $valid_type ) {
-				$block_content = '<div class="' . esc_attr( wp_get_block_default_classname( $instance->name ) ) . ' sd-block-has-rule">' . $content . '</div>';
+				$block_content = '<div class="' . esc_attr( wp_get_block_default_classname( $instance->name ) ) . ' sd-block-has-rule' . ( $output_condition['type'] == 'hide' ? ' sd-block-hide-rule' : '' ) . '">' . $content . '</div>';
 			}
 		}
 	}
 
-	return apply_filters( 'sd_render_block_visibility_content', $block_content, $_block_content, $attributes, $block, $instance );
+	return apply_filters( 'sd_render_block_visibility_content', $block_content, $_block_content, $attributes, $block, $instance, $check_rules );
 }
 add_filter( 'render_block', 'sd_render_block', 9, 3 );
 
@@ -3448,11 +3505,18 @@ function sd_block_check_rule( $match, $rule ) {
 						$user_roles = array_filter( array_map( 'trim', $user_roles ) );
 					}
 
-					if ( ! empty( $user_roles ) && is_array( $user_roles ) && is_user_logged_in() && ( $current_user = wp_get_current_user() ) ) {
-						$current_user_roles = $current_user->roles;
+					if ( ! empty( $user_roles ) && is_array( $user_roles ) ) {
+						if ( is_user_logged_in() && ( $current_user = wp_get_current_user() ) ) {
+							$current_user_roles = $current_user->roles;
 
-						foreach ( $user_roles as $role ) {
-							if ( in_array( $role, $current_user_roles ) ) {
+							foreach ( $user_roles as $role ) {
+								if ( in_array( $role, $current_user_roles ) ) {
+									$match = true;
+								}
+							}
+						} else {
+							// Logged out role.
+							if ( in_array( 'logged_out', $user_roles ) ) {
 								$match = true;
 							}
 						}
@@ -3463,6 +3527,10 @@ function sd_block_check_rule( $match, $rule ) {
 			case 'gd_field':
 				$match = sd_block_check_rule_gd_field( $rule );
 
+				break;
+
+			default:
+				$match = apply_filters( 'sd_block_check_custom_rule', $match, $rule );
 				break;
 		}
 	}
@@ -3714,12 +3782,24 @@ if(!function_exists('sd_blocks_render_blocks')){
 	 * @param $thiss
 	 * @return mixed|string
 	 */
-	function sd_blocks_render_blocks($block_content, $parsed_block, $thiss ){
+	function sd_blocks_render_blocks($block_content, $parsed_block, $thiss = array() ){
+		// Check hide block visibility conditions.
+		if ( ! empty( $parsed_block ) && ! empty( $parsed_block['attrs']['visibility_conditions'] ) && $block_content && strpos( strrev( $block_content ), strrev( ' sd-block-has-rule sd-block-hide-rule"></div>' ) ) === 0 && ! empty( $thiss ) && $thiss->name ) {
+			$match_content = '<div class="' . esc_attr( wp_get_block_default_classname( $thiss->name ) ) . ' sd-block-has-rule sd-block-hide-rule"></div>';
+
+			// Return empty content to hide block.
+			if ( $block_content == $match_content ) {
+				return '';
+			}
+		}
 
 		// Check if ita a nested block that needs to be wrapped
 		if(! empty($parsed_block['attrs']['sd_shortcode_close'])){
 			$content = isset($parsed_block['attrs']['html']) ? $parsed_block['attrs']['html'] : $block_content;
 			$block_content = $parsed_block['attrs']['sd_shortcode'].$content.$parsed_block['attrs']['sd_shortcode_close'];
+
+			$block_content = do_shortcode($block_content);
+
 		}elseif(! empty($parsed_block['attrs']['sd_shortcode'])){
 			$has_warp = false;
 			if($block_content && strpos(trim($block_content), '<div class="wp-block-') === 0 ){
@@ -3733,8 +3813,10 @@ if(!function_exists('sd_blocks_render_blocks')){
 				// Add the shortcode if its not a wrapped block
 				$block_content .= $parsed_block['attrs']['sd_shortcode'];
 			}
+
+			$block_content = do_shortcode($block_content);
 		}
-		return $block_content;
+		return  $block_content;
 	}
 }
 

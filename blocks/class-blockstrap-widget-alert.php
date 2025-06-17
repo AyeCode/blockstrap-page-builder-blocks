@@ -1,6 +1,6 @@
 <?php
 
-class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
+class BlockStrap_Widget_Alert extends WP_Super_Duper {
 
 
 	public $arguments;
@@ -13,29 +13,79 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 		$options = array(
 			'textdomain'        => 'blockstrap',
 			'output_types'      => array( 'block', 'shortcode' ),
-			'block-icon'        => 'fas fa-heading',
+			'block-icon'        => 'fas fa-exclamation-triangle',
 			'block-category'    => 'layout',
-			'block-keywords'    => "['heading','title','text']",
+			'block-keywords'    => "['alert','notice','message']",
 			'block-supports'    => array(
 				'customClassName' => false,
 			),
-			'block-edit-return' => "!props.attributes.is_link ? el(props.attributes.html_tag ? props.attributes.html_tag : 'h1', wp.blockEditor.useBlockProps({
-									dangerouslySetInnerHTML: {__html: 'Post Title' },
-									style: sd_build_aui_styles(props.attributes),
-									className: sd_build_aui_class(props.attributes),
-								})) :
-								el(props.attributes.html_tag ? props.attributes.html_tag : 'h1', wp.blockEditor.useBlockProps({
-									//dangerouslySetInnerHTML: {__html: 'Post Title' },
-									style: sd_build_aui_styles(props.attributes),
-									className: sd_build_aui_class(props.attributes),
-								}), el('a',{dangerouslySetInnerHTML: {__html: 'Post Title' },href: '#post-link', className: 'nav-link nav-link-' + props.attributes.text_color, style: sd_build_aui_styles(props.attributes)  }) )",
+
+			'block-edit-return' => "wp.element.createElement(
+			    'div',
+			    wp.blockEditor.useBlockProps({
+			        className: 'd-flex align-items-center fade show alert alert-' + props.attributes.alert_type + ' ' + sd_build_aui_class(props.attributes),
+			        style: sd_build_aui_styles(props.attributes),
+			        role: 'alert'
+			    }),
+			    props.attributes.icon_position === 'start'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes)  })
+			        : null,
+			    el(wp.blockEditor.RichText, {
+			        tagName: 'span',
+			        value: props.attributes.text,
+			        onChange: function (text) {
+			            props.setAttributes({ text: text });
+			        },
+			        className: 'flex-grow-1',
+			        placeholder: __('Heading...'),
+			    }),
+			    props.attributes.icon_position === 'end'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes) })
+			        : null,
+			    props.attributes.dismissible
+			        ? el('button', {
+						    type: 'button',
+						    className: 'btn-close',
+						    'aria-label': 'Close'
+						})
+			        : null
+			)
+			",
+			'block-save-return' => "wp.element.createElement(
+			    'div',
+			    wp.blockEditor.useBlockProps.save({
+			        className: 'd-flex align-items-center fade show alert alert-' + props.attributes.alert_type + ' ' + sd_build_aui_class(props.attributes),
+			        style: sd_build_aui_styles(props.attributes),
+			        role: 'alert'
+			    }),
+			    props.attributes.icon_position === 'start'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes) })
+			        : null,
+			    el(wp.blockEditor.RichText.Content, {
+			        tagName: 'span',
+			        value: props.attributes.text,
+			        className: 'flex-grow-1',
+			    }),
+			    props.attributes.icon_position === 'end'
+			        ? el('span', { className: bs_build_alert_icon_class(props.attributes) })
+			        : null,
+			    props.attributes.dismissible
+			        ? el('button', {
+						    type: 'button',
+						    className: 'btn-close',
+						    'data-bs-dismiss': 'alert',
+						    'aria-label': 'Close'
+						})
+			        : null
+			)
+			",
 			'block-wrap'        => '',
 			'class_name'        => __CLASS__,
-			'base_id'           => 'bs_post_title',
-			'name'              => __( 'BS > Post Title', 'blockstrap-page-builder-blocks' ),
+			'base_id'           => 'bs_alert',
+			'name'              => __( 'BS > Alert', 'blockstrap-page-builder-blocks' ),
 			'widget_ops'        => array(
-				'classname'   => 'bs-post-title',
-				'description' => esc_html__( 'Displays the title of a post, page, or any other content-type.', 'blockstrap-page-builder-blocks' ),
+				'classname'   => 'bs-heading',
+				'description' => esc_html__( 'An alert message box element', 'blockstrap-page-builder-blocks' ),
 			),
 			'example'           => array(
 				'attributes' => array(
@@ -45,7 +95,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			'no_wrap'           => true,
 			'block_group_tabs'  => array(
 				'content'  => array(
-					'groups' => array( __( 'Title', 'blockstrap-page-builder-blocks' ) ),
+					'groups' => array( __( 'Text', 'blockstrap-page-builder-blocks' ),__( 'Icon', 'blockstrap-page-builder-blocks' )  ),
 					'tab'    => array(
 						'title'     => __( 'Content', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_content',
@@ -89,43 +139,56 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 
 		$arguments = array();
 
-		$arguments['html_tag'] = array(
-			'type'     => 'select',
-			'title'    => __( 'HTML tag', 'blockstrap-page-builder-blocks' ),
-			'options'  => array(
-				'h1'   => 'h1',
-				'h2'   => 'h2',
-				'h3'   => 'h3',
-				'h4'   => 'h4',
-				'h5'   => 'h5',
-				'h6'   => 'h6',
-				'span' => 'span',
-				'div'  => 'div',
-				'p'    => 'p',
-			),
-			'default'  => 'h1',
-			'desc_tip' => true,
-			'group'    => __( 'Title', 'blockstrap-page-builder-blocks' ),
+		$arguments['text'] = array(
+			'type'        => 'textarea',
+			'title'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Enter you text!', 'blockstrap-page-builder-blocks' ),
+			'default'     => __( 'This is some information you should read', 'blockstrap-page-builder-blocks' ),
+			'desc_tip'    => true,
+			'desc'		=> __( 'Add class `alert-link` to links to make them stand out more', 'blockstrap-page-builder-blocks' ),
+			'group'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
-		$arguments['is_link'] = array(
+		$arguments['alert_type'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Alert type', 'blockstrap-page-builder-blocks' ),
+			'options'  => sd_aui_colors(),
+			'default'  => 'info',
+			'desc_tip' => true,
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['dismissible'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Link to post', 'blockstrap-page-builder-blocks' ),
+			'title'    => __( 'Dismissible', 'blockstrap-page-builder-blocks' ),
 			'default'  => '',
 			'value'    => '1',
 			'desc_tip' => false,
-			'group'    => __( 'Title', 'blockstrap-page-builder-blocks' ),
+			'desc'     => __( 'Hides the alert from the page until it’s refreshed (frontend only).', 'blockstrap-page-builder-blocks' ),
+			'group'    => __( 'Text', 'blockstrap-page-builder-blocks' ),
 		);
 
-		$arguments['stretched_link'] = array(
-			'type'            => 'checkbox',
-			'title'           => __( 'Stretched link', 'blockstrap-page-builder-blocks' ),
-			'desc'            => __( 'This expands the link to the first container with position relative (used to make a whole area clickable)', 'blockstrap-page-builder-blocks' ),
-			'default'         => '',
-			'value'           => '1',
-			'desc_tip'        => false,
-			'group'           => __( 'Title', 'blockstrap-page-builder-blocks' ),
-			'element_require' => '[%is_link%]',
+		$arguments['icon_class'] = array(
+			'type'        => 'text',
+			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
+			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'fas fa-info-circle', 'blockstrap-page-builder-blocks' ),
+			'default'     => '',
+			'desc_tip'    => true,
+			'group'       => __( 'Icon', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['icon_position'] = array(
+			'type'     => 'select',
+			'title'    => __( 'Icon position', 'blockstrap-page-builder-blocks' ),
+			'options'  => array(
+				'start' => __( 'Start', 'blockstrap-page-builder-blocks' ),
+				'end' => __( 'End', 'blockstrap-page-builder-blocks' ),
+				'none' => __( 'Remove', 'blockstrap-page-builder-blocks' ),
+			),
+			'default'  => 'start',
+			'desc_tip' => true,
+			'group'    => __( 'Icon', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color
@@ -137,8 +200,11 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 		// line height
 		$arguments['font_line_height'] = sd_get_font_line_height_input();
 
-		// font weight
+		// font size
 		$arguments['font_weight'] = sd_get_font_weight_input();
+
+		// font case
+		$arguments['font_case'] = sd_get_font_case_input();
 
 		// Text justify
 		$arguments['text_justify'] = sd_get_text_justify_input();
@@ -243,6 +309,9 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 		$arguments['display_md'] = sd_get_display_input( 'd', array( 'device_type' => 'Tablet' ) );
 		$arguments['display_lg'] = sd_get_display_input( 'd', array( 'device_type' => 'Desktop' ) );
 
+		// block visibility conditions
+		$arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
+
 		$arguments['css_class'] = sd_get_class_input();
 
 		if ( function_exists( 'sd_get_custom_name_input' ) ) {
@@ -263,71 +332,52 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-		// Makes sure the GD SEO title filter is called
-		if ( function_exists( 'geodir_is_page' ) && ( geodir_is_page( 'single' ) || geodir_is_page( 'preview' ) ) ) {
-			if ( GeoDir_SEO::yoast_enabled() || GeoDir_SEO::rank_math_enabled() ) {
-				// Yoast/Rank Math enabled.
-			} else {
-				GeoDir_SEO::set_meta();
-			}
-		}
 
-		$title = get_the_title();
+		return $content;
 
-		if ( $title ) {
-			$tag          = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'h2';
-			$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'p' );
-			$tag          = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'h2';
-
-			/**
-			 * A GeoDirectory filter to adjust the tag if based inside a GD Listings loop
-			 */
-			$tag          = apply_filters( 'geodir_widget_gd_post_title_tag', $tag, $args, $widget_args, $this );
-
-			// Unset custom color when color class already set.
-			if ( ! empty( $args['text_color'] ) && $args['text_color'] != 'custom' ) {
-				$args['text_color_custom'] = '';
-			}
-
-			// Unset custom font size when color class already set.
-			if ( ! empty( $args['font_size'] ) && $args['font_size'] != 'custom' ) {
-				$args['font_size_custom'] = '';
-			}
-
-			$classes      = sd_build_aui_class( $args );
-			$class        = $classes ? 'class="' . $classes . '"' : '';
-			$styles       = sd_build_aui_styles( $args );
-			$style        = $styles ? ' style="' . $styles . '"' : '';
-
-			$wrapper_attributes = $class . $style;
-
-			if ( $args['is_link'] ) {
-				$class  = $args['text_color'] ? 'link-' . esc_attr( $args['text_color'] ) : '';
-				$class .= ! empty( $args['stretched_link'] ) ? ' stretched-link' : '';
-				$link   = get_permalink();
-				$title  = sprintf(
-					'<a href="%1$s" class="%2$s" %3$s>%4$s</a>',
-					$link,
-					$class,
-					$style,
-					$title
-				);
-			}
-		}
-
-		return $title ? sprintf(
-			'<%1$s %2$s>%3$s</%1$s>',
-			$tag,
-			$wrapper_attributes,
-			$title
-		) : '';
 	}
+
+	public function block_global_js() {
+		ob_start();
+	if ( false ) {
+		?>
+		<script>
+			<?php
+			}
+			?>
+
+            function bs_build_alert_icon_class($args) {
+
+                let $class = '';
+
+	            if($args.icon_class){
+                    $class +=  $args.icon_class;
+	            }else if($args.alert_type === 'info'){
+                    $class += 'fas fa-info-circle';
+                }else if($args.alert_type === 'warning' || $args.alert_type === 'danger'){
+                    $class += 'fas fa-exclamation-triangle';
+                }else if($args.alert_type === 'success' ){
+                    $class += 'fas fa-check-circle';
+                }
+
+                if ($class) {
+                    $class += $args.icon_position === 'start' ? ' me-2' : ' ms-auto' ;
+
+                }
+
+                return $class;
+            }
+		<?php
+		return ob_get_clean();
+	}
+
 }
 
 // register it.
 add_action(
 	'widgets_init',
 	function () {
-		register_widget( 'BlockStrap_Widget_Post_Title' );
+		register_widget( 'BlockStrap_Widget_Alert' );
 	}
 );
+

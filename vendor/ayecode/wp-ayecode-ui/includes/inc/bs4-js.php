@@ -930,8 +930,8 @@
                 cs_scroll  = 'navbar-light';
             }
 
-            navbar.dataset.cso = cs_original
-            navbar.dataset.css = cs_scroll
+            navbar.dataset.cso = cs_original;
+            navbar.dataset.css = cs_scroll;
         }
 
         if($value > 0 ){
@@ -963,7 +963,7 @@
 
 	<?php
 	// FSE tweaks.
-	if(!empty($_REQUEST['postType']) && $_REQUEST['postType']=='wp_template'){ ?>
+	if(!empty($_REQUEST['postType']) && $_REQUEST['postType']=='wp_template' || !empty($_REQUEST['canvas']) ){ ?>
     function aui_fse_set_data_scroll() {
         console.log('init scroll');
         let Iframe = document.getElementsByClassName("edit-site-visual-editor__editor-canvas");

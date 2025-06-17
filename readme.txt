@@ -1,21 +1,21 @@
-=== BlockStrap Page Builder Blocks ===
+=== BlockStrap Page Builder - Bootstrap Blocks ===
 Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
-Tested up to: 6.5
-Stable tag: 0.1.19
+Tested up to: 6.8
+Stable tag: 0.1.37
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-BlockStrap Page Builder Blocks combines the power of BootStrap with the power of the block editor.
+BlockStrap Page Builder - Bootstrap Blocks combines Bootstrap's power with the block editor's versatility.
 
 == Description ==
 
-BlockStrap Page Builder Blocks gives you a selection of bootstrap blocks that let you craft a whole site including header, footer and even menus.
+BlockStrap Page Builder — Bootstrap Blocks gives you a selection of Bootstrap blocks that let you craft a whole site, including a header, footer, and even menus.
 
-This plugin, combined with the [BlockStrap theme](https://wordpress.org/themes/blockstrap/), turbocharges your website's loading speed effortlessly.
+This plugin, combined with the [BlockStrap theme](https://wordpress.org/themes/blockstrap/), effortlessly turbocharges your website's loading speed.
 
 # BlockStrap: The Ultimate BootStrap Page Builder for WordPress
 
@@ -23,7 +23,7 @@ Transform your WordPress website with BlockStrap, the ultimate page builder plug
 
 ## Why Choose BlockStrap?
 
-BlockStrap is not just a plugin, it's a complete page builder that gives you the freedom to create any type of theme. It integrates seamlessly with the WordPress block editor, providing a wide range of fully customizable blocks and easy to use. 
+BlockStrap is not just a plugin; it's a complete page builder that gives you the freedom to create any type of theme. It integrates seamlessly with the WordPress block editor, providing a wide range of fully customizable blocks that are easy to use. 
 
 ## Build Anything with BlockStrap
 
@@ -31,20 +31,20 @@ Whether you're building a blog, a Directory, an e-commerce store, a portfolio, o
 
 ## BlockStrap Free Child Themes
 
-* [Directory Theme](https://wordpress.org/themes/directory/) - Built for our plugin [GeoDirectory](https://wordpress.org/plugins/geodirectory), this is the [best free WordPress directory theme] (https://wpgeodirectory.com/downloads/directory-theme/) you will find on WordPress.org.
+* [Directory Theme](https://wordpress.org/themes/directory/) - Built for our plugin [GeoDirectory](https://wordpress.org/plugins/geodirectory), this is the best free [WordPress directory theme](https://wordpress.org/themes/directory/) you will find on WordPress.org.
 * [Real Estate Theme](https://wpgeodirectory.com/downloads/real-estate-directory-theme/) - Designed specifically for our GeoDirectory plugin, this is the top free WordPress Real Estate theme available. When used alongside the free [Real Estate Directory add-on ](https://wpgeodirectory.com/downloads/real-estate-directory/), for GeoDirectory, it puts premium real estate themes to shame.
 * [Job Board Theme](https://wpgeodirectory.com/downloads/job-board-theme/) Seamlessly integrated with GeoDirectory, this theme offers a robust platform for managing and showcasing job opportunities. Whether running a local job board or a large-scale employment site, the Job Board Theme ensures a professional look and smooth user experience.
 * [School Child Theme](https://wordpress.org/themes/school/) Build a professional-looking educational website with the free School Child Theme for Blockstrap. Tailored for academic institutions, this theme provides a clean, user-friendly design that enhances the online presence of schools and educational programs. Fully compatible with the Blockstrap framework, the School Child Theme offers seamless functionality and a professional aesthetic to engage students, parents, and educators alike.
 
-Many more BLockstrap Child themes are in the pipeline. We aim to release at least 2 per month.
+Many more BlockStrap Child themes are in the pipeline. We aim to release at least 1 per month.
 
 ## Blockstrap Blocks
 
 ### BS > Archive Actions
-Perfect for blogs and news sites, this block allows you to add category selector and sort options to archive pages.
+This block, perfect for blogs and news sites, allows you to add category selectors and sort options to archive pages.
 
 ### BS > Archive Title
-Display your archive titles in a stylish and professional manner.
+Display your archive titles stylishly and professionally.
 
 ### BS > Breadcrumb
 Improve your site navigation with this breadcrumb block.
@@ -56,7 +56,7 @@ Create stylish and responsive buttons that are highly customizable.
 This block allows you to create responsive containers for your content. It also doubles as row, column and card blocks.
 
 ### BS > Counter
-Display numbers in a dynamic and engaging way with this counter block.
+Display numbers dynamically and engagingly with this counter block.
 
 ### BS > Gallery
 Showcase your images in a beautiful and responsive gallery.
@@ -86,19 +86,19 @@ Add individual items to your navigation menu.
 Create a stylish and responsive navigation bar.
 
 ### BS > Navbar Brand
-Display your brand / logo in your navigation bar with this block.
+Display your brand/logo in your navigation bar with this block.
 
 ### BS > Pagination
 Improve your site navigation with this pagination block.
 
 ### BS > Post Excerpt
-Display post excerpts in a stylish and engaging manner.
+Display post excerpts stylishly and engagingly.
 
 ### BS > Post Info
-Showcase your post info with this block, including author, dates, comments, read time etc.
+Showcase your post info with this block, including author, dates, comments, reading time, etc.
 
 ### BS > Post Title
-Display your post titles in a stylish and professional manner.
+Display your post titles stylishly and professionally.
 
 ### BS > Search
 Add a search function to your site with this block.
@@ -128,7 +128,7 @@ Add individual items to your accordion with this block.
 Add a simple and easy contact form to your site with this block.
 
 ### BS > Rating
-Add a start rating icons to your posts. (can also be used to output GeoDirectory post ratings)
+Add star rating icons to your posts. (can also be used to output GeoDirectory post ratings)
 
 ### BS > Scroll Top
 Add a button to the page so users can scroll back to the top of the page easily.
@@ -137,7 +137,13 @@ Add a button to the page so users can scroll back to the top of the page easily.
 Add a modal (popup) to the page containing any content.
 
 ### BS > Offcanvas
-Add a Offcanvas element to the page containing any content.
+Add an Offcanvas element to the page containing any content.
+
+### BS > Alert
+Add an Alert element to the page to show important information.
+
+### BS > Headline
+Add an animated headline to your site, this supports highlight and animations.
 
 ## Get BlockStrap Today!
 Take your WordPress site to the next level with the BlockStrap plugin. Experience the power of Bootstrap in your WordPress block editor today!
@@ -152,9 +158,9 @@ Take your WordPress site to the next level with the BlockStrap plugin. Experienc
 
 = AUTOMATIC INSTALLATION =
 
-Automatic installation is the easiest option. To automatically install BlockStrap Page Builder Blocks, log in to your WordPress dashboard, navigate the Plugins menu, and click Add New.
+The easiest option is automatic installation. To automatically install BlockStrap Page Builder Blocks, log in to your WordPress dashboard, navigate to the Plugins menu, and click Add New.
 
-In the search field, type BlockStrap, and click Search Plugins. Once you've found our plugin, you install it by clicking Install Now.
+In the search field, type BlockStrap and click Search Plugins. Once you've found our plugin, install it by clicking Install Now.
 
 = MANUAL INSTALLATION =
 
@@ -162,7 +168,7 @@ The manual installation method involves downloading our Directory plugin and upl
 
 = UPDATING =
 
-Automatic updates should work seamlessly. We always suggest you backup your website before any automated update to avoid unforeseen problems.
+Automatic updates should work seamlessly. To avoid unforeseen problems, we always suggest backing up your website before any automated update.
 
 == Screenshots ==
 
@@ -181,6 +187,76 @@ Automatic updates should work seamlessly. We always suggest you backup your webs
 * Navbar Brand added option for dark mode logo upload - ADDED
 * BS Container has `undefined` class if style ID not set - FIXED
 
+= 0.1.37 - 2025-06-09 =
+* GD > Titles & Meta page title setting is not working on single page - FIXED
+* Icon Box block if using image has title added as alt tag for accessibility score - ADDED
+* Icon Box block, SVG icons will now take size from font size - ADDED
+* Icon Box title tag extra sanitization for contributor+ levels users - ADDED
+
+= 0.1.36 - 2025-05-07 =
+* Add missing minified JS file - FIXED
+
+= 0.1.35 - 2025-05-01 =
+* BS > Alert - block added for showing messages in and alert box - ADDED
+* BS > Container - added more list group types - ADDED
+* BS > Share - added print option - ADDED
+* BS > Dropdown - added option to hide the dropdown pointer - ADDED
+* BS > Icon Box - added options to use image upload, URL or direct SVG code as icons - ADDED
+* BS > Nav Item & Button - can now set a term id as a link - ADDED 
+* BS > Headline - block added for showing animated headlines - ADDED 
+
+= 0.1.34 - 2025-03-11 =
+* BS > Post Title unable to unset text custom color if saved - FIXED
+* SD and AUI packages updated - CHANGED
+
+= 0.1.32 - 2025-01-28 =
+* Filter added to breadcrumbs block to be able to adjust the breadcrumbs - ADDED
+* Breadcrumbs block improved to show CPT and custom taxonomies in the crumbs - CHANGED
+* Navbar can now accept template parts to be able to share menu items between normal and transparent menus - ADDED
+* Contact form will now prefill name and email for logged-in users - ADDED
+
+= 0.1.31 - 2024-12-12 =
+* Changes to better support AyeCode Connect Turnstile Captcha - ADDED
+
+= 0.1.30 - 2024-11-28 =
+* Read time can show 0m in some cases - FIXED
+
+= 0.1.29 - 2024-11-12 =
+* iOS fixed background image does not display correctly due to iOS bug - FIXED
+
+= 0.1.28 - 2024-11-08 =
+* BS Nav Item and other links not including Blog or Front page in pages list, or child pages - FIXED
+* BS Nav Item spacer would require a space in text to show - FIXED
+* BS Nav Item location switcher not showing current location - FIXED
+* BS Nav Item custom icons not working for some types of link - FIXED
+* BS Contact, form will not display if set to gd_post_email and the listing has no email set - CHANGED
+* BS Contact, notice added that from will not show if set to GD listing email and listing email is not set - ADDED
+* BS Contact, sending to GD listing email will now set the reply to as the sender email for easier replies - CHANGED
+
+= 0.1.27 - 2024-10-10 =
+* BS > Contact Form labels are not translatable - FIXED
+* Contact Form sends reCAPTCHA value along with other fields - FIXED
+* Block editor speed and stability improvements with less initial ajax calls - IMPROVED
+
+= 0.1.26 - 2024-09-26 =
+* Post Info block not working for custom meta - FIXED
+* Post Info block before and after texts not working - FIXED
+
+= 0.1.25 - 2024-09-17 =
+* Background featured image not getting correct image for GD Location manager locations - FIXED
+
+= 0.1.23 - 2024-09-12 =
+* Top menu is not scrollable with landscape mode in small screen device - FIXED
+* Button block missing UWP options for links - ADDED
+* Function added to get page IDs for page selects in blocks for better memory use - ADDED
+
+= 0.1.22 - 2024-07-17 =
+* Templates updated to new block output standards for less broken blocks - CHANGED
+
+= 0.1.21 - 2024-07-16 =
+* BS Container has `undefined` class if style ID not set - FIXED
+* JS error in rating block breaks modal functionality - FIXED
+* Changes to show GD post fallback images on GD post page - CHANGED
 
 = 0.1.19 =
 * BS > Offcanvas block added for creating Offcanvas items - ADDED

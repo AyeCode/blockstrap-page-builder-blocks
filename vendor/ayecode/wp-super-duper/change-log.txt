@@ -1,5 +1,57 @@
-= 1.2.3 - 2024-07-16 =
+= 1.2.22 - 2025-04-17 =
+* Extra sanitation for widget titles - ADDED
+
+= 1.2.21 - 2025-03-27 =
+* Added more container class options for creating list groups - ADDED
+
+= 1.2.20 - 2025-03-20 =
+* Advance Search Filters options are not available in Bricks GD > Search element - FIXED
+* GD > Map bricks element don't render map zoom control - FIXED
+
+= 1.2.19 - 2025-02-20 =
+* BS > Nav Item hide block condition is not working - FIXED
+
+= 1.2.18 - 2025-02-06 =
+* Fixed processing of rules with missing validators - FIXED
+
+= 1.2.17 - 2025-01-09 =
+* Added extensibility for block visibility field settings via hooks, filters and jQuery triggers - ADDED
+
+= 1.2.16 - 2024-12-12 =
+* Changes for Bricks output class to add AyeCode UI class and show icons as icon picker - ADDED
+
+= 1.2.15 - 2024-11-28 =
+* Class added for Bricks element conversion - ADDED
+
+= 1.2.14 - 2024-11-12 =
+* widget_title_tag param now filtered by allowed tags list - CHANGED
+
+= 1.2.13 - 2024-10-10 =
+* sd_template_page_options() not allowing child page selection - FIXED
+* Filter added `sd_template_page_options_limit` to adjust the 500 pages limit - ADDED
+* Multiple blocks with taxonomy linking feature can cause ajax query to loop and freeze browser - FIXED
+* __experimentalGetPreviewDeviceType is deprecated - FIXED
+
+= 1.2.10 - 2024-10-08 =
+* Selecting multiple similar blocks with different settings can cause editor to freeze - FIXED
+* Blocks with content already set will not call a refresh on load - CHANGED
+* New shortcode param could cause some blocks to call the render callback twice on each change - FIXED
+
+= 1.2.9 - 2024-09-12 =
+* Template get_pages call changed to custom query for better memory management - CHANGED
+
+= 1.2.7 - 2024-08-29 =
+* Fix conflicts with UpSolution Core plugin - FIXED
+
+= 1.2.6 - 2024-07-18 =
+* render_block hook only had 2 args prior to WP 5.9 which could cause fatal error when running WP < 5.9 - FIXED
+
+= 1.2.5 - 2024-07-17 =
+* non FSE themes can fail to render templates with blocks - FIXED
+
+= 1.2.4 - 2024-07-16 =
 * Some blocks not being wrapped inside the block wrapper - FIXED
+* Issue with blocks with no arguments not adding shortcode argument - FIXED
 
 = 1.2.2 - 2024-07-12 =
 * Blocks with `block-save-return` set should not have a sd_shortcode argument - FIXED

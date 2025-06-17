@@ -16,7 +16,7 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'nested-block'     => true,
 			'block-icon'       => 'fas fa-caret-down',
 			'block-category'   => 'layout',
-			'block-keywords'   => "['menu','nav','item']",
+			'block-keywords'   => "['menu','nav','item','dropdown']",
 			'block-label'      => "attributes.text ? '" . __( 'BS > Dropdown', 'blockstrap-page-builder-blocks' ) . " ('+ attributes.text+')' : ''",
 			'block-supports'   => array(
 				'customClassName' => false,
@@ -41,7 +41,7 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 						'element'          => 'innerBlocksProps',
 						'inner_element'    => 'ul',
 						'blockProps'       => array(
-							'className' => 'dropdown-menu',
+							'if_className' => 'props.attributes.dropdown_hide_pointer == 1 ? "dropdown-menu dropdown-caret-0" : "dropdown-menu"',
 						),
 						'innerBlocksProps' => array(
 							'orientation' => 'horizontal',
@@ -76,7 +76,7 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 					),
 				),
 				'styles'   => array(
-					'groups' => array( __( 'Link styles', 'blockstrap-page-builder-blocks' ), __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
+					'groups' => array( __( 'Link styles', 'blockstrap-page-builder-blocks' ), __( 'Dropdown', 'blockstrap-page-builder-blocks' ) , __( 'Typography', 'blockstrap-page-builder-blocks' ) ),
 					'tab'    => array(
 						'title'     => __( 'Styles', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_styles',
@@ -187,6 +187,14 @@ class BlockStrap_Widget_Nav_Dropdown extends WP_Super_Duper {
 			'default'  => '',
 			'desc_tip' => true,
 			'group'    => __( 'Link styles', 'blockstrap-page-builder-blocks' ),
+		);
+
+		$arguments['dropdown_hide_pointer'] = array(
+			'type'     => 'checkbox',
+			'title'    => __( 'Hide Dropdown Pointer', 'blockstrap-page-builder-blocks' ),
+			'default'  => '',
+			'desc_tip' => true,
+			'group'    => __( 'Dropdown', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// text color

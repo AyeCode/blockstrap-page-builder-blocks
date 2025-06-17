@@ -760,28 +760,41 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			),
 		);
 
+		$field_types = apply_filters( 'blockstrap_blocks_contact_block_field_types', $field_types, $args, $this );
+
 		$form_hz_col_class = ! $is_lightbox && $is_horizontal ? ' col' : '';
 
 		foreach ( $field_types as $field_slug => $field ) {
 
 			if ( 'hide' !== $args[ $field_slug ] ) {
-				$label    = ucfirst( str_replace( 'field_', '', $field_slug ) );
 				$required = 'require' === $args[ $field_slug ] ? ' <span class="text-danger">*</span>' : '';
 				if ( $required && empty( $args['display_labels'] ) ) {
 					$required = ' ' . __( '(required)', 'blockstrap-page-builder-blocks' );
 				}
 				$type           = 'textarea' === $field['type'] ? 'textarea' : 'input';
+
+				$value          = '';
+				// maybe set the name and email if the user is logged in
+				$current_user = wp_get_current_user();
+				if ( $current_user->exists() ) {
+					if($field_slug === 'field_name' && !empty($current_user->display_name)) {
+						$value = esc_attr( sanitize_text_field( $current_user->display_name ) );
+					}elseif ($field_slug === 'field_email' && !empty($current_user->user_email)) {
+						$value = esc_attr( sanitize_email( $current_user->user_email ) );
+					}
+				}
+
 				$field_content .= aui()->{$type}(
 					array(
 						'type'        => $field['type'],
 						//'id'          => $field_slug,
 						'name'        => $field_slug,
-						'value'       => '',
+						'value'       => $value,
 						'required'    => 'require' === $args[ $field_slug ],
 						'label_show'  => true,
-						'label'       => $label . $required,
+						'label'       => $field['label'] . $required,
 						'label_type'  => $args['display_labels'],
-						'placeholder' => empty( $args['display_labels'] ) ? $label . $required : '',
+						'placeholder' => empty( $args['display_labels'] ) ? $field['label'] . $required : '',
 						'size'        => ! empty( $args['field_size'] ) ? $args['field_size'] : '',
 						'rows'        => ! empty( $args['textarea_rows'] ) ? $args['textarea_rows'] : '4',
 						'wrap_class'  => $form_hz_col_class,
@@ -790,17 +803,24 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			}
 		}
 
+
+		// Captcha Input
+		$captcha_input = apply_filters( 'blockstrap_blocks_contact_form_captcha_input', '', $args );
+
 		// recaptcha
 		$recaptcha_enabled = false;
-		if ( defined( 'BLOCKSTRAP_VERSION' ) && empty( $args['field_recaptcha'] ) ) {
+		if ( !$captcha_input && defined( 'BLOCKSTRAP_VERSION' ) && empty( $args['field_recaptcha'] ) ) {
 			$keys     = function_exists( 'blockstrap_get_option' ) ? blockstrap_get_option( 'blockstrap_recaptcha_keys' ) : get_option( 'blockstrap_recaptcha_keys' );
 			if ( ! empty( $keys['site_key'] ) && ! empty( $keys['site_secret'] ) ) {
-				$field_content    .= '<div class="g-recaptcha mb-3" id="x" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';
-				$recaptcha_enabled = true;
+				$field_content    .= '<div class="g-recaptcha mb-3" data-sitekey="' . esc_attr( $keys['site_key'] ) . '"></div>';
+				$recaptcha_enabled = 'g-recaptcha-response';
 				//if(!$is_lightbox){
 					add_action( 'wp_footer', array( $this, 'get_recaptcha_js' ) );
 				//}
 			}
+		} elseif ( $captcha_input ) {
+			$field_content .= $captcha_input;
+			$recaptcha_enabled = 'cf-turnstile-response';
 		}
 
 		// add to footer
@@ -819,7 +839,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			(string) esc_attr( $send_bcc ),
 			(string) esc_attr( $subject ),
 			(string) absint( $post_id ),
-			(string) absint( $recaptcha_enabled ),
+			(string) esc_attr( $recaptcha_enabled ),
 			(string) esc_attr( $newsletter ),
 		);
 
@@ -898,6 +918,22 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			);
 		} else {
 			$html = $button_html . $form_html . $lightbox_html;
+		}
+
+
+		// show notice that form will only show if GD email exists
+		if ($send_to === 'gd_post_email') {
+			global $gd_post;
+			if ($this->is_preview()) {
+				$html = aui()->alert( array(
+					'type'    => 'info',
+					'content' => __( 'GD contact form will only show if the listing has an email set.', 'blockstrap-page-builder-blocks' ),
+					'class'   => 'mb-0',
+				)) . $html ;
+			}elseif(empty($gd_post->email)){
+				// if the GD post has no email then don't show the form
+				$html = '';
+			}
 		}
 
 		return apply_filters( 'blockstrap_blocks_block_output_contact', $html, $args );
@@ -1022,17 +1058,19 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 
 						if (data.success) {
 							jQuery($form).html( '<div class="alert alert-success" role="alert">'+$message+'</div>' );
-							aui_toast('blockstrap_page_management_error','success', $message );
+							aui_toast('blockstrap_contact_form_success','success', $message );
 						}else{
 							var message = data.data ? data.data : '<?php esc_html_e( 'Something went wrong, please try again', 'blockstrap-page-builder-blocks' ); ?>';
-							aui_toast('blockstrap_contact_corm_error','error', message );
+							aui_toast('','error', message );
 							jQuery($form).find('.btn-primary').prop('disabled', false).find('.spinner-border').addClass('d-none');
+							document.dispatchEvent(new Event('ayecode_reset_captcha'));
 						}
 
 					},
 					error: function(xhr) { // if error occured
 						jQuery($form).find('.btn-primary').prop('disabled', false).find('.spinner-border').addClass('d-none');
 						alert("Error occured.please try again");
+						document.dispatchEvent(new Event('ayecode_reset_captcha'));
 					},
 					complete: function() {
 						jQuery($form).find('.btn-primary').prop('disabled', false).find('.spinner-border').addClass('d-none');

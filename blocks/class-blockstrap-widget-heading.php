@@ -99,7 +99,7 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 		$arguments['text'] = array(
 			'type'        => 'textarea',
 			'title'       => __( 'Title', 'blockstrap-page-builder-blocks' ),
-			'placeholder' => __( 'Enter you title!', 'blockstrap-page-builder-blocks' ),
+			'placeholder' => __( 'Enter your title!', 'blockstrap-page-builder-blocks' ),
 			'default'     => __( 'Add Your Heading Text', 'blockstrap-page-builder-blocks' ),
 			'desc_tip'    => true,
 			'group'       => __( 'Title', 'blockstrap-page-builder-blocks' ),

@@ -339,6 +339,8 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 		// border
 		$arguments['img_border']       = sd_get_border_input( 'border', array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ) ) );
+		$arguments['img_border_width']     = sd_get_border_input( 'width' , array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),'element_require' => '', )); // BS5 only
+		$arguments['img_border_opacity']   = sd_get_border_input( 'opacity' , array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ),'element_require' => '', )); // BS5 only
 		$arguments['img_rounded']      = sd_get_border_input(
 			'rounded',
 			array(
@@ -353,6 +355,14 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 				'element_require' => '',
 			)
 		);
+
+//		// border
+//		$arguments['border']         = sd_get_border_input( 'border' );
+//		$arguments['border_type']    = sd_get_border_input( 'type' );
+//		$arguments['border_width']   = sd_get_border_input( 'width' ); // BS5 only
+//		$arguments['border_opacity'] = sd_get_border_input( 'opacity' ); // BS5 only
+//		$arguments['rounded']        = sd_get_border_input( 'rounded' );
+//		$arguments['rounded_size']   = sd_get_border_input( 'rounded_size' );
 
 		// shadow
 		$arguments['img_shadow'] = sd_get_shadow_input( 'shadow', array( 'group' => __( 'Image Styles', 'blockstrap-page-builder-blocks' ) ) );
@@ -458,9 +468,17 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$arguments['pl_lg'] = sd_get_padding_input( 'pl', array( 'device_type' => 'Desktop' ) );
 
 		// border
-		$arguments['border']       = sd_get_border_input( 'border' );
-		$arguments['rounded']      = sd_get_border_input( 'rounded' );
-		$arguments['rounded_size'] = sd_get_border_input( 'rounded_size' );
+//		$arguments['border']       = sd_get_border_input( 'border' );
+//		$arguments['rounded']      = sd_get_border_input( 'rounded' );
+//		$arguments['rounded_size'] = sd_get_border_input( 'rounded_size' );
+
+		// border
+		$arguments['border']         = sd_get_border_input( 'border' );
+		$arguments['border_type']    = sd_get_border_input( 'type' );
+		$arguments['border_width']   = sd_get_border_input( 'width' ); // BS5 only
+		$arguments['border_opacity'] = sd_get_border_input( 'opacity' ); // BS5 only
+		$arguments['rounded']        = sd_get_border_input( 'rounded' );
+		$arguments['rounded_size']   = sd_get_border_input( 'rounded_size' );
 
 		// shadow
 		$arguments['shadow'] = sd_get_shadow_input( 'shadow' );
@@ -553,13 +571,15 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$image          = '';
 		$image_class    = 'mw-100 w-100';
 		$image_class   .= ! empty( $args['img_border'] ) ? ' border border-' . esc_attr( $args['img_border'] ) : '';
+		$image_class   .= ! empty( $args['img_border_width'] ) ? ' ' . esc_attr( $args['img_border_width'] ) : '';
+		$image_class   .= ! empty( $args['img_border_opacity'] ) ? ' ' . esc_attr( $args['img_border_opacity'] ) : '';
 		$image_class   .= ! empty( $args['img_rounded'] ) ? ' ' . esc_attr( $args['img_rounded'] ) : '';
 		$image_class   .= ! empty( $args['img_rounded_size'] ) ? ' rounded-' . esc_attr( $args['img_rounded_size'] ) : '';
 		$image_class   .= ! empty( $args['img_shadow'] ) ? ' ' . esc_attr( $args['img_shadow'] ) : '';
 		$image_class   .= ! empty( $args['img_aspect'] ) ? ' embed-responsive-item' : '';
 
 		// image mask
-		$image_styles  = ! empty( $args['img_mask'] ) ? '-webkit-mask-image: url("' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/masks/' . esc_attr( $args['img_mask'] ) . '.svg");' : '';
+		$image_styles  = ! empty( $args['img_mask'] ) ? '-webkit-mask-image: url("' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/masks/' . esc_attr( $args['img_mask'] ) . '.svg");' : '';
 		$image_styles .= ! empty( $args['img_mask'] ) ? '-webkit-mask-size: contain;-webkit-mask-repeat: no-repeat;' : '';
 		$image_styles .= ! empty( $args['img_mask'] ) && ! empty( $args['img_mask_position'] ) ? '-webkit-mask-position: ' . esc_attr( $args['img_mask_position'] ) . ';' : '';
 		$image_style   = $image_styles ? "style='$image_styles'" : '';
@@ -587,6 +607,13 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'class'   => $image_class,
 		);
 
+		// if eager
+		if ('eager' === $img_lazy) {
+			$img_attr['fetchpriority'] = 'high';
+			$img_attr['decoding'] = 'async';
+			$img_attr['importance'] = 'high';
+		}
+
 		if ( 'url' === $args['img_src'] ) {
 			$image_src = $args['img_url'] ? esc_url_raw( $args['img_url'] ) : '';
 		} elseif ( 'featured' === $args['img_src'] ) {
@@ -600,25 +627,51 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 
 			$link_image_src_arr = wp_get_attachment_image_src( absint( $args['img_image_id'] ), $lightbox_size );
 			$link_image_src     = ! empty( $link_image_src_arr[0] ) ? esc_url_raw( $link_image_src_arr[0] ) : '';
-
 		}
 
 		if ( ! $image_src && $this->is_block_content_call() ) {
-			$image = '<img src="' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg" class="' . sd_sanitize_html_classes( $image_class ) . '" />';
+			$image = '<img src="' . BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/images/block-image-placeholder.jpg" class="' . sd_sanitize_html_classes( $image_class ) . '" />';
 		} elseif ( ! $image ) {
-
 			if ( 'featured' === $args['img_src'] && 'upload' === $args['fallback_img_src'] && ! empty( $args['fallback_img_image_id'] ) ) {
 				$image         = wp_get_attachment_image( absint( $args['fallback_img_image_id'] ), $image_size, false, $img_attr );
 				$image_src_arr = wp_get_attachment_image_src( absint( $args['fallback_img_image_id'] ), 'large' );
 				$image_src     = ! empty( $image_src_arr[0] ) ? esc_url_raw( $image_src_arr[0] ) : '';
 			} elseif ( 'featured' === $args['img_src'] && 'default' === $args['fallback_img_src'] ) {
-				$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . '/assets/images/block-image-placeholder.jpg';
+				$post_image = array();
+
+				if ( ! empty( $post ) && ! empty( $post->post_type ) && function_exists( 'geodir_is_gd_post_type' ) && geodir_is_gd_post_type( $post->post_type ) ) {
+					$post_images = geodir_get_images( (int) $post->ID, 1, true, 0, array( 'post_images' ) );
+
+					if ( ! empty( $post_images ) ) {
+						$post_image = $post_images[0];
+
+						$image_src = geodir_get_image_src( $post_image, $image_size );
+						$link_image_src = geodir_get_image_src( $post_image, $lightbox_size );
+					}
+				}
+
+				if ( ! $image_src ) {
+					$image_src = BLOCKSTRAP_BLOCKS_PLUGIN_URL . 'assets/images/block-image-placeholder.jpg';
+				}
+
 				if ( ! $img_alt ) {
-					$img_alt_tag = 'alt="' . __( 'Placeholder image', 'blockstrap-page-builder-blocks' ) . '"';
+					if ( ! empty( $post_image ) && ! empty( $post_image->title ) ) {
+						$img_alt_tag = 'alt="' . esc_attr( wp_strip_all_tags( stripslashes_deep( $post_image->title ) ) ) . '"';
+					} else {
+						$img_alt_tag = 'alt="' . __( 'Placeholder image', 'blockstrap-page-builder-blocks' ) . '"';
+					}
 				}
 				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
 			} else {
-				$image = '<img src="' . esc_url_raw( $image_src ) . '" class="' . sd_sanitize_html_classes( $image_class ) . '" ' . $img_alt_tag . ' ' . $img_lazy_tag . ' />';
+				$custom_attr_string = implode(',', array_map(
+					function($key, $value) {
+						return esc_attr($key) . '|' . esc_attr($value);
+					},
+					array_keys($img_attr),
+					$img_attr
+				));
+				$attributes_escaped = sd_build_attributes_string_escaped( array('custom'=> $custom_attr_string) );
+				$image = '<img src="' . esc_url_raw( $image_src ) . '" ' . $attributes_escaped . ' />';
 			}
 		}
 
@@ -660,7 +713,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		$ratio_cover_class .= ! empty( $args['img_aspect'] ) ? ' ' . $ratio_prefix . esc_attr( $ratio_val ) . ' ' : '';
 
 		// hover action
-		$ratio_cover_class .= 'none' === $link_hover ? '' : ' embed-has-action';
+		$ratio_cover_class .= 'none' === $link_hover ? '' : ' embed-has-action ';
 
 		if ( 'media' === $link_to ) {
 			$icon  = '' === $link_hover ? '<i class="fas fa-search-plus w-auto h-auto"></i>' : '';
@@ -699,10 +752,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		);
 
 		return $image ? $figure : '';
-
 	}
-
-
 }
 
 // register it.
@@ -712,4 +762,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Image' );
 	}
 );
-

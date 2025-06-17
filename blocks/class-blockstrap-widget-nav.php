@@ -2,7 +2,6 @@
 
 class BlockStrap_Widget_Nav extends WP_Super_Duper {
 
-
 	public $arguments;
 
 	/**
@@ -158,7 +157,6 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 	 * @return array
 	 */
 	public function set_arguments() {
-
 		$arguments = array();
 
 		$arguments['anchor'] = sd_get_anchor_input('anchor', array(
@@ -173,7 +171,6 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'element_require' => '[%anchor%]==""',
 		);
 
-		//
 		$arguments['inside_navbar'] = array(
 			'type'     => 'select',
 			'title'    => __( 'Usage', 'blockstrap-page-builder-blocks' ),
@@ -231,7 +228,6 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 
 		$arguments = $arguments + sd_get_flex_justify_content_input_group( 'flex_justify_content', array('element_require' => '','group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ) ) );
 
-
 		// fill / justify
 		$arguments['nav_fill'] = array(
 			'type'     => 'select',
@@ -245,7 +241,6 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'desc_tip' => true,
 			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
-
 
 		// font size
 		$arguments = $arguments + sd_get_font_size_input_group();
@@ -346,7 +341,6 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 		return $arguments;
 	}
 
-
 	/**
 	 * This is the output function for the widget, shortcode and block (front end).
 	 *
@@ -357,14 +351,12 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-
 		if ( empty( $content ) ) {
 			return '';
 		} else {
 			add_action( 'wp_enqueue_scripts',array( $this, 'enqueue_scripts' ) );
 			return $content;
 		}
-
 	}
 
 	/**
@@ -379,11 +371,10 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 
 		// Don't load JS again.
 		if ( empty( $blockstrap_nav_js ) && class_exists( 'AyeCode_UI_Settings' ) ) {
-			$script = 'jQuery(function() { jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").on("show.bs.collapse", function () {jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open"); jQuery(window).trigger("scroll");});jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").on("hidden.bs.collapse", function () {jQuery(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open"); jQuery(window).trigger("scroll");}); });';
+			$script = 'jQuery(function($){$(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").on("show.bs.collapse",function(){$(this).closest(".bg-transparent-until-scroll,.bg-transparent").addClass("nav-menu-open");if(!$(this).hasClass("navbar-nav-scroll")&&($(this).closest(".navbar").hasClass("fixed-top")||$(this).closest(".navbar").hasClass("fixed-bottom"))){$(this).addClass("bs-class-added navbar-nav-scroll")}$(window).trigger("scroll")});$(".wp-block-blockstrap-blockstrap-widget-nav.navbar-collapse, .blockstrap-nav.navbar-collapse").on("hidden.bs.collapse",function(){$(this).closest(".bg-transparent-until-scroll,.bg-transparent").removeClass("nav-menu-open");if($(this).hasClass("bs-class-added")&&$(this).hasClass("navbar-nav-scroll")){$(this).removeClass("bs-class-added navbar-nav-scroll")}$(window).trigger("scroll")})});';
 			$blockstrap_nav_js = wp_add_inline_script( 'bootstrap-js-bundle', $script );
 		}
 	}
-
 }
 
 // register it.
@@ -393,4 +384,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Nav' );
 	}
 );
-

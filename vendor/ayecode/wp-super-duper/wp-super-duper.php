@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WP_Super_Duper' ) ) {
 
-	define( 'SUPER_DUPER_VER', '1.2.3' );
+	define( 'SUPER_DUPER_VER', '1.2.22' );
 
 	/**
 	 * A Class to be able to create a Widget, Shortcode or Block to be able to output content for WordPress.
@@ -84,6 +84,11 @@ if ( ! class_exists( 'WP_Super_Duper' ) ) {
 					add_action( 'init', array( $this, 'register_fusion_element' ) );
 				}
 
+                // maybe load the Bricks transformer class
+                if( class_exists('\Bricks\Elements', false) ){
+					add_action( 'init', array( $this, 'load_bricks_element_class' ) );
+                }
+
 				// register block
 				if(empty($this->options['output_types']) || in_array('block',$this->options['output_types'])){
 					add_action( 'admin_enqueue_scripts', array( $this, 'register_block' ) );
@@ -104,6 +109,7 @@ if ( ! class_exists( 'WP_Super_Duper' ) ) {
 				$sd_widget_scripts = true;
 
 				// add shortcode insert button once
+				add_action( 'media_buttons', array( $this, 'wp_media_buttons' ), 1 );
 				add_action( 'media_buttons', array( $this, 'shortcode_insert_button' ) );
 				// generatepress theme sections compatibility
 				if ( function_exists( 'generate_sections_sections_metabox' ) ) {
@@ -136,6 +142,14 @@ if ( ! class_exists( 'WP_Super_Duper' ) ) {
 
 			do_action( 'wp_super_duper_widget_init', $options, $this );
 		}
+
+        /**
+         * Load the Bricks conversion class if we are running Bricks.
+         * @return void
+         */
+        public function load_bricks_element_class() {
+                    include_once __DIR__ . '/includes/class-super-duper-bricks-element.php';
+        }
 
 		/**
 		 * The register widget function
@@ -1554,6 +1568,10 @@ if ( ! class_exists( 'WP_Super_Duper' ) ) {
 			$this->arguments = apply_filters( 'wp_super_duper_arguments', $this->arguments, $this->options, $this->instance );
 			$this->arguments = $this->add_name_from_key( $this->arguments, true );
 
+            if( !empty( $this->arguments['title']['value'] ) ){
+                $this->arguments['title']['value'] = wp_kses_post( $this->arguments['title']['value'] );
+            }
+
 			return $this->arguments;
 		}
 
@@ -1786,7 +1804,15 @@ function sd_show_view_options($this){
 }
 
 function sd_set_view_type($device){
-	wp.data.dispatch('core/edit-site') ? wp.data.dispatch('core/edit-site').__experimentalSetPreviewDeviceType($device) : wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType($device);
+    const wpVersion = '<?php global $wp_version; echo esc_attr($wp_version); ?>';
+    if (parseFloat(wpVersion) < 6.5) {
+        wp.data.dispatch('core/edit-site') ? wp.data.dispatch('core/edit-site').__experimentalSetPreviewDeviceType($device) : wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType($device);
+    } else {
+        const editorDispatch = wp.data.dispatch('core/editor');
+        if (editorDispatch) {
+            editorDispatch.setDeviceType($device);
+        }
+    }
 }
 
 jQuery(function(){
@@ -1802,7 +1828,7 @@ function sd_block_visibility_init() {
 	});
 
 	jQuery(document).off('click', '.bs-vc-save').on('click', '.bs-vc-save', function() {
-		var $bsvcModal = jQuery(this).closest('.bs-vc-modal'), $bsvcForm = $bsvcModal.find('.bs-vc-modal-form'), vOutput = jQuery('#bsvc_output', $bsvcForm).val(), rawValue = '', oVal = {}, oOut = {}, iRule = 0;
+		var $bsvcModal = jQuery(this).closest('.bs-vc-modal'), $bsvcForm = $bsvcModal.find('.bs-vc-modal-form'), vOutput = jQuery('#bsvc_output', $bsvcForm).val(), vOutputN = jQuery('#bsvc_output_n', $bsvcForm).val(), rawValue = '', oVal = {}, oOut = {}, oOutN = {}, iRule = 0;
 		jQuery(this).addClass('disabled');
 		jQuery('.bs-vc-modal-form .bs-vc-rule-sets .bs-vc-rule').each(function(){
 			vRule = jQuery(this).find('.bsvc_rule').val(), oRule = {};
@@ -1827,7 +1853,10 @@ function sd_block_visibility_init() {
 						oRule.search = jQuery(this).find('.bsvc_gd_field_search').val();
 					}
 				}
-			}
+			} else {
+                oRule = jQuery(document).triggerHandler('sd_block_visibility_init', [vRule, oRule, jQuery(this)]);
+            }
+
 			if (Object.keys(oRule).length > 0) {
 				iRule++;
 				oVal['rule'+iRule] = oRule;
@@ -1857,6 +1886,30 @@ function sd_block_visibility_init() {
 		if (Object.keys(oOut).length > 0) {
 			oVal.output = oOut;
 		}
+		if (vOutputN == 'hide') {
+			oOutN.type = vOutputN;
+		} else if (vOutputN == 'message') {
+			if (jQuery('#bsvc_message_n', $bsvcForm).val()) {
+				oOutN.type = vOutputN;
+				oOutN.message = jQuery('#bsvc_message_n', $bsvcForm).val();
+				if (jQuery('#bsvc_message_type_n', $bsvcForm).val()) {
+					oOutN.message_type = jQuery('#bsvc_message_type_n', $bsvcForm).val();
+				}
+			}
+		} else if (vOutputN == 'page') {
+			if (jQuery('#bsvc_page_n', $bsvcForm).val()) {
+				oOutN.type = vOutputN;
+				oOutN.page = jQuery('#bsvc_page_n', $bsvcForm).val();
+			}
+		} else if (vOutputN == 'template_part') {
+			if (jQuery('#bsvc_tmpl_part_n', $bsvcForm).val()) {
+				oOutN.type = vOutputN;
+				oOutN.template_part = jQuery('#bsvc_tmpl_part_n', $bsvcForm).val();
+			}
+		}
+		if (Object.keys(oOutN).length > 0) {
+			oVal.outputN = oOutN;
+		}
 		if (Object.keys(oVal).length > 0) {
 			rawValue = JSON.stringify(oVal);
 		}
@@ -1873,6 +1926,8 @@ function sd_block_visibility_init() {
 		}
 		bsvcTmpl = bsvcTmpl.replace(/BSVCINDEX/g, c);
 		jQuery('.bs-vc-modal-form .bs-vc-rule-sets').append(bsvcTmpl);
+		jQuery('.bs-vc-modal-form .bs-vc-rule-sets .bs-vc-rule .bs-vc-sep-wrap').removeClass('d-none');
+		jQuery('.bs-vc-modal-form .bs-vc-rule-sets .bs-vc-rule:first .bs-vc-sep-wrap').addClass('d-none');
 		jQuery('.bs-vc-modal-form .bs-vc-rule-sets .bs-vc-rule:last').find('select').each(function(){
 			if (!jQuery(this).hasClass('no-select2')) {
 				jQuery(this).addClass('aui-select2');
@@ -1891,7 +1946,7 @@ function sd_block_visibility_init() {
 		jQuery(this).closest('.bs-vc-rule').remove();
 	});
 }
-function sd_block_visibility_render_fields(oValue) {
+function sd_block_visibility_render_fields(oValue) {console.log(oValue);
 	if (typeof oValue == 'object' && oValue.rule1 && typeof oValue.rule1 == 'object') {
 		for(k = 1; k <= Object.keys(oValue).length; k++) {
 			if (oValue['rule' + k] && oValue['rule' + k].type) {
@@ -1920,7 +1975,10 @@ function sd_block_visibility_render_fields(oValue) {
 							}
 						}
 					}
-				}
+				} else {
+                    jQuery(document).trigger('sd_block_visibility_render_fields', [oRule, elRule]);
+                }
+
 				jQuery('.bs-vc-modal-form .bs-vc-add-rule').removeClass('bs-vc-rendering');
 			}
 		}
@@ -1936,6 +1994,20 @@ function sd_block_visibility_render_fields(oValue) {
 				jQuery('.bs-vc-modal-form #bsvc_page').val(oValue.output.page);
 			} else if (oValue.output.type == 'template_part' && typeof oValue.output.template_part != 'undefined') {
 				jQuery('.bs-vc-modal-form #bsvc_template_part').val(oValue.output.template_part);
+			}
+		}
+
+		if (oValue.outputN && oValue.outputN.type) {
+			jQuery('.bs-vc-modal-form #bsvc_output_n').val(oValue.outputN.type);
+			if (oValue.outputN.type == 'message' && typeof oValue.outputN.message != 'undefined') {
+				jQuery('.bs-vc-modal-form #bsvc_message_n').val(oValue.outputN.message);
+				if (typeof oValue.outputN.message_type != 'undefined') {
+					jQuery('.bs-vc-modal-form #bsvc_message_type_n').val(oValue.outputN.message_type);
+				}
+			} else if (oValue.outputN.type == 'page' && typeof oValue.outputN.page != 'undefined') {
+				jQuery('.bs-vc-modal-form #bsvc_page_n').val(oValue.outputN.page);
+			} else if (oValue.outputN.type == 'template_part' && typeof oValue.outputN.template_part != 'undefined') {
+				jQuery('.bs-vc-modal-form #bsvc_template_part_n').val(oValue.outputN.template_part);
 			}
 		}
 	}
@@ -2570,7 +2642,7 @@ jQuery(function() {
 						echo "  html: false";
 						echo "},";*/
 
-						if ( ! empty( $this->arguments ) ) {
+
 							echo "attributes : {";
 
 							if ( $show_advanced ) {
@@ -2589,66 +2661,68 @@ jQuery(function() {
 							}
 
 
+							if ( ! empty( $this->arguments ) ) {
 
-							foreach ( $this->arguments as $key => $args ) {
+								foreach ( $this->arguments as $key => $args ) {
 
-								if( $args['type'] == 'image' ||  $args['type'] == 'images' ){
-									$img_drag_drop = true;
-								}
-
-								// set if we should show alignment
-								if ( $key == 'alignment' ) {
-									$show_alignment = true;
-								}
-
-								$extra = '';
-
-								if ( $args['type'] == 'notice' ||  $args['type'] == 'tab' ) {
-									continue;
-								}
-								elseif ( $args['type'] == 'checkbox' ) {
-									$type    = 'boolean';
-									$default = isset( $args['default'] ) && $args['default'] ? 'true' : 'false';
-								} elseif ( $args['type'] == 'number' ) {
-									$type    = 'number';
-									$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-								} elseif ( $args['type'] == 'select' && ! empty( $args['multiple'] ) ) {
-									$type = 'array';
-									if ( isset( $args['default'] ) && is_array( $args['default'] ) ) {
-										$default = ! empty( $args['default'] ) ? "['" . implode( "','", $args['default'] ) . "']" : "[]";
-									} else {
-										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+									if( $args['type'] == 'image' ||  $args['type'] == 'images' ){
+										$img_drag_drop = true;
 									}
-								} elseif ( $args['type'] == 'tagselect' ) {
-									$type    = 'array';
-									$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-								} elseif ( $args['type'] == 'multiselect' ) {
-									$type    = 'array';
-									$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-								} elseif ( $args['type'] == 'image_xy' ) {
-									$type    = 'object';
-									$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-								} elseif ( $args['type'] == 'image' ) {
-									$type    = 'string';
-									$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
 
-									// add a field for ID
-//                                    echo $key . "_id : {";
-//                                    echo "type : 'number',";
-//                                    echo "},";
-//                                    echo $key . "_xy : {";
-//                                    echo "type : 'object',";
-//                                    echo "},";
+									// set if we should show alignment
+									if ( $key == 'alignment' ) {
+										$show_alignment = true;
+									}
 
-								} else {
-									$type    = !empty($args['hidden_type']) ? esc_attr($args['hidden_type']) : 'string';
-									$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+									$extra = '';
 
+									if ( $args['type'] == 'notice' ||  $args['type'] == 'tab' ) {
+										continue;
+									}
+									elseif ( $args['type'] == 'checkbox' ) {
+										$type    = 'boolean';
+										$default = isset( $args['default'] ) && $args['default'] ? 'true' : 'false';
+									} elseif ( $args['type'] == 'number' ) {
+										$type    = 'number';
+										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+									} elseif ( $args['type'] == 'select' && ! empty( $args['multiple'] ) ) {
+										$type = 'array';
+										if ( isset( $args['default'] ) && is_array( $args['default'] ) ) {
+											$default = ! empty( $args['default'] ) ? "['" . implode( "','", $args['default'] ) . "']" : "[]";
+										} else {
+											$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+										}
+									} elseif ( $args['type'] == 'tagselect' ) {
+										$type    = 'array';
+										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+									} elseif ( $args['type'] == 'multiselect' ) {
+										$type    = 'array';
+										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+									} elseif ( $args['type'] == 'image_xy' ) {
+										$type    = 'object';
+										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+									} elseif ( $args['type'] == 'image' ) {
+										$type    = 'string';
+										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+
+										// add a field for ID
+	//                                    echo $key . "_id : {";
+	//                                    echo "type : 'number',";
+	//                                    echo "},";
+	//                                    echo $key . "_xy : {";
+	//                                    echo "type : 'object',";
+	//                                    echo "},";
+
+									} else {
+										$type    = !empty($args['hidden_type']) ? esc_attr($args['hidden_type']) : 'string';
+										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+
+									}
+									echo $key . " : {";
+									echo "type : '$type',";
+									echo "default : $default,";
+									echo "},";
 								}
-								echo $key . " : {";
-								echo "type : '$type',";
-								echo "default : $default,";
-								echo "},";
 							}
 
 							echo "content : {type : 'string',default: 'Please select the attributes in the block settings'},";
@@ -2662,13 +2736,14 @@ jQuery(function() {
 
 							echo "},";
 
-						}
+
 
 						?>
 
 						// The "edit" property must be a valid function.
 						edit: function (props) {
 
+							const selectedBlock = wp.data.select('core/block-editor').getSelectedBlock();
 
 <?php
 // only include the drag/drop functions if required.
@@ -2766,7 +2841,7 @@ const parentBlocks = wp.data.select('core/block-editor').getBlocksByClientId(par
 	// if we have a post_type and a category then link them
 	if( isset($this->arguments['post_type']) && isset($this->arguments['category']) && !empty($this->arguments['category']['post_type_linked']) ){
 	?>
-	if(typeof(prev_attributes[props.clientId]) != 'undefined'){
+	if(typeof(prev_attributes[props.clientId]) != 'undefined' && selectedBlock && selectedBlock.clientId === props.clientId){
 		$pt = props.attributes.post_type;
 		if(post_type_rest_slugs.length){
 			$value = post_type_rest_slugs[0][$pt];
@@ -2878,28 +2953,57 @@ if(!empty($current_screen->base) && $current_screen->base==='widgets'){
 }else{
 ?>
 /** Get device type const. */
-const { deviceType } = wp.data.useSelect != 'undefined' ?  wp.data.useSelect(select => {
-	const { __experimentalGetPreviewDeviceType } = select('core/edit-site') ? select('core/edit-site') : select('core/edit-post') ? select('core/edit-post') : ''; // For sie editor https://github.com/WordPress/gutenberg/issues/39248
-	return {
-		deviceType: __experimentalGetPreviewDeviceType(),
-	}
+const wpVersion = '<?php global $wp_version; echo esc_attr($wp_version); ?>';
+const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSelect(select => {
+    if (parseFloat(wpVersion) < 6.5) {
+        const { __experimentalGetPreviewDeviceType } = select('core/edit-site') ? select('core/edit-site') : select('core/edit-post') ? select('core/edit-post') : '';
+        return {
+            deviceType: __experimentalGetPreviewDeviceType(),
+        };
+    } else {
+        const editorSelect = select('core/editor');
+        if (editorSelect) {
+            return {
+                deviceType: editorSelect.getDeviceType(),
+            };
+        } else {
+            return {
+                deviceType: 'Desktop', // Default value if device type is not available
+            };
+        }
+    }
 }, []) : '';
 <?php } ?>
 							var content = props.attributes.content;
+							//console.log(props.attributes);
                             var shortcode = '';
 
 							function onChangeContent($type) {
-// console.log(deviceType);
+
 								$refresh = false;
 								// Set the old content the same as the new one so we only compare all other attributes
 								if(typeof(prev_attributes[props.clientId]) != 'undefined'){
 									prev_attributes[props.clientId].content = props.attributes.content;
+
+									// don't compare the sd_shortcode as it is changed later
+									prev_attributes[props.clientId].sd_shortcode = props.attributes.sd_shortcode;
 								}else if(props.attributes.content === ""){
 									// if first load and content empty then refresh
 									$refresh = true;
+
+								}else{
+
+									// if not new and has content then set it so we dont go fetch it
+									if(props.attributes.content && props.attributes.content !== 'Please select the attributes in the block settings'){
+										prev_attributes[props.clientId] = props.attributes;
+									}
+
 								}
 
+
+
 								if ( ( !is_fetching &&  JSON.stringify(prev_attributes[props.clientId]) != JSON.stringify(props.attributes) ) || $refresh  ) {
+
 
 									is_fetching = true;
 
@@ -2999,7 +3103,11 @@ const { deviceType } = wp.data.useSelect != 'undefined' ?  wp.data.useSelect(sel
 
 								if(shortcode){
 
-									props.setAttributes({sd_shortcode: shortcode});
+									// can cause a react exception when selecting multile blocks of the same type when the settings are not the same
+									if (props.attributes.sd_shortcode !== shortcode) {
+									  props.setAttributes({ sd_shortcode: shortcode });
+									}
+
 
 									<?php
 									if(!empty($this->options['nested-block']) || !empty($this->arguments['html']) ){
@@ -4461,7 +4569,9 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 
 					$output = $args['before_title'] . $title . $args['after_title'];
 				} else {
-					$title_tag = esc_attr( $instance['widget_title_tag'] );
+					$tag 			= esc_attr( $instance['widget_title_tag'] );
+					$allowed_tags 	= array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'p' );
+					$title_tag      = in_array( $tag, $allowed_tags, true ) ? esc_attr( $tag ) : 'h2';
 
 					// classes
 					$title_classes = array();
@@ -4875,6 +4985,11 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 				}
 			}
 
+            // maybe sanitize widget title
+            if(!empty($instance['title'])) {
+                $instance['title'] = wp_kses_post( $instance['title'] );
+            }
+
 			return $instance;
 		}
 
@@ -5101,6 +5216,8 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 							$content .= '</div>';
 						}
 
+                        $content .= apply_filters( 'sd_block_visibility_fields', '', $args );
+
 					$content .= '</div>';
 
 					$content .= '<div class="row aui-conditional-field" data-element-require="jQuery(form).find(\'[name=bsvc_rule_BSVCINDEX]\').val()==\'user_roles\'" data-argument="bsvc_user_roles_BSVCINDEX_1"><label for="bsvc_user_roles_BSVCINDEX_1" class="form-label mb-3">' . __( 'Select User Roles:', 'ayecode-connect' ) . '</label>';
@@ -5127,6 +5244,7 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 							$content .= '</div>';
 						}
 					$content .= '</div>';
+					$content .= '<div class="bs-vc-sep-wrap text-center position-absolute top-0 mt-n3"><div class="bs-vc-sep-cond d-inline-block badge text-dark bg-gray mt-1">' . esc_html__( 'AND', 'ayecode-connect' ) . '</div></div>';
 				$content .= '</div>';
 			$content .= '</div>';
 			$content .= '<form id="bs-vc-modal-form" class="bs-vc-modal-form">';
@@ -5138,7 +5256,7 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 					'id'          => 'bsvc_output',
 					'name'        => 'bsvc_output',
 					'label'       => __( 'What should happen if rules met.', 'ayecode-connect' ),
-					'placeholder' => __( 'Default Output', 'ayecode-connect' ),
+					'placeholder' => __( 'Show Block', 'ayecode-connect' ),
 					'class'       => 'bsvc_output form-select-sm no-select2 mw-100',
 					'options'     => sd_visibility_output_options(),
 					'default'     => '',
@@ -5215,7 +5333,7 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 					'id'              => 'bsvc_message',
 					'name'            => 'bsvc_message',
 					'label'           => '',
-					'class'           => 'bsvc_message form-control-sm',
+					'class'           => 'bsvc_message form-control-sm mb-3',
 					'placeholder'     => __( 'CUSTOM MESSAGE TO SHOW', 'ayecode-connect' ),
 					'label_type'      => '',
 					'value'           => '',
@@ -5224,9 +5342,115 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 				)
 			);
 
+			$content .= '</div></div><div class="row"><div class="col col-12"><div class="pt-3 mt-1 border-top"></div></div><div class="col-md-6 col-sm-12">';
+			$content .= aui()->select(
+				array(
+					'id'          => 'bsvc_output_n',
+					'name'        => 'bsvc_output_n',
+					'label'       => __( 'What should happen if rules NOT met.', 'ayecode-connect' ),
+					'placeholder' => __( 'Show Block', 'ayecode-connect' ),
+					'class'       => 'bsvc_output_n form-select-sm no-select2 mw-100',
+					'options'     => sd_visibility_output_options(),
+					'default'     => '',
+					'value'       => '',
+					'label_type'  => 'top',
+					'select2'     => false,
+					'extra_attributes' => array(
+						'data-minimum-results-for-search' => '-1'
+					)
+				)
+			);
+
+			$content .= '</div><div class="col-md-6 col-sm-12">';
+
+			$content .= aui()->select(
+				array(
+					'id'              => 'bsvc_page_n',
+					'name'            => 'bsvc_page_n',
+					'label'           => __( 'Page Content', 'ayecode-connect' ),
+					'placeholder'     => __( 'Select Page ID...', 'ayecode-connect' ),
+					'class'           => 'bsvc_page_n form-select-sm no-select2 mw-100',
+					'options'         => sd_template_page_options(),
+					'default'         => '',
+					'value'           => '',
+					'label_type'      => 'top',
+					'select2'         => false,
+					'element_require' => '[%bsvc_output_n%]=="page"'
+				)
+			);
+
+			$content .= aui()->select(
+				array(
+					'id'          => 'bsvc_tmpl_part_n',
+					'name'        => 'bsvc_tmpl_part_n',
+					'label'       => __( 'Template Part', 'ayecode-connect' ),
+					'placeholder' => __( 'Select Template Part...', 'ayecode-connect' ),
+					'class'       => 'bsvc_tmpl_part_n form-select-sm no-select2 mw-100',
+					'options'     => sd_template_part_options(),
+					'default'     => '',
+					'value'       => '',
+					'label_type'  => 'top',
+					'select2'     => false,
+					'element_require'  => '[%bsvc_output_n%]=="template_part"',
+					'extra_attributes' => array(
+						'data-minimum-results-for-search' => '-1'
+					)
+				)
+			);
+
+			$content .= aui()->select(
+				array(
+					'id'               => 'bsvc_message_type_n',
+					'name'             => 'bsvc_message_type_n',
+					'label'            => __( 'Custom Message Type', 'ayecode-connect' ),
+					'placeholder'      => __( 'Default (none)', 'ayecode-connect' ),
+					'class'            => 'bsvc_message_type_n form-select-sm no-select2 mw-100',
+					'options'          => sd_aui_colors(),
+					'default'          => '',
+					'value'            => '',
+					'label_type'       => 'top',
+					'select2'          => false,
+					'element_require'  => '[%bsvc_output_n%]=="message"',
+					'extra_attributes' => array(
+						'data-minimum-results-for-search' => '-1'
+					)
+				)
+			);
+
+			$content .= '</div><div class="col-sm-12">';
+
+			$content .= aui()->input(
+				array(
+					'type'            => 'text',
+					'id'              => 'bsvc_message_n',
+					'name'            => 'bsvc_message_n',
+					'label'           => '',
+					'class'           => 'bsvc_message_n form-control-sm',
+					'placeholder'     => __( 'CUSTOM MESSAGE TO SHOW', 'ayecode-connect' ),
+					'label_type'      => '',
+					'value'           => '',
+					'form_group_class' => ' ',
+					'element_require' => '[%bsvc_output_n%]=="message"',
+				)
+			);
+
 			$content .= '</div></div></form><input type="hidden" id="bsvc_raw_value" name="bsvc_raw_value" value="' . $value . '">';
 
 			return $content;
+		}
+
+		/**
+		 * Handle media_buttons hook.
+		 *
+		 * @since 1.2.7
+		 */
+		public function wp_media_buttons() {
+			global $shortcode_insert_button_once;
+
+			// Fix conflicts with UpSolution Core in header template edit element.
+			if ( defined( 'US_CORE_DIR' ) && ! empty( $_REQUEST['action'] ) && $_REQUEST['action'] == 'us_ajax_hb_get_ebuilder_html' ) {
+				$shortcode_insert_button_once = true;
+			}
 		}
 	}
 }
