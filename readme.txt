@@ -182,6 +182,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.38 - 2025-06-TBD =
+* BS Menu logout link overwrites UWP logout redirect - CHANGED
+
 = 0.1.37 - 2025-06-09 =
 * GD > Titles & Meta page title setting is not working on single page - FIXED
 * Icon Box block if using image has title added as alt tag for accessibility score - ADDED

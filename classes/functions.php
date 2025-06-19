@@ -112,11 +112,10 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 		$args['icon_class'] = $args['icon_class'] ?: 'far fa-user';
 		$link               = esc_url(wp_login_url(get_permalink()));
 		$link_text          = __('Sign in', 'blockstrap-page-builder-blocks');
-	} else if ('wp-logout' === $args['type']) {
-		// $icon      = 'fas fa-sign-out-alt';
+	} else if ( 'wp-logout' === $args['type'] ) {
 		$args['icon_class'] = $args['icon_class'] ?: 'fas fa-sign-out-alt';
-		$link               = esc_url(wp_logout_url(get_permalink()));
-		$link_text          = __('Sign out', 'blockstrap-page-builder-blocks');
+		$link               = esc_url( wp_logout_url() );
+		$link_text          = __( 'Sign out', 'blockstrap-page-builder-blocks' );
 	} else if ('lightbox' === $args['type']) {
 		$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
 		$link_text = __('Open Lightbox', 'blockstrap-page-builder-blocks');
@@ -253,9 +252,14 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 	} else if ('uwp_profile' === $args['type']) {
 		$link      = function_exists('uwp_get_profile_page_url') ? uwp_get_profile_page_url() : '';
 		$link_text = __('Profile', 'blockstrap-page-builder-blocks');
-	} else if ('uwp_logout' === $args['type']) {
-		$link      = wp_logout_url(get_permalink());
-		$link_text = __('Log out', 'blockstrap-page-builder-blocks');
+	} else if ( 'uwp_logout' === $args['type'] ) {
+		if ( class_exists( 'UsersWP_Templates', false ) ) {
+			$uwp_templates = new UsersWP_Templates();
+			$link = esc_url( $uwp_templates->uwp_logout_url() );
+		} else {
+			$link = esc_url( wp_logout_url() );
+		}
+		$link_text = __( 'Log out', 'blockstrap-page-builder-blocks' );
 	}//end if
 
 	// set link
