@@ -49,7 +49,7 @@ class BlockStrap_Blocks_Comments {
 		$defaults['fields']['url'] = '
 <div class="comment-form-url mb-3">
 <label for="url" class="sr-only sr-only-focusable">' . esc_html__( 'Website', 'blockstrap-page-builder-blocks' ) . '</label>
-<input class="required form-control border-gray" id="url" name="url" type="url" placeholder="' . esc_html__( 'Website', 'blockstrap-page-builder-blocks' ) . '" value=""  maxlength="200" />
+<input class="form-control border-gray" id="url" name="url" type="url" placeholder="' . esc_html__( 'Website', 'blockstrap-page-builder-blocks' ) . '" value=""  maxlength="200" />
 </div>';
 
 		$defaults['fields']['cookies'] = '
