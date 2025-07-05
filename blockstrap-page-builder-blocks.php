@@ -184,6 +184,16 @@ final class BlockStrap {
 			null,
 			BLOCKSTRAP_BLOCKS_VERSION
 		);
+
+		// icon picker for block editor
+		wp_enqueue_script(
+			'iconpicker-react'
+		);
+
+		// dynamic data picker for block editor
+		wp_enqueue_script(
+			'sd-dynamic-data-button'
+		);
 	}
 
 	/**
@@ -256,12 +266,26 @@ final class BlockStrap {
 		include_once 'classes/functions.php';
 
 		// Patterns
-		include_once 'patterns/comments.php';
-		include_once 'patterns/content.php';
-		include_once 'patterns/footer.php';
-		include_once 'patterns/header.php';
-		include_once 'patterns/hero.php';
-		include_once 'patterns/menu.php';
+		if ( defined( 'BLOCKSTRAP_USE_DARK_MODE' ) ) {
+			include_once 'patterns-dm/comments.php';
+			include_once 'patterns-dm/content.php';
+			include_once 'patterns-dm/footer.php';
+			include_once 'patterns-dm/header.php';
+			include_once 'patterns-dm/hero.php';
+			include_once 'patterns-dm/menu.php';
+
+			// GD
+			include_once 'patterns-dm/geodirectory.php';
+
+		}else{
+			include_once 'patterns-dm/comments.php';
+			include_once 'patterns-dm/content.php';
+			include_once 'patterns-dm/footer.php';
+			include_once 'patterns-dm/header.php';
+			include_once 'patterns-dm/hero.php';
+			include_once 'patterns-dm/menu.php';
+		}
+
 
 		// Blocks
 		include_once 'blocks/class-blockstrap-widget-archive-actions.php';
@@ -299,7 +323,14 @@ final class BlockStrap {
 		include_once 'blocks/class-blockstrap-widget-offcanvas.php';
 		include_once 'blocks/class-blockstrap-widget-alert.php';
 		include_once 'blocks/class-blockstrap-widget-headline.php';
-		include_once 'blocks/class-blockstrap-widget-nav-color-mode.php'; // @todd not ready for production - should only be enabled by theme
+		include_once 'blocks/class-blockstrap-widget-text.php';
+		//@todo add carousel
+
+		// Dark Mode blocks
+		if ( defined( 'BLOCKSTRAP_USE_DARK_MODE' ) ) {
+			include_once 'blocks/class-blockstrap-widget-dark-mode.php';
+		}
+
 
 		// Frontend comments
 		include_once 'classes/class-blockstrap-blocks-comments.php';

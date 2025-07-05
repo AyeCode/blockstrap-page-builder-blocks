@@ -462,6 +462,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
         // shadow
         $arguments['shadow'] = sd_get_shadow_input('shadow');
 
+	    // Icon hover animations
+	    $arguments['hover_icon_animation'] = sd_get_hover_icon_animation_input();
+
         // block visibility conditions
         $arguments['visibility_conditions'] = sd_get_visibility_conditions_input();
 
@@ -500,6 +503,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
         $link_divider_pos   = ! empty($args['link_divider']) ? esc_attr($args['link_divider']) : '';
         $link_divider_left  = 'left' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 start-0 translate-middle-y"></span>' : '';
         $link_divider_right = 'right' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 end-0 translate-middle-y"></span>' : '';
+	    $btn_color          = '';
 
         $font_weight = ! empty($args['font_weight']) ? esc_attr($args['font_weight']) : '';
         unset($args['font_weight']);
@@ -535,22 +539,28 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
 			$link_text = ! empty($args['text']) ? esc_attr($args['text']) : $link_text;
 		}
 
+		// Icon hover animation
+	    if(!empty($args['hover_icon_animation'])){
+		    $args['icon_class'] .= ' animate-target';
+	    }
+
         // link type
         if (! empty($args['link_type'])) {
             if ('btn' === $args['link_type']) {
-                $link_class = 'btn';
+                $link_class .= ' btn';
             } else if ('btn-round' === $args['link_type']) {
-                $link_class = 'btn btn-round';
+                $link_class .= ' btn btn-round';
             } else if ('btn-icon' === $args['link_type']) {
-                $link_class = 'btn btn-icon rounded-circle';
+                $link_class .= ' btn btn-icon rounded-circle';
             } else if ('iconbox' === $args['link_type']) {
-                $link_class = 'iconbox rounded-circle';
+                $link_class .= ' iconbox rounded-circle';
             } else if ('iconbox-fill' === $args['link_type']) {
-                $link_class = 'iconbox fill rounded-circle';
+                $link_class .= ' iconbox fill rounded-circle';
             }
 
             if ('btn' === $args['link_type'] || 'btn-round' === $args['link_type'] || 'btn-icon' === $args['link_type']) {
-                $link_class .= ' btn-'.sanitize_html_class($args['link_bg']);
+				$btn_color = ! empty($args['link_bg']) ? ' btn-'.sanitize_html_class($args['link_bg']) : '';
+                $link_class .= $btn_color;
                 if ('small' === $args['link_size']) {
                     $link_class .= ' btn-sm';
                 } else if ('extra-small' === $args['link_size']) {
@@ -569,6 +579,11 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
                 }
             }
         }//end if
+
+	    // if button color then we need to strip nav-link so it shows
+	    if ( $btn_color ) {
+		    $link_class = str_replace('nav-link', '', $link_class);
+	    }
 
         if (! empty($args['text_color'])) {
             $link_class .= $aui_bs5 ? ' link-'.esc_attr($args['text_color']) : ' text-'.esc_attr($args['text_color']);
@@ -613,10 +628,15 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
 			}
         }
 
+	    // btn-icon needed if no text and just icon
+//	    if(!$link_text && $icon){
+//		    $link_class .= ' btn btn-icon';
+//	    }
+
         // if a button add form-inline
-        if (! empty($args['link_type'])) {
-            $wrap_class .= $aui_bs5 ? ' align-self-center' : ' form-inline';
-        }
+//        if (! empty($args['link_type'])) {
+//            $wrap_class .= $aui_bs5 ? ' align-self-center' : ' form-inline';
+//        }
 
 		if (!$this->is_preview() && $link && function_exists( 'sd_build_attributes_string_escaped' ) ) {
 			$attributes_escaped = sd_build_attributes_string_escaped(

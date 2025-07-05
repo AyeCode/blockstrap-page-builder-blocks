@@ -462,3 +462,57 @@ function bpbb_get_template_html($page){
 	});
 }
 */
+
+
+// @todo we need to only load this if DM is set
+// ( function( wp ) {
+// 	const { domReady } = wp;
+//
+// 	domReady( () => {
+// 		const interval = setInterval( () => {
+// 			const settingsBar = document.querySelector( '.editor-header__settings' );
+// 			if ( ! settingsBar ) {
+// 				return;
+// 			}
+// 			clearInterval( interval );
+//
+// 			// create our toggle button
+// 			const btn = document.createElement( 'button' );
+// 			btn.type = 'button';
+// 			btn.setAttribute( 'aria-label', 'Toggle Dark Mode' );
+// 			btn.setAttribute( 'style', 'font-size: 17px;' );
+// 			btn.className = 'components-button  components-toolbar__control';
+//
+// 			// helper to set the current icon
+// 			function setIcon(isDark) {
+// 				btn.innerHTML = isDark
+// 					? '<i class="fas fa-sun" aria-hidden="true"></i>'
+// 					: '<i class="fas fa-moon" aria-hidden="true"></i>';
+// 			}
+//
+// 			// click toggles `data-bs-theme` inside the iframe
+// 			btn.addEventListener( 'click', () => {
+// 				const iframe = document.querySelector( 'iframe.edit-site-visual-editor__editor-canvas' );
+// 				if ( ! iframe?.contentDocument ) {
+// 					console.warn( 'Editor iframe not found or not yet loaded' );
+// 					return;
+// 				}
+// 				const docEl = iframe.contentDocument.documentElement;
+// 				const isDark = docEl.getAttribute( 'data-bs-theme' ) === 'dark';
+// 				docEl.setAttribute( 'data-bs-theme', isDark ? 'light' : 'dark' );
+// 				setIcon(! isDark);
+// 			} );
+//
+// 			// initialize icon based on current state in iframe (or default to light)
+// 			const existingIframe = document.querySelector( 'iframe.edit-site-visual-editor__editor-canvas' );
+// 			let startDark = false;
+// 			if ( existingIframe?.contentDocument ) {
+// 				startDark = existingIframe.contentDocument.documentElement.getAttribute( 'data-bs-theme' ) === 'dark';
+// 			}
+// 			setIcon(startDark);
+//
+// 			// insert into the settings bar
+// 			settingsBar.insertBefore( btn, settingsBar.firstElementChild );
+// 		}, 100 );
+// 	} );
+// } )( window.wp );

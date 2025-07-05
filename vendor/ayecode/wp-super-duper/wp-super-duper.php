@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WP_Super_Duper' ) ) {
 
-	define( 'SUPER_DUPER_VER', '1.2.22' );
+	define( 'SUPER_DUPER_VER', '1.2.23' );
 
 	/**
 	 * A Class to be able to create a Widget, Shortcode or Block to be able to output content for WordPress.
@@ -27,6 +27,7 @@ if ( ! class_exists( 'WP_Super_Duper' ) ) {
 		public $arguments = array();
 		public $instance = array();
 		private $class_name;
+		public $dynamic_fields = array();
 
 		/**
 		 * The relative url to the current folder.
@@ -912,7 +913,7 @@ if ( ! class_exists( 'WP_Super_Duper' ) ) {
 								if ($field_name == 'html') {
 									$content = element.value;
 								} else {
-									$output = $output + " " + $field_name + '="' + element.value + '"';
+									$output = element.value !== '' ? $output + " " + $field_name + '="' + element.value + '"' : '';
 								}
 							}
 						});
@@ -1308,14 +1309,43 @@ if ( ! class_exists( 'WP_Super_Duper' ) ) {
 			if ( ! empty( $options['arguments'] ) ) {
 				foreach ( $options['arguments'] as $key => $val ) {
 					$options['arguments'][ $key ]['name'] = $key;
+
+					// set the field as dynamic
+					if( !empty( $val['dynamic_data'] ) ){
+						$this->dynamic_fields[$key] = true;
+					}
 				}
 			} elseif ( $arguments && is_array( $options ) && ! empty( $options ) ) {
 				foreach ( $options as $key => $val ) {
 					$options[ $key ]['name'] = $key;
+
+					// set the field as dynamic
+					if( !empty( $val['dynamic_data'] ) ){
+						$this->dynamic_fields[$key] = true;
+					}
 				}
 			}
 
 			return $options;
+		}
+
+		/**
+ 		* Replace any fields dynamic data if marked as dynamic data.
+ 		*
+		* @param $args
+		*
+		* @return mixed
+		*/
+		public function render_dynamic_fields($args){
+
+			if(!$this->is_preview() && !empty($this->dynamic_fields)){
+				foreach($this->dynamic_fields as $key => $val ){
+//					echo '###'.$key;exit;
+					$args[$key] = sd_replace_variables($args[$key]);
+				}
+			}
+
+			return $args;
 		}
 
 		/**
@@ -2440,6 +2470,9 @@ new MutationObserver(() => {
 				// hover animations
 				if ( $args['hover_animations'] !== undefined && $args['hover_animations'] ) { $classes.push($args['hover_animations'].toString().replace(',',' ')); }
 
+				// hover icon animations
+				if ( $args['hover_icon_animation'] !== undefined && $args['hover_icon_animation'] !== '' ) { $classes.push( $args['hover_icon_animation']); }
+
 				// absolute_position
 				if ( $args['absolute_position'] !== undefined ) {
 					if ( 'top-left' === $args['absolute_position'] ) {
@@ -2535,6 +2568,17 @@ jQuery(function() {
 					const taxonomies_<?php echo str_replace("-","_", $this->id);?> = [{label: "Please wait", value: 0}];
 					const sort_by_<?php echo str_replace("-","_", $this->id);?> = [{label: "Please wait", value: 0}];
 					const MediaUpload = wp.blockEditor.MediaUpload;
+
+
+					// Ensure InputControl exists even on older builds: @todo add version check
+					if (
+						typeof wp.components.InputControl === 'undefined' &&
+						typeof wp.components.__experimentalInputControl !== 'undefined'
+					) {
+						wp.components.InputControl = wp.components.__experimentalInputControl;
+					}
+
+					const iconPickerInstances = {};
 
 					/**
 					 * Register Basic Block.
@@ -2632,123 +2676,188 @@ jQuery(function() {
 							$this->options['block-wrap'] = '';
 						}
 
-						// maybe load the drag/drop functions.
+						// Maybe load the drag/drop functions.
 						$img_drag_drop = false;
-
 						$show_alignment = false;
-						// align feature
-						/*echo "supports: {";
-						echo "	align: true,";
-						echo "  html: false";
-						echo "},";*/
-
 
 							echo "attributes : {";
 
 							if ( $show_advanced ) {
 								echo "show_advanced: {";
-								echo "	type: 'boolean',";
-								echo "  default: false,";
+								echo "  type: 'boolean',";
+								echo "  default: false";
 								echo "},";
 							}
 
-							// block wrap element
+							// Block wrap element
 							if ( ! empty( $this->options['block-wrap'] ) ) { //@todo we should validate this?
 								echo "block_wrap: {";
-								echo "	type: 'string',";
-								echo "  default: '" . esc_attr( $this->options['block-wrap'] ) . "',";
+								echo "  type: 'string',";
+								echo "  default: '" . esc_attr( $this->options['block-wrap'] ) . "'";
 								echo "},";
 							}
 
 
 							if ( ! empty( $this->arguments ) ) {
-
 								foreach ( $this->arguments as $key => $args ) {
-
-									if( $args['type'] == 'image' ||  $args['type'] == 'images' ){
+									if ( $args['type'] == 'image' ||  $args['type'] == 'images' ) {
 										$img_drag_drop = true;
 									}
 
-									// set if we should show alignment
+									// Set if we should show alignment.
 									if ( $key == 'alignment' ) {
 										$show_alignment = true;
 									}
 
 									$extra = '';
+									$_default = isset( $args['default'] ) && ! is_null( $args['default'] ) ? $args['default'] : '';
+
+									if ( ! empty( $_default ) ) {
+										$_default = wp_slash( $_default );
+									}
 
 									if ( $args['type'] == 'notice' ||  $args['type'] == 'tab' ) {
 										continue;
-									}
-									elseif ( $args['type'] == 'checkbox' ) {
+									} else if ( $args['type'] == 'checkbox' ) {
 										$type    = 'boolean';
-										$default = isset( $args['default'] ) && $args['default'] ? 'true' : 'false';
-									} elseif ( $args['type'] == 'number' ) {
+										$default = $_default ? 'true' : 'false';
+									} else if ( $args['type'] == 'number' ) {
 										$type    = 'number';
-										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-									} elseif ( $args['type'] == 'select' && ! empty( $args['multiple'] ) ) {
+										$default = "'" . $_default . "'";
+									} else if ( $args['type'] == 'select' && ! empty( $args['multiple'] ) ) {
 										$type = 'array';
 										if ( isset( $args['default'] ) && is_array( $args['default'] ) ) {
-											$default = ! empty( $args['default'] ) ? "['" . implode( "','", $args['default'] ) . "']" : "[]";
+											$default = ! empty( $_default ) ? "['" . implode( "','", $_default ) . "']" : "[]";
 										} else {
-											$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
+											$default = "'" . $_default . "'";
 										}
-									} elseif ( $args['type'] == 'tagselect' ) {
+									} else if ( $args['type'] == 'tagselect' ) {
 										$type    = 'array';
-										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-									} elseif ( $args['type'] == 'multiselect' ) {
+										$default = "'" . $_default . "'";
+									} else if ( $args['type'] == 'multiselect' ) {
 										$type    = 'array';
-										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-									} elseif ( $args['type'] == 'image_xy' ) {
+										$default = "'" . $_default . "'";
+									} else if ( $args['type'] == 'image_xy' ) {
 										$type    = 'object';
-										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-									} elseif ( $args['type'] == 'image' ) {
+										$default = "'" . $_default . "'";
+									} else if ( $args['type'] == 'image' ) {
 										$type    = 'string';
-										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-
-										// add a field for ID
-	//                                    echo $key . "_id : {";
-	//                                    echo "type : 'number',";
-	//                                    echo "},";
-	//                                    echo $key . "_xy : {";
-	//                                    echo "type : 'object',";
-	//                                    echo "},";
-
+										$default = "'" . $_default . "'";
 									} else {
-										$type    = !empty($args['hidden_type']) ? esc_attr($args['hidden_type']) : 'string';
-										$default = isset( $args['default'] ) ? "'" . $args['default'] . "'" : "''";
-
+										$type    = ! empty( $args['hidden_type'] ) ? esc_attr( $args['hidden_type'] ) : 'string';
+										$default = "'" . $_default . "'";
 									}
+
 									echo $key . " : {";
 									echo "type : '$type',";
-									echo "default : $default,";
+									echo "default : $default";
 									echo "},";
 								}
 							}
 
+
 							echo "content : {type : 'string',default: 'Please select the attributes in the block settings'},";
 							echo "sd_shortcode : {type : 'string',default: ''},";
 
-							if(!empty($this->options['nested-block']) || !empty($this->arguments['html']) ){
+							// set dynamic filed
+							if(!empty($this->options['block-dynamic-field'] )){
+								echo "sd_dynamic_field : {type : 'string',default: 'true'},";
+							}
+
+							if ( ! empty( $this->options['nested-block'] ) || ! empty( $this->arguments['html'] ) ) {
 								echo "sd_shortcode_close : {type : 'string',default: ''},";
 							}
 
-							echo "className: { type: 'string', default: '' },";
-
+							echo "className: { type: 'string', default: '' }";
 							echo "},";
-
-
-
 						?>
-
 						// The "edit" property must be a valid function.
 						edit: function (props) {
 
-							const selectedBlock = wp.data.select('core/block-editor').getSelectedBlock();
+<?php if(!empty($this->options['block-dynamic-field'] )){
+	// for dynamic data insert into richText at current cursor position
+	$dynamic_field_key = esc_attr($this->options['block-dynamic-field']);
+	?>
+	/**
+	 * --------------------------------------------------------------------
+	 * 1. State Management
+	 * --------------------------------------------------------------------
+	 */
+	// State for the modal's visibility
+	const modalState = wp.element.useState(false);
+	const isModalOpen = modalState[0];
+	const setModalOpen = modalState[1];
 
+	// State to store the last known cursor position
+	const caretState = wp.element.useState(null);
+	const caretOffset = caretState[0];
+	const setCaretOffset = caretState[1];
+
+	// A 'ref' to get a direct handle on our block's wrapper element
+	const blockWrapperRef = wp.element.useRef(null);
+
+	/**
+	 * --------------------------------------------------------------------
+	 * 2. Handler Functions
+	 * --------------------------------------------------------------------
+	 */
+
+	// This function manually calculates the cursor position.
+	// This logic is proven to work in both editor contexts.
+	function updateCaret() {
+		const node = blockWrapperRef.current;
+		if (!node) return;
+
+		// Get the selection from the document that OWNS our text field.
+		const sel = node.ownerDocument.defaultView.getSelection();
+
+		if (!sel.rangeCount) return;
+		const range = sel.getRangeAt(0);
+
+		const editableEl = node.querySelector('[contenteditable="true"]');
+		if (!editableEl || !editableEl.contains(range.startContainer)) return;
+
+		const pre = range.cloneRange();
+		pre.selectNodeContents(editableEl);
+		pre.setEnd(range.endContainer, range.endOffset);
+		setCaretOffset(pre.toString().length);
+	}
+
+	// This function uses the captured cursor position to insert the tag.
+	function handleSelect(dataTag) {
+		const existingText = props.attributes.<?php echo esc_attr($dynamic_field_key);?> || '';
+		const offset = caretOffset !== null ? caretOffset : existingText.length;
+
+		const before = existingText.slice(0, offset);
+		const after = existingText.slice(offset);
+
+		props.setAttributes({ <?php echo esc_attr($dynamic_field_key);?>: before + dataTag + after });
+		setModalOpen(false);
+		setCaretOffset(null); // Reset after insertion
+	}
+
+	function handleTextChange(newHtmlString) {
+		props.setAttributes({ <?php echo esc_attr($dynamic_field_key);?>: newHtmlString });
+	}
+
+	/**
+	 * --------------------------------------------------------------------
+	 * 3. Rendered Output
+	 * --------------------------------------------------------------------
+	 */
+	// Assign the ref to the block props here. This is the wrapper div.
+	const blockProps = wp.blockEditor.useBlockProps({
+		ref: blockWrapperRef,
+		className: sd_build_aui_class(props.attributes),
+		style: sd_build_aui_styles(props.attributes),
+	});
+
+<?php } ?>
+
+							const selectedBlock = wp.data.select('core/block-editor').getSelectedBlock();
 <?php
 // only include the drag/drop functions if required.
-if( $img_drag_drop ){
-
+if ( $img_drag_drop ) {
 ?>
 
 function enableDragSort(listClass) {
@@ -2978,85 +3087,77 @@ const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSel
 							//console.log(props.attributes);
                             var shortcode = '';
 
-							function onChangeContent($type) {
+							window.sdBlockDebounceTimers = window.sdBlockDebounceTimers || {};
 
-								$refresh = false;
-								// Set the old content the same as the new one so we only compare all other attributes
-								if(typeof(prev_attributes[props.clientId]) != 'undefined'){
-									prev_attributes[props.clientId].content = props.attributes.content;
+							function onChangeContent() {
+								// Clear any existing timer to reset the delay
+								clearTimeout(window.sdBlockDebounceTimers[props.clientId]);
 
-									// don't compare the sd_shortcode as it is changed later
-									prev_attributes[props.clientId].sd_shortcode = props.attributes.sd_shortcode;
-								}else if(props.attributes.content === ""){
-									// if first load and content empty then refresh
-									$refresh = true;
+								// --- START: NEW DYNAMIC DELAY LOGIC ---
+								let delay = 500; // Default delay
+								const longDelayAttributes = ['title', 'text', 'description']; // Add any text field attribute names here
 
-								}else{
-
-									// if not new and has content then set it so we dont go fetch it
-									if(props.attributes.content && props.attributes.content !== 'Please select the attributes in the block settings'){
-										prev_attributes[props.clientId] = props.attributes;
+								// Find which attribute key changed
+								if (prev_attributes[props.clientId]) {
+									for (const key in props.attributes) {
+										if (props.attributes[key] !== prev_attributes[props.clientId][key]) {
+											// If the changed attribute is NOT in our long-delay list, make the update faster.
+											if (!longDelayAttributes.includes(key)) {
+												delay = 100; // Use a much shorter delay for select dropdowns, toggles, etc.
+											}
+											break; // We only need to find the first change
+										}
 									}
-
 								}
+								// --- END: NEW DYNAMIC DELAY LOGIC ---
+								console.log(delay);
 
+								// Set a new timer with our calculated delay
+								window.sdBlockDebounceTimers[props.clientId] = setTimeout(function() {
+									var originalFunctionality = function() {
+										// This is your original logic, now wrapped
+										var $refresh = false;
+										if(typeof(prev_attributes[props.clientId]) != 'undefined'){
+											prev_attributes[props.clientId].content = props.attributes.content;
+											prev_attributes[props.clientId].sd_shortcode = props.attributes.sd_shortcode;
+										} else if(props.attributes.content === ""){
+											$refresh = true;
+										} else {
+											if(props.attributes.content && props.attributes.content !== 'Please select the attributes in the block settings'){
+												prev_attributes[props.clientId] = props.attributes;
+											}
+										}
 
-
-								if ( ( !is_fetching &&  JSON.stringify(prev_attributes[props.clientId]) != JSON.stringify(props.attributes) ) || $refresh  ) {
-
-
-									is_fetching = true;
-
-									var data = {
-										'action': 'super_duper_output_shortcode',
-										'shortcode': '<?php echo $this->options['base_id'];?>',
-										'attributes': props.attributes,
-										'block_parent_name': parentBlocks.length ? parentBlocks[parentBlocks.length - 1].name : '',
-										'post_id': <?php global $post; if ( isset( $post->ID ) ) {
-										echo $post->ID;
-									}else{echo '0';}?>,
-										'_ajax_nonce': '<?php echo wp_create_nonce( 'super_duper_output_shortcode' );?>'
+										if ( ( !is_fetching && JSON.stringify(prev_attributes[props.clientId]) != JSON.stringify(props.attributes) ) || $refresh  ) {
+											is_fetching = true;
+											var data = {
+											   'action': 'super_duper_output_shortcode',
+											   'shortcode': '<?php echo $this->options['base_id'];?>',
+											   'attributes': props.attributes,
+											   'block_parent_name': parentBlocks.length ? parentBlocks[parentBlocks.length - 1].name : '',
+											   'post_id': <?php global $post; echo isset($post->ID) ? $post->ID : 0;?>,
+											   '_ajax_nonce': '<?php echo wp_create_nonce( 'super_duper_output_shortcode' );?>'
+											};
+											jQuery.post(ajaxurl, data).then(function (env) {
+											   if (env == '') {
+												  env = "<div style='background:#0185ba33;padding: 10px;border: 4px #ccc dashed;'>" + "<?php _e( 'Placeholder for:', 'ayecode-connect' );?> " + props.name + "</div>";
+											   }
+											   <?php if(!empty($this->options['nested-block'])): ?>
+											   <?php else: ?>
+												   props.setAttributes({content: env});
+											   <?php endif; ?>
+											   is_fetching = false;
+											   prev_attributes[props.clientId] = props.attributes;
+											   if (typeof aui_init === "function") {
+												  aui_init();
+											   }
+											});
+										}
 									};
-
-									jQuery.post(ajaxurl, data, function (response) {
-										return response;
-									}).then(function (env) {
-
-										// if the content is empty then we place some placeholder text
-										if (env == '') {
-											env = "<div style='background:#0185ba33;padding: 10px;border: 4px #ccc dashed;'>" + "<?php _e( 'Placeholder for:', 'ayecode-connect' );?> " + props.name + "</div>";
-										}
-
-										 <?php
-										if(!empty($this->options['nested-block'])){
-											?>
-											// props.setAttributes({content: env});
-										is_fetching = false;
-										prev_attributes[props.clientId] = props.attributes;
-											 <?php
-										}else{
-										?>
-										props.setAttributes({content: env});
-										is_fetching = false;
-										prev_attributes[props.clientId] = props.attributes;
-										<?php
-										}
-										?>
-
-
-										// if AUI is active call the js init function
-										if (typeof aui_init === "function") {
-											aui_init();
-										}
-									});
-
-
-								}
-
-
+									originalFunctionality();
+								}, delay); // Use the dynamic delay
 
 								return props.attributes.content;
-
 							}
 
 							<?php
@@ -3072,7 +3173,8 @@ const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSel
 								///////////////////////////////////////////////////////////////////////
 
 									 // build the shortcode.
-								shortcode = "[<?php echo $this->options['base_id'];?>";
+							//	shortcode = "[<?php echo $this->options['base_id'];?>";
+								shortcode = "<?php echo $this->options['base_id'];?>";
 								<?php
 
 								if(! empty( $this->arguments )){
@@ -3084,22 +3186,23 @@ const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSel
 								   if (substr($key, 0, 9 ) === 'metadata_') {
 									   continue;
 								   }
+								   /*
 								?>
 								if (props.attributes.hasOwnProperty("<?php echo esc_attr( $key );?>")) {
 									if ('<?php echo esc_attr( $key );?>' == 'html') {
 									} else if ('<?php echo esc_attr( $args['type'] );?>' == 'image_xy') {
-										shortcode += props.attributes.<?php echo esc_attr( $key );?>.length && ( props.attributes.<?php echo esc_attr( $key );?>.x.length || props.attributes.<?php echo esc_attr( $key );?>.y.length ) ? " <?php echo esc_attr( $key );?>='{x:" + props.attributes.<?php echo esc_attr( $key );?>.x + ",y:"+props.attributes.<?php echo esc_attr( $key );?>.y +"}' " : "";
+									    props.attributes.<?php echo esc_attr( $key );?>.length && ( props.attributes.<?php echo esc_attr( $key );?>.x.length || props.attributes.<?php echo esc_attr( $key );?>.y.length ) ? " <?php echo esc_attr( $key );?>='{x:" + props.attributes.<?php echo esc_attr( $key );?>.x + ",y:"+props.attributes.<?php echo esc_attr( $key );?>.y +"}' " : "";
 									} else {
-										//shortcode += props.attributes.<?php echo esc_attr( $key );?>.length ? " <?php echo esc_attr( $key );?>='" + props.attributes.<?php echo esc_attr( $key );?>.toString().replace('\'','&#39;') + "' " : "";
-										shortcode +=  " <?php echo esc_attr( $key );?>='" + props.attributes.<?php echo esc_attr( $key );?>.toString().replace('\'','&#39;') + "' ";
+										  props.attributes.<?php echo esc_attr( $key );?>.toString().replace('\'','&#39;');
 									}
 								}
 								<?php
+								   */
 								}
 								}
 
 								?>
-								shortcode += "]";
+								//shortcode += "]";
 
 								if(shortcode){
 
@@ -3111,7 +3214,8 @@ const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSel
 
 									<?php
 									if(!empty($this->options['nested-block']) || !empty($this->arguments['html']) ){
-										echo "props.setAttributes({sd_shortcode_close: '[/".esc_attr( $this->options['base_id'] )."]'});";
+										echo "props.setAttributes({sd_shortcode_close: '".esc_attr( $this->options['base_id'] )."'});";
+//										echo "props.setAttributes({sd_shortcode_close: '[/".esc_attr( $this->options['base_id'] )."]'});";
 									}
 									?>
 								}
@@ -3120,6 +3224,12 @@ const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSel
 							///////////////////////////////////////////////////////////////////////
 							<?php
 							} // end nested block check
+
+
+							// set dynamic filed
+							if(!empty($this->options['block-dynamic-field'] )){
+								echo "props.setAttributes({ sd_dynamic_field: '".esc_attr($this->options['block-dynamic-field'])."' });";
+							}
 							?>
 
 							return [
@@ -3135,7 +3245,7 @@ const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSel
 												props.setAttributes({alignment: alignment})
 											}
 										}
-									)
+									),
 									<?php }?>
 
 								),
@@ -3313,16 +3423,26 @@ const { deviceType } = typeof wp.data.useSelect !== 'undefined' ? wp.data.useSel
 							   if (substr($key, 0, 9 ) === 'metadata_') {
 								   continue;
 							   }
-							?>
-							if (attr.hasOwnProperty("<?php echo esc_attr( $key );?>")) {
-								if ('<?php echo esc_attr( $key );?>' == 'html') {
-									$html = attr.<?php echo esc_attr( $key );?>;
-								} else if ('<?php echo esc_attr( $args['type'] );?>' == 'image_xy') {
-									content += " <?php echo esc_attr( $key );?>='{x:" + attr.<?php echo esc_attr( $key );?>.x + ",y:"+attr.<?php echo esc_attr( $key );?>.y +"}' ";
-								} else {
-									content += " <?php echo esc_attr( $key );?>='" + attr.<?php echo esc_attr( $key );?>.toString().replace('\'','&#39;') + "' ";
+
+
+								// Get the attribute value into a variable for easy and safe checking
+								$attributeValue = 'attr.' . esc_attr($key);
+								?>
+								// Check if the attribute exists and has a meaningful value before processing
+								if (<?php echo $attributeValue; ?> !== undefined && <?php echo $attributeValue; ?> !== null && <?php echo $attributeValue; ?> !== '') {
+									if ('<?php echo esc_attr( $key );?>' == 'html') {
+										$html = <?php echo $attributeValue; ?>;
+									} else if ('<?php echo esc_attr( $args['type'] );?>' == 'image_xy') {
+										// Also ensure the inner properties of image_xy are valid
+										if (<?php echo $attributeValue; ?>.x || <?php echo $attributeValue; ?>.y) {
+											content += " <?php echo esc_attr( $key );?>='{x:" + <?php echo $attributeValue; ?>.x + ",y:"+<?php echo $attributeValue; ?>.y +"}' ";
+										}
+									} else {
+										// Now it's safe to call .toString()
+										content += " <?php echo esc_attr( $key );?>='" + <?php echo $attributeValue; ?>.toString().replace('\'','&#39;') + "' ";
+									}
 								}
-							}
+
 							<?php
 							}
 							}
@@ -3601,6 +3721,7 @@ el('div',{className: 'bsui'},
 			$custom_attributes = ! empty( $args['custom_attributes'] ) ? $this->array_to_attributes( $args['custom_attributes'] ) : '';
 			$options           = '';
 			$extra             = '';
+			$suffix            = '';
 			$require           = '';
 			$inside_elements   = '';
 			$after_elements	   = '';
@@ -3641,7 +3762,40 @@ el('div',{className: 'bsui'},
 			$element_require = ! empty( $args['element_require'] ) ? $this->block_props_replace( $args['element_require'], true ) . " && " : "";
 
 
-			$onchange  = "props.setAttributes({ $key: $key } )";
+			$onchange = "props.setAttributes({ $key: $key })"; // Base onchange
+
+			// Check for our new custom parameter
+			if (!empty($args['clears_on_change']) && is_array($args['clears_on_change'])) {
+
+				$clear_logic_js = "const attrsToClear = {};";
+				$clear_logic_js .= "switch($key) {";
+
+				foreach ($args['clears_on_change'] as $case_value => $attrs_to_clear) {
+					if ($case_value === 'default_case') continue;
+					$clear_logic_js .= " case '" . esc_js($case_value) . "': ";
+					foreach ($attrs_to_clear as $attr_name) {
+						$clear_logic_js .= "attrsToClear['" . esc_js($attr_name) . "'] = undefined; ";
+					}
+					$clear_logic_js .= " break;";
+				}
+
+				// Add the default case
+				if (isset($args['clears_on_change']['default_case'])) {
+					$clear_logic_js .= " default: ";
+					foreach ($args['clears_on_change']['default_case'] as $attr_name) {
+						$clear_logic_js .= "attrsToClear['" . esc_js($attr_name) . "'] = undefined; ";
+					}
+					$clear_logic_js .= " break;";
+				}
+
+				$clear_logic_js .= "}";
+				$clear_logic_js .= "props.setAttributes(attrsToClear);";
+
+				// Prepend the clearing logic to the original onChange
+				$onchange = $onchange . '; ' . $clear_logic_js;
+			}
+
+
 			$onchangecomplete  = "";
 			$value     = "props.attributes.$key";
 			$text_type = array( 'text', 'password', 'number', 'email', 'tel', 'url', 'colorx','range' );
@@ -3656,6 +3810,47 @@ el('div',{className: 'bsui'},
 					$real_key = str_replace('metadata_','', $key );
 					$onchange = "props.setAttributes({ metadata: { $real_key: $key } } )";
 					$value     = "props.attributes.metadata && props.attributes.metadata.$real_key ? props.attributes.metadata.$real_key : ''";
+				}
+
+				// Maybe add the icon picker
+				if(!empty($args['icon_picker'])){
+					$type = 'InputControl';
+					$suffix .= " el(
+						window.auiBlockTools.IconPickerButton,
+						{
+							value: props.attributes." . esc_js($key) . ",
+							setAttributes: props.setAttributes,
+							attributeName: '" . esc_js($key) . "',
+							uniqueId: '" . esc_js($key) . "'
+						}
+					),";
+				}
+
+
+				// Maybe add the dynamic data picker
+				if(!empty($args['dynamic_data'])){
+					$type = 'InputControl';
+					$suffix .= "el(
+    window.auiBlockTools.DynamicDataButton,
+    {
+        onSelect: function(dataTag) {
+            // This function runs when a tag is selected from the modal
+
+            // 1. Get the current value of the specific attribute we want to change
+            var currentText = props.attributes." . esc_js($key) . " || '';
+
+            // 2. Create the new value by appending the tag
+            var newText = currentText + ' ' + dataTag;
+
+            // 3. Create a new attributes object to avoid mutation issues
+            var newAttributes = {};
+            newAttributes['" . esc_js($key) . "'] = newText;
+
+            // 4. Call setAttributes with the updated value
+            props.setAttributes(newAttributes);
+        }
+    }
+),";
 				}
 			}
 //			else if ( $args['type'] == 'popup' ) {
@@ -3688,61 +3883,7 @@ el('div',{className: 'bsui'},
 				$notice = "el('div',{className:'bsui'},el(wp.components.Notice, {status: '$notice_status',isDismissible: false,className: 'm-0 pr-0 pe-0 mb-3'},el('div',{dangerouslySetInnerHTML: {__html: '$notice_message'}}))),";
 				echo $notice_message ? $element_require . $notice : '';
 				return;
-			}
-			/*
-			 * https://www.wptricks.com/question/set-current-tab-on-a-gutenberg-tabpanel-component-from-outside-that-component/ es5 layout
-						elseif($args['type']=='tabs'){
-							?>
-								el(
-									wp.components.TabPanel,
-									{
-										activeClass: 'active-tab',
-										initialTabName: deviceType,
-										tabs: [
-											{
-												name: 'Desktop',
-												title: el('div', {dangerouslySetInnerHTML: {__html: '<i class="fas fa-desktop"></i>'}}),
-												className: 'tab-one' + deviceType == 'Desktop' ? ' active-tab' : '',
-												content: el('div', {dangerouslySetInnerHTML: {__html: 'ddd'}})
-											},
-											{
-												name: 'Tablet',
-												title: el('div', {dangerouslySetInnerHTML: {__html: '<i class="fas fa-tablet-alt"></i>'}}),
-												className: 'tab-two' + deviceType == 'Tablet' ? ' active-tab' : '',
-												content: el('div', {dangerouslySetInnerHTML: {__html: 'ttt'}})
-											},
-											{
-												name: 'Mobile',
-												title: el('div', {dangerouslySetInnerHTML: {__html: '<i class="fas fa-mobile-alt"></i>'}}),
-												className: 'tab-two' + deviceType == 'Mobile' ? ' active-tab' : '',
-												content: el('div', {dangerouslySetInnerHTML: {__html: 'mmm'}})
-											},
-										],
-									},
-									( tab ) => {
-
-// @todo https://github.com/WordPress/gutenberg/issues/39248
-									if(tab.name=='Desktop'){
-									wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType('Desktop');
-wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
-									}else if(tab.name=='Tablet'){
-									wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType('Tablet');
-wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
-									}else if(tab.name=='Mobile'){
-									wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType('Mobile');
-wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
-									}
-
-									return tab.content;
-
-								}
-								),
-
-							<?php
-							return;
-						}
-*/
-			elseif ( $args['type'] == 'color' ) {
+			}elseif ( $args['type'] == 'color' ) {
 				$type = 'ColorPicker';
 				$onchange = "";
 				$extra = "color: $value,";
@@ -4068,6 +4209,14 @@ wp.data.select('core/edit-post').__experimentalGetPreviewDeviceType();
 
 			// icon
 			echo $icon;
+
+
+			// maybe we need a suffix
+			if($suffix){
+				$extra .= "suffix: el('span', { style: {
+            display: 'flex',
+	        }}, $suffix),";
+			}
 			?>
 			el( <?php echo $args['type'] == 'image' || $args['type'] == 'images' ? $type  : "wp.components.".$type; ?>, {
 			label: <?php if ( empty( $args['title'] ) ) { echo "''"; } else if ( empty( $args['row'] ) && ! empty( $args['device_type'] ) ) { ?>el('label',{className:'components-base-control__label',style:{width:"100%"}},el('span',{dangerouslySetInnerHTML: {__html: '<?php echo addslashes( $args['title'] ) ?>'}}),<?php if ( $device_type_icon ) { ?>deviceType == '<?php echo $device_type;?>' && el('span',{dangerouslySetInnerHTML: {__html: '<?php echo $device_type_icon; ?>'},title: deviceType + ": Set preview mode to change",style: {right:"0",position:"absolute",color:"var(--wp-admin-theme-color)"}})<?php } ?>)<?php

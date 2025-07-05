@@ -161,8 +161,10 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 
 
 					// path
+					$color_var_name = blockstrap_convert_color_to_var_name($args.sd_color);
 					$css += '.' + $args.styleid + ' svg path{ ';
-					$css += $args.sd_color == 'custom-color' ? 'fill: ' +  $args.sd_custom_color : '';
+					$css += $args.sd_color == 'custom-color' ? 'fill: ' +  $args.sd_custom_color : 'fill: var('+$color_var_name+')';
+					//$css += $args.sd_color != 'custom-color' ? 'fill: ' +  $args.sd_custom_color : '';
 					$css += '}';
 
 				}
@@ -170,9 +172,27 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 				return $css;
 			}
 
+			function blockstrap_convert_color_to_var_name(name) {
+				const parts = name.split('-');
+
+				// special case for "body"
+				if (parts.length === 1 && parts[0] === 'body') {
+					return `--bs-body-bg`;
+				}
+
+				// single name (other than "body")
+				if (parts.length === 1) {
+					return `--bs-${parts[0]}`;
+				}
+
+				// multi-part: first is the base, the rest go after “-bg-”
+				const [base, ...modifiers] = parts;
+				return `--bs-${base}-bg-${modifiers.join('-')}`;
+			}
+
 
 			function blockstrap_build_shape($args) {
-				let $class = $args.sd_color != 'custom-color' ? 'bg-' + $args.sd_color : '';
+				let $class = '';// $args.sd_color != 'custom-color' ? 'bg-' + $args.sd_color : '';
 				let $svg = '';
 
 				if ($args.sd === 'mountains') {

@@ -126,3 +126,25 @@ el(
 		)
 	)
 )
+export default function Edit() {
+	const [ value, setValue ] = useState( '' );
+
+	return el(
+		InputControl,
+		{
+			label: 'Your text',
+			value: value,
+			onChange: setValue,
+			suffix: el(
+				Dashicon,
+				{
+					icon: 'search',
+					className: 'my-suffix-icon',
+					onClick: () => {
+						alert( 'You typed: ' + value );
+					},
+				}
+			),
+		}
+	);
+}

@@ -15,7 +15,33 @@ class BlockStrap_Blocks_Comments {
 
 		add_action( 'comment_form_default_fields', array( $this, 'comment_args' ) );
 		add_action( 'comment_form_defaults', array( $this, 'comment_form_defaults' ), 100 );
+		add_filter('render_block', array( $this, 'comment_form_blocks_render' ), 10, 2);
 
+	}
+
+	/**
+	 * Force some WP comment form blocks to use the `a` tag instead of wrapping it in a dev so BS classes work.
+	 *
+	 * @param $block_content
+	 * @param $block
+	 *
+	 * @return array|mixed|string|string[]|null
+	 */
+	public function comment_form_blocks_render($block_content, $block) {
+		$target_blocks = ['core/comment-edit-link', 'core/comment-reply-link'];
+
+		if (!in_array($block['blockName'], $target_blocks, true)) {
+			return $block_content;
+		}
+
+		$class = isset($block['attrs']['className']) ? $block['attrs']['className'] : '';
+		$font_size = isset($block['attrs']['fontSize']) ? 'has-' . sanitize_html_class($block['attrs']['fontSize']) . '-font-size' : '';
+		$all_classes = trim("has-link-color $class $font_size");
+
+		$block_content = preg_replace('/^<div[^>]*>(.*?)<\/div>$/s', '$1', $block_content);
+		$block_content = preg_replace('/<a /', '<a class="' . esc_attr($all_classes) . '" ', $block_content, 1);
+
+		return $block_content;
 	}
 
 	/**
@@ -58,11 +84,11 @@ class BlockStrap_Blocks_Comments {
 <label class="custom-control-label" for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'blockstrap-page-builder-blocks' ) . '</label>
 </div>';
 
-		$defaults['class_submit'] .= ' btn btn-primary btn-lg form-control text-white';
+		$defaults['class_submit'] .= ' ';
 
 		$defaults['submit_field'] = '<div class="form-submit mb-3">%1$s %2$s</div>';
 
-		$defaults['submit_button'] = '<input name="%1$s" type="submit" id="%2$s" class="%3$s btn btn-primary btn-lg form-control" value="%4$s" />';
+		$defaults['submit_button'] = '<input name="%1$s" type="submit" id="%2$s" class="%3$s btn btn-primary btn-lg" value="%4$s" />';
 
 		$defaults['comment_notes_before'] = str_replace( 'comment-notes', 'comment-notes text-muted', $defaults['comment_notes_before'] );
 

@@ -162,6 +162,8 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 
 		$arguments['icon_class'] = array(
 			'type'        => 'text',
+			'icon_picker' => true,
+			'dynamic_data' => true,
 			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
 			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
 			'placeholder' => __( 'fas fa-ship', 'blockstrap-page-builder-blocks' ),
@@ -173,12 +175,13 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 		);
 
 		$arguments['title'] = array(
-			'type'        => 'text',
-			'title'       => __( 'Title', 'blockstrap-page-builder-blocks' ),
-			'placeholder' => __( 'fas fa-ship', 'blockstrap-page-builder-blocks' ),
-			'default'     => __( 'Title of the iconbox', 'blockstrap-page-builder-blocks' ),
-			'desc_tip'    => true,
-			'group'       => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+			'type'         => 'text',
+			'title'        => __( 'Title', 'blockstrap-page-builder-blocks' ),
+			'placeholder'  => __( 'fas fa-ship', 'blockstrap-page-builder-blocks' ),
+			'default'      => __( 'Title of the iconbox', 'blockstrap-page-builder-blocks' ),
+			'desc_tip'     => true,
+			'group'        => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
+			'dynamic_data' => true,
 		);
 
 		$arguments['title_tag'] = array(
@@ -632,6 +635,9 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
+
+		// maybe render dynamic fields
+		$args = $this->render_dynamic_fields($args);
 
 		$icon_html        = $this->build_icon( $args );
 		$title_html       = $this->build_title( $args );

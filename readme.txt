@@ -182,10 +182,15 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+
 = 1.0.0-beta =
 * Icon box block description text can get stuck in custom color even if not selected - FIXED
 * Navbar Brand added option for dark mode logo upload - ADDED
 * BS Container has `undefined` class if style ID not set - FIXED
+* Block `BS > Text` added as replacement for WP Paragraph with our styles and dynamic data -  ADDED
+* Icon picker popup option added to icon class inputs - ADDED
+* Dynamic data popup added to some fields - ADDED
+* Dark mode templates added - ADDED
 
 = 0.1.37 - 2025-06-09 =
 * GD > Titles & Meta page title setting is not working on single page - FIXED

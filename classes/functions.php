@@ -22,11 +22,6 @@ function blockstrap_pbb_get_block_link_types(){
 		'offcanvas' => __( 'Open Offcanvas', 'blockstrap-page-builder-blocks' ),
 	];
 
-	if(version_compare($ayecode_ui_version, '0.2.99', '>')){
-		$links['dark-mode-toggle'] = __( 'Dark Mode Toggle', 'blockstrap-page-builder-blocks' );
-		$links['dark-mode-dropdown'] = __( 'Dark Mode Dropdown', 'blockstrap-page-builder-blocks' );
-	}
-
 	if (defined('GEODIRECTORY_VERSION')) {
 		$post_types           = function_exists('geodir_get_posttypes') ? geodir_get_posttypes('options-plural') : [];
 		$links['gd_search']   = __('GD Search', 'blockstrap-page-builder-blocks');
@@ -274,9 +269,9 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 	}
 
 	// set icon_class
-	//if ( isset( $link_parts['icon_class'] ) ) {
+	if ( isset( $link_parts['icon_class'] ) ) {
 		$link_parts['icon_class'] = $args['icon_class'];
-	//}
+	}
 
 	// set link_attr
 	if ( isset( $link_attr ) ) {

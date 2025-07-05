@@ -192,7 +192,7 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 			'options'  => array(
 				''      => __( 'Off', 'blockstrap-page-builder-blocks' ),
 				'lazy'  => __( 'On', 'blockstrap-page-builder-blocks' ),
-				'eager' => __( 'Force off', 'blockstrap-page-builder-blocks' ),
+				'eager' => __( 'Force off (eager)', 'blockstrap-page-builder-blocks' ),
 			),
 			'default'  => '',
 			'desc_tip' => true,
