@@ -754,11 +754,3 @@ class BlockStrap_Widget_Image extends WP_Super_Duper {
 		return $image ? $figure : '';
 	}
 }
-
-// register it.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Image' );
-	}
-);

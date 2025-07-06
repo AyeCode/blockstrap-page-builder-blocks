@@ -20,6 +20,14 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 			'block-supports'    => array(
 				'customClassName' => false,
 			),
+			'transforms' => array(
+				'from'	=> array(
+					'blocks' => array('core/paragraph'),
+					'args' => array(
+						'content' => 'text'
+					)
+				)
+			),
 
 			'block-edit-return' => "wp.element.createElement(
 		wp.element.Fragment,
@@ -45,11 +53,14 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 				wp.blockEditor.RichText, {
 					tagName: props.attributes.html_tag ? props.attributes.html_tag : 'p',
 					value: props.attributes.text,
+					style: sd_build_aui_styles(props.attributes),
+					className: sd_build_aui_class(props.attributes),
 					onChange: handleTextChange,
 					placeholder: wp.i18n.__('Your text here...'),
 					onFocus: updateCaret,
 					onClick: updateCaret,
 					onKeyUp: updateCaret,
+					orientation : 'vertical' // vital for background on text feature for gradient
 				}
 			)
 		),
@@ -345,11 +356,4 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 
 }
 
-// register it.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Text' );
-	}
-);
 

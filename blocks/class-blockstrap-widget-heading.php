@@ -20,7 +20,7 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 				'customClassName' => false,
 			),
 
-			'block-edit-return' => "wp.element.createElement(wp.blockEditor.RichText, Object.assign(wp.blockEditor.useBlockProps({className: sd_build_aui_class(props.attributes)}), {
+			'block-edit-return' => "wp.element.createElement(wp.blockEditor.RichText, Object.assign(wp.blockEditor.useBlockProps({className: sd_build_aui_class(props.attributes),orientation : 'vertical'}), {
                 tagName: props.attributes.html_tag ? props.attributes.html_tag : 'h1',
                 value: props.attributes.text,
                 style: sd_build_aui_styles(props.attributes),
@@ -295,12 +295,4 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
 	}
 
 }
-
-// register it.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Heading' );
-	}
-);
 

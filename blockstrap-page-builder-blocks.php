@@ -332,6 +332,9 @@ final class BlockStrap {
 		}
 
 
+		// register blocks
+		include_once 'blocks/class-blockstrap-register-blocks.php';
+
 		// Frontend comments
 		include_once 'classes/class-blockstrap-blocks-comments.php';
 	}

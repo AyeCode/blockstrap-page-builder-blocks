@@ -310,12 +310,3 @@ Donec egestas urna vel lorem bibendum fringilla. Curabitur in dui augue. Interdu
 	}
 
 }
-
-// register it.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Post_Excerpt' );
-	}
-);
-

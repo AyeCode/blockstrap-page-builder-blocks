@@ -354,11 +354,3 @@ class BlockStrap_Widget_Navbar_Brand extends WP_Super_Duper {
 		return $content;
 	}
 }
-
-// register it.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Navbar_Brand' );
-	}
-);

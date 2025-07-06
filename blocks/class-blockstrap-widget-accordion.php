@@ -328,11 +328,3 @@ class BlockStrap_Widget_Accordion extends WP_Super_Duper
 
 
 }//end class
-
-// register it.
-add_action(
-    'widgets_init',
-    function () {
-        register_widget('BlockStrap_Widget_Accordion');
-    }
-);

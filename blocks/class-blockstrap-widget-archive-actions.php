@@ -545,14 +545,6 @@ jQuery(function($) {
 
 }
 
-// Register block.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Archive_Actions' );
-	}
-);
-
 /**
  * Archive actions show/hide block.
  *

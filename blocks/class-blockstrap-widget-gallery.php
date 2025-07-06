@@ -673,11 +673,3 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 		return $script;
 	}
 }
-
-// Register widget.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Gallery' );
-	}
-);

@@ -622,10 +622,3 @@ class BlockStrap_Widget_Pagination extends WP_Super_Duper {
 	}
 }
 
-// Register block.
-add_action(
-	'widgets_init',
-	function () {
-		register_widget( 'BlockStrap_Widget_Pagination' );
-	}
-);
