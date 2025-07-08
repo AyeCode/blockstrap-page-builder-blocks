@@ -558,12 +558,9 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 		$link_divider_right = 'right' === $link_divider_pos ? '<span class="navbar-divider d-none d-lg-block position-absolute top-50 end-0 translate-middle-y"></span>' : '';
 
 		$font_weight = ! empty( $args['font_weight'] ) ? esc_attr( $args['font_weight'] ) : '';
-		//unset( $args['font_weight'] ); // we don't want it on the parent.
 
-		//      print_r( $args );
-		$wrap_class = sd_build_aui_class( $args );
+		$wrap_class  = sd_build_aui_class( $args );
 
-		//      echo '###'.$wrap_class .'###';
 		if ( 'author' === $args['type'] ) {
 			$link = $is_preview ? '#author' : get_author_posts_url( $post_author );
 			$text = $is_preview ? 'John Doe' : get_the_author_meta( 'display_name' );
@@ -617,7 +614,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			$text = sprintf( __( '%d min read', 'blockstrap-page-builder-blocks' ), absint( $m ) );
 			$icon = 'far fa-clock';
 		} elseif ( 'taxonomy' === $args['type'] ) {
-			$taxonomy = esc_attr( $args['taxonomy'] );
+			$taxonomy = sanitize_text_field( $args['taxonomy'] );
 			$terms    = get_the_terms( $post, $taxonomy );
 			$term     = '';
 			$limit    = absint( $args['taxonomy_limit'] );
@@ -625,21 +622,20 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			$text     = $is_preview ? 'Taxonomy' : '';
 
 			if ( ! empty( $terms ) ) {
-
 				if ( $limit && count( $terms ) > $limit ) {
 					$terms = array_slice( $terms, 0, $limit );
 				}
 
 				if ( 1 === count( $terms ) ) {
 					$term = end( $terms );
-					$text = esc_attr( $term->name );
+					$text = $term->name;
 					$link = $is_preview ? '#post-tax' : get_term_link( $term );
 				} else {
-
 					$text = array();
+
 					foreach ( $terms as $term ) {
 						$text[] = array(
-							'text' => esc_attr( $term->name ),
+							'text' => $term->name,
 							'link' => $is_preview ? '#post-tax' : get_term_link( $term ),
 						);
 					}
@@ -650,28 +646,21 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				$text = 'Taxonomy';
 				$link = '#';
 			}
-
-			//          print_r( $term );
-			//          echo '###' . $taxonomy;//exit;
-			//          $link = $is_preview ? '#post-tax' : get_term_link( $term );
-
 		}
 
-		// maybe set custom link text
-		$text = ! empty( $args['text'] ) ? esc_attr( $args['text'] ) : $text;
+		// Maybe set custom link text.
+		$text = ! empty( $args['text'] ) ? sanitize_text_field( $args['text'] ) : $text;
 
+		// Maybe add before and after text.
+		$before_text = isset( $args['before'] ) && is_scalar( $args['before'] ) ? $args['before'] : '';
+		$after_text = isset( $args['after'] ) && is_scalar( $args['after'] ) ? $args['after'] : '';
 
-		// maybe add before and after text
-		if (!empty($args['before'])) {
-			$text = esc_attr( $args['before'] ) . $text;
-		}
-		if (!empty($args['after'])) {
-			$text .= esc_attr( $args['after'] );
+		if ( ! is_array( $text ) ) {
+			$text = esc_html( $before_text ) . $text . esc_html( $after_text );
 		}
 
 		// link type
 		if ( ! empty( $args['link_type'] ) ) {
-
 			if ( 'btn' === $args['link_type'] ) {
 				$link_class = 'btn';
 			} elseif ( 'btn-round' === $args['link_type'] ) {
@@ -738,8 +727,6 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 		//          )
 		//      );
 
-		//      echo '####'.$link_class.'###';
-
 		$wrap_class .= ' ' . $link_class;
 
 		if ( 'custom' !== $args['icon_type'] ) {
@@ -748,40 +735,40 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 		$icon = '';
 		if ( ! empty( $args['icon_class'] ) ) {
-			// remove default text if icon exists.
+			// Remove default text if icon exists.
 			if ( empty( $args['text'] ) ) {
 				$link_text = '';
 			}
-			$mr   = $aui_bs5 ? ' me-2' : ' mr-2';
-			$icon = '<i class="' . esc_attr( $args['icon_class'] ) . $mr . '"></i>';
 
+			$mr   = $aui_bs5 ? ' me-2' : ' mr-2';
+			$icon = '<i class="' . sanitize_html_class( $args['icon_class'] ) . $mr . '"></i>';
 		}
 
-		// if a button add form-inline
+		// If a button add form-inline.
 		if ( ! empty( $args['link_type'] ) ) {
 			$wrap_class .= $aui_bs5 ? ' align-self-center' : ' form-inline';
 		}
 
 		$wrapper_attributes = '';
-
 		$output = '';
 
 		if ( is_array( $text ) ) {
 			foreach ( $text as $t ) {
-				$text    = ! empty( $t['text'] ) ? $t['text'] : $text;
-				$link    = ! empty( $t['link'] ) ? $t['link'] : $link;
-				$output .= $this->output_html( $text, $link, $wrap_class, $wrapper_attributes, $icon, $args['is_link'] );
+				$_text = ! empty( $t['text'] ) ? $t['text'] : $text;
+				$link  = ! empty( $t['link'] ) ? $t['link'] : $link;
+
+				$_text = esc_html( $before_text ) . $_text . esc_html( $after_text );
+
+				$output .= $this->output_html( $_text, $link, $wrap_class, $wrapper_attributes, $icon, $args['is_link'] );
 			}
 		} else {
 			$output .= $this->output_html( $text, $link, $wrap_class, $wrapper_attributes, $icon, $args['is_link'] );
 		}
 
 		return $output;
-
 	}
 
 	public function output_html( $text, $link, $wrap_class, $wrapper_attributes, $icon, $is_link ) {
-
 		if ( $is_link ) {
 			return $text ? sprintf(
 				'<a href="%1$s" class="%2$s" %3$s>%4$s%5$s</a>',
@@ -801,7 +788,6 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			) : '';
 		}
 	}
-
 }
 
 // register it.
