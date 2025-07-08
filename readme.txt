@@ -184,6 +184,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 = 0.1.38 - 2025-06-TBD =
 * BS Menu logout link overwrites UWP logout redirect - CHANGED
+* BS > Post info don't render multiple terms for selected taxonomy - FIXED
 
 = 0.1.37 - 2025-06-09 =
 * GD > Titles & Meta page title setting is not working on single page - FIXED
