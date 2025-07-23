@@ -20,6 +20,7 @@ class BlockStrap_Widget_Headline extends WP_Super_Duper {
 				'customClassName' => false,
 			),
 			'block-wrap'       => '',
+			'block-edit-hook' => 'useHeadlineAnimation',
 			'class_name'       => __CLASS__,
 			'base_id'          => 'bs_headline',
 			'name'             => __( 'BS > Headline', 'blockstrap-page-builder-blocks' ),
@@ -645,61 +646,41 @@ class BlockStrap_Widget_Headline extends WP_Super_Duper {
 			<?php
 			}
 			?>
-			// init headlines inside site editor iframe
-			function bs_fse_run_highlight_headline_from_iframe() {
-				const iframeEl = document.querySelector(".edit-site-visual-editor__editor-canvas");
-				if (!iframeEl?.contentWindow) return;
+			// This code should exist somewhere before registerSuperDuperBlock is called.
+			const { useRef, useEffect } = window.wp.element;
 
-				const iframeDoc = iframeEl.contentWindow.document;
-				const widgets = iframeDoc.querySelectorAll('.bs-highlight-headline-widget');
+			window.sdBlockFunctions.useHeadlineAnimation = function(previewHtml, blockId) {
+				const { useEffect } = window.wp.element;
 
-				// Just pass all widgets — let the main function handle .data() checking
-				if (widgets.length) {
-					window.bs_init_highlight_headline(Array.from(widgets));
-				}
-			}
-
-			// init headlines inside site editor iframe
-			function bs_fse_run_animated_headline_from_iframe() {
-				const iframe = document.querySelector('.edit-site-visual-editor__editor-canvas');
-				if (!iframe?.contentWindow || !iframe.contentWindow.document) return;
-
-				const iframeDoc = iframe.contentWindow.document;
-
-				const elements = Array.from(
-					iframeDoc.querySelectorAll('.bs-headline-text-rotating.bs-words-wrapper')
-				);
-
-				if (elements.length && typeof window.bs_init_animated_headline === 'function') {
-					window.bs_init_animated_headline(elements);
-				}
-			}
-
-			let BSdebounceTimer;
-
-			wp.data.subscribe(() => {
-				// Clear the previous debounce timer.
-				clearTimeout(BSdebounceTimer);
-
-				// Set a new timer that will run after 800 ms of inactivity.
-				BSdebounceTimer = setTimeout(() => {
-					console.log('BS Headline animation initialized');
-
-					// Site editor calls
-					if (typeof bs_fse_run_highlight_headline_from_iframe === 'function') {
-						bs_fse_run_highlight_headline_from_iframe();
-						bs_fse_run_animated_headline_from_iframe();
+				useEffect(() => {
+					// Guard against running without a blockId
+					if (!blockId) {
+						return;
 					}
 
-					// Page/post editor calls
-					if (typeof bs_init_highlight_headline === 'function') {
-						bs_init_highlight_headline();
+					// Find the block's main wrapper using the ID from blockProps
+					const blockWrapperElement = document.getElementById(blockId);
+
+					if (!blockWrapperElement) {
+						return;
 					}
-					if (typeof bs_init_animated_headline === 'function') {
-						bs_init_animated_headline();
+
+					// Now that we have the wrapper, find the animation targets inside it
+					const animatedEl = blockWrapperElement.querySelector('.bs-headline-text-rotating.bs-words-wrapper');
+					if (animatedEl && typeof window.bs_init_animated_headline === 'function') {
+						window.bs_init_animated_headline([animatedEl]);
 					}
-				}, 800);
-			});
+
+					const highlightedEl = blockWrapperElement.querySelector('.bs-highlight-headline-widget');
+					if (highlightedEl && typeof window.bs_init_highlight_headline === 'function') {
+						window.bs_init_highlight_headline([highlightedEl]);
+					}
+
+					// This hook now runs when the HTML changes or if the block ID were to change
+				}, [previewHtml, blockId]);
+
+				// This hook no longer needs to create or return a ref
+			};
 			<?php
 			if ( false ) {
 			?>

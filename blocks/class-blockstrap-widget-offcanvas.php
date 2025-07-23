@@ -27,74 +27,77 @@ class BlockStrap_Widget_Offcanvas extends WP_Super_Duper
             'block-supports'   => ['customClassName' => false],
             'block-output'     => [
 				[
-					'element'       => 'BlocksProps',
-					'blockProps'       => array(
-						'if_className'	=> 'bs_build_offcanvas_button_class(props.attributes)',
-					),
-					'inner_element' => 'button',
-					'"data-bs-togglex"'	=> 'offcanvas',
-					'if_"data-bs-target"'	=> 'props.attributes.anchor ? "#" + props.attributes.anchor : "#" + props.attributes.styleid',
-					'if_content'	=> 'props.attributes.button_text',
-					'element_require' => '[%open_with%]==""',
-				],
-				[
-					'element'       => 'BlocksProps',
-					'blockProps'       => array(
-						'className'	=> 'alert alert-info',
-					),
-					'inner_element' => 'div',
-					'if_content'	=> '"Offcanvas Placeholder for #" + bs_build_offcanvas_id(props.attributes)',
-					'element_require' => '[%open_with%]=="external"',
-				],
-				array(
-					'element'              => 'div',
-					'if_id'	=> 'props.attributes.anchor ? props.attributes.anchor : props.attributes.styleid',
-					'if_class' => '"offcanvas " + bs_build_offcanvas_class(props.attributes)',
-					'style'        => '{zIndex:100000,[%WrapStyle%]}',
-					'tabindex'	=> '-1',
-					'if_"data-bs-backdrop"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "static" : "true"',
-					'if_"data-bs-keyboard"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "false" : "true"',
-//					array(
-//						'element' => 'div',
-//						'if_class' => '"modal-dialog " + bs_build_offcanvas_dialog_class(props.attributes)',
-//						array(
-//							'element' => 'div',
-//							'if_class' => '"modal-content overflow-hidden " [%WrapClass%]',
-//							'style'        => '{[%WrapStyle%]}',
-							array(
-								'element' => 'div',
-								'if_class' => '"offcanvas-header " +  bs_build_offcanvas_header_class(props.attributes)',
+					'element'       => 'Fragment',
+					[
+						'element'       => 'BlocksProps',
+						'blockProps'       => array(
+							'if_className'	=> 'bs_build_offcanvas_button_class(props.attributes)',
+						),
+						'inner_element' => 'button',
+						'"data-bs-togglex"'	=> 'offcanvas',
+						'if_"data-bs-target"'	=> 'props.attributes.anchor ? "#" + props.attributes.anchor : "#" + props.attributes.styleid',
+						'if_content'	=> 'props.attributes.button_text',
+						'element_require' => '[%open_with%]==""',
+					],
+					[
+						'element'       => 'BlocksProps',
+						'blockProps'       => array(
+							'className'	=> 'alert alert-info',
+						),
+						'inner_element' => 'div',
+						'if_content'	=> '"Offcanvas Placeholder for #" + bs_build_offcanvas_id(props.attributes)',
+						'element_require' => '[%open_with%]=="external"',
+					],
+					array(
+						'element'              => 'div',
+						'if_id'	=> 'props.attributes.anchor ? props.attributes.anchor : props.attributes.styleid',
+						'if_class' => '"offcanvas " + bs_build_offcanvas_class(props.attributes)',
+						'style'        => '{zIndex:100000,[%WrapStyle%]}',
+						'tabindex'	=> '-1',
+						'if_"data-bs-backdrop"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "static" : "true"',
+						'if_"data-bs-keyboard"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "false" : "true"',
+	//					array(
+	//						'element' => 'div',
+	//						'if_class' => '"modal-dialog " + bs_build_offcanvas_dialog_class(props.attributes)',
+	//						array(
+	//							'element' => 'div',
+	//							'if_class' => '"modal-content overflow-hidden " [%WrapClass%]',
+	//							'style'        => '{[%WrapStyle%]}',
 								array(
-									'element' => 'h1',
-									'if_class' => '"offcanvas-title " +  bs_build_offcanvas_title_class(props.attributes)',
-									'if_content' => 'props.attributes.header_title',
-								),
-								array(
-									'element' => 'button',
-									'if_class' => 'props.attributes.close_icon=="hide" ? "d-none" : "btn-close bg-white"',
-									'"data-bs-dismiss"' => 'offcanvas',
-									'"aria-label"' => 'Close',
-								),
-
-							),
-							array(
-								'element' => 'div',
-								'if_class' => '"offcanvas-body " +  bs_build_offcanvas_body_class(props.attributes)',
-								array(
-									'element'          => 'innerBlocksProps',
-									'blockProps'       => array(
+									'element' => 'div',
+									'if_class' => '"offcanvas-header " +  bs_build_offcanvas_header_class(props.attributes)',
+									array(
+										'element' => 'h1',
+										'if_class' => '"offcanvas-title " +  bs_build_offcanvas_title_class(props.attributes)',
+										'if_content' => 'props.attributes.header_title',
 									),
-									'innerBlocksProps' => array(
-										'orientation' => 'vertical',
+									array(
+										'element' => 'button',
+										'if_class' => 'props.attributes.close_icon=="hide" ? "d-none" : "btn-close bg-white"',
+										'"data-bs-dismiss"' => 'offcanvas',
+										'"aria-label"' => 'Close',
 									),
 
 								),
-							)
+								array(
+									'element' => 'div',
+									'if_class' => '"offcanvas-body " +  bs_build_offcanvas_body_class(props.attributes)',
+									array(
+										'element'          => 'innerBlocksProps',
+										'blockProps'       => array(
+										),
+										'innerBlocksProps' => array(
+											'orientation' => 'vertical',
+										),
 
-//						)
-//					),
+									),
+								)
 
-				),
+	//						)
+	//					),
+
+					),
+				]
             ],
 			'example'           => array(
 				'viewportWidth' => 200

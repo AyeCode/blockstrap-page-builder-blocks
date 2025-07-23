@@ -205,6 +205,7 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			'title'    => __( 'Description', 'blockstrap-page-builder-blocks' ),
 			//'default'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus magna, dignissim sit amet aliquam consequat, dignissim non ex.',
 			'desc_tip' => true,
+			'dynamic_data' => true,
 			'group'    => __( 'Icon Box', 'blockstrap-page-builder-blocks' ),
 		);
 

@@ -27,34 +27,14 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 				array(
 					'element'          => 'innerBlocksProps',
 					'blockProps'       => array(
-						//                      'if_className' => 'props.attributes.styleid + " " [%WrapClass%]',
 						'if_className' => ' ( typeof  props.attributes.styleid !== "undefined" )  ?  props.attributes.styleid + " " [%WrapClass%] : ""  [%WrapClass%]',
 						'style'        => '{[%WrapStyle%]}',
 						'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : props.clientId',
-		//                      'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : "bbb"',
-						//                      '\'data-styleid\'' => "block-" . wp_rand(15),
-						//                      'if_\'data-styleid\'' => 'props.attributes.anchor ? props.attributes.anchor : props.attributes.styleid',
-						//                      'if_id'        => 'props.attributes.anchor ? props.attributes.anchor : "vvvv"',
-						//                      'if_id'        => 'props.attributes.bg',
-		//                                            'if_id'        => '"zzzzz"',
 					),
 					'innerBlocksProps' => array(
-						'orientation' => 'vertical',
-						//                      'template'    => "
-						//                      [
-						//                          [ 'blockstrap/blockstrap-widget-row', {}, [[ 'core/paragraph', { placeholder: 'Summaryx' } ],] ],
-						//
-						//                        ]
-						//    "
+						'orientation' => 'vertical'
 					),
-
 				),
-				//              array(
-				//                  'element'   => 'style',
-				//                  //'className' => 'blockstrap-shape',
-				//                  'if_content'   => "build_shape_divider_css( props.attributes )",
-				//              )
-
 			),
 			'block-wrap'       => '',
 			'class_name'       => __CLASS__,

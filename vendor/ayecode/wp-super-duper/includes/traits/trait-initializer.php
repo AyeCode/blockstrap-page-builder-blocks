@@ -71,9 +71,27 @@ trait WP_Super_Duper_Initializer {
 			if ( class_exists( '\Bricks\Elements', false ) ) {
 				add_action( 'init', array( $this, 'load_bricks_element_class' ) );
 			}
-			if ( empty( $this->options['output_types'] ) || in_array( 'block', $this->options['output_types'] ) ) {
-				add_action( 'admin_enqueue_scripts', array( $this, 'register_block' ) );
-			}
+
+//			global $oooonce;
+//			if ( !empty($this->options['base_id']) && (
+//				$this->options['base_id'] === 'bs_text'
+//				|| $this->options['base_id'] === 'super_card'
+//				|| $this->options['base_id'] === 'bs_search'
+//				|| $this->options['base_id'] === 'bs_container'
+//				)
+//			) {
+//				// @todo testing
+////				echo '@@@'.$this->options['base_id'];exit;
+////				add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_block_assets' ] );
+//				add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
+//			}elseif ( empty( $this->options['output_types'] ) || in_array( 'block', $this->options['output_types'] ) ) {
+//				if(! $oooonce) add_action( 'admin_enqueue_scripts', array( $this, 'register_block' ) );
+//				$oooonce = true;
+//			}
+
+			add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
+
+
 		}
 
 		// Add global scripts and styles only once.

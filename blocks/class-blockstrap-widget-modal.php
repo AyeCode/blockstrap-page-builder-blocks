@@ -25,77 +25,103 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
             'block-category'   => 'layout',
             'block-keywords'   => "['modal','popup','lightbox']",
             'block-supports'   => ['customClassName' => false],
+			'block-edit-returnx' => 'el(
+    Fragment, // Use a Fragment to wrap multiple elements
+    {},
+    el(
+        \'div\',
+        {
+            // 1. Spread the existing blockProps onto the element
+            ...blockProps,
+
+            // 2. Safely merge your custom class with the default one from blockProps
+            className: `${blockProps.className || \'\'} ${props.attributes.styleid} blockstrap-shape blockstrap-shape-${props.attributes.sd_position} position-absolute ${sd_build_aui_class(props.attributes)}`.trim(),
+
+            // 3. Apply dangerouslySetInnerHTML directly to the div
+            dangerouslySetInnerHTML: { __html: blockstrap_build_shape(props.attributes) }
+        }
+    ),
+    el(
+        \'style\',
+        {},
+        build_shape_divider_css(props.attributes)
+    )
+)',
             'block-output'     => [
 				[
-					'element'       => 'BlocksProps',
-					'blockProps'       => array(
-						'if_className'	=> 'bs_build_modal_button_class(props.attributes)',
-					),
-					'inner_element' => 'button',
+					'element'       => 'Fragment',
+					[
+						'element'       => 'BlocksProps',
+						'blockProps'       => array(
+							'if_className'	=> 'bs_build_modal_button_class(props.attributes)',
+						),
+						'inner_element' => 'button',
 //					setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 1000);"
 //					'if_onclick'	=> 'alert(1)',//'setTimeout(function() { window.dispatchEvent(new Event("resize")); }, 1000);',
-					'"data-bs-togglex"'	=> 'modal',
-					'if_"data-bs-target"'	=> 'props.attributes.anchor ? "#" + props.attributes.anchor : "#" + props.attributes.styleid',
-					'if_content'	=> 'props.attributes.button_text',
-					'element_require' => '[%open_with%]==""',
-				],
-				[
-					'element'       => 'BlocksProps',
-					'blockProps'       => array(
-						'className'	=> 'alert alert-info',
-					),
-					'inner_element' => 'div',
-					'if_content'	=> '"Modal Placeholder for #" + bs_build_modal_id(props.attributes)',
-					'element_require' => '[%open_with%]=="external"',
-				],
-				array(
-					'element'              => 'div',
-					'if_id'	=> 'props.attributes.anchor ? props.attributes.anchor : props.attributes.styleid',
-					'if_class'	=> 'props.attributes.animation && props.attributes.animation === "no" ? "modal" : "modal fade"',
-					'tabindex'	=> '-1',
-					'if_"data-bs-backdrop"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "static" : "true"',
-					'if_"data-bs-keyboard"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "false" : "true"',
+						'"data-bs-togglex"'	=> 'modal',
+						'if_"data-bs-target"'	=> 'props.attributes.anchor ? "#" + props.attributes.anchor : "#" + props.attributes.styleid',
+						'if_content'	=> 'props.attributes.button_text',
+						'element_require' => '[%open_with%]==""',
+					],
+					[
+						'element'       => 'BlocksProps',
+						'blockProps'       => array(
+							'className'	=> 'alert alert-info',
+						),
+						'inner_element' => 'div',
+						'if_content'	=> '"Modal Placeholder for #" + bs_build_modal_id(props.attributes)',
+						'element_require' => '[%open_with%]=="external"',
+					],
 					array(
-						'element' => 'div',
-						'if_class' => '"modal-dialog " + bs_build_modal_dialog_class(props.attributes)',
+						'element'              => 'div',
+						'if_id'	=> 'props.attributes.anchor ? props.attributes.anchor : props.attributes.styleid',
+						'if_class'	=> 'props.attributes.animation && props.attributes.animation === "no" ? "modal" : "modal fade"',
+						'tabindex'	=> '-1',
+						'if_"data-bs-backdrop"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "static" : "true"',
+						'if_"data-bs-keyboard"'	=> 'props.attributes.static_backdrop && props.attributes.static_backdrop == "yes" ? "false" : "true"',
 						array(
 							'element' => 'div',
-							'if_class' => '"modal-content overflow-hidden " [%WrapClass%]',
-							'style'        => '{[%WrapStyle%]}',
+							'if_class' => '"modal-dialog " + bs_build_modal_dialog_class(props.attributes)',
 							array(
 								'element' => 'div',
-								'if_class' => '"modal-header " +  bs_build_modal_header_class(props.attributes)',
+								'if_class' => '"modal-content overflow-hidden " [%WrapClass%]',
+								'style'        => '{[%WrapStyle%]}',
 								array(
-									'element' => 'h1',
-									'if_class' => '"modal-title " +  bs_build_modal_title_class(props.attributes)',
-									'if_content' => 'props.attributes.header_title',
-								),
-								array(
-									'element' => 'button',
-									'if_class' => 'props.attributes.close_icon=="hide" ? "d-none" : "btn-close bg-white"',
-									'"data-bs-dismiss"' => 'modal',
-									'"aria-label"' => 'Close',
-								),
-
-							),
-							array(
-								'element' => 'div',
-								'if_class' => '"modal-body " +  bs_build_modal_body_class(props.attributes)',
-								array(
-									'element'          => 'innerBlocksProps',
-									'blockProps'       => array(
+									'element' => 'div',
+									'if_class' => '"modal-header " +  bs_build_modal_header_class(props.attributes)',
+									array(
+										'element' => 'h1',
+										'if_class' => '"modal-title " +  bs_build_modal_title_class(props.attributes)',
+										'if_content' => 'props.attributes.header_title',
 									),
-									'innerBlocksProps' => array(
-										'orientation' => 'vertical',
+									array(
+										'element' => 'button',
+										'if_class' => 'props.attributes.close_icon=="hide" ? "d-none" : "btn-close bg-white"',
+										'"data-bs-dismiss"' => 'modal',
+										'"aria-label"' => 'Close',
 									),
 
 								),
+								array(
+									'element' => 'div',
+									'if_class' => '"modal-body " +  bs_build_modal_body_class(props.attributes)',
+									array(
+										'element'          => 'innerBlocksProps',
+										'blockProps'       => array(
+										),
+										'innerBlocksProps' => array(
+											'orientation' => 'vertical',
+										),
+
+									),
+								)
+
 							)
+						),
 
-						)
 					),
+				]
 
-				),
             ],
 			'example'           => array(
 				'viewportWidth' => 200
@@ -636,6 +662,14 @@ class BlockStrap_Widget_Modal extends WP_Super_Duper
 				return $class;
 			}
 
+
+			// add to our global namespace
+			window.sdBlockFunctions.bs_build_modal_button_class = bs_build_modal_button_class;
+			window.sdBlockFunctions.bs_build_modal_body_class = bs_build_modal_body_class;
+			window.sdBlockFunctions.bs_build_modal_title_class = bs_build_modal_title_class;
+			window.sdBlockFunctions.bs_build_modal_header_class = bs_build_modal_header_class;
+			window.sdBlockFunctions.bs_build_modal_id = bs_build_modal_id;
+			window.sdBlockFunctions.bs_build_modal_dialog_class = bs_build_modal_dialog_class;
 
 
 		<?php

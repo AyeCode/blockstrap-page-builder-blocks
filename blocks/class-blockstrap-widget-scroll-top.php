@@ -99,6 +99,7 @@ class BlockStrap_Widget_Scroll_Top extends WP_Super_Duper
 
         $arguments['icon_class'] = [
             'type'        => 'text',
+			'icon_picker' => true,
             'title'       => __('Icon Class', 'blockstrap-page-builder-blocks'),
             'desc'        => __('Enter a font awesome icon class.', 'blockstrap-page-builder-blocks'),
             'placeholder' => __('fas fa-arrow-up', 'blockstrap-page-builder-blocks'),

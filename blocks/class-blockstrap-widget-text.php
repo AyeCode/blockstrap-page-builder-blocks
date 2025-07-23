@@ -68,7 +68,7 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 		// The Modal (Simplified Call)
 		// We no longer need the Fragment or the backdrop div here.
 		isModalOpen &&
-			wp.element.createElement(window.auiBlockTools.DynamicDataModal, {
+			wp.element.createElement(window.sdBlockTools.DynamicDataModal, {
 				isOpen: isModalOpen,
 				onSelect: handleSelect,
 				onClose: function () { setModalOpen(false); },
@@ -111,7 +111,11 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 					),
 				),
 				'advanced' => array(
-					'groups' => array( __( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ), __( 'Advanced', 'blockstrap-page-builder-blocks' ) ),
+					'groups' => array(
+						__( 'Wrapper Styles', 'blockstrap-page-builder-blocks' ),
+						__( 'Visibility Conditions', 'blockstrap-page-builder-blocks' ),
+						__( 'Advanced', 'blockstrap-page-builder-blocks' ),
+					),
 					'tab'    => array(
 						'title'     => __( 'Advanced', 'blockstrap-page-builder-blocks' ),
 						'key'       => 'bs_tab_advanced',
@@ -291,6 +295,7 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 			$arguments['metadata_name'] = sd_get_custom_name_input();
 		}
 
+//		print_r($arguments);exit;
 		return $arguments;
 	}
 
@@ -305,7 +310,6 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-
 
 
 		// maybe render dynamic fields
@@ -328,30 +332,6 @@ class BlockStrap_Widget_Text extends WP_Super_Duper {
 			$html
 		);
 
-	}
-
-	public function block_global_js() {
-		ob_start();
-		if ( false ) {
-			?>
-		<script>
-			<?php
-		}
-		?>
-
-			function bs_build_heading_html($args) {
-
-				let $html = '';
-
-				$html += $args.text;
-
-
-				return $html;
-			}
-
-
-		<?php
-		return ob_get_clean();
 	}
 
 }

@@ -18,6 +18,7 @@
 	@at-root .offcanvas:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.is-selected),
 	.offcanvas:has(.wp-block-blockstrap-blockstrap-widget-offcanvas.has-child-selected) {
 		transform: none !important;
+		visibility: visible;
 	}
 }
 

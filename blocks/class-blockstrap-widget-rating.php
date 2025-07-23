@@ -98,6 +98,7 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 
 		$arguments['icon_class'] = array(
 			'type'        => 'text',
+			'icon_picker' => true,
 			'title'       => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
 			'desc'        => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
 			'placeholder' => __( 'fas fa-star', 'blockstrap-page-builder-blocks' ),

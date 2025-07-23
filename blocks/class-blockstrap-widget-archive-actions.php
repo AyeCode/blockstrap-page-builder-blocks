@@ -15,11 +15,17 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 			'block-icon'        => 'fas fa-filter',
 			'block-category'    => 'layout',
 			'block-keywords'    => "['archive','category','sorting','actions']",
-			'block-wrap'        => '',
+			'block-wrap'        => 'span',
 			'block-supports'    => array(
 				'customClassName' => false,
 			),
-			'block-edit-return' => "el('span',wp.blockEditor.useBlockProps({dangerouslySetInnerHTML:{__html:onChangeContent()},style:{'minHeight': '30px'},className:''}))",
+//			'block-edit-returnx' => "el('span',wp.blockEditor.useBlockProps({dangerouslySetInnerHTML:{__html:previewHtml},style:{'minHeight': '30px'},className:''}))",
+//			'block-edit-return' => "el('span', { ...blockProps, style: { ...blockProps.style, minHeight: '30px' }, dangerouslySetInnerHTML: { __html: previewHtml } })",
+//			'block-edit-return' => "el('span',{
+//			...blockProps,
+//			dangerouslySetInnerHTML:{__html:onChangeContent()}
+//			,style:{'minHeight': '30px'},
+//			className:''})",
 			'class_name'        => __CLASS__,
 			'base_id'           => 'bs_archive_actions',
 			'name'              => __( 'BS > Archive Actions', 'blockstrap-page-builder-blocks' ),

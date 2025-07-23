@@ -140,6 +140,7 @@ class BlockStrap_Widget_Alert extends WP_Super_Duper {
 		$arguments = array();
 
 		$arguments['text'] = array(
+			'dynamic_data' => true,
 			'type'        => 'textarea',
 			'title'       => __( 'Text', 'blockstrap-page-builder-blocks' ),
 			'placeholder' => __( 'Enter you text!', 'blockstrap-page-builder-blocks' ),
@@ -175,6 +176,8 @@ class BlockStrap_Widget_Alert extends WP_Super_Duper {
 			'placeholder' => __( 'fas fa-info-circle', 'blockstrap-page-builder-blocks' ),
 			'default'     => '',
 			'desc_tip'    => true,
+			'icon_picker' => true,
+			'dynamic_data' => true,
 			'group'       => __( 'Icon', 'blockstrap-page-builder-blocks' ),
 		);
 

@@ -28,7 +28,7 @@ class BlockStrap_Widget_Heading extends WP_Super_Duper {
                 onChange: function (text) {
                     props.setAttributes({text: text}); // Store updated content as a block attribute
                 },
-                placeholder: __('Heading...'),
+                placeholder: 'Heading...',
             }))",
 			'block-save-return' => "wp.element.createElement( wp.blockEditor.RichText.Content, Object.assign( wp.blockEditor.useBlockProps.save({className: sd_build_aui_class(props.attributes)}), {
              tagName: props.attributes.html_tag ? props.attributes.html_tag : 'h1',

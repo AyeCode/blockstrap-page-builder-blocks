@@ -10,10 +10,6 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 	 */
 	public function __construct() {
 
-		$aui_settings = is_admin() ? get_option( 'ayecode-ui-settings', array() ) : array();
-		$aui_settings = apply_filters( 'ayecode-ui-settings', $aui_settings, array(), array() );
-		$bs5          = ! empty( $aui_settings['bs_ver'] ) && '5' === $aui_settings['bs_ver'] ? 'bs-' : '';
-
 		$options = array(
 			'textdomain'        => 'blockstrap',
 			'output_types'      => array( 'block', 'shortcode' ),
@@ -61,7 +57,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 
 											childBlocks.map((tab, index) => (
 												(tab.attributes.visibility_conditions ? tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor,visibility_conditions:JSON.parse(tab.attributes.visibility_conditions)}) : tabs_array.push({name:tab.attributes.text,id:tab.attributes.anchor})),
-												 active_index = tab.clientId === wp.data.select('core/editor').getBlockSelectionStart() || hasSelectedInnerBlock(tab) ? index : active_index
+												 active_index = tab.clientId === wp.data.select('core/block-editor').getBlockSelectionStart() || wp.data.select('core/block-editor').hasSelectedInnerBlock(tab.clientId, true) ? index : active_index
 											));
 
 											props.setAttributes({
@@ -72,12 +68,12 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 												tabs.push(
 													el('li',{className:'nav-item'}, el('button',{
 															className: active_index === index ? 'nav-link active ' + sd_build_aui_class({rounded_size: props.attributes.tabs_rounded_size}) : 'nav-link ' + sd_build_aui_class({rounded_size: props.attributes.tabs_rounded_size}),
-															'data-{$bs5}toggle': 'tab',
+															'data-bs-toggle': 'tab',
 															type: 'button',
 															role: 'tab',
 															'aria-selected': false,
 															'aria-controls': 'nav-profile',
-															'data-{$bs5}target':  '#block-' + tab.clientId
+															'data-bs-target':  '#block-' + tab.clientId
 														},
 													 tab.attributes.text ? tab.attributes.text : 'Tab ' + (index+1)
 													 )
@@ -334,12 +330,11 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-		global $aui_bs5;
 
 		if ( $content ) {
-			$bs5          = $aui_bs5 ? 'bs-' : '';
+//			print_r( $args );exit;
 			$wrap_class   = sd_build_aui_class( $args );
-			$tabs_array   = $args['tabs_head_array'] ? json_decode( '[' . $args['tabs_head_array'] . ']', true ) : array();
+			$tabs_array   = $args['tabs_head_array'] ? json_decode( '[' . str_replace('&quot;','"', $args['tabs_head_array'] ) . ']', true ) : array();
 			$tabs         = '';
 			$first_tab_id = '';
 
@@ -365,7 +360,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 					$first_tab_id = $active ? esc_attr( $tab['id'] ) : $first_tab_id;
 					$aria_active  = $active ? 'true' : 'false';
 					$active      .= ' ' . sd_build_aui_class( array( 'rounded_size' => $args['tabs_rounded_size'] ) );
-					$tabs        .= '<li class="nav-item"><button class="nav-link ' . $active . '" id="' . esc_attr( $tab['id'] ) . '-tab" data-' . $bs5 . 'toggle="tab" data-' . $bs5 . 'target="#' . esc_attr( $tab['id'] ) . '" type="button" role="tab" aria-controls="nav-home" aria-selected="' . $aria_active . '">' . esc_attr( $tab['name'] ) . '</button></li>';
+					$tabs        .= '<li class="nav-item"><button class="nav-link ' . $active . '" id="' . esc_attr( $tab['id'] ) . '-tab" data-bs-toggle="tab" data-bs-target="#' . esc_attr( $tab['id'] ) . '" type="button" role="tab" aria-controls="nav-home" aria-selected="' . $aria_active . '">' . esc_attr( $tab['name'] ) . '</button></li>';
 					++$_key;
 				}
 			}

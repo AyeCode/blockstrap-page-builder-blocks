@@ -126,6 +126,7 @@ class BlockStrap_Widget_Search extends WP_Super_Duper {
 
 		$arguments['button_icon_class'] = array(
 			'type'            => 'text',
+			'icon_picker' => true,
 			'title'           => __( 'Icon class', 'blockstrap-page-builder-blocks' ),
 			'desc'            => __( 'Enter a font awesome icon class.', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => __( 'fas fa-search', 'blockstrap-page-builder-blocks' ),

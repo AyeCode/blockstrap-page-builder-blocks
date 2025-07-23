@@ -142,17 +142,15 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 		$arguments['gallery_style'] = array(
 			'title'                 => __( 'Gallery style', 'blockstrap-page-builder-blocks' ),
 			//          'desc' => __('For a more consistent image view you can set the aspect ratio of the image view port.', 'blockstrap-page-builder-blocks'),
-							'type'  => 'select',
+			'type'  => 'select',
 			'options'               => array(
 				'grid'  => __( 'Grid (default)', 'blockstrap-page-builder-blocks' ),
 				'1-2-5' => __( '1-2-5 Grid', 'blockstrap-page-builder-blocks' ),
 				'1-2-2' => __( '1-2-2 Grid', 'blockstrap-page-builder-blocks' ),
 			),
 			'desc_tip'              => true,
-			'value'                 => '',
 			'default'               => 'grid',
-			//          'advanced' => true,
-							'group' => __( 'Gallery Styles', 'blockstrap-page-builder-blocks' ),
+			'group' => __( 'Gallery Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
 		// row-cols
@@ -455,11 +453,15 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 		if ( function_exists( 'geodir_get_images' ) && ! empty( $args['img_source'] ) && $args['img_source'] === 'gd_post_images' ) {
 			$images = $this->is_block_content_call() ? $this->get_dummy_images() : geodir_get_images( $post->ID );
 			$gd_images = true;
-		} elseif ( $this->is_block_content_call() ) {
-				$args['images'] = str_replace( '&quot;', '"', $args['images'] );
-				$images         = json_decode( '[' . $args['images'] . ']', true );
-			} else {
-			$images = json_decode( '[' . $args['images'] . ']', true );
+		}
+//		elseif ( $this->is_block_content_call() ) {
+//				$args['images'] = str_replace( '&quot;', '"', $args['images'] );
+//				$images         = json_decode( '[' . $args['images'] . ']', true );
+//			}
+		else {
+			//$images = json_decode( '[' . $args['images'] . ']', true );
+			$args['images'] = str_replace( '&quot;', '"', $args['images'] );
+			$images         = json_decode( '[' . $args['images'] . ']', true );
 		}
 
 		$lightbox_size = $args['lightbox_size'] ? esc_attr( $args['lightbox_size'] ) : '';
@@ -494,6 +496,7 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 		$col_class .= ! empty( $args['row_gap_x'] ) ? ' px-' . absint( $args['row_gap_x'] ) : '';
 		$col_class .= ! empty( $args['row_gap_y'] ) ? ' mb-' . absint( $args['row_gap_y'] ) : ' mb-4';
 
+//		print_r( $args );exit;
 		$cols = array();
 		if ( ! empty( $images ) ) {
 			$i = 0;
@@ -648,6 +651,11 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 		}
 
 		$cols = implode( '', $cols );
+
+		// bail if no images
+		if ( empty( $cols ) ) {
+			return '';
+		}
 
 		// class
 		$wrap_class        = sd_build_aui_class( $args );

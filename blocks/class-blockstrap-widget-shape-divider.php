@@ -25,7 +25,52 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 					'sd_color' => 'primary',
 				),
 			),
-			'block-output'   => array(
+			'block-edit-return' => 'el(
+    Fragment, // Use a Fragment to wrap multiple elements
+    {},
+    el(
+        \'div\',
+        {
+            // 1. Spread the existing blockProps onto the element
+            ...blockProps,
+
+            // 2. Safely merge your custom class with the default one from blockProps
+            className: `${blockProps.className || \'\'} ${props.attributes.styleid} blockstrap-shape blockstrap-shape-${props.attributes.sd_position} position-absolute ${sd_build_aui_class(props.attributes)}`.trim(),
+
+            // 3. Apply dangerouslySetInnerHTML directly to the div
+            dangerouslySetInnerHTML: { __html: blockstrap_build_shape(props.attributes) }
+        }
+    ),
+    el(
+        \'style\',
+        {},
+        build_shape_divider_css(props.attributes)
+    )
+)',
+			'block-save-return' => 'el(
+    Fragment, // Use a Fragment to wrap multiple elements
+    {},
+    el(
+        \'div\',
+        {
+            // 1. Spread the existing blockProps onto the element
+            ...blockProps,
+
+            // 2. Safely merge your custom class with the default one from blockProps
+            className: `${blockProps.className || \'\'} ${props.attributes.styleid} blockstrap-shape blockstrap-shape-${props.attributes.sd_position} position-absolute ${sd_build_aui_class(props.attributes)}`.trim(),
+
+            // 3. Apply dangerouslySetInnerHTML directly to the div
+            dangerouslySetInnerHTML: { __html: blockstrap_build_shape(props.attributes) }
+        }
+    ),
+    el(
+        \'style\',
+        {},
+        build_shape_divider_css(props.attributes)
+    )
+)',
+			'block-outputx'   => array(
+				'element'       => 'Fragment',
 				array(
 					'element'       => 'BlocksProps',
 					'inner_element' => 'div',
@@ -246,6 +291,10 @@ class BlockStrap_Widget_Shape_Divider extends WP_Super_Duper {
 
 				return $svg;
 			}
+
+			window.sdBlockFunctions.blockstrap_build_shape = blockstrap_build_shape;
+			window.sdBlockFunctions.blockstrap_convert_color_to_var_name = blockstrap_convert_color_to_var_name;
+			window.sdBlockFunctions.build_shape_divider_css = build_shape_divider_css;
 		<?php
 		return ob_get_clean();
 	}
