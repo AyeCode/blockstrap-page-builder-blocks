@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 0.1.38
+Stable tag: 0.1.39
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -181,6 +181,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.39 - 2025-07-24 =
+* AUI & FA packages updated - CHANGED
 
 = 0.1.38 - 2025-07-14 =
 * BS Menu logout link overwrites UWP logout redirect - CHANGED
