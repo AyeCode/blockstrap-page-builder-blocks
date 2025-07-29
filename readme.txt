@@ -182,6 +182,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.40 - 2025-07-TBD =
+* BS > Icon Box renders wrong heading classes - FIXED
+
 = 0.1.39 - 2025-07-24 =
 * AUI & FA packages updated - CHANGED
 
@@ -278,7 +281,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 * Accordion block now has option to enable FAQ Schema - ADDED
 * New BS > Scroll Top block for scrolling the page back to the top - NEW/ADDED
 * BS > Post Title will now dynamically change h tag if inside GD Loop - ADDED
-* BD > Post Title link color not showing correct color when set - FIXED
+* BS > Post Title link color not showing correct color when set - FIXED
 * BS > Share block current URl function improved - CHANGED
 * BS > Share block will use new twitter X logo if current Font Awesome version supports it - CHANGED
 * BS > Container block background as featured image will now USE GD location, category and CPT images when available - ADDED
