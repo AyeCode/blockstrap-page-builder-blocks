@@ -187,9 +187,10 @@ class BlockStrap_Widget_Icon_Box extends WP_Super_Duper {
 			'options'  => array(
 				'h1'  => 'h1',
 				'h2'  => 'h2',
-				'h4'  => 'h3',
-				'h5'  => 'h4',
-				'h6'  => 'h5',
+				'h3'  => 'h3',
+				'h4'  => 'h4',
+				'h5'  => 'h5',
+				'h6'  => 'h6',
 				'div' => 'div',
 			),
 			'default'  => 'h3',
