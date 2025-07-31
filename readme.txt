@@ -184,6 +184,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 = 0.1.40 - 2025-07-TBD =
 * BS > Icon Box renders wrong heading classes - FIXED
+* BS > Post Title leads to wrong meta title with AISEO - FIXED
 
 = 0.1.39 - 2025-07-24 =
 * AUI & FA packages updated - CHANGED

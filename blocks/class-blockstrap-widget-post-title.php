@@ -265,7 +265,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
 		// Makes sure the GD SEO title filter is called
 		if ( function_exists( 'geodir_is_page' ) && ( geodir_is_page( 'single' ) || geodir_is_page( 'preview' ) ) ) {
-			if ( GeoDir_SEO::yoast_enabled() || GeoDir_SEO::rank_math_enabled() ) {
+			if ( GeoDir_SEO::yoast_enabled() || GeoDir_SEO::rank_math_enabled() || ( method_exists( 'GeoDir_SEO', 'aioseo_enabled' ) && GeoDir_SEO::aioseo_enabled() ) ) {
 				// Yoast/Rank Math enabled.
 			} else {
 				GeoDir_SEO::set_meta();
