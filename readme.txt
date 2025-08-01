@@ -182,6 +182,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.41 - 2025-08-TBD =
+* BS > Nav Item shows error when assigned term is deleted - FIXED
+
 = 0.1.40 - 2025-07-31 =
 * BS > Icon Box renders wrong heading classes - FIXED
 * BS > Post Title leads to wrong meta title with AISEO - FIXED

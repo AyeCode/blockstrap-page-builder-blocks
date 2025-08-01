@@ -89,24 +89,30 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 				$link_text = esc_attr($page->post_title);
 			}
 		}
-	} else if ('term-id' === $args['type']) {
-		$taxonomy = ! empty($args['taxonomy']) ? esc_attr($args['taxonomy']) : '';
-		$term_id = ! empty($args['term_id']) ? absint($args['term_id']) : 0;
-		if ($term_id && $taxonomy) {
-			$link = get_term_link($term_id, $taxonomy);
-			if (empty($args['text'])) {
-				// its more efficient to manually set a name but this is good UX
-				$term = get_term($term_id, $taxonomy);
-				if ( ! is_wp_error( $term ) && ! empty( $term ) ) {
-					$link_text = esc_attr($term->name);
+	} else if ( 'term-id' === $args['type'] ) {
+		$taxonomy = ! empty( $args['taxonomy'] ) ? $args['taxonomy'] : '';
+		$term_id = ! empty( $args['term_id'] ) ? absint( $args['term_id'] ) : 0;
+
+		if ( $term_id && $taxonomy ) {
+			$link = get_term_link( $term_id, $taxonomy );
+
+			if ( is_wp_error( $link ) ) {
+				$link = "#";
+			} else {
+				if ( empty( $args['text'] ) ) {
+					// Its more efficient to manually set a name but this is good UX
+					$term = get_term( $term_id, $taxonomy );
+
+					if ( ! is_wp_error( $term ) && ! empty( $term ) ) {
+						$link_text = $term->name;
+					}
 				}
 			}
 
-			// fallback
-			if(empty($link_text)) {
-				$link_text = __('Term link', 'blockstrap-page-builder-blocks');
+			// Fallback
+			if ( empty( $link_text ) ) {
+				$link_text = __( 'Term link', 'blockstrap-page-builder-blocks' );
 			}
-
 		}
 	} else if ('wp-login' === $args['type']) {
 		$args['icon_class'] = $args['icon_class'] ?: 'far fa-user';
