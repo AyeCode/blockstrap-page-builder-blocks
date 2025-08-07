@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.40\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.41\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-31 20:58+0530\n"
-"PO-Revision-Date: 2025-07-31 20:59+0530\n"
+"POT-Creation-Date: 2025-08-07 15:21+0530\n"
+"PO-Revision-Date: 2025-08-07 15:21+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -772,7 +772,7 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-archive-title.php:265
 #: blocks/class-blockstrap-widget-search.php:120
-#: blocks/class-blockstrap-widget-search.php:352 classes/functions.php:180
+#: blocks/class-blockstrap-widget-search.php:352 classes/functions.php:186
 msgid "Search"
 msgstr ""
 
@@ -2316,7 +2316,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-image.php:217
 #: blocks/class-blockstrap-widget-navbar-brand.php:175
 #: blocks/class-blockstrap-widget-post-info.php:161
-#: blocks/class-blockstrap-widget-post-info.php:204 classes/functions.php:177
+#: blocks/class-blockstrap-widget-post-info.php:204 classes/functions.php:183
 msgid "Custom"
 msgstr ""
 
@@ -3058,7 +3058,7 @@ msgid ""
 msgstr ""
 
 #: blocks/class-blockstrap-widget-offcanvas.php:219 classes/functions.php:22
-#: classes/functions.php:125
+#: classes/functions.php:131
 msgid "Open Offcanvas"
 msgstr ""
 
@@ -3894,7 +3894,7 @@ msgstr ""
 msgid "WP Logout (logged in)"
 msgstr ""
 
-#: classes/functions.php:21 classes/functions.php:121
+#: classes/functions.php:21 classes/functions.php:127
 msgid "Open Lightbox"
 msgstr ""
 
@@ -3942,63 +3942,63 @@ msgstr ""
 msgid "spacer (non link)"
 msgstr ""
 
-#: classes/functions.php:107
+#: classes/functions.php:114
 msgid "Term link"
 msgstr ""
 
-#: classes/functions.php:114
+#: classes/functions.php:120
 msgid "Sign in"
 msgstr ""
 
-#: classes/functions.php:118
+#: classes/functions.php:124
 msgid "Sign out"
 msgstr ""
 
-#: classes/functions.php:183
+#: classes/functions.php:189
 msgid "Location"
 msgstr ""
 
-#: classes/functions.php:186
+#: classes/functions.php:192
 msgid "Set Location"
 msgstr ""
 
-#: classes/functions.php:207
+#: classes/functions.php:213
 msgid "Clear Location"
 msgstr ""
 
-#: classes/functions.php:230
+#: classes/functions.php:236
 #, php-format
 msgid "Add %s"
 msgstr ""
 
-#: classes/functions.php:236
+#: classes/functions.php:242
 msgid "Login"
 msgstr ""
 
-#: classes/functions.php:240
+#: classes/functions.php:246
 msgid "Register"
 msgstr ""
 
-#: classes/functions.php:244
+#: classes/functions.php:250
 msgid "Forgot Password"
 msgstr ""
 
-#: classes/functions.php:248
+#: classes/functions.php:254
 msgid "Account"
 msgstr ""
 
-#: classes/functions.php:251
+#: classes/functions.php:257
 msgid "Change password"
 msgstr ""
 
-#: classes/functions.php:254
+#: classes/functions.php:260
 msgid "Profile"
 msgstr ""
 
-#: classes/functions.php:262
+#: classes/functions.php:268
 msgid "Log out"
 msgstr ""
 
-#: classes/functions.php:372
+#: classes/functions.php:378
 msgid "Select Page..."
 msgstr ""
