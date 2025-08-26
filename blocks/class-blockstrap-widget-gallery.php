@@ -421,8 +421,8 @@ class BlockStrap_Widget_Gallery extends WP_Super_Duper {
 			$image->ID = 0;
 			$image->post_id = 0;
 			$image->user_id = 0;
-			$image->title = sprintf( __( 'Demo image title %d', 'geodirectory' ), $count );
-			$image->caption = sprintf( __( 'Demo image caption %d', 'geodirectory' ), $count );
+			$image->title = sprintf( __( 'Demo image title %d', 'blockstrap-page-builder-blocks' ), $count );
+			$image->caption = sprintf( __( 'Demo image caption %d', 'blockstrap-page-builder-blocks' ), $count );
 			$image->file = $dummy_image_url . $dummy_image;
 			$image->mime_type = '';
 			$image->menu_order = 0;

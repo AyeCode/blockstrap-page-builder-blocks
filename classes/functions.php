@@ -210,7 +210,7 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 
 		if ($location_set) {
 			$mr   = $aui_bs5 ? ' me-1' : ' mr-1';
-			$icon               = '<span class="hover-swap gdlmls-menu-icon '.$mr.'"><i class="'.$icon_class.' hover-content-original"></i><i class="fas fa-times hover-content c-pointer" title="'.__('Clear Location', 'geodirlocation').'" data-toggle="tooltip"></i></span> ';
+			$icon               = '<span class="hover-swap gdlmls-menu-icon '.$mr.'"><i class="'.$icon_class.' hover-content-original"></i><i class="fas fa-times hover-content c-pointer" title="'.__('Clear Location', 'blockstrap-page-builder-blocks').'" data-toggle="tooltip"></i></span> ';
 			$args['text']       = esc_attr($location_name);
 		}
 
