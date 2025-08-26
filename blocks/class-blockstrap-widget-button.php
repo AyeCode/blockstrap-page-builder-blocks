@@ -451,7 +451,7 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 	public function get_custom_field_keys() {
 		$fields = geodir_post_custom_fields( '', 'all', 'all', 'none' );
 		$keys   = array();
-		$keys[] = __( 'Select Key', 'geodirectory' );
+		$keys[] = __( 'Select Key', 'blockstrap-page-builder-blocks' );
 		if ( ! empty( $fields ) ) {
 			$address = array();
 			foreach ( $fields as $field ) {

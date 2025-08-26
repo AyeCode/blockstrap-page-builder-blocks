@@ -222,7 +222,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 			$arguments['email_submit_text'] = array(
 				'type'        => 'text',
 				'title'       => __( 'Submit text', 'blockstrap-page-builder-blocks' ),
-				'placeholder' => 'Send',
+				'placeholder' => __( 'Send', 'blockstrap-page-builder-blocks' ),
 				'default'     => '',
 				'desc'        => __( 'Leave this blank to be able to translate it.', 'blockstrap-page-builder-blocks' ),
 				'group'       => __( 'Fields', 'blockstrap-page-builder-blocks' ),
@@ -633,7 +633,7 @@ class BlockStrap_Widget_Contact extends WP_Super_Duper {
 		$link_text = __( 'Send', 'blockstrap-page-builder-blocks' );
 
 		// maybe set custom link text
-		$link_text     = ! empty( $args['email_submit_text'] ) ? esc_attr( $args['email_submit_text'] ) : $link_text;
+		$link_text     = ! empty( $args['email_submit_text'] ) ? __( $args['email_submit_text'], 'blockstrap-page-builder-blocks' ) : $link_text;
 		$is_lightbox   = ! empty( $args['display'] );
 		$is_horizontal = ! empty( $args['field_layout'] ) && 'horizontal' === $args['field_layout'];
 

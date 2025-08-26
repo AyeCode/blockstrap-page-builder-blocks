@@ -77,13 +77,13 @@ class BlockStrap_Blocks_AJAX {
 		$email_template = nl2br(
 			apply_filters(
 				'blockstrap_blocks_contact_email_template',
-				'Contact form received
+				__( 'Contact form received
 
 Submitted from: %%submitted_from_url%%
 
 %%form_data%%
 
-%%blockstrap_contact_footer%%',
+%%blockstrap_contact_footer%%', 'blockstrap-page-builder-blocks' ),
 				$_POST,
 				$data,
 				$fields
@@ -98,7 +98,7 @@ Submitted from: %%submitted_from_url%%
 			}
 		}
 
-		$subject = 'BlockStrap Contact Form';
+		$subject = __( 'BlockStrap Contact Form', 'blockstrap-page-builder-blocks' );
 
 		$email_template = str_replace(
 			array(
@@ -109,7 +109,7 @@ Submitted from: %%submitted_from_url%%
 			array(
 				! empty( $_POST['location'] ) ? esc_url( $_POST['location'] ) : '',
 				$content,
-				__( 'Contact form by BlockStrap' ),
+				__( 'Contact form by BlockStrap', 'blockstrap-page-builder-blocks' ),
 			),
 			$email_template
 		);
