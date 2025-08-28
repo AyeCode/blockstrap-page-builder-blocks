@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 0.1.41
+Stable tag: 0.1.42
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -182,7 +182,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.42 - 2025-08-TBD =
+= 0.1.42 - 2025-08-28 =
 * BS > Contact Form message is not translatable - FIXED
 
 = 0.1.41 - 2025-08-07 =
