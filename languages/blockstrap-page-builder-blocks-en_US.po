@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.41\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.42\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-07 15:21+0530\n"
-"PO-Revision-Date: 2025-08-07 15:21+0530\n"
+"POT-Creation-Date: 2025-08-28 19:36+0530\n"
+"PO-Revision-Date: 2025-08-28 19:36+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -1357,6 +1357,11 @@ msgstr ""
 msgid "Submit text"
 msgstr ""
 
+#: blocks/class-blockstrap-widget-contact.php:225
+#: blocks/class-blockstrap-widget-contact.php:633
+msgid "Send"
+msgstr ""
+
 #: blocks/class-blockstrap-widget-contact.php:227
 msgid "Leave this blank to be able to translate it."
 msgstr ""
@@ -1479,10 +1484,6 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:598
 msgid "GD Listing Email"
-msgstr ""
-
-#: blocks/class-blockstrap-widget-contact.php:633
-msgid "Send"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:772
@@ -3840,6 +3841,22 @@ msgstr ""
 #: classes/class-blockstrap-blocks-admin.php:146
 #: classes/class-blockstrap-blocks-admin.php:171
 msgid "Text color to use for this item for frontend."
+msgstr ""
+
+#: classes/class-blockstrap-blocks-ajax.php:80
+#, php-format
+msgid ""
+"Contact form received\n"
+"\n"
+"Submitted from: %%submitted_from_url%%\n"
+"\n"
+"%%form_data%%\n"
+"\n"
+"%%blockstrap_contact_footer%%"
+msgstr ""
+
+#: classes/class-blockstrap-blocks-ajax.php:101
+msgid "BlockStrap Contact Form"
 msgstr ""
 
 #: classes/class-blockstrap-blocks-ajax.php:112
