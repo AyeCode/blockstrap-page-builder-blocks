@@ -1,7 +1,5 @@
 <?php
-
 class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
-
 
 	public $arguments;
 
@@ -79,7 +77,6 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 	 * @return array
 	 */
 	public function set_arguments() {
-
 		$arguments = array();
 
 		$arguments['hide_home'] = array(
@@ -204,16 +201,12 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 		$output = '';
 		$crumbs = $this->get_breadcrumbs();
 
-//      /print_r($crumbs);exit();
-
 		// maybe remove home link
 		if ( ! empty( $crumbs ) && ! empty( $args['hide_home'] ) ) {
 			array_shift( $crumbs );
 		}
 
 		if ( ! empty( $crumbs ) ) {
-
-			//          print_r( $args );
 			$item_class = sd_build_aui_class(
 				array(
 					'text_color'        => $args['text_color'],
@@ -231,11 +224,11 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 			unset( $args['font_size_custom'] );
 
 			$wrap_class    = sd_build_aui_class( $args );
-			$class_output  = $wrap_class ? ' class=" ' . $wrap_class . '"' : '';
+			$class_output  = $wrap_class ? ' class=" ' . esc_attr( $wrap_class ) . '"' : '';
 			$wrap_styles   = sd_build_aui_styles( $args );
-			$styles_output = $wrap_class ? ' style="' . $wrap_styles . '"' : '';
+			$styles_output = $wrap_class ? ' style="' . esc_attr( $wrap_styles ) . '"' : '';
 
-			$output .= '<nav aria-label="breadcrumb" ' . $class_output . $styles_output . '><ol class="breadcrumb  m-0 p-0 pt-1">';
+			$output .= '<nav aria-label="breadcrumb" ' . esc_attr( $class_output . $styles_output ) . '><ol class="breadcrumb  m-0 p-0 pt-1">';
 
 			$i     = 0;
 			$total = count( $crumbs );
@@ -243,7 +236,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				$icon = '';
 				if ( ! $i && empty( $args['hide_home'] ) ) {
 					if ( ! empty( $args['home_text'] ) && ' ' !== $args['home_text'] ) {
-						$crumb['name'] = esc_attr( $args['home_text'] );
+						$crumb['name'] = $args['home_text'];
 					}
 
 					if ( ! empty( $args['icon_class'] ) ) {
@@ -252,17 +245,16 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				}
 				++$i;
 
-				$link    = $i < $total && $crumb['link'] ? esc_url_raw( $crumb['link'] ) : '';
-				$name    = $crumb['name'] ? esc_attr( $crumb['name'] ) : '';
-				$output .= ! $link ? '<li class="breadcrumb-item active ' . $item_class . '" aria-current="page">' : '<li class="breadcrumb-item ' . $item_class . '">';
+				$link    = $i < $total && $crumb['link'] ? $crumb['link'] : '';
+				$name    = $crumb['name'] ? $crumb['name'] : '';
+				$output .= ! $link ? '<li class="breadcrumb-item active ' . esc_attr( $item_class ) . '" aria-current="page">' : '<li class="breadcrumb-item ' . esc_attr( $item_class ) . '">';
 				$output .= $link ? '<a href="' . esc_url_raw( $link ) . '">' : '';
 				$output .= $icon . esc_attr( $name );
 				$output .= $link ? '</a>' : '';
 				$output .= '</li>';
-
 			}
-			$output .= '</ol></nav>';
 
+			$output .= '</ol></nav>';
 		}
 
 		return $output;
@@ -282,12 +274,11 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 		// Home page
 		$breadcrumbs[] = array(
-			'name' => 'Home',
+			'name' => _x( 'Home', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ),
 			'link' => home_url(),
 		);
 
 		if ( is_archive() && ! is_tax() && ! is_category() && ! is_tag() ) {
-
 			// Custom post type archive
 			$post_type        = get_post_type();
 			$post_type_object = get_post_type_object( $post_type );
@@ -298,7 +289,6 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				);
 			}
 		} elseif ( is_archive() && is_tax() && ! is_category() && ! is_tag() ) {
-
 			// check if we can get the CTP link first
 			$post_type        = get_post_type();
 			$post_type_object = get_post_type_object( $post_type );
@@ -315,15 +305,12 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'name' => $custom_tax_name,
 				'link' => '',
 			);
-
 		} elseif ( is_home() ) {
-
 			$breadcrumbs[] = array(
-				'name' => 'Blog',
+				'name' => _x( 'Blog', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ),
 				'link' => '#',
 			);
 		} elseif ( is_single() ) {
-
 			// Single post
 			$post_type = get_post_type();
 
@@ -335,34 +322,28 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 					'name' => esc_attr( $post_type_object->label ),
 					'link' => get_post_type_archive_link( $post_type ),
 				);
-
 			} else {
-
 				// Blog post
 				$breadcrumbs[] = array(
-					'name' => 'Blog',
+					'name' => _x( 'Blog', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ),
 					'link' => get_permalink( get_option( 'page_for_posts' ) ),
 				);
-
 			}
 
 			// Get post category info
 			$category = get_the_category();
 
 			if ( ! empty( $category ) ) {
-
 				// Get last category post is in
 				$last_category = reset( $category );
 
 				if ( ! empty( $last_category ) ) {
-					//                  print_r( $last_category );
 					$breadcrumbs[] = array(
 						'name' => $last_category->name,
 						'link' => get_term_link( $last_category->term_id ),
 					);
 				}
-
-			}else{
+			} else {
 				global $wp_query;
 
 				// check for custom categories
@@ -371,7 +352,6 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 					$taxonomy      = ! empty( $wp_query->query_vars[ $post_type . 'category' ] ) ? esc_attr( $post_type . 'category' ) : esc_attr( $post_type . '_category' );
 					$taxonomy_slug = ! empty( $wp_query->query_vars[ $post_type . 'category' ] ) ? esc_attr( $wp_query->query_vars[ $post_type . 'category' ] ) : esc_attr( $wp_query->query_vars[ $post_type . '_category' ] );
 					$term          = get_term_by( 'slug', $taxonomy_slug, $taxonomy );
-
 
 					if ( isset( $term->name ) ) {
 						$breadcrumbs[] = array(
@@ -382,29 +362,20 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				}
 			}
 
-
-
 			// Add current page to breadcrumbs
 			$breadcrumbs[] = array(
 				'name' => $current_page_title,
 				'link' => '',
 			);
-
 		} elseif ( is_category() ) {
-
 			// Category page
 			$breadcrumbs[] = array(
 				'name' => single_cat_title( '', false ),
 				'link' => '',
 			);
-
-
-
 		} elseif ( is_page() ) {
-
 			// Standard page
 			if ( $post->post_parent ) {
-
 				// If child page, get parents
 				$anc = get_post_ancestors( $post->ID );
 
@@ -424,18 +395,14 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 					'name' => $current_page_title,
 					'link' => '',
 				);
-
 			} else {
-
 				// Just add current page to breadcrumbs
 				$breadcrumbs[] = array(
 					'name' => $current_page_title,
 					'link' => '',
 				);
-
 			}
 		} elseif ( is_tag() ) {
-
 			// Tag page
 
 			// Get tag information
@@ -452,9 +419,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'name' => $get_term_name,
 				'link' => '',
 			);
-
 		} elseif ( is_day() ) {
-
 			// Day archive
 
 			// Year link
@@ -474,9 +439,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'name' => get_the_time( 'jS' ),
 				'link' => '',
 			);
-
 		} elseif ( is_month() ) {
-
 			// Month Archive
 
 			// Year link
@@ -489,17 +452,13 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 				'name' => get_the_time( 'M' ),
 				'link' => '',
 			);
-
 		} elseif ( is_year() ) {
-
 			// Display year archive
 			$breadcrumbs[] = array(
 				'name' => get_the_time( 'Y' ),
 				'link' => '',
 			);
-
 		} elseif ( is_author() ) {
-
 			// Auhor archive
 
 			// Get the author information
@@ -508,40 +467,34 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 
 			// Display author name
 			$breadcrumbs[] = array(
-				'name' => 'Author: ' . $userdata->display_name,
+				'name' => wp_sprintf( _x( 'Author: %s', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ), $userdata->display_name ),
 				'link' => '',
 			);
-
 		} elseif ( get_query_var( 'paged' ) ) {
-
 			// Paginated archives
 			$breadcrumbs[] = array(
-				'name' => 'Page ' . get_query_var( 'paged' ),
+				'name' => wp_sprintf( _x( 'Page %s', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ), get_query_var( 'paged' ) ),
 				'link' => '',
 			);
-
 		} elseif ( is_search() ) {
-
 			// Search results page
 			$breadcrumbs[] = array(
-				'name' => 'Search results for: ' . esc_attr( get_search_query() ),
+				'name' => wp_sprintf( _x( 'Search results for: %s', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ), get_search_query() ),
 				'link' => '',
 			);
-
 		} elseif ( is_404() ) {
-
 			// 404 page
 			$breadcrumbs[] = array(
-				'name' => 'Error 404',
+				'name' => _x( 'Error 404', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ),
 				'link' => '',
 			);
 		} elseif ( $this->is_preview() ) {
 			$breadcrumbs[] = array(
-				'name' => 'Backend',
+				'name' => _x( 'Backend', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ),
 				'link' => '#',
 			);
 			$breadcrumbs[] = array(
-				'name' => 'Block Editor',
+				'name' => _x( 'Block Editor', 'breadcrumb link label', 'blockstrap-page-builder-blocks' ),
 				'link' => '',
 			);
 		}
@@ -556,10 +509,8 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 		 * @param array $breadcrumbs The array of breadcrumbs.
 		 */
 		return apply_filters( 'blockstrap_blocks_breadcrumb_block_breadcrumbs', $breadcrumbs );
-
 	}
 }
-
 
 // register it.
 add_action(

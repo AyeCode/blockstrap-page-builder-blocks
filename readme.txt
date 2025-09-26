@@ -182,6 +182,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.43 - 2025-09-TBD =
+* Breadcrumb link texts are not translatable - FIXED
+
 = 0.1.42 - 2025-08-28 =
 * BS > Contact Form message is not translatable - FIXED
 
