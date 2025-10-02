@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.42\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.43\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 19:36+0530\n"
-"PO-Revision-Date: 2025-08-28 19:36+0530\n"
+"POT-Creation-Date: 2025-10-02 19:31+0530\n"
+"PO-Revision-Date: 2025-10-02 19:31+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -43,7 +43,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-alert.php:100
 #: blocks/class-blockstrap-widget-archive-actions.php:40
 #: blocks/class-blockstrap-widget-archive-title.php:45
-#: blocks/class-blockstrap-widget-breadcrumb.php:43
+#: blocks/class-blockstrap-widget-breadcrumb.php:41
 #: blocks/class-blockstrap-widget-button.php:43
 #: blocks/class-blockstrap-widget-contact.php:45
 #: blocks/class-blockstrap-widget-container.php:83
@@ -72,7 +72,7 @@ msgid "Content"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-accordion-item.php:88
-#: blocks/class-blockstrap-widget-breadcrumb.php:51
+#: blocks/class-blockstrap-widget-breadcrumb.php:49
 #: blocks/class-blockstrap-widget-contact.php:54
 #: blocks/class-blockstrap-widget-container.php:91
 #: blocks/class-blockstrap-widget-container.php:164
@@ -88,7 +88,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-alert.php:108
 #: blocks/class-blockstrap-widget-archive-actions.php:48
 #: blocks/class-blockstrap-widget-archive-title.php:53
-#: blocks/class-blockstrap-widget-breadcrumb.php:51
+#: blocks/class-blockstrap-widget-breadcrumb.php:49
 #: blocks/class-blockstrap-widget-button.php:51
 #: blocks/class-blockstrap-widget-container.php:91
 #: blocks/class-blockstrap-widget-gallery.php:50
@@ -118,7 +118,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-alert.php:110
 #: blocks/class-blockstrap-widget-archive-actions.php:50
 #: blocks/class-blockstrap-widget-archive-title.php:55
-#: blocks/class-blockstrap-widget-breadcrumb.php:53
+#: blocks/class-blockstrap-widget-breadcrumb.php:51
 #: blocks/class-blockstrap-widget-button.php:53
 #: blocks/class-blockstrap-widget-contact.php:59
 #: blocks/class-blockstrap-widget-container.php:93
@@ -158,7 +158,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-archive-title.php:63
 #: blocks/class-blockstrap-widget-archive-title.php:156
 #: blocks/class-blockstrap-widget-archive-title.php:165
-#: blocks/class-blockstrap-widget-breadcrumb.php:61
+#: blocks/class-blockstrap-widget-breadcrumb.php:59
 #: blocks/class-blockstrap-widget-button.php:61
 #: blocks/class-blockstrap-widget-contact.php:67
 #: blocks/class-blockstrap-widget-container.php:102
@@ -217,8 +217,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-archive-actions.php:217
 #: blocks/class-blockstrap-widget-archive-title.php:63
 #: blocks/class-blockstrap-widget-archive-title.php:65
+#: blocks/class-blockstrap-widget-breadcrumb.php:59
 #: blocks/class-blockstrap-widget-breadcrumb.php:61
-#: blocks/class-blockstrap-widget-breadcrumb.php:63
 #: blocks/class-blockstrap-widget-button.php:61
 #: blocks/class-blockstrap-widget-button.php:63
 #: blocks/class-blockstrap-widget-button.php:436
@@ -485,7 +485,7 @@ msgid "Icon class"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-alert.php:174
-#: blocks/class-blockstrap-widget-breadcrumb.php:107
+#: blocks/class-blockstrap-widget-breadcrumb.php:104
 #: blocks/class-blockstrap-widget-button.php:182
 #: blocks/class-blockstrap-widget-icon-box.php:166
 #: blocks/class-blockstrap-widget-nav-dropdown.php:127
@@ -776,34 +776,34 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:30
+#: blocks/class-blockstrap-widget-breadcrumb.php:28
 msgid "BS > Breadcrumb"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:33
+#: blocks/class-blockstrap-widget-breadcrumb.php:31
 msgid "A bootstrap breadcrumb output."
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:41
-#: blocks/class-blockstrap-widget-breadcrumb.php:92
-#: blocks/class-blockstrap-widget-breadcrumb.php:101
-#: blocks/class-blockstrap-widget-breadcrumb.php:111
+#: blocks/class-blockstrap-widget-breadcrumb.php:39
+#: blocks/class-blockstrap-widget-breadcrumb.php:89
+#: blocks/class-blockstrap-widget-breadcrumb.php:98
+#: blocks/class-blockstrap-widget-breadcrumb.php:108
 msgid "Home Link"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:87
+#: blocks/class-blockstrap-widget-breadcrumb.php:84
 msgid "Hide the home link"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:91
+#: blocks/class-blockstrap-widget-breadcrumb.php:88
 msgid "This will hide the home link."
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:97
+#: blocks/class-blockstrap-widget-breadcrumb.php:94
 msgid "Home Text"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:98
+#: blocks/class-blockstrap-widget-breadcrumb.php:95
 #: blocks/class-blockstrap-widget-button.php:173
 #: blocks/class-blockstrap-widget-icon-box.php:603
 #: blocks/class-blockstrap-widget-nav-dropdown.php:118
@@ -815,12 +815,56 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:106
+#: blocks/class-blockstrap-widget-breadcrumb.php:103
 msgid "Home icon class"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-breadcrumb.php:108
+#: blocks/class-blockstrap-widget-breadcrumb.php:105
 msgid "fas fa-home"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:277
+msgctxt "breadcrumb link label"
+msgid "Home"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:310
+#: blocks/class-blockstrap-widget-breadcrumb.php:328
+msgctxt "breadcrumb link label"
+msgid "Blog"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:470
+#, php-format
+msgctxt "breadcrumb link label"
+msgid "Author: %s"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:476
+#, php-format
+msgctxt "breadcrumb link label"
+msgid "Page %s"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:482
+#, php-format
+msgctxt "breadcrumb link label"
+msgid "Search results for: %s"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:488
+msgctxt "breadcrumb link label"
+msgid "Error 404"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:493
+msgctxt "breadcrumb link label"
+msgid "Backend"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-breadcrumb.php:497
+msgctxt "breadcrumb link label"
+msgid "Block Editor"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:30
