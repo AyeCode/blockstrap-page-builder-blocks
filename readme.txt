@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 0.1.43
+Stable tag: 0.1.44
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -182,6 +182,10 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.44 - 2024-10-16 =
+* BS > Post Info fontawesome icon class is not working - FIXED
+* Hover style is not working on clone BS element - FIXED
+
 = 0.1.43 - 2025-10-02 =
 * Breadcrumb link texts are not translatable - FIXED
 
@@ -247,9 +251,6 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 * BS Contact, form will not display if set to gd_post_email and the listing has no email set - CHANGED
 * BS Contact, notice added that from will not show if set to GD listing email and listing email is not set - ADDED
 * BS Contact, sending to GD listing email will now set the reply to as the sender email for easier replies - CHANGED
-
-= 0.1.28 - 2024-10-TBD =
-* BS > Post Info fontawesome icon class is not working - FIXED
 
 = 0.1.27 - 2024-10-10 =
 * BS > Contact Form labels are not translatable - FIXED
