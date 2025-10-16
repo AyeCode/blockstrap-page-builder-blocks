@@ -609,7 +609,7 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
 
             $mr   = $aui_bs5 ? ' me-2' : ' mr-2';
 			if(!$icon){
-				$icon = ! empty($link_text) ? '<i class="'.esc_attr($args['icon_class']).$mr.'"></i>' : '<i class="'.esc_attr($args['icon_class']).'"></i>';
+				$icon = ! empty($link_text) ? '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . $mr . '"></i>' : '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . '"></i>';
 			}
         }
 

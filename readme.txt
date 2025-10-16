@@ -248,6 +248,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 * BS Contact, notice added that from will not show if set to GD listing email and listing email is not set - ADDED
 * BS Contact, sending to GD listing email will now set the reply to as the sender email for easier replies - CHANGED
 
+= 0.1.28 - 2024-10-TBD =
+* BS > Post Info fontawesome icon class is not working - FIXED
+
 = 0.1.27 - 2024-10-10 =
 * BS > Contact Form labels are not translatable - FIXED
 * Contact Form sends reCAPTCHA value along with other fields - FIXED

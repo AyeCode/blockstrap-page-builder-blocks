@@ -191,7 +191,7 @@ class BlockStrap_Widget_Scroll_Top extends WP_Super_Duper
         ob_start();
 		$style = $this->is_preview() ? '' : 'display: none !important;';
 		$class_btt = $this->is_preview() ? ' d-flex' : ' fixed-bottom';
-		$fa_icon = empty( $args['icon_class'] ) ? 'fas fa-arrow-up' : esc_attr( $args['icon_class'] );
+		$fa_icon = empty( $args['icon_class'] ) ? 'fas fa-arrow-up' : sd_sanitize_html_classes( $args['icon_class'] );
 		$color_class = empty( $args['color_class'] ) ? 'outline-primary' : esc_attr( $args['color_class'] );
 		$wrap_class    = sd_build_aui_class( $args );
         ?>
