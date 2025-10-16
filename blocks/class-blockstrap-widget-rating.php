@@ -346,7 +346,7 @@ class BlockStrap_Widget_Rating extends WP_Super_Duper {
 		global $gd_post;
 
 		$rating_count = isset( $args['rating_count'] ) ? absint( $args['rating_count'] ) : 5;
-		$icon_class   = ! empty( $args['icon_class'] ) ? esc_attr( $args['icon_class'] ) : 'fas fa-star';
+		$icon_class   = ! empty( $args['icon_class'] ) ? sd_sanitize_html_classes( $args['icon_class'] ) : 'fas fa-star';
 		$type         = isset( $args['type'] ) ? esc_attr( $args['type'] ) : '';
 		$rating_score = isset( $args['rating_score'] ) ? absint( $args['rating_score'] ) : 80;
 		$hover_text   = isset( $args['hover_text'] ) ? esc_attr( trim( $args['hover_text'] ) ) : '';

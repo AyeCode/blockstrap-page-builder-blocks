@@ -172,12 +172,6 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 </script>
 ";
 		$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#dark-mode-toggle';
-		//$link_text = __('Dark Mode', 'blockstrap-page-builder-blocks');
-//		$link_attr = ' data-bs-toggle="offcanvas" ';
-//		$icon_class         = ! empty($args['icon_class']) ? esc_attr($args['icon_class']) : 'fas fa-map-marker-alt fa-lg text-primary';
-//		$args['icon_class'] = $icon_class;
-
-
 	} else if ('custom' === $args['type']) {
 		$link      = ! empty($args['custom_url']) ? esc_url_raw($args['custom_url']) : '#';
 		$link_text = __('Custom', 'blockstrap-page-builder-blocks');
@@ -205,12 +199,12 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 			$location_set = false;
 		}
 
-		$icon_class         = ! empty($args['icon_class']) ? esc_attr($args['icon_class']) : 'fas fa-map-marker-alt fa-lg text-primary';
-		$args['icon_class'] = $icon_class;
+		$icon_class         = ! empty($args['icon_class']) ? $args['icon_class'] : 'fas fa-map-marker-alt fa-lg text-primary';
+		$args['icon_class'] = sd_sanitize_html_classes( $icon_class );
 
 		if ($location_set) {
 			$mr   = $aui_bs5 ? ' me-1' : ' mr-1';
-			$icon               = '<span class="hover-swap gdlmls-menu-icon '.$mr.'"><i class="'.$icon_class.' hover-content-original"></i><i class="fas fa-times hover-content c-pointer" title="'.__('Clear Location', 'blockstrap-page-builder-blocks').'" data-toggle="tooltip"></i></span> ';
+			$icon               = '<span class="hover-swap gdlmls-menu-icon '.$mr.'"><i class="' . sd_sanitize_html_classes( $icon_class ) . ' hover-content-original"></i><i class="fas fa-times hover-content c-pointer" title="'.__('Clear Location', 'blockstrap-page-builder-blocks').'" data-toggle="tooltip"></i></span> ';
 			$args['text']       = esc_attr($location_name);
 		}
 
@@ -284,9 +278,7 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' )
 	}
 
 	// set icon_class
-	//if ( isset( $link_parts['icon_class'] ) ) {
-		$link_parts['icon_class'] = $args['icon_class'];
-	//}
+	$link_parts['icon_class'] = $args['icon_class'];
 
 	// set link_attr
 	if ( isset( $link_attr ) ) {

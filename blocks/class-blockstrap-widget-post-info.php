@@ -741,7 +741,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			}
 
 			$mr   = $aui_bs5 ? ' me-2' : ' mr-2';
-			$icon = '<i class="' . sanitize_html_class( $args['icon_class'] ) . $mr . '"></i>';
+			$icon = '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . $mr . '" aria-hidden="true"></i>';
 		}
 
 		// If a button add form-inline.

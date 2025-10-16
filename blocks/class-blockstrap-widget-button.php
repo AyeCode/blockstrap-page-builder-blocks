@@ -578,10 +578,10 @@ class BlockStrap_Widget_Button extends WP_Super_Duper {
 
 			if ( 'right' === $args['icon_position'] ) {
 				$ml         = $aui_bs5 ? ' ms-2' : ' ml-2';
-				$icon_right = ! empty( $link_text ) ? '<i class="' . esc_attr( $args['icon_class'] ) . $ml . '"></i>' : '<i class="' . esc_attr( $args['icon_class'] ) . '"></i>';
+				$icon_right = ! empty( $link_text ) ? '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . $ml . '"></i>' : '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . '"></i>';
 			} else {
 				$mr        = $aui_bs5 ? ' me-2' : ' mr-2';
-				$icon_left = ! empty( $link_text ) ? '<i class="' . esc_attr( $args['icon_class'] ) . $mr . '"></i>' : '<i class="' . esc_attr( $args['icon_class'] ) . '"></i>';
+				$icon_left = ! empty( $link_text ) ? '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . $mr . '"></i>' : '<i class="' . sd_sanitize_html_classes( $args['icon_class'] ) . '"></i>';
 			}
 		}
 
