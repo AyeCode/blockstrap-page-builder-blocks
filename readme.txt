@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 0.1.44
+Stable tag: 0.1.45
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -182,10 +182,10 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.45 - 2024-10-TBD =
+= 0.1.45 - 2025-10-30 =
 * BS > Share add unique CSS class to each item - ADDED
 
-= 0.1.44 - 2024-10-16 =
+= 0.1.44 - 2025-10-16 =
 * BS > Post Info fontawesome icon class is not working - FIXED
 * Hover style is not working on clone BS element - FIXED
 
