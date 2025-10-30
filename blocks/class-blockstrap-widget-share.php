@@ -144,7 +144,7 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 		$arguments['service_twitter'] = array(
 			'type'     => 'select',
-			'title'    => __( 'Twitter', 'blockstrap-page-builder-blocks' ),
+			'title'    => __( 'X (Twitter)', 'blockstrap-page-builder-blocks' ),
 			'options'  => array(
 				'0' => __( 'Disabled', 'blockstrap-page-builder-blocks' ),
 				'1' => __( 'Enabled', 'blockstrap-page-builder-blocks' ),
@@ -156,8 +156,8 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 		$arguments['twitter_handel'] = array(
 			'type'            => 'text',
-			'title'           => __( 'Twitter handel', 'blockstrap-page-builder-blocks' ),
-			'desc'            => __( 'Add your twitter handel to add `via @handel`', 'blockstrap-page-builder-blocks' ),
+			'title'           => __( 'X (Twitter) handel', 'blockstrap-page-builder-blocks' ),
+			'desc'            => __( 'Add your X handel to add `via @handel`', 'blockstrap-page-builder-blocks' ),
 			'placeholder'     => __( 'handel', 'blockstrap-page-builder-blocks' ),
 			'default'         => '',
 			'desc_tip'        => true,
@@ -553,36 +553,39 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		global $wp;
 		$current_url = $this->get_current_page_url();
 
+		$twitter_icon_class = 'fab fa-twitter';
+
+		if ( ! empty( $args['service_twitter'] ) ) {
+			// what icon shoudl we use
+			if ( class_exists( 'WP_Font_Awesome_Settings' ) ) {
+				$FAS = WP_Font_Awesome_Settings::instance();
+				$fas_settings = $FAS->get_settings();
+				$version = $fas_settings['version'] ?? '';
+
+				if ( ! $version || version_compare( $version, '5.999', '>' ) ) {
+					$twitter_icon_class = 'fab fa-x-twitter';
+				}
+			}
+		}
+
 		if ( 'icons' === $output_type ) {
-			$tag         = 'span';
+			$tag     = 'span';
 			$output .= '<div class="d-flex">';
 			if ( ! empty( $args['service_facebook'] ) ) {
 				$link    = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode_deep( $current_url );
-				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Facebook', 'blockstrap-page-builder-blocks' ) . '" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;"><i class="fab fa-facebook-f"></i></a>';
+				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-facebook" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Facebook', 'blockstrap-page-builder-blocks' ) . '" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;"><i class="fab fa-facebook-f"></i></a>';
 			}
 
 			if ( ! empty( $args['service_twitter'] ) ) {
-				// what icon shoudl we use
-				$twitter_icon_class = 'fab fa-twitter';
-				if(class_exists('WP_Font_Awesome_Settings')) {
-					$FAS = WP_Font_Awesome_Settings::instance();
-					$fas_settings = $FAS->get_settings();
-					$version = $fas_settings['version'] ?? '';
-
-					if( !$version || version_compare($version,'5.999','>')){
-						$twitter_icon_class = 'fab fa-x-twitter';
-					}
-				}
-
 				$handel     = ! empty( $args['twitter_handel'] ) ? '&via=' . esc_attr( $args['twitter_handel'] ) : '';
 				$share_text = ! empty( $args['share_text'] ) ? '&text=' . esc_attr( $args['share_text'] ) : '';
 				$link       = 'https://twitter.com/share?url=' . urlencode_deep( $current_url ) . $handel . $share_text;
-				$output    .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Twitter', 'blockstrap-page-builder-blocks' ) . '" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600\');return false;"><i class="' . esc_attr( $twitter_icon_class ) . '"></i></a>';
+				$output    .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-x" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to X (Twitter)', 'blockstrap-page-builder-blocks' ) . '" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600\');return false;"><i class="' . esc_attr( $twitter_icon_class ) . '"></i></a>';
 			}
 
 			if ( ! empty( $args['service_linkedin'] ) ) {
 				$link    = 'https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode_deep( $current_url );
-				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Linkedin', 'blockstrap-page-builder-blocks' ) . '" target="_blank" ><i class="fab fa-linkedin-in"></i></a>';
+				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-linkedin" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Linkedin', 'blockstrap-page-builder-blocks' ) . '" target="_blank" ><i class="fab fa-linkedin-in"></i></a>';
 			}
 
 			if ( ! empty( $args['service_email'] ) ) {
@@ -591,15 +594,15 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 				$body    = ! empty( $args['email_body'] ) ? esc_attr( $args['email_body'] ) : esc_attr__( 'I thought you might be interested in this: %%page_url%%', 'blockstrap-page-builder-blocks' );
 				$body    = str_replace( array( '%%page_url%%', '%%site_url%%' ), array( $current_url, get_site_url() ), $body );
-				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="mailto:?subject=' . urlencode_deep( $subject ) . '&body=' . urlencode_deep( $body ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share via Email', 'blockstrap-page-builder-blocks' ) . '" target="_blank" ><i class="far fa-envelope"></i></a>';
+				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-email" href="mailto:?subject=' . urlencode_deep( $subject ) . '&body=' . urlencode_deep( $body ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share via Email', 'blockstrap-page-builder-blocks' ) . '" target="_blank" ><i class="far fa-envelope"></i></a>';
 			}
 
 			if ( ! empty( $args['service_link'] ) ) {
-				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Copy URL', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-link"></i></a>';
+				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-copy" href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Copy URL', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-link"></i></a>';
 			}
 
 			if ( ! empty( $args['service_print'] ) ) {
-				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2" href="' . esc_url( $current_url ) . '" onclick="window.print();return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Print page', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-print"></i></a>';
+				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-print" href="' . esc_url( $current_url ) . '" onclick="window.print();return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Print page', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-print"></i></a>';
 			}
 
 			$output .= '</div>';
@@ -608,19 +611,19 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			$output .= '<div class="dropdown-menu dropdown-menu-end dropdown-caret-0 mt-2 text-muted ">';
 			if ( ! empty( $args['service_facebook'] ) ) {
 				$link    = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode_deep( $current_url );
-				$output .= '<a href="' . esc_url( $link ) . '" class="dropdown-item" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;"><i class="fab fa-facebook-f fa-fw opacity-75 fa-lg"></i> ' . __( 'Facebook', 'blockstrap-page-builder-blocks' ) . '</a>';
+				$output .= '<a href="' . esc_url( $link ) . '" class="dropdown-item bs-share-facebook" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;"><i class="fab fa-facebook-f fa-fw opacity-75 fa-lg"></i> ' . __( 'Facebook', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			if ( ! empty( $args['service_twitter'] ) ) {
 				$handel     = ! empty( $args['twitter_handel'] ) ? '&via=' . esc_attr( $args['twitter_handel'] ) : '';
 				$share_text = ! empty( $args['share_text'] ) ? '&text=' . esc_attr( $args['share_text'] ) : '';
 				$link       = 'https://twitter.com/share?url=' . urlencode_deep( $current_url ) . $handel . $share_text;
-				$output    .= '<a href="' . esc_url( $link ) . '" class="dropdown-item"  target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600\');return false;"><i class="fab fa-twitter fa-fw opacity-75 fa-lg"></i> ' . __( 'Twitter', 'blockstrap-page-builder-blocks' ) . '</a>';
+				$output    .= '<a href="' . esc_url( $link ) . '" class="dropdown-item bs-share-x"  target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600\');return false;"><i class="' . esc_attr( $twitter_icon_class ) . ' fa-fw opacity-75 fa-lg"></i> ' . __( 'Twitter', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			if ( ! empty( $args['service_linkedin'] ) ) {
 				$link    = 'https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode_deep( $current_url );
-				$output .= '<a href="' . esc_url( $link ) . '" class="dropdown-item"  target="_blank"><i class="fab fa-linkedin-in fa-fw opacity-75 fa-lg"></i> ' . __( 'Linkedin', 'blockstrap-page-builder-blocks' ) . '</a>';
+				$output .= '<a href="' . esc_url( $link ) . '" class="dropdown-item bs-share-linkedin"  target="_blank"><i class="fab fa-linkedin-in fa-fw opacity-75 fa-lg"></i> ' . __( 'Linkedin', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			if ( ! empty( $args['service_email'] ) ) {
@@ -629,15 +632,15 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 				$body    = ! empty( $args['email_body'] ) ? esc_attr( $args['email_body'] ) : esc_attr__( 'I thought you might be interested in this: %%page_url%%', 'blockstrap-page-builder-blocks' );
 				$body    = str_replace( array( '%%page_url%%', '%%site_url%%' ), array( $current_url, get_site_url() ), $body );
-				$output .= '<a href="mailto:?subject=' . urlencode_deep( $subject ) . '&body=' . urlencode_deep( $body ) . '" class="dropdown-item"><i class="far fa-envelope fa-fw opacity-75 fa-lg"></i> ' . __( 'Email', 'blockstrap-page-builder-blocks' ) . '</a>';
+				$output .= '<a href="mailto:?subject=' . urlencode_deep( $subject ) . '&body=' . urlencode_deep( $body ) . '" class="dropdown-item bs-share-email"><i class="far fa-envelope fa-fw opacity-75 fa-lg"></i> ' . __( 'Email', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			if ( ! empty( $args['service_link'] ) ) {
-				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" class="dropdown-item"><i class="fas fa-link fa-fw opacity-75 fa-lg"></i> ' . __( 'Copy Link', 'blockstrap-page-builder-blocks' ) . '</a>';
+				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" class="dropdown-item bs-share-copy"><i class="fas fa-link fa-fw opacity-75 fa-lg"></i> ' . __( 'Copy Link', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			if ( ! empty( $args['service_print'] ) ) {
-				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="window.print();return false;" class="dropdown-item"><i class="fas fa-print fa-fw opacity-75 fa-lg"></i> ' . __( 'Print page', 'blockstrap-page-builder-blocks' ) . '</a>';
+				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="window.print();return false;" class="dropdown-item bs-share-print"><i class="fas fa-print fa-fw opacity-75 fa-lg"></i> ' . __( 'Print page', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			$output .= '</div>';
@@ -687,13 +690,11 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		$styles = function_exists( 'sd_build_hover_styles' ) ? sd_build_hover_styles( $args, $this->is_preview() ) : '';
 
 		if ( 'icons' === $output_type ) {
-			return $link_text || $icon_left || $icon_right ? '<div class="d-inline-flex  align-items-center"><' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '" >' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $output . $styles . '</div>' : ''; // shortcode
+			return $link_text || $icon_left || $icon_right ? '<div class="d-inline-flex align-items-center bs-share-icons"><' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '" >' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $output . $styles . '</div>' : ''; // shortcode
 
 		} else {
-			return $link_text || $icon_left || $icon_right ? '<div class="dropdown"><' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="dropdown-toggle dropdown-toggle-0 ' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '"  data-bs-toggle="dropdown" aria-expanded="false">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $output . $styles . '</div>' : ''; // shortcode
-
+			return $link_text || $icon_left || $icon_right ? '<div class="dropdown bs-share-dropdown"><' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="dropdown-toggle dropdown-toggle-0 ' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '"  data-bs-toggle="dropdown" aria-expanded="false">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $output . $styles . '</div>' : ''; // shortcode
 		}
-
 	}
 
 	public function get_current_page_url() {
@@ -733,10 +734,7 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 		return $pageURL;
 	}
-
-
 }
-
 
 // register it.
 add_action(
@@ -745,4 +743,3 @@ add_action(
 		register_widget( 'BlockStrap_Widget_Share' );
 	}
 );
-
