@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.44\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-16 14:06+0530\n"
-"PO-Revision-Date: 2025-10-16 14:06+0530\n"
+"POT-Creation-Date: 2025-10-30 19:48+0530\n"
+"PO-Revision-Date: 2025-10-30 19:48+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -1268,7 +1268,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:276
 #: blocks/class-blockstrap-widget-contact.php:747
 #: blocks/class-blockstrap-widget-share.php:193
-#: blocks/class-blockstrap-widget-share.php:632
+#: blocks/class-blockstrap-widget-share.php:635
 #: classes/class-blockstrap-blocks-ajax.php:45
 #: classes/class-blockstrap-blocks-comments.php:45
 msgid "Email"
@@ -3609,21 +3609,20 @@ msgid "Icons"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-share.php:135
-#: blocks/class-blockstrap-widget-share.php:611
+#: blocks/class-blockstrap-widget-share.php:614
 msgid "Facebook"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-share.php:147
-#: blocks/class-blockstrap-widget-share.php:618
-msgid "Twitter"
+msgid "X (Twitter)"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-share.php:159
-msgid "Twitter handel"
+msgid "X (Twitter) handel"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-share.php:160
-msgid "Add your twitter handel to add `via @handel`"
+msgid "Add your X handel to add `via @handel`"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-share.php:161
@@ -3643,7 +3642,7 @@ msgid "Check this out!"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-share.php:181
-#: blocks/class-blockstrap-widget-share.php:623
+#: blocks/class-blockstrap-widget-share.php:626
 msgid "Linkedin"
 msgstr ""
 
@@ -3652,8 +3651,8 @@ msgid "Email Subject"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-share.php:206
-#: blocks/class-blockstrap-widget-share.php:589
-#: blocks/class-blockstrap-widget-share.php:627
+#: blocks/class-blockstrap-widget-share.php:592
+#: blocks/class-blockstrap-widget-share.php:630
 #, php-format
 msgid "Check this out! - %%site_url%%"
 msgstr ""
@@ -3677,43 +3676,47 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:561
+#: blocks/class-blockstrap-widget-share.php:576
 msgid "Share to Facebook"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:580
-msgid "Share to Twitter"
+#: blocks/class-blockstrap-widget-share.php:583
+msgid "Share to X (Twitter)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:585
+#: blocks/class-blockstrap-widget-share.php:588
 msgid "Share to Linkedin"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:592
-#: blocks/class-blockstrap-widget-share.php:630
+#: blocks/class-blockstrap-widget-share.php:595
+#: blocks/class-blockstrap-widget-share.php:633
 #, php-format
 msgid "I thought you might be interested in this: %%page_url%%"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:594
+#: blocks/class-blockstrap-widget-share.php:597
 msgid "Share via Email"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:598
-#: blocks/class-blockstrap-widget-share.php:636
+#: blocks/class-blockstrap-widget-share.php:601
+#: blocks/class-blockstrap-widget-share.php:639
 msgid "URL Copied to Clipboard"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:598
+#: blocks/class-blockstrap-widget-share.php:601
 msgid "Copy URL"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:602
-#: blocks/class-blockstrap-widget-share.php:640
+#: blocks/class-blockstrap-widget-share.php:605
+#: blocks/class-blockstrap-widget-share.php:643
 msgid "Print page"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-share.php:636
+#: blocks/class-blockstrap-widget-share.php:621
+msgid "Twitter"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-share.php:639
 msgid "Copy Link"
 msgstr ""
 
