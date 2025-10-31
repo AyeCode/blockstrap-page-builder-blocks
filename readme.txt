@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 0.1.47
+Stable tag: 0.1.48
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -182,7 +182,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.47 - 2025-10-31 =
+= 0.1.48 - 2025-10-31 =
 * Merge SD 1.2.29 - CHANGED
 
 = 0.1.46 - 2025-10-30 =
