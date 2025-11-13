@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.47\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.49\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-31 11:31+0530\n"
-"PO-Revision-Date: 2025-10-31 11:31+0530\n"
+"POT-Creation-Date: 2025-11-13 19:51+0530\n"
+"PO-Revision-Date: 2025-11-13 19:51+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -772,7 +772,7 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-archive-title.php:265
 #: blocks/class-blockstrap-widget-search.php:120
-#: blocks/class-blockstrap-widget-search.php:352 classes/functions.php:180
+#: blocks/class-blockstrap-widget-search.php:352 classes/functions.php:201
 msgid "Search"
 msgstr ""
 
@@ -810,8 +810,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav-item.php:170
 #: blocks/class-blockstrap-widget-navbar-brand.php:174
 #: blocks/class-blockstrap-widget-rating.php:313
-#: blocks/class-blockstrap-widget-share.php:101 classes/functions.php:14
-#: classes/functions.php:80
+#: blocks/class-blockstrap-widget-share.php:101 classes/functions.php:15
+#: classes/functions.php:95
 msgid "Home"
 msgstr ""
 
@@ -1004,7 +1004,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:220
 #: blocks/class-blockstrap-widget-icon-box.php:605
 #: blocks/class-blockstrap-widget-nav-item.php:107
-#: blocks/class-blockstrap-widget-rating.php:315 classes/functions.php:15
+#: blocks/class-blockstrap-widget-rating.php:315 classes/functions.php:16
 msgid "Page"
 msgstr ""
 
@@ -1028,7 +1028,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-icon-box.php:231
 #: blocks/class-blockstrap-widget-icon-box.php:606
 #: blocks/class-blockstrap-widget-nav-item.php:118
-#: blocks/class-blockstrap-widget-rating.php:316 classes/functions.php:16
+#: blocks/class-blockstrap-widget-rating.php:316 classes/functions.php:17
 msgid "Post ID"
 msgstr ""
 
@@ -1047,7 +1047,7 @@ msgid "Select Taxonomy"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-button.php:142
-#: blocks/class-blockstrap-widget-nav-item.php:139 classes/functions.php:17
+#: blocks/class-blockstrap-widget-nav-item.php:139 classes/functions.php:18
 msgid "Term ID"
 msgstr ""
 
@@ -1057,7 +1057,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-nav-item.php:149
 #: blocks/class-blockstrap-widget-navbar-brand.php:185
 #: blocks/class-blockstrap-widget-post-info.php:190
-#: blocks/class-blockstrap-widget-rating.php:317 classes/functions.php:20
+#: blocks/class-blockstrap-widget-rating.php:317 classes/functions.php:21
 msgid "Custom URL"
 msgstr ""
 
@@ -2265,23 +2265,23 @@ msgid "None (non link)"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-icon-box.php:612
-#: blocks/class-blockstrap-widget-rating.php:322 classes/functions.php:32
+#: blocks/class-blockstrap-widget-rating.php:322 classes/functions.php:35
 msgid "GD Search"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-icon-box.php:613
-#: blocks/class-blockstrap-widget-rating.php:323 classes/functions.php:33
+#: blocks/class-blockstrap-widget-rating.php:323 classes/functions.php:36
 msgid "GD Location"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-icon-box.php:616
-#: blocks/class-blockstrap-widget-rating.php:326 classes/functions.php:36
+#: blocks/class-blockstrap-widget-rating.php:326 classes/functions.php:40
 #, php-format
 msgid "%s (archive)"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-icon-box.php:618
-#: blocks/class-blockstrap-widget-rating.php:328 classes/functions.php:38
+#: blocks/class-blockstrap-widget-rating.php:328 classes/functions.php:43
 #, php-format
 msgid "%s (add listing)"
 msgstr ""
@@ -2361,7 +2361,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-image.php:217
 #: blocks/class-blockstrap-widget-navbar-brand.php:175
 #: blocks/class-blockstrap-widget-post-info.php:161
-#: blocks/class-blockstrap-widget-post-info.php:204 classes/functions.php:177
+#: blocks/class-blockstrap-widget-post-info.php:204 classes/functions.php:185
 msgid "Custom"
 msgstr ""
 
@@ -3102,8 +3102,8 @@ msgid ""
 "Button or BS > Nav item"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-offcanvas.php:219 classes/functions.php:22
-#: classes/functions.php:131
+#: blocks/class-blockstrap-widget-offcanvas.php:219 classes/functions.php:23
+#: classes/functions.php:148
 msgid "Open Offcanvas"
 msgstr ""
 
@@ -3950,119 +3950,127 @@ msgid ""
 "Save my name, email, and website in this browser for the next time I comment."
 msgstr ""
 
-#: classes/functions.php:18
+#: classes/functions.php:19
 msgid "WP Login (logged out)"
 msgstr ""
 
-#: classes/functions.php:19
+#: classes/functions.php:20
 msgid "WP Logout (logged in)"
 msgstr ""
 
-#: classes/functions.php:21 classes/functions.php:127
+#: classes/functions.php:22 classes/functions.php:144
 msgid "Open Lightbox"
 msgstr ""
 
-#: classes/functions.php:26
+#: classes/functions.php:27
 msgid "Dark Mode Toggle"
 msgstr ""
 
-#: classes/functions.php:27
+#: classes/functions.php:28
 msgid "Dark Mode Dropdown"
 msgstr ""
 
-#: classes/functions.php:43
-msgid "GD Location Switcher"
+#: classes/functions.php:34
+msgid "GD Post Meta"
 msgstr ""
 
 #: classes/functions.php:48
-msgid "UWP Login (logged out)"
-msgstr ""
-
-#: classes/functions.php:49
-msgid "UWP Register (logged out)"
-msgstr ""
-
-#: classes/functions.php:50
-msgid "UWP Forgot Password? (logged out)"
+msgid "GD Location Switcher"
 msgstr ""
 
 #: classes/functions.php:53
-msgid "Account (logged in)"
+msgid "UWP Login (logged out)"
 msgstr ""
 
 #: classes/functions.php:54
-msgid "Change Password (logged in)"
+msgid "UWP Register (logged out)"
 msgstr ""
 
 #: classes/functions.php:55
-msgid "Profile (logged in)"
+msgid "UWP Forgot Password? (logged out)"
 msgstr ""
 
-#: classes/functions.php:56
-msgid "Log out (logged in)"
+#: classes/functions.php:58
+msgid "Account (logged in)"
 msgstr ""
 
 #: classes/functions.php:59
+msgid "Change Password (logged in)"
+msgstr ""
+
+#: classes/functions.php:60
+msgid "Profile (logged in)"
+msgstr ""
+
+#: classes/functions.php:61
+msgid "Log out (logged in)"
+msgstr ""
+
+#: classes/functions.php:64
 msgid "spacer (non link)"
 msgstr ""
 
-#: classes/functions.php:114
+#: classes/functions.php:131
 msgid "Term link"
 msgstr ""
 
-#: classes/functions.php:120
+#: classes/functions.php:137
 msgid "Sign in"
 msgstr ""
 
-#: classes/functions.php:124
+#: classes/functions.php:141
 msgid "Sign out"
 msgstr ""
 
-#: classes/functions.php:183
+#: classes/functions.php:198
+msgid "Click here"
+msgstr ""
+
+#: classes/functions.php:204
 msgid "Location"
 msgstr ""
 
-#: classes/functions.php:186
+#: classes/functions.php:207
 msgid "Set Location"
 msgstr ""
 
-#: classes/functions.php:207
+#: classes/functions.php:227
 msgid "Clear Location"
 msgstr ""
 
-#: classes/functions.php:230
+#: classes/functions.php:252
 #, php-format
 msgid "Add %s"
 msgstr ""
 
-#: classes/functions.php:236
+#: classes/functions.php:258
 msgid "Login"
 msgstr ""
 
-#: classes/functions.php:240
+#: classes/functions.php:262
 msgid "Register"
 msgstr ""
 
-#: classes/functions.php:244
+#: classes/functions.php:266
 msgid "Forgot Password"
 msgstr ""
 
-#: classes/functions.php:248
+#: classes/functions.php:270
 msgid "Account"
 msgstr ""
 
-#: classes/functions.php:251
+#: classes/functions.php:273
 msgid "Change password"
 msgstr ""
 
-#: classes/functions.php:254
+#: classes/functions.php:276
 msgid "Profile"
 msgstr ""
 
-#: classes/functions.php:262
+#: classes/functions.php:284
 msgid "Log out"
 msgstr ""
 
-#: classes/functions.php:370
+#: classes/functions.php:391
 msgid "Select Page..."
 msgstr ""
