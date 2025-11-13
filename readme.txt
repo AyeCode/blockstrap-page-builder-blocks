@@ -182,6 +182,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.49 - 2025-11-13 =
+* BS > Button GD post meta is not working - FIXED
+
 = 0.1.48 - 2025-10-31 =
 * Merge SD 1.2.29 - CHANGED
 
