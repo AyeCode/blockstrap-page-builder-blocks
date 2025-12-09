@@ -3,8 +3,8 @@ Contributors: stiofansisland, paoltaia, ayecode
 Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
-Tested up to: 6.8
-Stable tag: 0.1.49
+Tested up to: 6.9
+Stable tag: 0.1.50
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -181,6 +181,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.50 - 2025-12-09 =
+* WordPress 6.9 compatibility check - COMPATIBILITY
 
 = 0.1.49 - 2025-11-13 =
 * BS > Button GD post meta is not working - FIXED
