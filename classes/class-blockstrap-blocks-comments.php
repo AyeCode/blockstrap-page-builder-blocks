@@ -52,11 +52,13 @@ class BlockStrap_Blocks_Comments {
 <input class="form-control border-gray" id="url" name="url" type="url" placeholder="' . esc_html__( 'Website', 'blockstrap-page-builder-blocks' ) . '" value=""  maxlength="200" />
 </div>';
 
-		$defaults['fields']['cookies'] = '
+		if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) && get_option( 'show_comments_cookies_opt_in' ) ) {
+			$defaults['fields']['cookies'] = '
 <div class="comment-form-cookies-consent mb-3 form-check custom-control custom-checkbox">
 <input class="custom-control-input" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
 <label class="custom-control-label" for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'blockstrap-page-builder-blocks' ) . '</label>
 </div>';
+		}
 
 		$defaults['class_submit'] .= ' btn btn-primary btn-lg form-control text-white';
 

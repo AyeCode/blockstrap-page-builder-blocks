@@ -182,6 +182,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.51 - 2025-12-TBD =
+* Comments cookies checkbox is always visible to non-logged-in users - FIXED
+
 = 0.1.50 - 2025-12-09 =
 * WordPress 6.9 compatibility check - COMPATIBILITY
 
