@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 0.1.50
+Stable tag: 0.1.51
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -182,7 +182,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
-= 0.1.51 - 2025-12-TBD =
+= 0.1.51 - 2026-01-22 =
 * Comments cookies checkbox is always visible to non-logged-in users - FIXED
 
 = 0.1.50 - 2025-12-09 =
