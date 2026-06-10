@@ -49,8 +49,7 @@ class BlockStrap_Blocks_Admin {
 	 * @return mixed
 	 */
 	public static function maybe_load_aui( $aui_screens ) {
-
-		$screen = get_current_screen();
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : array();
 
 		if ( ! empty( $screen->id ) && ! empty( $screen->base ) && 'post' === $screen->base ) {
 			$aui_screens[] = esc_attr( $screen->id );
