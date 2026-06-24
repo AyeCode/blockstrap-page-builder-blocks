@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.55\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.56\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 21:14+0530\n"
-"PO-Revision-Date: 2026-06-10 21:14+0530\n"
+"POT-Creation-Date: 2026-06-24 21:05+0530\n"
+"PO-Revision-Date: 2026-06-24 21:05+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -1150,7 +1150,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-post-info.php:243
 #: blocks/class-blockstrap-widget-post-info.php:418
 #: blocks/class-blockstrap-widget-share.php:255
-#: classes/class-blockstrap-blocks-admin.php:193
+#: classes/class-blockstrap-blocks-admin.php:192
 msgid "None"
 msgstr ""
 
@@ -2244,8 +2244,8 @@ msgid "Small-Medium"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-icon-box.php:321
-#: classes/class-blockstrap-blocks-admin.php:138
-#: classes/class-blockstrap-blocks-admin.php:165
+#: classes/class-blockstrap-blocks-admin.php:137
+#: classes/class-blockstrap-blocks-admin.php:164
 msgid "Background Color"
 msgstr ""
 
@@ -3850,16 +3850,16 @@ msgstr ""
 msgid "Tabs head array"
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:98
+#: classes/class-blockstrap-blocks-admin.php:97
 msgid "Thanks for installing BlockStrap Blocks"
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:99
+#: classes/class-blockstrap-blocks-admin.php:98
 msgid ""
 "BlockStrap Blocks work best with the BlockStrap theme, why not give it a try?"
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:103
+#: classes/class-blockstrap-blocks-admin.php:102
 #, php-format
 msgid ""
 "If you notice undesirable style changes to your current theme, please try to "
@@ -3867,26 +3867,26 @@ msgid ""
 "the class `bsui`"
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:114
+#: classes/class-blockstrap-blocks-admin.php:113
 msgid "Install BlockStrap Theme"
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:122
+#: classes/class-blockstrap-blocks-admin.php:121
 msgid "Dismiss"
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:140
-#: classes/class-blockstrap-blocks-admin.php:166
+#: classes/class-blockstrap-blocks-admin.php:139
+#: classes/class-blockstrap-blocks-admin.php:165
 msgid "Background color to use for this item for frontend."
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:144
-#: classes/class-blockstrap-blocks-admin.php:170
+#: classes/class-blockstrap-blocks-admin.php:143
+#: classes/class-blockstrap-blocks-admin.php:169
 msgid "Text Color"
 msgstr ""
 
-#: classes/class-blockstrap-blocks-admin.php:146
-#: classes/class-blockstrap-blocks-admin.php:171
+#: classes/class-blockstrap-blocks-admin.php:145
+#: classes/class-blockstrap-blocks-admin.php:170
 msgid "Text color to use for this item for frontend."
 msgstr ""
 
