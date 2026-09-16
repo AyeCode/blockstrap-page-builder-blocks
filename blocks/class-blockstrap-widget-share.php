@@ -1,7 +1,10 @@
 <?php
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class BlockStrap_Widget_Share extends WP_Super_Duper {
-
 
 	public $arguments;
 
@@ -598,7 +601,7 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			}
 
 			if ( ! empty( $args['service_link'] ) ) {
-				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-copy" href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Copy URL', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-link"></i></a>';
+				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-copy" href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(this.href);aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_js( __( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) ) . '\');return false;" data-bs-toggle="tooltip" title="' . esc_attr__( 'Copy URL', 'blockstrap-page-builder-blocks' ) . '"><i class="fas fa-link"></i></a>';
 			}
 
 			if ( ! empty( $args['service_print'] ) ) {
@@ -636,7 +639,7 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			}
 
 			if ( ! empty( $args['service_link'] ) ) {
-				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(\'' . esc_url( $current_url ) . '\');aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_attr__( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) . '\');return false;" class="dropdown-item bs-share-copy"><i class="fas fa-link fa-fw opacity-75 fa-lg"></i> ' . __( 'Copy Link', 'blockstrap-page-builder-blocks' ) . '</a>';
+				$output .= '<a href="' . esc_url( $current_url ) . '" onclick="navigator.clipboard.writeText(this.href);aui_toast(\'bs-blocks-copy-url\',\'success\',\'' . esc_js( __( 'URL Copied to Clipboard', 'blockstrap-page-builder-blocks' ) ) . '\');return false;" class="dropdown-item bs-share-copy"><i class="fas fa-link fa-fw opacity-75 fa-lg"></i> ' . esc_html__( 'Copy Link', 'blockstrap-page-builder-blocks' ) . '</a>';
 			}
 
 			if ( ! empty( $args['service_print'] ) ) {
