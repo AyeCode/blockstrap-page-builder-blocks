@@ -401,3 +401,120 @@ function blockstrap_pbb_page_options($exclude_blog = true, $exclude_front = true
 
 	return $options;
 }
+
+/**
+ * Sanitize a string that will be injected as HTML on the client (e.g. read back
+ * out of a data-* attribute with jQuery.data() and passed to .html()).
+ *
+ * Event handlers (onclick, onerror, …), <script>/<iframe>/<object> and unsafe URL
+ * protocols are removed via wp_kses(). The value is decoded to a fixed point first
+ * so multi-encoded payloads cannot smuggle a tag past kses that the browser would
+ * later decode and execute.
+ *
+ * @since 0.1.59
+ *
+ * @param string $content Raw content.
+ * @param array  $args    Optional context passed to the filter.
+ * @return string Sanitized HTML safe to inject client-side.
+ */
+function blockstrap_pbb_esc_js_attrs( $content, $args = array() ) {
+	$content = is_scalar( $content ) ? (string) $content : '';
+
+	if ( '' === trim( $content ) ) {
+		return $content;
+	}
+
+	$orig_content = $content;
+
+	// Decode to a fixed point BEFORE sanitizing. The value is decoded again
+	// client-side (the browser when parsing the attribute, then jQuery.data()),
+	// so kses must see the fully-decoded markup or a double-encoded payload such
+	// as &amp;lt;img onerror=..&amp;gt; slips through. Bounded to avoid abuse.
+	if ( false !== strpos( $content, '&' ) ) {
+		for ( $i = 0; $i < 10; $i++ ) {
+			$decoded = html_entity_decode( $content, ENT_QUOTES, 'UTF-8' );
+			if ( $decoded === $content ) {
+				break;
+			}
+			$content = $decoded;
+		}
+	}
+
+	$allowed_html = array(
+		'div' => array(
+			'class'             => true,
+			'style'             => true,
+			'role'              => true,
+			'id'                => true,
+			'data-bs-container' => true,
+			'data-argument'     => true
+		),
+		'span' => array(
+			'class' => true,
+			'style' => true,
+			'id'    => true
+		),
+		'label' => array(
+			'class' => true,
+			'for'   => true,
+			'title' => true,
+			'style' => true
+		),
+		'input' => array(
+			'class'        => true,
+			'type'         => true,
+			'name'         => true,
+			'id'           => true,
+			'value'        => true,
+			'checked'      => true,
+			'autocomplete' => true,
+			'min'          => true,
+			'max'          => true,
+			'step'         => true,
+			'lang'         => true,
+			'disabled'     => true,
+			'readonly'     => true,
+			'placeholder'  => true
+		),
+		'b'      => array(),
+		'strong' => array(),
+		'i'      => array(),
+		'em'     => array(),
+		'br'     => array(),
+		'a'      => array( 'href' => true, 'title' => true, 'target' => true, 'rel' => true ),
+		'img'    => array( 'src' => true, 'alt' => true, 'width' => true, 'height' => true )
+	);
+
+	/**
+	 * Filter the allowed HTML for blockstrap_pbb_esc_js_attrs().
+	 *
+	 * @param array  $allowed_html Allowed tags/attributes for wp_kses().
+	 * @param string $content      Decoded content about to be sanitized.
+	 * @param string $orig_content Original content before decoding.
+	 * @param array  $args         Optional context.
+	 */
+	$allowed_html = apply_filters( 'blockstrap_pbb_esc_js_attrs_allowed_html', $allowed_html, $content, $orig_content, $args );
+
+	// Only permit safe protocols in href/src, on top of kses' own protocol check.
+	$allowed_protocols = apply_filters(
+		'blockstrap_pbb_esc_js_attrs_allowed_protocols',
+		array( 'http', 'https', 'mailto', 'tel' ),
+		$args
+	);
+
+	$content = wp_kses( $content, $allowed_html, $allowed_protocols );
+
+	// kses cannot ADD attributes, so enforce noopener on target=_blank links
+	// to prevent reverse tabnabbing.
+	$content = preg_replace_callback(
+		'#<a\b[^>]*\btarget\s*=\s*(["\'])_blank\1[^>]*>#i',
+		function ( $m ) {
+			return ( false === stripos( $m[0], 'rel=' ) )
+				? preg_replace( '#<a\b#i', '<a rel="noopener noreferrer"', $m[0], 1 )
+				: $m[0];
+		},
+		$content
+	);
+
+	return $content;
+}

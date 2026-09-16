@@ -572,8 +572,9 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 		}
 
 		if ( 'icons' === $output_type ) {
-			$tag     = 'span';
-			$output .= '<div class="d-flex">';
+			$unique_id = wp_unique_id( 'bs-share-icons-' );
+			$tag       = 'span';
+			$output   .= '<div class="d-flex">';
 			if ( ! empty( $args['service_facebook'] ) ) {
 				$link    = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode_deep( $current_url );
 				$output .= '<a class="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm ms-2 bs-share-facebook" href="' . esc_url( $link ) . '" data-bs-toggle="tooltip" title="' . esc_attr__( 'Share to Facebook', 'blockstrap-page-builder-blocks' ) . '" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;"><i class="fab fa-facebook-f"></i></a>';
@@ -610,8 +611,9 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 
 			$output .= '</div>';
 		} else {
+			$unique_id = wp_unique_id( 'bs-share-icons-' );
+			$output   .= '<div class="dropdown-menu dropdown-menu-end dropdown-caret-0 mt-2 text-muted" aria-labelledby="' . esc_attr( $unique_id ) . '">';
 
-			$output .= '<div class="dropdown-menu dropdown-menu-end dropdown-caret-0 mt-2 text-muted ">';
 			if ( ! empty( $args['service_facebook'] ) ) {
 				$link    = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode_deep( $current_url );
 				$output .= '<a href="' . esc_url( $link ) . '" class="dropdown-item bs-share-facebook" target="_blank" onclick="javascript:window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;"><i class="fab fa-facebook-f fa-fw opacity-75 fa-lg"></i> ' . __( 'Facebook', 'blockstrap-page-builder-blocks' ) . '</a>';
@@ -696,7 +698,7 @@ class BlockStrap_Widget_Share extends WP_Super_Duper {
 			return $link_text || $icon_left || $icon_right ? '<div class="d-inline-flex align-items-center bs-share-icons"><' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '" >' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $output . $styles . '</div>' : ''; // shortcode
 
 		} else {
-			return $link_text || $icon_left || $icon_right ? '<div class="dropdown bs-share-dropdown"><' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="dropdown-toggle dropdown-toggle-0 ' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '"  data-bs-toggle="dropdown" aria-expanded="false">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $output . $styles . '</div>' : ''; // shortcode
+			return $link_text || $icon_left || $icon_right ? '<div class="dropdown bs-share-dropdown"><' . esc_attr( $tag ) . ' ' . $style . ' ' . $href . ' class="dropdown-toggle dropdown-toggle-0 d-inline-block ' . esc_attr( $link_class ) . ' ' . esc_attr( $wrap_class ) . '"  data-bs-toggle="dropdown" aria-expanded="false" id="' . esc_attr( $unique_id ) . '">' . $icon_left . esc_attr( $link_text ) . $icon_right . '</' . esc_attr( $tag ) . '> ' . $output . $styles . '</div>' : ''; // shortcode
 		}
 	}
 

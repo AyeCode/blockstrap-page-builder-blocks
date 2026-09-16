@@ -210,6 +210,11 @@ class BlockStrap_Blocks_Admin {
 	 * @param string $taxonomy Taxonomy slug.
 	 */
 	public static function save_term_fields( $term_id, $tt_id = '', $taxonomy = '' ) {
+		// Check if user has permission to edit terms.
+		if ( ! current_user_can( 'edit_term', $term_id ) ) {
+			return;
+		}
+
 		$taxonomies = array( 'category' );
 
 		// Save term colors.
