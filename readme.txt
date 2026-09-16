@@ -188,6 +188,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 = 0.1.59 - 2026-0-TBD =
 * Fixed an XSS vulnerability in the copy URL feature in BS > Share block - FIXED/SECURITY
+* Update AUI 0.2.54 and SD 1.2.36 - CHANGED
 
 = 0.1.58 - 2026-09-09 =
 * Upgrade AUI 0.2.53 & FA 1.1.12 - CHANGED
