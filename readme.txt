@@ -186,6 +186,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.60 - 2026-09-23 =
+* Update AUI 0.2.55 - CHANGED
+
 = 0.1.59 - 2026-09-16 =
 * Fixed an XSS vulnerability in the copy URL feature in BS > Share block - FIXED/SECURITY
 * Update AUI 0.2.54 and SD 1.2.36 - CHANGED
