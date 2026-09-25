@@ -563,7 +563,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 		if ( 'author' === $args['type'] ) {
 			$link = $is_preview ? '#author' : get_author_posts_url( $post_author );
-			$text = $is_preview ? 'John Doe' : get_the_author_meta( 'display_name' );
+			$text = $is_preview ? 'John Doe' : esc_html( get_the_author_meta( 'display_name' ) );
 			$icon = 'fas fa-user-circle';
 		} elseif ( 'custom' === $args['type'] && !empty( $args['custom_meta'] ) ) {
 			$meta_key = sanitize_key( $args['custom_meta'] );
@@ -585,7 +585,9 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 			}else{
 				$date = '';
 			}
+
 			$text = $is_preview ? gmdate( $date_format, strtotime( '-2 hours' ) ) : gmdate( $date_format, strtotime( $date ) );
+			$text = esc_html( $text );
 			$icon = 'far fa-calendar';
 
 			if ( $time_ago ) {
@@ -593,7 +595,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 				$date_raw = $is_preview ? strtotime( '-2 hours' ) : $date;
 				$text     = $is_preview ? '2 days ago' : sprintf(
 					'<span class="timeago" datetime="%1$s" >%2$s</span>',
-					$date_raw,
+					esc_attr( $date_raw ),
 					$text
 				);
 			}
@@ -628,14 +630,14 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 
 				if ( 1 === count( $terms ) ) {
 					$term = end( $terms );
-					$text = $term->name;
+					$text = esc_html( $term->name );
 					$link = $is_preview ? '#post-tax' : get_term_link( $term );
 				} else {
 					$text = array();
 
 					foreach ( $terms as $term ) {
 						$text[] = array(
-							'text' => $term->name,
+							'text' => esc_html( $term->name ),
 							'link' => $is_preview ? '#post-tax' : get_term_link( $term ),
 						);
 					}
@@ -653,7 +655,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 		}
 
 		// Maybe set custom link text.
-		$text = ! empty( $args['text'] ) ? sanitize_text_field( $args['text'] ) : $text;
+		$text = ! empty( $args['text'] ) ? esc_html( sanitize_text_field( $args['text'] ) ) : $text;
 
 		// Maybe add before and after text.
 		$before_text = isset( $args['before'] ) && is_scalar( $args['before'] ) ? $args['before'] : '';
@@ -773,11 +775,12 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 	}
 
 	public function output_html( $text, $link, $wrap_class, $wrapper_attributes, $icon, $is_link ) {
+		// $text and $icon are built above and already escaped, the attributes are not.
 		if ( $is_link ) {
 			return $text ? sprintf(
 				'<a href="%1$s" class="%2$s" %3$s>%4$s%5$s</a>',
-				$link,
-				$wrap_class,
+				esc_url( $link ),
+				esc_attr( $wrap_class ),
 				$wrapper_attributes,
 				$icon,
 				$text
@@ -785,7 +788,7 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 		} else {
 			return $text ? sprintf(
 				'<span class="%1$s" %2$s>%3$s%4$s</span>',
-				$wrap_class,
+				esc_attr( $wrap_class ),
 				$wrapper_attributes,
 				$icon,
 				$text
@@ -794,11 +797,9 @@ class BlockStrap_Widget_Post_Info extends WP_Super_Duper {
 	}
 }
 
-// register it.
 add_action(
 	'widgets_init',
 	function () {
 		register_widget( 'BlockStrap_Widget_Post_Info' );
 	}
 );
-

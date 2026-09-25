@@ -370,12 +370,12 @@ class BlockStrap_Widget_Map extends WP_Super_Duper {
 				'56.98381687584503',
 				'-7.46814054212338',
 			);
-			$lat         = trim( esc_attr( $gps[0] ) );
-			$lon         = trim( esc_attr( $gps[1] ) );
+			$lat         = isset( $gps[0] ) ? max( -90.0, min( 90.0, (float) trim( $gps[0] ) ) ) : 0;
+			$lon         = isset( $gps[1] ) ? max( -180.0, min( 180.0, (float) trim( $gps[1] ) ) ) : 0;
 			$zoom_bounds = 5242.88 / ( pow( 2, $zoom ) );
 			$bounds_arr  = $this->getBoundingBox( $lat, $lon, $zoom_bounds );
 			$bounds      = implode( ',', $bounds_arr );
-			$src         = "https://www.openstreetmap.org/export/embed.html?bbox=$bounds&amp;layer=$layer&amp;marker=" . trim( esc_attr( $gps[0] ) ) . ',' . trim( esc_attr( $gps[1] ) );
+			$src         = "https://www.openstreetmap.org/export/embed.html?bbox=$bounds&amp;layer=$layer&amp;marker=" . $lat . ',' . $lon;
 		} else {
 			$zoom  = $args['map_zoom'] ? absint( $args['map_zoom'] ) : '10';
 			$layer = $args['map_view_google'] ? esc_attr( $args['map_view_google'] ) : 'm';

@@ -272,7 +272,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			}
 		}
 
-		$title = get_the_title();
+		$title = esc_html( get_the_title() );
 
 		if ( $title ) {
 			$tag          = ! empty( $args['html_tag'] ) ? esc_attr( $args['html_tag'] ) : 'h2';
@@ -295,9 +295,9 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 			}
 
 			$classes      = sd_build_aui_class( $args );
-			$class        = $classes ? 'class="' . $classes . '"' : '';
+			$class        = $classes ? 'class="' . esc_attr( $classes ) . '"' : '';
 			$styles       = sd_build_aui_styles( $args );
-			$style        = $styles ? ' style="' . $styles . '"' : '';
+			$style        = $styles ? ' style="' . esc_attr( $styles ) . '"' : '';
 
 			$wrapper_attributes = $class . $style;
 
@@ -307,7 +307,7 @@ class BlockStrap_Widget_Post_Title extends WP_Super_Duper {
 				$link   = get_permalink();
 				$title  = sprintf(
 					'<a href="%1$s" class="%2$s" %3$s>%4$s</a>',
-					$link,
+					esc_url( $link ),
 					$class,
 					$style,
 					$title
