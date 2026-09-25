@@ -277,7 +277,12 @@ Nam malesuada metus lorem, nec lobortis sem suscipit quis. Curabitur fringilla n
 Donec egestas urna vel lorem bibendum fringilla. Curabitur in dui augue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam et maximus mauris. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam volutpat viverra tortor sit amet volutpat. Donec nec scelerisque nunc. Donec lobortis tempor pharetra. Nulla a pharetra felis. Nunc placerat faucibus malesuada. Ut commodo lectus a sollicitudin tincidunt. Donec ac lectus eu enim efficitur elementum sed vitae mi. Nunc ac dui lacinia, egestas felis sed, gravida neque.';
 
 		} else {
-			$content = ! empty( $post->post_content ) ? wp_strip_all_tags( $post->post_content ) : '';
+			// Never expose the content of password protected posts.
+			if ( ! empty( $post ) && post_password_required( $post ) ) {
+				$content = esc_html__( 'There is no excerpt because this is a protected post.', 'blockstrap-page-builder-blocks' );
+			} else {
+				$content = ! empty( $post->post_content ) ? wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) : '';
+			}
 		}
 
 		if ( $content ) {
@@ -298,6 +303,8 @@ Donec egestas urna vel lorem bibendum fringilla. Curabitur in dui augue. Interdu
 			} else {
 				$content = substr( $content, 0, $strip_count ) . $strip_append;
 			}
+
+			$content = esc_html( $content );
 		}
 
 		return $content ? sprintf(

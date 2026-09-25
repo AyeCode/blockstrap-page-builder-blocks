@@ -332,9 +332,8 @@ function blockstrap_pbb_get_link_parts( $args, $wrap_class = '' ) {
  * @global array $blockstrap_pbb_page_options Cached page options to avoid redundant database queries.
  */
 function blockstrap_pbb_page_options($exclude_blog = true, $exclude_front = true, $parent_only = false ) {
-
 	// Same function, lets not call it twice if we don't need to
-	if(function_exists('sd_template_page_options') && $exclude_blog && $exclude_front) {
+	if ( function_exists( 'sd_template_page_options' ) && $exclude_blog && $exclude_front ) {
 		return sd_template_page_options();
 	}
 
@@ -345,18 +344,19 @@ function blockstrap_pbb_page_options($exclude_blog = true, $exclude_front = true
 	}
 
 	$exclude_pages = array();
-	if ( $page_on_front = get_option( 'page_on_front' ) && $exclude_front ) {
+	if ( ( $page_on_front = get_option( 'page_on_front' ) ) && $exclude_front ) {
 		$exclude_pages[] = $page_on_front;
 	}
 
-	if ( $page_for_posts = get_option( 'page_for_posts' ) && $exclude_blog ) {
+	if ( ( $page_for_posts = get_option( 'page_for_posts' ) ) && $exclude_blog ) {
 		$exclude_pages[] = $page_for_posts;
 	}
 
 	$exclude_pages_placeholders = '';
+
 	if ( ! empty( $exclude_pages ) ) {
 		// Sanitize the array of excluded pages and implode it for the SQL query
-		$exclude_pages_placeholders = implode(',', array_fill(0, count($exclude_pages), '%d'));
+		$exclude_pages_placeholders = implode(',', array_fill( 0, count( $exclude_pages ), '%d' ) );
 	}
 
 	// Prepare the base SQL query, including child_of = 0 (only root-level pages)
@@ -367,7 +367,7 @@ function blockstrap_pbb_page_options($exclude_blog = true, $exclude_front = true
 		AND post_status = 'publish'
 	";
 
-	if ($parent_only) {
+	if ( $parent_only ) {
 		$sql .= " AND post_parent = 0 ";
 	}
 
@@ -380,9 +380,10 @@ function blockstrap_pbb_page_options($exclude_blog = true, $exclude_front = true
 	$sql .= " ORDER BY post_title ASC";
 
 	// add a limit so we don't break
-	$limit = apply_filters('blockstrap_blocks_page_options_limit',200);
-	if ($limit) {
-		$sql .= $wpdb->prepare(" LIMIT %d", $limit);
+	$limit = apply_filters( 'blockstrap_blocks_page_options_limit', 200 );
+
+	if ( $limit ) {
+		$sql .= $wpdb->prepare( " LIMIT %d", $limit );
 	}
 
 	// Prepare the SQL query to include the excluded pages only if we have placeholders.

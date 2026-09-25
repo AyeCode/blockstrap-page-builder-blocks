@@ -377,7 +377,7 @@ class BlockStrap_Widget_Archive_Actions extends WP_Super_Duper {
 				array(
 					'name'             => '_bs_sortby',
 					'class'            => $select_class,
-					'value'            => ( ! empty( $_REQUEST['_bs_sortby'] ) && isset( $sortby_options[ $_REQUEST['_bs_sortby'] ] ) ? sanitize_key( $_REQUEST['_bs_sortby'] ) : '' ),
+					'value'            => ( ! empty( $_REQUEST['_bs_sortby'] ) && is_scalar( $_REQUEST['_bs_sortby'] ) && isset( $sortby_options[ sanitize_key( $_REQUEST['_bs_sortby'] ) ] ) ? sanitize_key( $_REQUEST['_bs_sortby'] ) : '' ),
 					'options'          => $sortby_options,
 					'no_wrap'          => true,
 					'extra_attributes' => array(
@@ -588,7 +588,7 @@ function blockstrap_blocks_archive_actions_show() {
  * @since 1.0
  */
 function blockstrap_blocks_archive_actions_filter( $query ) {
-	if ( isset( $_REQUEST['_bs_sortby'] ) && $query->is_main_query() && ! is_admin() && blockstrap_blocks_archive_actions_show() ) {
+	if ( isset( $_REQUEST['_bs_sortby'] ) && is_scalar( $_REQUEST['_bs_sortby'] ) && $query->is_main_query() && ! is_admin() && blockstrap_blocks_archive_actions_show() ) {
 		// Sort by
 		if ( ! empty( $_REQUEST['_bs_sortby'] ) ) {
 			switch ( $_REQUEST['_bs_sortby'] ) {
