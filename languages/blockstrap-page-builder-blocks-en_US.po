@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.60\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.61\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-23 20:28+0530\n"
-"PO-Revision-Date: 2026-09-23 20:28+0530\n"
+"POT-Creation-Date: 2026-09-30 11:46+0530\n"
+"PO-Revision-Date: 2026-09-30 11:46+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -3302,6 +3302,10 @@ msgstr ""
 msgid "Trim append"
 msgstr ""
 
+#: blocks/class-blockstrap-widget-post-excerpt.php:282
+msgid "There is no excerpt because this is a protected post."
+msgstr ""
+
 #: blocks/class-blockstrap-widget-post-info.php:19
 #: blocks/class-blockstrap-widget-post-info.php:30
 msgid "BS > Post info"
@@ -3399,18 +3403,18 @@ msgstr ""
 msgid "Category Color (taxonomy only)"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-post-info.php:605
+#: blocks/class-blockstrap-widget-post-info.php:607
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: blocks/class-blockstrap-widget-post-info.php:606
+#: blocks/class-blockstrap-widget-post-info.php:608
 msgid "No comments"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-post-info.php:614
+#: blocks/class-blockstrap-widget-post-info.php:616
 #, php-format
 msgid "%d min read"
 msgstr ""
@@ -4071,6 +4075,6 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: classes/functions.php:391
+#: classes/functions.php:392
 msgid "Select Page..."
 msgstr ""
