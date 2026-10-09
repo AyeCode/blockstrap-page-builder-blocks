@@ -375,10 +375,28 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 					$url = geodir_get_image_src( $images[0], 'full' );
 				}
 			} else if ( geodir_is_page( 'archive' ) ) {
-				$images = geodir_get_images( 0, 1, false, '', array(), array( 'cat_default', 'cpt_default', 'listing_default' ) );
+
+				$images = geodir_get_images( 0, 1, false, '', array(), array( 'cat_default' ) );
 
 				if ( ! empty( $images ) ) {
 					$url = geodir_get_image_src( $images[0], 'full' );
+				}
+				// CPT default image: the 'cpt_default' fallback in geodir_get_images() needs a post, so it never resolves on archives.
+				if ( ! $url ) {
+					$post_type = geodir_get_current_posttype();
+					$post_types = geodir_get_posttypes( 'array' );
+
+					if ( $post_type && ! empty( $post_types[ $post_type ]['default_image'] ) ) {
+						$url = wp_get_attachment_image_url( absint( $post_types[ $post_type ]['default_image'] ), 'full' );
+					}
+				}
+
+				if ( ! $url ) {
+					$images = geodir_get_images( 0, 1, false, '', array(), array( 'listing_default' ) );
+
+					if ( ! empty( $images ) ) {
+						$url = geodir_get_image_src( $images[0], 'full' );
+					}
 				}
 			}
 		}
