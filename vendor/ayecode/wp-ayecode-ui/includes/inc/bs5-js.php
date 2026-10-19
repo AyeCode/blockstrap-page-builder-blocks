@@ -1144,59 +1144,94 @@
         return result ? parseInt(result[1], 16) +','+parseInt(result[2], 16)+','+parseInt(result[3], 16) : null;
     }
 
+    // The site colors we keep in sync with the global style palette.
+    const aui_fse_sync_colors = ['primary', 'danger', 'warning', 'info'];
+
+    // Last seen value for each synced color, so we only write when it actually changes.
+    let aui_fse_color_cache = {};
+
     /**
-     * update colors as the style colour pallet is changed
-     * @param $color
+     * Read the `styles` entry of the editor settings.
+     *
+     * This is a plain store read with no DOM or layout access, so it is cheap enough
+     * to run on every wp.data change. The array identity only changes when the global
+     * styles are regenerated, which is what we use as our "something changed" signal.
+     *
+     * @returns {Array|null}
      */
-    function aui_fse_sync_site_colors($color){
+    function aui_fse_get_styles_setting(){
+        const store = wp.data && wp.data.select ? wp.data.select('core/block-editor') : null;
 
-        const getColorHex = () => {
-            const element = jQuery(".edit-site-visual-editor__editor-canvas").contents().find(".editor-styles-wrapper").get(0);
-            const style = element == null ? '' : window.getComputedStyle(element).getPropertyValue('--wp--preset--color--'+$color);
-            return style;
-        };
+        if ( ! store || typeof store.getSettings !== 'function' ) {
+            return null;
+        }
 
-        // set the initial ColorHex
-        let colorHex = getColorHex();
+        const settings = store.getSettings();
 
+        return settings && settings.styles ? settings.styles : null;
+    }
 
-        wp.data.subscribe(() => {
-
-            // get the current ColorHex
-            const newColorHex = getColorHex();
-
-            // only do something if ColorHex has changed.
-            if( newColorHex && colorHex !== newColorHex ) {
-                jQuery(".edit-site-visual-editor__editor-canvas").contents().find("html body").get(0).style.setProperty('--bs-'+$color+'-rgb',aui_fse_hexToRgb(newColorHex));
-            }
-
-            // update the newColorHex variable.
-            colorHex = newColorHex;
-
-        });
+    /**
+     * Get the global styles CSS string out of a `styles` setting array.
+     *
+     * @param styles
+     * @returns {string|null}
+     */
+    function aui_fse_get_global_styles_css( styles ){
+        return styles && styles[3] && typeof styles[3].css === 'string' ? styles[3].css : null;
     }
 
     /**
      * update colors as the style colour pallet is changed
-     * @param $color
+     *
+     * @param prime When true, only record the current values without writing them.
      */
-    function aui_fse_sync_site_typography(){
-        const getGlobalStyles = () => {
-            const { select } = wp.data;
-            const settings = select('core/block-editor').getSettings();
+    function aui_fse_sync_site_colors( prime ){
+        const element = jQuery(".edit-site-visual-editor__editor-canvas").contents().find(".editor-styles-wrapper").get(0);
 
-            return ( settings && settings.styles && settings.styles[3].css ? settings.styles[3].css : null );
-        };
+        if ( element == null ) {
+            return;
+        }
 
-        // set the initial styles
-        let Styles = getGlobalStyles();
+        // Resolve the styles once and read every color from the same snapshot.
+        const computed = window.getComputedStyle(element);
+        let body = null;
 
-        wp.data.subscribe(() => {
-            // get the current styles
-            const newStyles = getGlobalStyles();
+        aui_fse_sync_colors.forEach(function($color){
+            const newColorHex = computed.getPropertyValue('--wp--preset--color--'+$color);
 
-            // only do something if newStyles has changed.
-            if( newStyles && Styles !== newStyles ) {
+            // only do something if ColorHex has changed.
+            if( ! newColorHex || aui_fse_color_cache[$color] === newColorHex ) {
+                return;
+            }
+
+            // On the initial run we just record what is already there, matching the previous behaviour.
+            if ( prime ) {
+                aui_fse_color_cache[$color] = newColorHex;
+
+                return;
+            }
+
+            if ( body === null ) {
+                body = jQuery(".edit-site-visual-editor__editor-canvas").contents().find("html body").get(0);
+            }
+
+            if ( body ) {
+                body.style.setProperty('--bs-'+$color+'-rgb',aui_fse_hexToRgb(newColorHex));
+
+                // update the cached value.
+                aui_fse_color_cache[$color] = newColorHex;
+            }
+        });
+    }
+
+    /**
+     * update typography as the global styles are changed
+     *
+     * @param newStyles The global styles CSS string.
+     */
+    function aui_fse_sync_site_typography( newStyles ){
+        if( newStyles ) {
                 // heading sizes
                 aui_updateCssRule('body.editor-styles-wrapper h1', 'font-size', aui_parseCSS(newStyles, 'h1', 'font-size'));
                 aui_updateCssRule('body.editor-styles-wrapper h2', 'font-size', aui_parseCSS(newStyles, 'h2', 'font-size'));
@@ -1244,24 +1279,80 @@
 
                 //                console.log('Font size of h2 is:', fontSize);
             }
-
-            // update the newStyles variable.
-            Styles = newStyles;
-
-
-        });
     }
 
     setTimeout(function(){
         aui_sync_admin_styles();
     }, 10000);
 
+    // Guard so we only ever register one subscriber, even if called again.
+    let aui_fse_synced = false;
+
     function aui_sync_admin_styles(){
-        aui_fse_sync_site_colors('primary');
-        aui_fse_sync_site_colors('danger');
-        aui_fse_sync_site_colors('warning');
-        aui_fse_sync_site_colors('info');
-        aui_fse_sync_site_typography();
+        if ( aui_fse_synced ) {
+            return;
+        }
+
+        aui_fse_synced = true;
+
+        // The `styles` array identity is our change signal, the CSS string tells us if typography needs a repaint.
+        let aui_fse_last_styles = aui_fse_get_styles_setting();
+        let aui_fse_last_css = aui_fse_get_global_styles_css( aui_fse_last_styles );
+        let aui_fse_timer = null;
+
+        // CSS waiting to be applied, carried across debounced ticks so a change is never dropped.
+        let aui_fse_pending_css = null;
+
+        // Prime the color cache so the first real change is the first thing we write.
+        aui_fse_sync_site_colors( true );
+
+        /**
+         * Do the expensive work: read the computed palette and re-apply typography rules.
+         *
+         * Only ever called after the global styles have actually changed.
+         */
+        const run = function( css ){
+            aui_fse_sync_site_colors();
+            aui_fse_sync_site_typography( css );
+        };
+
+        // A single subscriber for everything, gated on a cheap store read.
+        wp.data.subscribe(function(){
+            const styles = aui_fse_get_styles_setting();
+
+            // Nothing style related changed, so this is a keystroke/selection/etc. Bail before touching the DOM.
+            if ( styles === aui_fse_last_styles ) {
+                return;
+            }
+
+            aui_fse_last_styles = styles;
+
+            const css = aui_fse_get_global_styles_css( styles );
+
+            if ( css !== aui_fse_last_css ) {
+                aui_fse_last_css = css;
+                aui_fse_pending_css = css;
+            }
+
+            // Debounce: global style edits fire a burst of store updates, we only need the last one.
+            if ( aui_fse_timer ) {
+                clearTimeout( aui_fse_timer );
+            }
+
+            aui_fse_timer = setTimeout(function(){
+                aui_fse_timer = null;
+
+                const css_to_apply = aui_fse_pending_css;
+                aui_fse_pending_css = null;
+
+                run( css_to_apply );
+
+                // The iframe can apply the new stylesheet a beat after the store updates, so look again.
+                setTimeout(function(){
+                    aui_fse_sync_site_colors();
+                }, 500);
+            }, 150);
+        });
     }
 
     // setTimeout(function(){
