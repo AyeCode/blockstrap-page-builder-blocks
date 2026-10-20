@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 0.1.61
+Stable tag: 0.1.62
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -185,6 +185,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.62 - 2026-10-20 =
+* Update AUI 0.2.58 and SD 1.2.38 - CHANGED
 
 = 0.1.61 - 2026-09-30 =
 * Enhanced data sanitization and output escaping - CHANGED/SECURITY
