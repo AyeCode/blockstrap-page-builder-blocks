@@ -187,6 +187,7 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 == Changelog ==
 
 = 0.1.62 - 2026-10-20 =
+* Fix Container featured background not using CPT default image on CPT archive and CPT location pages - FIXED
 * Update AUI 0.2.58 and SD 1.2.38 - CHANGED
 
 = 0.1.61 - 2026-09-30 =
