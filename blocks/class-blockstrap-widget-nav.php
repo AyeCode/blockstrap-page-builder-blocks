@@ -350,12 +350,37 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 	 *
 	 * @return string
 	 */
+	/**
+	 * When several nav items match the current page (a page item and a link to one view of it, e.g. Account and
+	 * /account/?type=billing), keep only the most specific so a single link is highlighted and the others stay usable.
+	 *
+	 * @param string $content The rendered nav items.
+	 * @return string
+	 */
+	public static function keep_best_current_match( $content ) {
+		if ( ! preg_match_all( '/data-nav-match="(\d+)"/', $content, $m ) || count( $m[1] ) < 2 ) {
+			return $content;
+		}
+		$best = max( array_map( 'intval', $m[1] ) );
+		return preg_replace_callback(
+			'/<a\b[^>]*data-nav-match="(\d+)"[^>]*>/',
+			function ( $tag ) use ( $best ) {
+				if ( (int) $tag[1] >= $best ) {
+					return $tag[0];
+				}
+				$a = str_replace( array( ' aria-current="page"', ' data-nav-match="' . $tag[1] . '"' ), '', $tag[0] );
+				return preg_replace( '/(class="[^"]*?)\s+active(?=[\s"])/', '$1', $a );
+			},
+			$content
+		);
+	}
+
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
 		if ( empty( $content ) ) {
 			return '';
 		} else {
 			add_action( 'wp_enqueue_scripts',array( $this, 'enqueue_scripts' ) );
-			return $content;
+			return self::keep_best_current_match( $content );
 		}
 	}
 

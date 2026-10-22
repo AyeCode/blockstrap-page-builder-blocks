@@ -619,9 +619,11 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
         }
 
 		// Mark the link to the page being viewed, as WordPress menus do with current-menu-item.
-		if ( ! $this->is_block_content_call() && ! $this->is_preview() && $this->is_current_link( $link, $args ) ) {
+		// The Nav block keeps only the most specific match when several items match (see current_link_match()).
+		$match = ( ! $this->is_block_content_call() && ! $this->is_preview() ) ? $this->current_link_match( $link, $args ) : 0;
+		if ( $match ) {
 			$link_class .= ' active';
-			$link_attr  .= ' aria-current="page"';
+			$link_attr  .= ' aria-current="page" data-nav-match="' . absint( $match ) . '"';
 		}
 
 		if (!$this->is_preview() && $link && function_exists( 'sd_build_attributes_string_escaped' ) ) {
@@ -659,45 +661,59 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
     }//end output()
 
 	/**
-	 * Whether this item links to the page being viewed: a "page" item by its page ID, any other link by its address
-	 * (host and path; the query string and fragment are ignored).
+	 * How this item matches the page being viewed: 0 no match, 1 the same page (a "page" item by its page ID, or a link
+	 * with the same host and path), 2 the same path and every query argument the link carries (a link to one view of a
+	 * page, e.g. /account/?type=billing). The Nav block keeps the highest match when several items match.
 	 *
 	 * @param string $link The item's URL.
 	 * @param array  $args The block arguments.
 	 *
-	 * @return bool
+	 * @return int
 	 */
-	public function is_current_link( $link, $args ) {
+	public function current_link_match( $link, $args ) {
 		global $wp;
 
-		$active = false;
+		$match = 0;
 		if ( is_admin() || wp_doing_ajax() || is_feed() ) {
-			$active = false;
+			$match = 0;
 		} elseif ( ! empty( $args['type'] ) && 'page' === $args['type'] && ! empty( $args['page_id'] ) ) {
-			$active = is_page() && absint( $args['page_id'] ) === absint( get_queried_object_id() );
+			$match = is_page() && absint( $args['page_id'] ) === absint( get_queried_object_id() ) ? 1 : 0;
 		} elseif ( $link && '#' !== substr( $link, 0, 1 ) && ! empty( $wp ) ) {
 			$normalise = function ( $url ) {
 				$parts = wp_parse_url( $url );
-				$host  = isset( $parts['host'] ) ? strtolower( preg_replace( '/^www\./i', '', $parts['host'] ) ) : '';
+				$host  = isset( $parts['host'] ) ? strtolower( preg_replace( '/^www\\./i', '', $parts['host'] ) ) : '';
 				$path  = isset( $parts['path'] ) ? untrailingslashit( $parts['path'] ) : '';
-				return array( $host, $path );
+				$query = array();
+				if ( ! empty( $parts['query'] ) ) {
+					wp_parse_str( $parts['query'], $query );
+				}
+				return array( $host, $path, $query );
 			};
-			list( $link_host, $link_path ) = $normalise( $link );
-			list( $here_host, $here_path ) = $normalise( home_url( $wp->request ) );
-			$active = ( '' === $link_host || $link_host === $here_host ) && $link_path === $here_path;
+			list( $link_host, $link_path, $link_query ) = $normalise( $link );
+			list( $here_host, $here_path )              = $normalise( home_url( $wp->request ) );
+			if ( ( '' === $link_host || $link_host === $here_host ) && $link_path === $here_path ) {
+				// A link carrying query arguments only matches when the current request has the same values.
+				$match = 1;
+				foreach ( $link_query as $key => $value ) {
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read only comparison.
+					if ( ! isset( $_GET[ $key ] ) || (string) wp_unslash( $_GET[ $key ] ) !== (string) $value ) {
+						$match = 0;
+						break;
+					}
+				}
+				$match = $match && $link_query ? 2 : $match;
+			}
 		}
 
 		/**
-		 * Filters whether a nav item is shown as the current page.
+		 * Filters how a nav item matches the current page (0 none, 1 same page, 2 same page and query).
 		 *
-		 * @param bool   $active Whether the item links to the current page.
-		 * @param string $link   The item's URL.
-		 * @param array  $args   The block arguments.
+		 * @param int    $match The match.
+		 * @param string $link  The item's URL.
+		 * @param array  $args  The block arguments.
 		 */
-		return (bool) apply_filters( 'blockstrap_pbb_nav_item_is_active', $active, $link, $args );
+		return absint( apply_filters( 'blockstrap_pbb_nav_item_current_match', $match, $link, $args ) );
 	}
-
-
 }//end class
 
 // register it.
