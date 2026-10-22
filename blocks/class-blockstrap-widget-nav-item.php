@@ -618,6 +618,12 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
             $wrap_class .= $aui_bs5 ? ' align-self-center' : ' form-inline';
         }
 
+		// Mark the link to the page being viewed, as WordPress menus do with current-menu-item.
+		if ( ! $this->is_block_content_call() && ! $this->is_preview() && $this->is_current_link( $link, $args ) ) {
+			$link_class .= ' active';
+			$link_attr  .= ' aria-current="page"';
+		}
+
 		if (!$this->is_preview() && $link && function_exists( 'sd_build_attributes_string_escaped' ) ) {
 			$attributes_escaped = sd_build_attributes_string_escaped(
 				array(
@@ -651,6 +657,45 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
         }
 
     }//end output()
+
+	/**
+	 * Whether this item links to the page being viewed: a "page" item by its page ID, any other link by its address
+	 * (host and path; the query string and fragment are ignored).
+	 *
+	 * @param string $link The item's URL.
+	 * @param array  $args The block arguments.
+	 *
+	 * @return bool
+	 */
+	public function is_current_link( $link, $args ) {
+		global $wp;
+
+		$active = false;
+		if ( is_admin() || wp_doing_ajax() || is_feed() ) {
+			$active = false;
+		} elseif ( ! empty( $args['type'] ) && 'page' === $args['type'] && ! empty( $args['page_id'] ) ) {
+			$active = is_page() && absint( $args['page_id'] ) === absint( get_queried_object_id() );
+		} elseif ( $link && '#' !== substr( $link, 0, 1 ) && ! empty( $wp ) ) {
+			$normalise = function ( $url ) {
+				$parts = wp_parse_url( $url );
+				$host  = isset( $parts['host'] ) ? strtolower( preg_replace( '/^www\./i', '', $parts['host'] ) ) : '';
+				$path  = isset( $parts['path'] ) ? untrailingslashit( $parts['path'] ) : '';
+				return array( $host, $path );
+			};
+			list( $link_host, $link_path ) = $normalise( $link );
+			list( $here_host, $here_path ) = $normalise( home_url( $wp->request ) );
+			$active = ( '' === $link_host || $link_host === $here_host ) && $link_path === $here_path;
+		}
+
+		/**
+		 * Filters whether a nav item is shown as the current page.
+		 *
+		 * @param bool   $active Whether the item links to the current page.
+		 * @param string $link   The item's URL.
+		 * @param array  $args   The block arguments.
+		 */
+		return (bool) apply_filters( 'blockstrap_pbb_nav_item_is_active', $active, $link, $args );
+	}
 
 
 }//end class
