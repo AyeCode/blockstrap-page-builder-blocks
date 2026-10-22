@@ -623,7 +623,9 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
 		$match = ( ! $this->is_block_content_call() && ! $this->is_preview() ) ? $this->current_link_match( $link, $args ) : 0;
 		if ( $match ) {
 			$link_class .= ' active';
-			$link_attr  .= ' aria-current="page" data-nav-match="' . absint( $match ) . '"';
+			// A user's own aria-current (Link attributes) wins, so the attribute is never doubled.
+			$own_attrs   = ! empty( $args['link_attributes'] ) ? wp_json_encode( $args['link_attributes'] ) : '';
+			$link_attr  .= ( false === stripos( (string) $own_attrs, 'aria-current' ) ? ' aria-current="page"' : '' ) . ' data-nav-match="' . absint( $match ) . '"';
 		}
 
 		if (!$this->is_preview() && $link && function_exists( 'sd_build_attributes_string_escaped' ) ) {
@@ -673,16 +675,25 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
 	public function current_link_match( $link, $args ) {
 		global $wp;
 
+		if ( is_admin() || wp_doing_ajax() || is_feed() || empty( $wp ) ) {
+			return 0;
+		}
+
 		$match = 0;
-		if ( is_admin() || wp_doing_ajax() || is_feed() ) {
-			$match = 0;
-		} elseif ( ! empty( $args['type'] ) && 'page' === $args['type'] && ! empty( $args['page_id'] ) ) {
+
+		// A page item matches its own page by ID (slug changes don't matter); otherwise it is compared by URL below,
+		// which also covers the posts page (is_home(), not is_page()).
+		if ( ! empty( $args['type'] ) && 'page' === $args['type'] && ! empty( $args['page_id'] ) ) {
 			$match = is_page() && absint( $args['page_id'] ) === absint( get_queried_object_id() ) ? 1 : 0;
-		} elseif ( $link && '#' !== substr( $link, 0, 1 ) && ! empty( $wp ) ) {
+		}
+
+		if ( ! $match && $link && '#' !== substr( $link, 0, 1 ) ) {
 			$normalise = function ( $url ) {
-				$parts = wp_parse_url( $url );
-				$host  = isset( $parts['host'] ) ? strtolower( preg_replace( '/^www\\./i', '', $parts['host'] ) ) : '';
+				// Some link types are esc_url()'d, which turns & into &#038;.
+				$parts = wp_parse_url( html_entity_decode( $url, ENT_QUOTES ) );
+				$host  = isset( $parts['host'] ) ? strtolower( preg_replace( '/^www\./i', '', $parts['host'] ) ) : '';
 				$path  = isset( $parts['path'] ) ? untrailingslashit( $parts['path'] ) : '';
+				$path  = '' !== $path && '/' !== $path[0] ? '/' . $path : $path; // a relative "account/" is "/account"
 				$query = array();
 				if ( ! empty( $parts['query'] ) ) {
 					wp_parse_str( $parts['query'], $query );
@@ -690,14 +701,26 @@ class BlockStrap_Widget_Nav_Item extends WP_Super_Duper
 				return array( $host, $path, $query );
 			};
 			list( $link_host, $link_path, $link_query ) = $normalise( $link );
-			list( $here_host, $here_path )              = $normalise( home_url( $wp->request ) );
-			if ( ( '' === $link_host || $link_host === $here_host ) && $link_path === $here_path ) {
+			// Paged archives and lists (/blog/page/2) still belong to the first page's item.
+			list( $here_host, $here_path ) = $normalise( home_url( preg_replace( '#(^|/)page/\d+$#', '', (string) $wp->request ) ) );
+
+			if ( '' === $link_path && '' === $here_path && ! is_front_page() && ! is_home() ) {
+				// A query-only request (a search, or any page with plain permalinks) is not the home page.
+				$match = 0;
+			} elseif ( ( '' === $link_host || $link_host === $here_host ) && $link_path === $here_path ) {
 				// A link carrying query arguments only matches when the current request has the same values.
 				$match = 1;
 				foreach ( $link_query as $key => $value ) {
 					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read only comparison.
-					if ( ! isset( $_GET[ $key ] ) || (string) wp_unslash( $_GET[ $key ] ) !== (string) $value ) {
+					$current = isset( $_GET[ $key ] ) ? wp_unslash( $_GET[ $key ] ) : null;
+					if ( null === $current ) {
 						$match = 0;
+					} elseif ( is_array( $value ) || is_array( $current ) ) {
+						$match = (array) $value == (array) $current ? $match : 0; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- order-insensitive array compare.
+					} elseif ( (string) $current !== (string) $value ) {
+						$match = 0;
+					}
+					if ( ! $match ) {
 						break;
 					}
 				}
