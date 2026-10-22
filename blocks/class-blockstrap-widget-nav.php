@@ -212,13 +212,14 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
 
-		// Highlight the item for the page being viewed (active + aria-current).
-		$arguments['highlight_current'] = array(
+		// Items for the page being viewed are marked active (+ aria-current); this turns that off. An opt-out, so blocks
+		// saved before this setting existed (no attribute, read as empty) keep the highlight.
+		$arguments['no_current_highlight'] = array(
 			'type'     => 'checkbox',
-			'title'    => __( 'Highlight current page', 'blockstrap-page-builder-blocks' ),
-			'desc'     => __( 'Mark the link to the page being viewed as active.', 'blockstrap-page-builder-blocks' ),
+			'title'    => __( "Don't highlight the current page", 'blockstrap-page-builder-blocks' ),
+			'desc'     => __( 'By default the link to the page being viewed is marked active.', 'blockstrap-page-builder-blocks' ),
 			'value'    => '1',
-			'default'  => '1',
+			'default'  => '',
 			'desc_tip' => true,
 			'group'    => __( 'Nav Styles', 'blockstrap-page-builder-blocks' ),
 		);
@@ -366,7 +367,7 @@ class BlockStrap_Widget_Nav extends WP_Super_Duper {
 			return '';
 		} else {
 			add_action( 'wp_enqueue_scripts',array( $this, 'enqueue_scripts' ) );
-			$highlight = ! isset( $args['highlight_current'] ) || ! empty( $args['highlight_current'] );
+			$highlight = empty( $args['no_current_highlight'] );
 			return self::keep_best_current_match( $content, $highlight );
 		}
 	}
