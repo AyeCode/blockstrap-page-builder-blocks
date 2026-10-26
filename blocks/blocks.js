@@ -94,8 +94,8 @@ el(
 										'data-{$bs5}toggle': 'tab',
 										type: 'button',
 										role: 'tab',
-										'aria-selected': false,
-										'aria-controls': 'nav-profile',
+										'aria-selected': active_index === index,
+										'aria-controls': 'block-' + tab.clientId,
 										'data-{$bs5}target':  '#block-' + tab.clientId
 									},
 									tab.attributes.text ? tab.attributes.text : 'Tab ' + (index + 1)
