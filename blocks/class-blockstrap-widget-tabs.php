@@ -75,8 +75,8 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 															'data-{$bs5}toggle': 'tab',
 															type: 'button',
 															role: 'tab',
-															'aria-selected': false,
-															'aria-controls': 'nav-profile',
+															'aria-selected': active_index === index,
+															'aria-controls': 'block-' + tab.clientId,
 															'data-{$bs5}target':  '#block-' + tab.clientId
 														},
 													 tab.attributes.text ? tab.attributes.text : 'Tab ' + (index+1)
@@ -361,11 +361,12 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 						}
 					}
 
+					$tab_id       = ! empty( $tab['id'] ) ? sanitize_html_class( $tab['id'] ) : '';
 					$active       = 0 === $_key ? 'active' : '';
-					$first_tab_id = $active ? esc_attr( $tab['id'] ) : $first_tab_id;
+					$first_tab_id = $active ? $tab_id : $first_tab_id;
 					$aria_active  = $active ? 'true' : 'false';
 					$active      .= ' ' . sd_build_aui_class( array( 'rounded_size' => $args['tabs_rounded_size'] ) );
-					$tabs        .= '<li class="nav-item"><button class="nav-link ' . $active . '" id="' . esc_attr( $tab['id'] ) . '-tab" data-' . $bs5 . 'toggle="tab" data-' . $bs5 . 'target="#' . esc_attr( $tab['id'] ) . '" type="button" role="tab" aria-controls="nav-home" aria-selected="' . $aria_active . '">' . esc_attr( $tab['name'] ) . '</button></li>';
+					$tabs        .= '<li class="nav-item"><button class="nav-link ' . esc_attr( $active ) . '" id="' . esc_attr( $tab_id ) . '-tab" data-' . esc_attr( $bs5 ) . 'toggle="tab" data-' . esc_attr( $bs5 ) . 'target="#' . esc_attr( $tab_id ) . '" type="button" role="tab" aria-controls="' . esc_attr( $tab_id ) . '" aria-selected="' . esc_attr( $aria_active ) . '">' . esc_attr( $tab['name'] ) . '</button></li>';
 					++$_key;
 				}
 			}
@@ -376,7 +377,7 @@ class BlockStrap_Widget_Tabs extends WP_Super_Duper {
 
 			// set the first tab active.
 			if ( $first_tab_id ) {
-				$content = str_replace( 'id="' . $first_tab_id . '" class="tab-pane', 'id="' . $first_tab_id . '" class="active show tab-pane', $content );
+				$content = str_replace( 'id="' . esc_attr( $first_tab_id ) . '" class="tab-pane', 'id="' . esc_attr( $first_tab_id ) . '" class="active show tab-pane', $content );
 			}
 
 			$greedy      = ! empty( $args['tabs_greedy'] ) ? 'greedy' : '';
