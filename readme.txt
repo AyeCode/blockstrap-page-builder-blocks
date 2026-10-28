@@ -4,7 +4,7 @@ Donate link: https://ayecode.io
 Tags: page builder, bootstrap, blocks, builder, design
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 0.1.62
+Stable tag: 0.1.63
 Requires PHP: 7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -185,6 +185,10 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 7. Image Gallery.
 
 == Changelog ==
+
+= 0.1.63 - 2026-10-28 =
+* Tabs block: each tab now links to its own panel (aria-controls) for screen readers. - FIXED
+* Tabs block: the active tab is marked as selected (aria-selected) in the editor. - FIXED
 
 = 0.1.62 - 2026-10-20 =
 * Fix Container featured background not using CPT default image on CPT archive and CPT location pages - FIXED
