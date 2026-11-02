@@ -186,6 +186,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.64 - TBD =
+* Update AUI 0.2.59 - CHANGED
+
 = 0.1.63 - 2026-10-28 =
 * Tabs block: each tab now links to its own panel (aria-controls) for screen readers. - FIXED
 * Tabs block: the active tab is marked as selected (aria-selected) in the editor. - FIXED
