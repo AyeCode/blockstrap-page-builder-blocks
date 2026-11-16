@@ -2,7 +2,6 @@
 
 class BlockStrap_Widget_Container extends WP_Super_Duper {
 
-
 	public $arguments;
 
 	/**
@@ -165,6 +164,26 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 			'element_require' => '[%bg%]=="custom-gradient"',
 		);
 
+		$arguments['bg_image_random'] = array(
+			'type'            => 'checkbox',
+			'title'           => __( 'Random image on each load', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'value'           => '1',
+			'desc_tip'        => false,
+			'desc'            => __( 'Show one of the images below at random each time the page loads. The custom image above is used in the editor and as a fallback.', 'blockstrap-page-builder-blocks' ),
+			'group'           => __( 'Background', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '![%bg_image_use_featured%]',
+		);
+
+		$arguments['bg_images'] = array(
+			'type'            => 'images',
+			'title'           => __( 'Random images', 'blockstrap-page-builder-blocks' ),
+			'default'         => '',
+			'desc_tip'        => true,
+			'group'           => __( 'Background', 'blockstrap-page-builder-blocks' ),
+			'element_require' => '[%bg_image_random%] && ![%bg_image_use_featured%]',
+		);
+
 		// text color
 		$arguments['text_color'] = sd_get_text_color_input();
 
@@ -307,7 +326,6 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 	 * @return string
 	 */
 	public function output( $args = array(), $widget_args = array(), $content = '' ) {
-
 		if ( ! empty( $args['bg_image_use_featured'] ) ) {
 			global $post;
 			$featured_image = get_the_post_thumbnail_url( $post, 'full' );
@@ -329,6 +347,19 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 				$featured_image = $gd_archive_img;
 			}
 
+			/**
+			 * Filter the image URL used by the container's "Use featured image" option.
+			 *
+			 * @since 0.1.65
+			 *
+			 * @param string                        $featured_image The image URL. Can be empty.
+			 * @param array                         $args           The block arguments.
+			 * @param WP_Post|null                  $post           The current post.
+			 * @param BlockStrap_Widget_Container   $widget         The container block instance.
+			 */
+			$featured_image = apply_filters( 'blockstrap_blocks_container_featured_bg_image', $featured_image, $args, $post, $this );
+			$featured_image = is_string( $featured_image ) && $featured_image ? esc_url( $featured_image ) : '';
+
 			// replace the old URL based placeholder image @todo remove once all products have latest SD in their release.
 			$content = preg_replace( '/:url\(\w+:\/\/\S*\/icons\/placeholder.png/', ':url(' . $featured_image, $content );
 
@@ -338,7 +369,6 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 				':url(' . $featured_image . ')',
 				$content
 			);
-
 		}
 
 		//$content = str_replace( '&lt;', '<', $content ); // this could cause XSS in search
@@ -346,15 +376,173 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 		if ( empty( $content ) ) {
 			return '';
 		} elseif ( strpos( $content, 'class="wp-block-' ) !== false ) {//block
-			return $content;
+			$html = $content;
 		} else {
 			$wrap_class = sd_build_aui_class( $args );
 
 			$styles = sd_build_aui_styles( $args );
 			$style  = $styles ? ' style="' . $styles . '"' : '';
 
-			return '<section class="' . $wrap_class . '"' . $style . '>' . $content . '</section>'; // shortcode
+			$html = '<section class="' . $wrap_class . '"' . $style . '>' . $content . '</section>'; // shortcode
 		}
+
+		// Random background image (the featured image option takes priority).
+		if ( empty( $args['bg_image_use_featured'] ) ) {
+			$random_images = $this->get_random_bg_images( $args );
+
+			if ( ! empty( $random_images ) ) {
+				$html = $this->apply_random_bg_image( $html, $random_images );
+			}
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Get the list of image URLs for the random background option.
+	 *
+	 * @param array $args The block arguments.
+	 *
+	 * @return array
+	 */
+	public function get_random_bg_images( $args ) {
+		$urls = array();
+
+		if ( ! empty( $args['bg_image_random'] ) && ! empty( $args['bg_images'] ) && is_string( $args['bg_images'] ) ) {
+			// The images input stores a list of JSON objects without the surrounding brackets.
+			$raw    = str_replace( array( '&quot;', '&#39;' ), array( '"', "'" ), $args['bg_images'] );
+			$images = json_decode( '[' . $raw . ']', true );
+
+			if ( is_array( $images ) ) {
+				foreach ( $images as $image ) {
+					$url = '';
+
+					// Prefer the current full size URL from the media library.
+					if ( ! empty( $image['id'] ) ) {
+						$url = wp_get_attachment_image_url( absint( $image['id'] ), 'full' );
+					}
+
+					if ( ! $url && ! empty( $image['url'] ) ) {
+						$url = $image['url'];
+					}
+
+					if ( $url ) {
+						$urls[] = $url;
+					}
+				}
+			}
+		}
+
+		/**
+		 * Filter the image URLs the container picks a random background from.
+		 *
+		 * @since 0.1.65
+		 *
+		 * @param string[]                      $urls   The image URLs chosen in the block settings.
+		 * @param array                         $args   The block arguments.
+		 * @param BlockStrap_Widget_Container   $widget The container block instance.
+		 */
+		$urls = apply_filters( 'blockstrap_blocks_container_random_bg_images', $urls, $args, $this );
+
+		if ( ! is_array( $urls ) ) {
+			return array();
+		}
+
+		$clean = array();
+		foreach ( $urls as $url ) {
+			$url = is_string( $url ) ? esc_url_raw( $url ) : '';
+
+			if ( $url ) {
+				$clean[] = $url;
+			}
+		}
+
+		return array_values( array_unique( $clean ) );
+	}
+
+	/**
+	 * Add a random background image to the container's wrapper element.
+	 *
+	 * PHP picks one image so the page works without JavaScript, then a small script
+	 * (loaded once per page) picks again in the browser so the image still changes
+	 * on cached pages.
+	 *
+	 * @param string $html   The container HTML.
+	 * @param array  $images The image URLs to pick from.
+	 *
+	 * @return string
+	 */
+	public function apply_random_bg_image( $html, $images ) {
+		// The first opening tag is the container wrapper; inner blocks come after it.
+		if ( ! preg_match( '/^\s*<([a-z][a-z0-9-]*)\b[^>]*>/i', $html, $tag_match ) ) {
+			return $html;
+		}
+
+		$tag     = $tag_match[0];
+		$new_tag = $tag;
+		$pick    = esc_url( $images[ array_rand( $images ) ] );
+		$css_url = 'url(&quot;' . $pick . '&quot;)';
+
+		if ( preg_match( '/\sstyle="([^"]*)"/i', $tag, $style_match ) ) {
+			if ( strpos( $style_match[1], 'url(' ) !== false ) {
+				// Swap the existing image, keeping any gradient or colour overlay.
+				$new_style = preg_replace_callback(
+					'/url\([^)]*\)/',
+					function () use ( $css_url ) {
+						return $css_url;
+					},
+					$style_match[1],
+					1
+				);
+			} else {
+				$new_style = 'background-image:' . $css_url . ';background-size:cover;' . $style_match[1];
+			}
+
+			$new_tag = str_replace( $style_match[0], ' style="' . $new_style . '"', $tag );
+			$extra   = '';
+		} else {
+			$extra = ' style="background-image:' . $css_url . ';background-size:cover;"';
+		}
+
+		$extra .= ' data-bs-random-bg="' . esc_attr( wp_json_encode( $images ) ) . '"';
+
+		// Insert the extra attributes straight after the tag name.
+		$name_end = strpos( $new_tag, $tag_match[1] ) + strlen( $tag_match[1] );
+		$new_tag  = substr_replace( $new_tag, $extra, $name_end, 0 );
+
+		$html = substr_replace( $html, $new_tag, 0, strlen( $tag ) );
+
+		return $this->enqueue_random_bg_script( $html );
+	}
+
+	/**
+	 * Load the random background script once per page, in the footer.
+	 *
+	 * @param string $html The container HTML.
+	 *
+	 * @return string
+	 */
+	public function enqueue_random_bg_script( $html ) {
+		static $done = false;
+
+		if ( $done ) {
+			return $html;
+		}
+		$done = true;
+
+		$script = <<<'JS'
+(function(){function r(){document.querySelectorAll('[data-bs-random-bg]').forEach(function(e){try{var l=JSON.parse(e.getAttribute('data-bs-random-bg'));e.removeAttribute('data-bs-random-bg');if(l.length){var u=String(l[Math.floor(Math.random()*l.length)]).replace(/"/g,'%22');e.style.backgroundImage=e.style.backgroundImage.replace(/url\([^)]*\)/,'url("'+u+'")');}}catch(x){}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',r);}else{r();}})();
+JS;
+
+		if ( did_action( 'wp_print_footer_scripts' ) ) {
+			return $html . '<script>' . $script . '</script>';
+		}
+
+		wp_register_script( 'bs-random-bg', false, array(), BLOCKSTRAP_BLOCKS_VERSION, true );
+		wp_add_inline_script( 'bs-random-bg', $script );
+		wp_enqueue_script( 'bs-random-bg' );
+
+		return $html;
 	}
 
 	/**
@@ -415,7 +603,6 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 		$url = '';
 
 		if ( defined( 'GEODIRLOCATION_VERSION' ) && geodir_is_page( 'location' ) ) {
-
 			$img = do_shortcode( '[gd_location_meta key="location_image" image_size="full" no_wrap="1"]' );//exit;
 
 			if( ! empty( $img ) ) {
@@ -423,18 +610,6 @@ class BlockStrap_Widget_Container extends WP_Super_Duper {
 					$url = esc_url( $matches[1] );
 				}
 			}
-
-//			if(!empty($geodirectory->location->type)){
-//				$attachment = GeoDir_Location_SEO::get_seo_by_slug( $slug, $geodirectory->location->type, $geodirectory->location->country_slug, $region_slug = '' )
-//
-//			}
-//
-//			$attachment = GeoDir_Location_SEO::get_post_attachment( $geodirectory->location );
-//			print_r($geodirectory->location);echo '####';print_r($attachment);exit;
-//
-//			if ( ! empty( $attachment ) ) {
-//				$url = esc_url( geodir_get_image_src( $attachment , 'full' ) );
-//			}
 		}
 
 		return $url;

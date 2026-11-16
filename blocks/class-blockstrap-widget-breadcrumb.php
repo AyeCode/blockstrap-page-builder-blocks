@@ -228,7 +228,7 @@ class BlockStrap_Widget_Breadcrumb extends WP_Super_Duper {
 			$wrap_styles   = sd_build_aui_styles( $args );
 			$styles_output = $wrap_class ? ' style="' . esc_attr( $wrap_styles ) . '"' : '';
 
-			$output .= '<nav aria-label="breadcrumb" ' . esc_attr( $class_output . $styles_output ) . '><ol class="breadcrumb  m-0 p-0 pt-1">';
+			$output .= '<nav aria-label="breadcrumb" ' . $class_output . $styles_output . '><ol class="breadcrumb  m-0 p-0 pt-1">';
 
 			$i     = 0;
 			$total = count( $crumbs );
