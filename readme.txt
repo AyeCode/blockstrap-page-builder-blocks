@@ -186,6 +186,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.65 - TBD =
+* Option added in BS > Container to show random background image on each page load - ADDED
+
 = 0.1.64 - 2026-11-02 =
 * Update AUI 0.2.59 - CHANGED
 
