@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.64\n"
+"Project-Id-Version: BlockStrap Page Builder Blocks 0.1.65\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 19:38+0530\n"
-"PO-Revision-Date: 2026-11-02 19:38+0530\n"
+"POT-Creation-Date: 2026-11-18 19:39+0530\n"
+"PO-Revision-Date: 2026-11-18 19:39+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-breadcrumb.php:41
 #: blocks/class-blockstrap-widget-button.php:43
 #: blocks/class-blockstrap-widget-contact.php:48
-#: blocks/class-blockstrap-widget-container.php:83
+#: blocks/class-blockstrap-widget-container.php:82
 #: blocks/class-blockstrap-widget-counter.php:51
 #: blocks/class-blockstrap-widget-gallery.php:39
 #: blocks/class-blockstrap-widget-heading.php:57
@@ -74,8 +74,10 @@ msgstr ""
 #: blocks/class-blockstrap-widget-accordion-item.php:88
 #: blocks/class-blockstrap-widget-breadcrumb.php:49
 #: blocks/class-blockstrap-widget-contact.php:57
-#: blocks/class-blockstrap-widget-container.php:91
-#: blocks/class-blockstrap-widget-container.php:164
+#: blocks/class-blockstrap-widget-container.php:90
+#: blocks/class-blockstrap-widget-container.php:163
+#: blocks/class-blockstrap-widget-container.php:174
+#: blocks/class-blockstrap-widget-container.php:183
 #: blocks/class-blockstrap-widget-navbar.php:91
 #: blocks/class-blockstrap-widget-navbar.php:102
 #: blocks/class-blockstrap-widget-scroll-top.php:52
@@ -90,7 +92,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-archive-title.php:53
 #: blocks/class-blockstrap-widget-breadcrumb.php:49
 #: blocks/class-blockstrap-widget-button.php:51
-#: blocks/class-blockstrap-widget-container.php:91
+#: blocks/class-blockstrap-widget-container.php:90
 #: blocks/class-blockstrap-widget-gallery.php:50
 #: blocks/class-blockstrap-widget-heading.php:65
 #: blocks/class-blockstrap-widget-headline.php:51
@@ -121,7 +123,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-breadcrumb.php:51
 #: blocks/class-blockstrap-widget-button.php:53
 #: blocks/class-blockstrap-widget-contact.php:62
-#: blocks/class-blockstrap-widget-container.php:93
+#: blocks/class-blockstrap-widget-container.php:92
 #: blocks/class-blockstrap-widget-counter.php:64
 #: blocks/class-blockstrap-widget-gallery.php:53
 #: blocks/class-blockstrap-widget-heading.php:67
@@ -161,7 +163,7 @@ msgstr ""
 #: blocks/class-blockstrap-widget-breadcrumb.php:59
 #: blocks/class-blockstrap-widget-button.php:61
 #: blocks/class-blockstrap-widget-contact.php:70
-#: blocks/class-blockstrap-widget-container.php:102
+#: blocks/class-blockstrap-widget-container.php:101
 #: blocks/class-blockstrap-widget-counter.php:72
 #: blocks/class-blockstrap-widget-counter.php:266
 #: blocks/class-blockstrap-widget-counter.php:275
@@ -225,8 +227,8 @@ msgstr ""
 #: blocks/class-blockstrap-widget-contact.php:70
 #: blocks/class-blockstrap-widget-contact.php:72
 #: blocks/class-blockstrap-widget-contact.php:428
-#: blocks/class-blockstrap-widget-container.php:104
-#: blocks/class-blockstrap-widget-container.php:107
+#: blocks/class-blockstrap-widget-container.php:103
+#: blocks/class-blockstrap-widget-container.php:106
 #: blocks/class-blockstrap-widget-counter.php:72
 #: blocks/class-blockstrap-widget-counter.php:74
 #: blocks/class-blockstrap-widget-gallery.php:61
@@ -524,7 +526,7 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-alert.php:240
 #: blocks/class-blockstrap-widget-archive-title.php:160
-#: blocks/class-blockstrap-widget-container.php:159
+#: blocks/class-blockstrap-widget-container.php:158
 #: blocks/class-blockstrap-widget-counter.php:270
 #: blocks/class-blockstrap-widget-gallery.php:313
 #: blocks/class-blockstrap-widget-heading.php:173
@@ -538,7 +540,7 @@ msgstr ""
 
 #: blocks/class-blockstrap-widget-alert.php:244
 #: blocks/class-blockstrap-widget-archive-title.php:164
-#: blocks/class-blockstrap-widget-container.php:163
+#: blocks/class-blockstrap-widget-container.php:162
 #: blocks/class-blockstrap-widget-counter.php:274
 #: blocks/class-blockstrap-widget-gallery.php:317
 #: blocks/class-blockstrap-widget-heading.php:177
@@ -1431,7 +1433,7 @@ msgid "Newsletter Subscribe"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-contact.php:263
-#: blocks/class-blockstrap-widget-container.php:137
+#: blocks/class-blockstrap-widget-container.php:136
 #: blocks/class-blockstrap-widget-image.php:236
 #: blocks/class-blockstrap-widget-modal.php:268
 #: blocks/class-blockstrap-widget-nav.php:236
@@ -1551,39 +1553,53 @@ msgstr ""
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-container.php:20
+#: blocks/class-blockstrap-widget-container.php:19
 msgid "BS > "
 msgstr ""
 
-#: blocks/class-blockstrap-widget-container.php:20
-#: blocks/class-blockstrap-widget-container.php:62
+#: blocks/class-blockstrap-widget-container.php:19
+#: blocks/class-blockstrap-widget-container.php:61
 msgid "BS > Container"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-container.php:65
-#: blocks/class-blockstrap-widget-container.php:73
+#: blocks/class-blockstrap-widget-container.php:64
+#: blocks/class-blockstrap-widget-container.php:72
 msgid "A container for content"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-container.php:81
-#: blocks/class-blockstrap-widget-container.php:141
+#: blocks/class-blockstrap-widget-container.php:80
+#: blocks/class-blockstrap-widget-container.php:140
 msgid "Container"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-container.php:103
+#: blocks/class-blockstrap-widget-container.php:102
 msgid "Hover Animations"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-container.php:134
+#: blocks/class-blockstrap-widget-container.php:133
 msgid "Card equal heights"
 msgstr ""
 
-#: blocks/class-blockstrap-widget-container.php:138
+#: blocks/class-blockstrap-widget-container.php:137
 #: blocks/class-blockstrap-widget-image.php:237
 #: blocks/class-blockstrap-widget-modal.php:256
 #: blocks/class-blockstrap-widget-modal.php:269
 #: blocks/class-blockstrap-widget-offcanvas.php:279
 msgid "Yes"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:169
+msgid "Random image on each load"
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:173
+msgid ""
+"Show one of the images below at random each time the page loads. The custom "
+"image above is used in the editor and as a fallback."
+msgstr ""
+
+#: blocks/class-blockstrap-widget-container.php:180
+msgid "Random images"
 msgstr ""
 
 #: blocks/class-blockstrap-widget-counter.php:36
