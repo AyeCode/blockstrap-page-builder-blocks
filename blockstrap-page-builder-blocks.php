@@ -11,8 +11,8 @@
  * Plugin Name: BlockStrap Page Builder Blocks
  * Plugin URI: https://ayecode.io/
  * Description: BlockStrap - A FSE page builder for WordPress
- * Version: 0.1.65
- * Author: AyeCode
+ * Version: 0.1.66
+ * Author: AyeCode Ltd
  * Author URI: https://ayecode.io
  * Text Domain: blockstrap-page-builder-blocks
  * Domain Path: /languages
@@ -21,7 +21,7 @@
  */
 
 
-define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.65' );
+define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.66' );
 
 /**
  * The BlockStrap Class
@@ -63,6 +63,12 @@ final class BlockStrap {
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_scripts' ], 1000 );
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ], 100 );
 		add_filter( 'render_block', [ $this, 'force_render_blocks_on_templates' ], 100000, 2 );
+
+		// Prevent visitor supplied comment data from being parsed as shortcodes/blocks by the render_block filter above.
+		add_filter( 'comment_text', [ $this, 'neutralize_untrusted_content' ], PHP_INT_MAX );
+		add_filter( 'get_comment_excerpt', [ $this, 'neutralize_untrusted_content' ], PHP_INT_MAX );
+		add_filter( 'get_comment_author', [ $this, 'neutralize_untrusted_content' ], PHP_INT_MAX );
+		add_filter( 'get_comment_author_url', [ $this, 'neutralize_untrusted_content' ], PHP_INT_MAX );
 		add_filter( 'ayecode-ui-settings', [ $this, 'aui_settings_overwrite' ], 10, 3 );
 		add_filter( 'ayecode-ui-default-settings', [ $this, 'aui_default_settings_overwrite' ], 10, 2 );
 	}
@@ -113,12 +119,64 @@ final class BlockStrap {
 	 * @return mixed
 	 */
 	public function force_render_blocks_on_templates( $block_content, $block ) {
+		// Never parse shortcodes in blocks that output visitor supplied content.
+		if ( ! empty( $block['blockName'] ) && in_array( $block['blockName'], self::untrusted_content_blocks(), true ) ) {
+			return $block_content;
+		}
+
 		$block_content = strip_shortcodes(do_shortcode($block_content));
 
 		// @todo WP 6.2.1+ broke shortcodes, the order they added the code back broke other things, we need this till they revert it: https://core.trac.wordpress.org/ticket/58366#comment:37
 		$block_content = str_replace('[/bs_', '[bs_', $block_content);
 
 		return strip_shortcodes(do_shortcode($block_content));
+	}
+
+	/**
+	 * Block names that output visitor supplied content and must not be parsed for shortcodes.
+	 *
+	 * @return array
+	 */
+	public static function untrusted_content_blocks() {
+		return apply_filters(
+			'blockstrap_blocks_untrusted_content_blocks',
+			array(
+				'core/comment-content',
+				'core/comment-author-name',
+				'core/latest-comments',
+			)
+		);
+	}
+
+	/**
+	 * Neutralize shortcodes and block delimiters in visitor supplied content (comments).
+	 *
+	 * The render_block filter runs do_shortcode() over every block's rendered HTML, which includes
+	 * parent blocks (comment template, group, template part) that wrap visitor supplied text. Encoding
+	 * the square brackets prevents that text from ever being executed as a shortcode while rendering
+	 * identically in the browser. Block delimiter HTML comments are stripped so they can't be parsed
+	 * as blocks.
+	 *
+	 * @param string $content The content.
+	 *
+	 * @return string
+	 */
+	public function neutralize_untrusted_content( $content ) {
+		if ( ! is_string( $content ) || $content === '' ) {
+			return $content;
+		}
+
+		// Strip block delimiters.
+		if ( strpos( $content, '<!--' ) !== false ) {
+			$content = preg_replace( '/<!--\s*\/?wp:.*?-->/s', '', $content );
+		}
+
+		// Encode square brackets so shortcodes can't be executed.
+		if ( strpos( $content, '[' ) !== false || strpos( $content, ']' ) !== false ) {
+			$content = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $content );
+		}
+
+		return $content;
 	}
 
 	/**
