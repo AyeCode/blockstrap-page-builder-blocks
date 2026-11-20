@@ -11,8 +11,8 @@
  * Plugin Name: BlockStrap Page Builder Blocks
  * Plugin URI: https://ayecode.io/
  * Description: BlockStrap - A FSE page builder for WordPress
- * Version: 0.1.65
- * Author: AyeCode
+ * Version: 0.1.66
+ * Author: AyeCode Ltd
  * Author URI: https://ayecode.io
  * Text Domain: blockstrap-page-builder-blocks
  * Domain Path: /languages
@@ -21,7 +21,7 @@
  */
 
 
-define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.65' );
+define( 'BLOCKSTRAP_BLOCKS_VERSION', '0.1.66' );
 
 /**
  * The BlockStrap Class
