@@ -186,6 +186,9 @@ Automatic updates should work seamlessly. To avoid unforeseen problems, we alway
 
 == Changelog ==
 
+= 0.1.66 - 2026-11-20 =
+* Fixed stored XSS via comment content being re-parsed as shortcodes/blocks - CHANGED/SECURITY
+
 = 0.1.65 - 2026-11-18 =
 * Option added in BS > Container to show random background image on each page load - ADDED
 
